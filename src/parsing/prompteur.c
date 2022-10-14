@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
-
-int     verification_quote(line)
+//quite verification fini !
+static int     verification_quote(char *line)
 {
     int start;
     char    c;
@@ -8,12 +8,13 @@ int     verification_quote(line)
     start = 0;
     while (*line)
     {
-        if (start == 0 && (*line == '\'' || *line == '\"'))
+        if (start == 0  && (*line == 34 || *line == 39))
         {
             c = *line;
             start++;
+            line++;
         }
-        if (start == 1 && *line == c)
+        if (*line && start == 1 && *line == c)
             start = 0;
         line++;
     }
@@ -22,7 +23,7 @@ int     verification_quote(line)
     return (SUCCESS);
 }
 
-void    prompt(/*voir ce qu'il y a pas a passer*/)
+int    prompt(/*voir ce qu'il y a pas a passer*/)
 {
     char    *line;
 
@@ -33,4 +34,5 @@ void    prompt(/*voir ce qu'il y a pas a passer*/)
         free(line);
         line = readline("doudou > ");
     }
+    return (SUCCESS);
 }
