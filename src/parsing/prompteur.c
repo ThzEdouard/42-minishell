@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:50:52 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/10/15 12:12:46 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/10/15 14:40:37 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,10 @@ void	prompt(/*voir ce qu'il y a pas a passer*/)
 	while (line != NULL)
 	{
 		if (verification_quote(line))
+		{
+
+		}
+		parsing(line);
 		//ici on envoie la ligne vair le parsing est l'execution du programme
 		free(line);
 		line = readline("doudou > ");

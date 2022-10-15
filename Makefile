@@ -1,5 +1,6 @@
 NAME	= minitest
-FILE = src/parsing/prompteur.c src/minishell.c
+FILE = src/parsing/prompteur.c src/parsing/list_token.c src/parsing/parsing.c src/minishell.c\
+		src_utils/ft_strjoin.c src_utils/ft_strlen.c src_utils/ft_strdup.c src_utils/ft_strcpy.c src_utils/ft_strcmp.c src_utils/ft_strcat.c src_utils/ft_substr.c
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 RM = rm -rfv

@@ -6,42 +6,74 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 11:41:28 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/10/15 13:15:36 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/10/15 15:22:56 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	token_init(t_list_token *l)
+int	ft_space(char c)
 {
-	l->first = NULL;
-	l->last = NULL;
+	if (c != 34 && c != 39 && c != 60 && c!= 62)
+		return (0);
+	return (1);
 }
 
-void	token_pusht_(t_list_token *l, int val, char *str)
+int	test(char *line, char start)
 {
-	t_token *new;
-
-	new = malloc(sizeof(t_token));
-	if (!new)
-		return ;
-	new->space = val;
-	new->str = str;
-	new->prev = l->last;
-	new->next = NULL;
-	if (l->last)
-		l->last->next = new;
-	else
-		l->first = new;
-	l->last = new;
+	int	i = 2;
+	line++;
+	while (*line && *line != start)
+		line++, i++;
+	return (i);
 }
 
 void	pars_cmd(t_list_token *l, char *line)
 {
-	
+	int	end;
+
+	while (*line)
+	{
+		end = 0;
+		while (*line && *line == 32)
+		line++;
+		if(!ft_space(*line))
+		{
+			while (*line && *line != 32 &&!ft_space(*line))
+				end++, line++;
+		}
+		else
+		{
+			if (*line == 39 || *line == 34)
+			{
+				end = test(line, *line);
+				line+=end;
+			}
+			else{
+				while (*line && ft_space(*line))
+					end++, line++;
+			}
+		}
+		token_push(l, ft_substr(line-end, 0, end));
+	}
+}
+
+void View(t_list_token l)
+{
+	t_token *pelem = l.first;
+	while(pelem)
+	{
+		printf("%s\n",pelem->str);
+		pelem = pelem->next;
+	}
 }
 
 int	parsing(char *line)
 {
+	t_list_token l;
+
+	token_init(&l);
+	pars_cmd(&l, line);
+	View(l);
 	return (SUCCESS);
 }
