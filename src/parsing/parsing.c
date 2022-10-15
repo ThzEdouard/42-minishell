@@ -1,14 +1,47 @@
-#include "../../include/minitest.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/15 11:41:28 by eflaquet          #+#    #+#             */
+/*   Updated: 2022/10/15 12:14:17 by eflaquet         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void    init(t_list_token *l)
+#include "../../include/minishell.h"
+
+void	token_init(t_list_token *l)
 {
-    l->first = NULL;
-    l->lest = NULL;
+	l->first = NULL;
+	l->last = NULL;
 }
 
-
-
-int     parsing(char *line)
+void	token_pusht_(t_list_token *l, int val, char *str)
 {
-    return (SUCCES);
+	t_token *new;
+
+	new = malloc(sizeof(t_token));
+	if (!new)
+		return ;
+	new->space = val;
+	new->str = str;
+	new->prev = l->last;
+	new->next = NULL;
+	if (l->last)
+		l->last->next = new;
+	else
+		l->first = new;
+	l->last = new;
+}
+
+void	pars_cmd(t_list_token *l, char *line)
+{
+
+}
+
+int	parsing(char *line)
+{
+	return (SUCCESS);
 }
