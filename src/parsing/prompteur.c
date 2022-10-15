@@ -6,11 +6,13 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:50:52 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/10/15 14:40:37 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/10/15 17:27:10 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+//la verification des quote est bon voir ausssi pour rajouter les \ est les ; car error pour le doudou
 
 static int	verification_quote(char *line)
 {

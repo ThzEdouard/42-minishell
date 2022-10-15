@@ -6,19 +6,19 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 11:41:28 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/10/15 15:22:56 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/10/15 17:30:34 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
+//petite fonction mais tres interesante
 int	ft_space(char c)
 {
 	if (c != 34 && c != 39 && c != 60 && c!= 62)
 		return (0);
 	return (1);
 }
-
+//le test fonction voir pour ameliorer tout ca !!
 int	test(char *line, char start)
 {
 	int	i = 2;
@@ -27,7 +27,7 @@ int	test(char *line, char start)
 		line++, i++;
 	return (i);
 }
-
+//le decoupage est bon a voir il faut attribuer les token avec est return les cas error
 void	pars_cmd(t_list_token *l, char *line)
 {
 	int	end;
@@ -57,7 +57,7 @@ void	pars_cmd(t_list_token *l, char *line)
 		token_push(l, ft_substr(line-end, 0, end));
 	}
 }
-
+//foncction jusste la pour voir a la fin elle degage
 void View(t_list_token l)
 {
 	t_token *pelem = l.first;
@@ -67,7 +67,7 @@ void View(t_list_token l)
 		pelem = pelem->next;
 	}
 }
-
+//la fonction parsing qui fait tout 
 int	parsing(char *line)
 {
 	t_list_token l;

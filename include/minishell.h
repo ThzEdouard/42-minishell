@@ -16,7 +16,6 @@
 typedef enum s_type
 {
 	WORLD,
-	OPTION,
 	PIPE,
 	APPEND,
 	WRITE,
@@ -27,6 +26,7 @@ typedef enum s_type
 typedef struct s_token
 {
 	char			*str;
+	e_type			type;
 	struct s_token	*prev;
 	struct s_token	*next;
 }					t_token;
@@ -44,5 +44,8 @@ void	token_init(t_list_token *l);
 void	token_push(t_list_token *l, char *str);
 void	token_clear(t_list_token *l);
 void	prompt(/*voir ce qu'il y a pas a passer*/);
-int	parsing(char *line);
+int		parsing(char *line);
+
+
+
 #endif
