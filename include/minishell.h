@@ -45,6 +45,8 @@ void	token_push(t_list_token *l, char *str);
 void	token_clear(t_list_token *l);
 void	prompt(/*voir ce qu'il y a pas a passer*/);
 int		parsing(char *line);
+void	add_token(t_token *t);
+int		verification_token(t_token *t);
 
 
 

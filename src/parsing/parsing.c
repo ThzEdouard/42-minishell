@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 11:41:28 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/10/15 17:30:34 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/10/15 22:28:01 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 //petite fonction mais tres interesante
 int	ft_space(char c)
 {
-	if (c != 34 && c != 39 && c != 60 && c!= 62)
+	if (c != 34 && c!= 39 && c != 60 && c!= 62 && c!= 124)
 		return (0);
 	return (1);
 }
@@ -36,10 +36,10 @@ void	pars_cmd(t_list_token *l, char *line)
 	{
 		end = 0;
 		while (*line && *line == 32)
-		line++;
+			line++;
 		if(!ft_space(*line))
 		{
-			while (*line && *line != 32 &&!ft_space(*line))
+			while (*line && *line != 32 && !ft_space(*line))
 				end++, line++;
 		}
 		else
@@ -50,7 +50,8 @@ void	pars_cmd(t_list_token *l, char *line)
 				line+=end;
 			}
 			else{
-				while (*line && ft_space(*line))
+
+				while (*line  && *line != 32 && ft_space(*line))
 					end++, line++;
 			}
 		}
@@ -67,13 +68,18 @@ void View(t_list_token l)
 		pelem = pelem->next;
 	}
 }
-//la fonction parsing qui fait tout 
+//la fonction parsing qui fait tout
 int	parsing(char *line)
 {
 	t_list_token l;
 
 	token_init(&l);
+
 	pars_cmd(&l, line);
-	View(l);
+	add_token(l.first);
+	if (verification_token(l.first) == FAIL)
+		printf("gros fail sa mere ;");
+	// mView(l);
+	// return (FAIL);
 	return (SUCCESS);
 }

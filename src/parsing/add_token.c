@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 16:45:42 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/10/15 19:35:10 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/10/15 22:27:49 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,33 @@
 //verifier en meme temp que on atribut un type ou apres le type
 // a voir
 
+int		verification_arg(t_token *t)
+{
+	while (t->next)
+	{
+		if (t->type != WORLD && t->next->type != WORLD)
+			return (/*faire le message d'erreur*/FAIL);
+		t = t->next;
+	}
+	return (SUCCESS);
+}
+
 int		verification_token(t_token *t)
 {
+	if (verification_arg(t) == FAIL)
+		return (FAIL);
+
 	while (t)
 	{
 		if (t->type == PIPE && ft_strlen(t->str) > 1)
 			return (/*voir message error pour le fail*/FAIL);
 		if (t->type == APPEND && ft_strlen(t->str) > 2)
-			return (FAIL);
+			return (/*voir message error pour le fail*/FAIL);
 		if (t->type == HEREDOC && ft_strlen(t->str) > 2)
-			return (FAIL);
+			return (/*voir message error pour le fail*/FAIL);
 		t = t->next;
 	}
+
 	return (SUCCESS);
 }
 
@@ -52,7 +67,7 @@ void	add_token(t_token *t)
 		t->type= WORLD;
 	t = t->next;
 	if (t)
-		add_type(t);
+		add_token(t);
 }
 
 //apres avoir tout verifier voir comment tout rasemble pour que tout fonctonne bien
