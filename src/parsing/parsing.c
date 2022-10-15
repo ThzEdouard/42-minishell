@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 11:41:28 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/10/15 12:14:17 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/10/15 13:15:36 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	token_pusht_(t_list_token *l, int val, char *str)
 
 void	pars_cmd(t_list_token *l, char *line)
 {
-
+	
 }
 
 int	parsing(char *line)
