@@ -6,11 +6,14 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 11:41:28 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/10/15 22:28:01 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/10/16 19:24:37 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+//faie un viewer pour qu'il affiche les commenande comme personne hihi
+
 //petite fonction mais tres interesante
 int	ft_space(char c)
 {
@@ -28,6 +31,8 @@ int	test(char *line, char start)
 	return (i);
 }
 //le decoupage est bon a voir il faut attribuer les token avec est return les cas error
+//voir comment ameliorer cette fonction pour que'elle sois beaucoupe mieux pour la suite
+//du parsing avec exec
 void	pars_cmd(t_list_token *l, char *line)
 {
 	int	end;
@@ -79,7 +84,7 @@ int	parsing(char *line)
 	add_token(l.first);
 	if (verification_token(l.first) == FAIL)
 		printf("gros fail sa mere ;");
-	// mView(l);
+	View(l);
 	// return (FAIL);
 	return (SUCCESS);
 }

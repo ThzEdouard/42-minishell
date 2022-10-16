@@ -4,7 +4,7 @@
 NAME		= minishell
 SRC_DIR		= ./
 OBJ_DIR		= obj/
-CC			= gcc
+CC			= cc
 CFLAGS		= -Wall -Werror -Wextra
 RM			= rm -f
 #					//SOUCES\\  #
@@ -35,46 +35,22 @@ $(NAME):	$(OBJ)
 			$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -lreadline
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJF)
-			@$(CC) $(CFLAGS) -c $< -o $@
+			@echo "\033[0;32m [OK] \033" $<
+			$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJF):
-			@mkdir -p $(OBJ_DIR)
-			@mkdir -p $(OBJ_DIR)$(SRC_MINISHEL)
-			@mkdir -p $(OBJ_DIR)$(SRC_PARSING)
-			@mkdir -p $(OBJ_DIR)$(SRC_UTILS)
+			mkdir -p $(OBJ_DIR)
+			mkdir -p $(OBJ_DIR)$(SRC_MINISHEL)
+			mkdir -p $(OBJ_DIR)$(SRC_PARSING)
+			mkdir -p $(OBJ_DIR)$(SRC_UTILS)
 
 clean:
-			@$(RM) -rf $(OBJ_DIR)
+			$(RM) -rf $(OBJ_DIR)
 
 fclean:		clean
-			@$(RM) -f $(NAME)
+			$(RM) -f $(NAME)
 
 re:		fclean all
 
 
 .PHONY:		all clean fclean re
-
-
-#NAME	= minitest
-#FILE = src/parsing/prompteur.c src/parsing/list_token.c src/parsing/parsing.c  src/parsing/add_token.c src/minishell.c \
-#		src_utils/ft_strjoin.c src_utils/ft_strlen.c src_utils/ft_strdup.c src_utils/ft_strcpy.c src_utils/ft_strcmp.c src_utils/ft_strcat.c src_utils/ft_substr.c
-#CC = cc
-#CFLAGS = -Wall -Wextra -Werror -g
-#RM = rm -rfv
-#
-#OBJ = $(FILE:.c=.o)
-#
-#all: $(NAME)
-#
-#$(NAME): $(OBJ)
-#			$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -lreadline
-#
-#clean:
-#			$(RM) -rf $(OBJ)
-#
-#fclean:		clean
-#			$(RM) -f $(NAME)
-#
-#re:		fclean all
-#
-#.PHONY:		all clean fclean re
