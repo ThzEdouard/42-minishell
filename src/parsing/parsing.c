@@ -73,6 +73,34 @@ void View(t_list_token l)
 		pelem = pelem->next;
 	}
 }
+
+void view_commande(t_list_token l)
+{
+    int i;
+    t_token *t = l.first;
+    while (t)
+    {
+        i = 0;
+        printf("\ncommande : %s", t->str);
+
+        while (t->next  && t->next->type == WORLD)
+        {
+            t = t->next;
+            printf(" arguments %d : %s ", i, t->str);
+            i++;
+        }
+        if (t->next && t->next->type != WORLD)
+        {
+            t = t->next;
+            printf ("token : %s", t->str);
+        }
+
+        if (t)
+            t = t->next;
+    }
+    printf ("\n");
+}
+
 //la fonction parsing qui fait tout
 int	parsing(char *line)
 {
@@ -84,7 +112,10 @@ int	parsing(char *line)
 	add_token(l.first);
 	if (verification_token(l.first) == FAIL)
 		printf("gros fail sa mere ;");
-	View(l);
+    view_commande(l);
+
+    //rassenbler les commande apres le parsing quand il est fini
+	//View(l);
 	// return (FAIL);
 	return (SUCCESS);
 }
