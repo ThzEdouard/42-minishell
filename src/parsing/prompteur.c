@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:50:52 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/10/16 12:22:28 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/11/02 20:12:20 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	prompt(/*voir ce qu'il y a pas a passer*/)
 	{
 		if (verification_quote(line))
 		{
-//apres le parsing on peut preparer pour l'execution qui est important a voir tres rapidemant pour faire plus de test
+		//apres le parsing on peut preparer pour l'execution qui est important a voir tres rapidemant pour faire plus de test
 		}
 		parsing(line);
 		//ici on envoie la ligne vair le parsing est l'execution du programme

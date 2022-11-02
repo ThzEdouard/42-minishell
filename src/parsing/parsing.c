@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 11:41:28 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/10/16 19:24:37 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/11/02 16:37:36 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ void	pars_cmd(t_list_token *l, char *line)
 			if (*line == 39 || *line == 34)
 			{
 				end = test(line, *line);
-				line+=end;
+				line += end;
 			}
 			else{
 
-				while (*line  && *line != 32 && ft_space(*line))
+				while (*line && *line != 32 && ft_space(*line))
 					end++, line++;
 			}
 		}
@@ -114,7 +114,7 @@ int	parsing(char *line)
 		printf("gros fail sa mere ;");
     view_commande(l);
 
-    //rassenbler les commande apres le parsing quand il est fini
+	//rassenbler les commande apres le parsing quand il est fini
 	//View(l);
 	// return (FAIL);
 	return (SUCCESS);

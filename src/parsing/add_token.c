@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 16:45:42 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/10/16 15:40:58 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/11/02 14:21:47 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ int		verification_arg(t_token *t)
 	while (t->next)
 	{
 		if (t->type != WORLD && t->next->type != WORLD)
-			return (printf("bash : error fail %c\n", t->next->str[0]), FAIL);
+			return (printf("bash : error fail %s\n", t->next->str), FAIL);
 		t = t->next;
 	}
 	if (t->next == NULL && t->type != WORLD)
-		return (printf("bash : error fail %c\n", t->str[0]), FAIL);
+		return (printf("bash : error fail %s\n", t->str), FAIL);
 	return (SUCCESS);
 }
 
