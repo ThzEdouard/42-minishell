@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 20:01:26 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/11/02 21:41:22 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/11/02 22:30:45 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@ void	exec_init(t_list_exec *l)
 {
 	l->first = NULL;
 	l->first = NULL;
+}
+
+static char *ft_acces(t_list_exec *l)
+{
+
 }
 
 static char	**ft_path(t_list_exec *l, t_env *env)
@@ -31,8 +36,8 @@ void	exec_push(t_list_exec *l, char **cmd, char **filename, t_env *env)
 	if (!new)
 		return ;
 	new->cmd = cmd;
-	new->file->filename = filename;
 	new->path_cmd = ft_path();
+	new->file->filename = filename;
 	new->next = NULL;
 	if (l->last)
 		l->last->next = new;
