@@ -6,10 +6,13 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 15:16:15 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/11/02 15:16:59 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/11/03 14:39:13 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
 //ici ecrire les code erreur ..
+
+
+//code erreur a faire ;)

@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 20:06:52 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/11/02 21:32:43 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/11/03 15:15:21 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,16 +93,23 @@ typedef struct s_list_token
 void	token_init(t_list_token *l);
 void	token_push(t_list_token *l, char *str);
 void	token_clear(t_list_token *l);
-void	prompt(/*voir ce qu'il y a pas a passer*/);
+void	prompt(t_env *env);
 int		parsing(char *line);
 void	add_token(t_token *t);
 int		verification_token(t_token *t);
 /* *************************************************************************** */
+/*------------------------------env------------------------------*/
+/* *************************************************************************** */
+t_env	*new_elem(char *str);
+void	generator_env(t_env **env, char **envp);
+/* *************************************************************************** */
 /*------------------------------exec------------------------------*/
 /* *************************************************************************** */
+//exec fonction sur l'autre ;)
 void	exec_init(t_list_exec *l);
-void	exec_push();
-void	exec_clear();
+void	exec_push(t_list_exec *l, char **cmd, char **filename, t_env *env);
+void	exec_clear();//clear a faire ;)
+void	ft_free_paths(t_exec *exec);//les free a farie
 /* *************************************************************************** */
 /*------------------------------bulting------------------------------*/
 /* *************************************************************************** */

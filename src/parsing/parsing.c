@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 11:41:28 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/11/02 16:37:36 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/11/03 14:39:53 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,29 +76,27 @@ void View(t_list_token l)
 
 void view_commande(t_list_token l)
 {
-    int i;
-    t_token *t = l.first;
-    while (t)
-    {
-        i = 0;
-        printf("\ncommande : %s", t->str);
-
-        while (t->next  && t->next->type == WORLD)
-        {
-            t = t->next;
-            printf(" arguments %d : %s ", i, t->str);
-            i++;
-        }
-        if (t->next && t->next->type != WORLD)
-        {
-            t = t->next;
-            printf ("token : %s", t->str);
-        }
-
-        if (t)
-            t = t->next;
-    }
-    printf ("\n");
+	int i;
+	t_token *t = l.first;
+	while (t)
+	{
+		i = 0;
+		printf("\ncommande : %s", t->str);
+		while (t->next  && t->next->type == WORLD)
+		{
+			t = t->next;
+			printf(" arguments %d : %s ", i, t->str);
+			i++;
+		}
+		if (t->next && t->next->type != WORLD)
+		{
+		    t = t->next;
+		    printf ("token : %s", t->str);
+		}
+		 if (t)
+		    t = t->next;
+	}
+	printf ("\n");
 }
 
 //la fonction parsing qui fait tout

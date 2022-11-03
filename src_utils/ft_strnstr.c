@@ -1,30 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 11:41:23 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/11/03 11:50:25 by eflaquet         ###   ########.fr       */
+/*   Created: 2022/04/01 17:10:10 by aradice           #+#    #+#             */
+/*   Updated: 2022/11/03 14:09:57 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../include/utils.h"
 
-
-//ATTENTION A FAIRE RAPIDEMENT
-//LE MAKEFILE en bien mieux que ce qu'il y a
-//actulement pour qu'il sois plus simple d'utilistion
-//||||||||!!!!!!!!\\\/
-//cree un code erreur pour avoir le erreur bien ecrie est styler
-
-int main(int argc, char **argv, char **envp)
+char	*ft_strnstr(const char *big, const char *little, size_t size)
 {
-	(void) argc, (void)argv;
-	t_env	*env;
-	generator_env(&env, envp);
-	
-	prompt(env);
-	return (SUCCESS);
+	size_t	i;
+	size_t	y;
+
+	i = 0;
+	y = 0;
+	if (little[0] == '\0')
+		return ((char *)big);
+	while (big[i] && i < size)
+	{
+		y = 0;
+		while (little[y] && big[i + y] == little[y] && i + y < size)
+		{
+			if (little[y + 1] == '\0')
+				return ((char *)big + i);
+			y++;
+		}
+		i++;
+	}
+	return (NULL);
 }
