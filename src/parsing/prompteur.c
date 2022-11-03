@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:50:52 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/11/02 20:12:20 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/11/03 19:36:16 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ static int	verification_quote(char *line)
 	return (SUCCESS);
 }
 
-void	prompt(/*voir ce qu'il y a pas a passer*/)
+void	prompt(t_env *env)
 {
 	char	*line;
-
+	(void)env;
 	line = readline("doudou > ");
 	while (line != NULL)
 	{
@@ -52,6 +52,7 @@ void	prompt(/*voir ce qu'il y a pas a passer*/)
 		}
 		parsing(line);
 		//ici on envoie la ligne vair le parsing est l'execution du programme
+		add_history(line);
 		free(line);
 		line = readline("doudou > ");
 	}

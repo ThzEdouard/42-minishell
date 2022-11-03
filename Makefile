@@ -14,13 +14,20 @@ FT_MINISHELL = minishell
 SRC_PARSING = src/parsing/
 FT_PARSING = prompteur list_token parsing add_token
 
+SRC_ENV = src/env/
+FT_ENV = list_env
+
+SRC_EXEC = src/exec/
+FT_EXEC = list_exec add_exec
+
 SRC_UTILS = src_utils/
 FT_UTILS = ft_strjoin ft_strlen ft_strdup ft_strcpy ft_strcmp ft_strcat ft_substr
-
 
 #				//ADD TO SRC_DIR\\#
 SRC_FILES+=$(addprefix $(SRC_MINISHEL),$(FT_MINISHELL))
 SRC_FILES+=$(addprefix $(SRC_PARSING),$(FT_PARSING))
+SRC_FILES+=$(addprefix $(SRC_EXEC),$(FT_EXEC))
+SRC_FILES+=$(addprefix $(SRC_ENV),$(FT_ENV))
 SRC_FILES+=$(addprefix $(SRC_UTILS),$(FT_UTILS))
 
 SRC 		= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))

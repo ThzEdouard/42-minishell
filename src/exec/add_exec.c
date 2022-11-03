@@ -6,11 +6,16 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 21:24:03 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/11/03 15:25:55 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/11/03 18:02:01 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+void	ft_free_all()
+{
+	
+}
 
 void	ft_free_paths(t_exec *exec)
 {

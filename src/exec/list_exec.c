@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 20:01:26 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/11/03 14:30:01 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/11/03 20:14:14 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char *ft_acces(t_exec *exec)
 {
 	int		i;
 	char	*tmp;
-	char	cmd;
+	char	*cmd;
 
 	i = 0;
 	cmd = exec->cmd[0];
