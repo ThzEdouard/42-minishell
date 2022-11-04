@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_token.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aradice <aradice@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 16:45:42 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/11/02 14:21:47 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/11/04 18:59:42 by aradice          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ int		verification_arg(t_token *t)
 {
 	while (t->next)
 	{
-		if (t->type != WORLD && t->next->type != WORLD)
+		if (t->type != WORD && t->next->type != WORD)
 			return (printf("bash : error fail %s\n", t->next->str), FAIL);
 		t = t->next;
 	}
-	if (t->next == NULL && t->type != WORLD)
+	if (t->next == NULL && t->type != WORD)
 		return (printf("bash : error fail %s\n", t->str), FAIL);
 	return (SUCCESS);
 }
@@ -66,7 +66,7 @@ void	add_token(t_token *t)
 	else if(!ft_strncmp(t->str, "<<", 2))
 		t->type = HEREDOC;
 	else
-		t->type= WORLD;
+		t->type= WORD;
 	t = t->next;
 	if (t)
 		add_token(t);

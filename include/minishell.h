@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aradice <aradice@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 20:06:52 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/11/04 17:51:07 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/11/04 23:03:49 by aradice          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 # include <readline/history.h>
 # include <signal.h>
 # include <sys/types.h>
+# include <limits.h>
+# include <fcntl.h>
+# include <sys/wait.h>
 # include "utils.h"
 
 # define SUCCESS 0
@@ -27,7 +30,7 @@
 
 typedef enum s_type
 {
-	WORLD,
+	WORD,
 	PIPE,
 	APPEND,
 	WRITE,
@@ -51,7 +54,6 @@ typedef struct s_token
 
 typedef struct s_exec
 {
-
 	char	**cmd;
 	char	*path_cmd;
 	int		pipefd[2];
@@ -84,8 +86,8 @@ typedef struct s_list_token
 void	token_init(t_list_token *l);
 void	token_push(t_list_token *l, char *str);
 void	token_clear(t_list_token *l);
-void	prompt(t_env *env);
-int		parsing(char *line, t_list_exec exec);
+void	prompt(t_env *env, char **envp);
+int		parsing(char *line, t_list_exec exec, char **envp, t_env *env);
 void	add_token(t_token *t);
 int		verification_token(t_token *t);
 //reste les code erreur
@@ -103,12 +105,32 @@ void	generator_env(t_env **env, char **envp);
 void	exec_init(t_list_exec *l);
 void	exec_push(t_list_exec *l, char **cmd, char **filename, e_type type, t_env *env);
 void	exec_clear();//clear a faire ;)
-t_exec	*add_exec(t_token *t);
+t_exec	*add_exec(t_token *t, t_env *env);
 void	ft_free_paths(t_exec *exec);//les free a farie
+
+void	ft_error(char *error);
+void	ft_free_all(char **tab);
+void	ft_open_files(t_exec *data);
+void	ft_childs(t_exec *data, char **envp, t_env *env);
+void	ft_exec(t_exec *pipe, char **envp, t_env *env);
+char	*ft_access(t_exec *data);
+char	*ft_path(t_exec *exec, t_env *env);
+void	ft_mode(t_exec *data);
+void	ft_here_doc(t_exec *data);
+void	ft_free_paths(t_exec *data);
+void	ft_exec_init(t_exec *data, t_env *env);
+void	ft_message(char *error);
+
 /* *************************************************************************** */
 /*------------------------------bulting------------------------------*/
 /* *************************************************************************** */
 
-
+int		ft_pwd(void); // faite a tester !!
+void	ft_exit(void); //a faire;
+int		ft_env(t_env *env); //a faire
+void	ft_export(void); //a faire
+void	ft_unset(void); //a faire
+int		ft_cd(t_env **env, char *cmd);
+void	ft_echo(void); //a faire
 
 #endif

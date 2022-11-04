@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   add_exec.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aradice <aradice@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 21:24:03 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/11/04 18:09:28 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/11/04 21:06:29 by aradice          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-t_exec	*add_exec(t_token *t)
+t_exec	*add_exec(t_token *t, t_env *env)
 {
 	int		i;
 	int		y;
@@ -31,13 +31,13 @@ t_exec	*add_exec(t_token *t)
 
 	while (t)
 	{
-		if (t->type == WORLD)
+		if (t->type == WORD)
 		{
 			command[y] = t->str;
 			y++;
 			if (!(t->next) || t->next->type == PIPE || t->type == PIPE)
 			{
-				exec_push(&exec, command, filename, WORLD, NULL);
+				exec_push(&exec, command, filename, WORD, env);
 				i = 0;
 				while(command[i])
 				{
@@ -59,7 +59,7 @@ t_exec	*add_exec(t_token *t)
 				filename[j] = t->next->str;
 				j++;
 			}
-			exec_push(&exec, command, filename, WRITE, NULL);
+			exec_push(&exec, command, filename, WRITE, env);
 			j = 0;
 			while(filename[j])
 			{
@@ -81,7 +81,7 @@ t_exec	*add_exec(t_token *t)
 				filename[j] = t->next->str;
 				j++;
 			}
-			exec_push(&exec, command, filename, APPEND, NULL);
+			exec_push(&exec, command, filename, APPEND, env);
 			j = 0;
 			while(filename[j])
 			{
@@ -103,13 +103,13 @@ t_exec	*add_exec(t_token *t)
 				filename[j] = t->next->str;
 				j++;
 			}
-			while (t->next->next && t->next->next->type == WORLD)
+			while (t->next->next && t->next->next->type == WORD)
 			{
 				command[y] = t->next->next->str;
 				y++;
 				t = t->next;
 			}
-			exec_push(&exec, command, filename, READ, NULL);
+			exec_push(&exec, command, filename, READ, env);
 			j = 0;
 			while(filename[j])
 			{
@@ -132,13 +132,13 @@ t_exec	*add_exec(t_token *t)
 				filename[j] = t->next->str;
 				j++;
 			}
-			while (t->next->next && t->next->next->type == WORLD)
+			while (t->next->next && t->next->next->type == WORD)
 			{
 				command[y] = t->next->next->str;
 				y++;
 				t = t->next;
 			}
-			exec_push(&exec, command, filename, HEREDOC, NULL);
+			exec_push(&exec, command, filename, HEREDOC, env);
 			j = 0;
 			while(filename[j])
 			{

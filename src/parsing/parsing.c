@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aradice <aradice@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 11:41:28 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/11/04 18:09:58 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/11/04 22:10:10 by aradice          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,13 @@ void view_commande(t_list_token l)
 	{
 		i = 0;
 		printf("\ncommande : %s", t->str);
-		while (t->next  && t->next->type == WORLD)
+		while (t->next  && t->next->type == WORD)
 		{
 			t = t->next;
 			printf(" arguments %d : %s ", i, t->str);
 			i++;
 		}
-		if (t->next && t->next->type != WORLD)
+		if (t->next && t->next->type != WORD)
 		{
 		    t = t->next;
 		    printf ("token : %s", t->str);
@@ -113,7 +113,7 @@ void ft_view_groups(t_exec *p)
 }
 
 //la fonction parsing qui fait tout
-int	parsing(char *line, t_list_exec e)
+int	parsing(char *line, t_list_exec e, char **envp, t_env *env)
 {
 	t_list_token l;
 	t_exec *exec;
@@ -124,8 +124,10 @@ int	parsing(char *line, t_list_exec e)
 	if (verification_token(l.first) == FAIL)
 		printf("gros fail sa mere ;");
 	//view_commande(l);
-	exec = add_exec(l.first);
+	exec = add_exec(l.first, env);
 	ft_view_groups(exec);
+	ft_exec(exec, envp, env);
+	
 	//rassenbler les commande apres le parsing quand il est fini
 	//View(l);
 	// return (FAIL);

@@ -12,68 +12,97 @@
 
 #include "../include/utils.h"
 
-static void free_split(char **str)
+char	**ft_free2(char **tab)
 {
 	int	i;
 
 	i = 0;
-	if (!str)
-		return ;
-	while (str[i])
+	while (tab[i])
 	{
-		free (str[i]);
+		free (tab[i]);
 		i++;
 	}
-	free (str);
+	free(tab);
+	return (NULL);
 }
 
-char	**ft_input(char **tabs, char *s1, char c)
+int	ft_nbwords(char const *s, char c)
 {
-	int	len;
 	int	i;
-	int	y;
+	int	words;
 
 	i = 0;
-	y = 0;
-	while (*s1)
+	words = 0;
+	while (s[i])
 	{
-		len = 0;
-		while (s1[i] && !(s1[i] == c))
-			len++;
-		if (len)
+		if (s[i] != c)
 		{
-			tabs[y] =  malloc(sizeof(char) * (len + 1));
-			if (tabs[y])
-				return (free_split(tabs), NULL);
-			tabs[y] = ft_strncpy(tabs[y], s1, len);
+			words++;
+			while (s[i] && s[i] != c)
+				i++;
 		}
-		if (s1[i])
+		else
 			i++;
 	}
-	return (tabs);
+	return (words);
 }
 
-char	**ft_split(char *s1, char c)
+char	*ft_setword(char *testword, char const *s, int len, int i)
 {
-	char	**str;
-	int		wordl;
+	int	y;
 
-	wordl = 0;
-	if (!s1)
-		return (NULL);
-	while (*s1)
+	y = 0;
+	while (len > 0)
 	{
-		while (*s1 != '\0' && (*s1 == c))
-			s1++;
-		if (*s1 != '\0')
-			wordl++;
-		while (*s1 != '\0' && !(*s1 == c))
-			s1++;
+		testword[y] = s[i - len];
+		y++;
+		len--;
 	}
-	str = malloc(sizeof(char *) * (wordl + 1));
-	if (!str)
+	testword[y] = '\0';
+	return (testword);
+}
+
+char	**ft_words(char **test, int words, char const *s, char c)
+{
+	int	i;
+	int	word;
+	int	len;
+
+	i = 0;
+	word = 0;
+	len = 0;
+	while (word < words)
+	{
+		while (s[i] == c && s[i])
+			i++;
+		while (s[i] != c && s[i])
+		{
+			i++;
+			len++;
+		}
+		test[word] = malloc(sizeof(char) * (len + 1));
+		if (!test[word])
+			return (ft_free2 (test));
+		ft_setword (test[word], s, len, i);
+		word++;
+		len = 0;
+	}
+	test[word] = 0;
+	return (test);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	int		words;
+	char	**test;
+
+	if (!s)
 		return (NULL);
-	str = ft_input(str, s1, c);
-	str[wordl] = 0;
-	return (str);
+	words = ft_nbwords (s, c);
+	test = malloc (sizeof(char *) * (words + 1));
+	if (!test)
+		return (0);
+	if (!ft_words (test, words, s, c))
+		return (NULL);
+	return (test);
 }
