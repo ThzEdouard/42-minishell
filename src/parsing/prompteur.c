@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:50:52 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/11/03 19:36:16 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/11/04 17:39:32 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ static int	verification_quote(char *line)
 void	prompt(t_env *env)
 {
 	char	*line;
+	t_list_exec exec;
 	(void)env;
+	exec_init(&exec);
 	line = readline("doudou > ");
 	while (line != NULL)
 	{
@@ -50,7 +52,7 @@ void	prompt(t_env *env)
 		{
 		//apres le parsing on peut preparer pour l'execution qui est important a voir tres rapidemant pour faire plus de test
 		}
-		parsing(line);
+		parsing(line, exec);
 		//ici on envoie la ligne vair le parsing est l'execution du programme
 		add_history(line);
 		free(line);

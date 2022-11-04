@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 11:41:28 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/11/03 14:39:53 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/11/04 18:09:58 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,19 +99,33 @@ void view_commande(t_list_token l)
 	printf ("\n");
 }
 
+void ft_view_groups(t_exec *p)
+{
+
+   while(p)
+   {
+     printf("Command: %s\n Options: %s\n Args: %s\n Type: %d\n File1: %s\n File2: %s\n File3: %s\n File4: %s\n",p->cmd[0], p->cmd[1], p->cmd[2], p->type, p->filename[0], p->filename[1], p->filename[2], p->filename[3]);
+    //  printf("Command: %s\n Options: %s\n Args: %s\n Type: %d\n",p->command[0], p->command[1], p->command[2], p->type);
+    //  printf("Command: %s\nType: %d\n",p->command[0], p->type);
+     p = p->next;
+   }
+
+}
+
 //la fonction parsing qui fait tout
-int	parsing(char *line)
+int	parsing(char *line, t_list_exec e)
 {
 	t_list_token l;
-
+	t_exec *exec;
+	(void)e;
 	token_init(&l);
-
 	pars_cmd(&l, line);
 	add_token(l.first);
 	if (verification_token(l.first) == FAIL)
 		printf("gros fail sa mere ;");
-    view_commande(l);
-
+	//view_commande(l);
+	exec = add_exec(l.first);
+	ft_view_groups(exec);
 	//rassenbler les commande apres le parsing quand il est fini
 	//View(l);
 	// return (FAIL);

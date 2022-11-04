@@ -5,7 +5,7 @@ NAME		= minishell
 SRC_DIR		= ./
 OBJ_DIR		= obj/
 CC			= cc
-CFLAGS		= -Wall -Werror -Wextra
+CFLAGS		= -Wall -Werror -Wextra -g
 RM			= rm -f
 #					//SOUCES\\  #
 SRC_MINISHEL	= src/
@@ -21,7 +21,7 @@ SRC_EXEC = src/exec/
 FT_EXEC = list_exec add_exec
 
 SRC_UTILS = src_utils/
-FT_UTILS = ft_strjoin ft_strlen ft_strdup ft_strcpy ft_strcmp ft_strcat ft_substr
+FT_UTILS = ft_strjoin ft_strlen ft_strdup ft_strcpy ft_strcmp ft_strcat ft_substr ft_split ft_strnstr
 
 #				//ADD TO SRC_DIR\\#
 SRC_FILES+=$(addprefix $(SRC_MINISHEL),$(FT_MINISHELL))
@@ -49,6 +49,8 @@ $(OBJF):
 			mkdir -p $(OBJ_DIR)
 			mkdir -p $(OBJ_DIR)$(SRC_MINISHEL)
 			mkdir -p $(OBJ_DIR)$(SRC_PARSING)
+			mkdir -p $(OBJ_DIR)$(SRC_EXEC)
+			mkdir -p $(OBJ_DIR)$(SRC_ENV)
 			mkdir -p $(OBJ_DIR)$(SRC_UTILS)
 
 clean:

@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 09:38:52 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/10/13 20:51:43 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/11/04 12:39:47 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ char	**ft_split(char *s1, char c);
 char	*ft_strncpy(char *s1, char *s2, unsigned int n);
 char	*ft_strcat(char *s1, char *s2);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_strnstr(const char *big, const char *little, size_t size);
 
 #endif
