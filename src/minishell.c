@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aradice <aradice@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 11:41:23 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/11/04 19:38:20 by aradice          ###   ########.fr       */
+/*   Updated: 2022/11/06 19:41:55 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int main(int argc, char **argv, char **envp)
 	(void) argc, (void)argv;
 	t_env	*env;
 	generator_env(&env, envp);
-
+	
 	prompt(env, envp);
 
 	//cler ce qu'il y a a clear

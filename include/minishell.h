@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aradice <aradice@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 20:06:52 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/11/04 23:03:49 by aradice          ###   ########.fr       */
+/*   Updated: 2022/11/06 20:14:42 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	token_init(t_list_token *l);
 void	token_push(t_list_token *l, char *str);
 void	token_clear(t_list_token *l);
 void	prompt(t_env *env, char **envp);
-int		parsing(char *line, t_list_exec exec, char **envp, t_env *env);
+int		parsing(char *line, t_token *t);
 void	add_token(t_token *t);
 int		verification_token(t_token *t);
 //reste les code erreur

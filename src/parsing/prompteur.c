@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompteur.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aradice <aradice@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:50:52 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/11/04 21:08:10 by aradice          ###   ########.fr       */
+/*   Updated: 2022/11/06 20:21:48 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,17 @@ static int	verification_quote(char *line)
 void	prompt(t_env *env, char **envp)
 {
 	char	*line;
-	t_list_exec exec;
-	exec_init(&exec);
+	t_exec *exec;
+	t_token t;
 	line = readline("doudou > ");
 	while (line != NULL)
 	{
-		if (verification_quote(line))
+		if (verification_quote(line) == SUCCESS && parsing(line, &t) == SUCCESS)
 		{
-		//apres le parsing on peut preparer pour l'execution qui est important a voir tres rapidemant pour faire plus de test
+			exec = add_exec(&t, env);
+			//ft_view_groups(exec);
+			ft_exec(exec, envp, env);
 		}
-		parsing(line, exec, envp, env);
 		//ici on envoie la ligne vair le parsing est l'execution du programme
 		add_history(line);
 		free(line);

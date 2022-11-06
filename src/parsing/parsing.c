@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aradice <aradice@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 11:41:28 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/11/04 22:10:10 by aradice          ###   ########.fr       */
+/*   Updated: 2022/11/06 20:25:36 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,21 +113,16 @@ void ft_view_groups(t_exec *p)
 }
 
 //la fonction parsing qui fait tout
-int	parsing(char *line, t_list_exec e, char **envp, t_env *env)
+int	parsing(char *line, t_token *t)
 {
 	t_list_token l;
-	t_exec *exec;
-	(void)e;
+	(void) t;
 	token_init(&l);
 	pars_cmd(&l, line);
 	add_token(l.first);
 	if (verification_token(l.first) == FAIL)
-		printf("gros fail sa mere ;");
-	//view_commande(l);
-	exec = add_exec(l.first, env);
-	ft_view_groups(exec);
-	ft_exec(exec, envp, env);
-	
+		return (FAIL);
+	t = l.first;
 	//rassenbler les commande apres le parsing quand il est fini
 	//View(l);
 	// return (FAIL);
