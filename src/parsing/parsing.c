@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 11:41:28 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/11/06 20:25:36 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/11/07 14:39:57 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,16 +113,17 @@ void ft_view_groups(t_exec *p)
 }
 
 //la fonction parsing qui fait tout
-int	parsing(char *line, t_token *t)
+int	parsing(char *line, t_list_token *t)
 {
 	t_list_token l;
-	(void) t;
+
 	token_init(&l);
 	pars_cmd(&l, line);
 	add_token(l.first);
 	if (verification_token(l.first) == FAIL)
 		return (FAIL);
-	t = l.first;
+	t->first = l.first;
+
 	//rassenbler les commande apres le parsing quand il est fini
 	//View(l);
 	// return (FAIL);

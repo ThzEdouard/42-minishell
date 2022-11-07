@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:50:52 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/11/06 20:21:48 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/11/07 14:39:45 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,14 @@ void	prompt(t_env *env, char **envp)
 {
 	char	*line;
 	t_exec *exec;
-	t_token t;
+	t_list_token t;
+	token_init(&t);
 	line = readline("doudou > ");
 	while (line != NULL)
 	{
-		if (verification_quote(line) == SUCCESS && parsing(line, &t) == SUCCESS)
+		if (verification_quote(line) == SUCCESS && (parsing(line, &t) == SUCCESS))
 		{
-			exec = add_exec(&t, env);
+			exec = add_exec(t.first, env);
 			//ft_view_groups(exec);
 			ft_exec(exec, envp, env);
 		}

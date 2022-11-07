@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 20:06:52 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/11/06 20:14:42 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/11/07 15:44:47 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@
 
 # define SUCCESS 0
 # define FAIL 1
+
+# define NAME_SHELL "doudou"
+# define ERROR_0 " : syntax error near unexepted token %s"
+# define ERROR_1 " : %s: Is a directory"
+# define ERROR_2 " : %s: command not found"
 
 typedef enum s_type
 {
@@ -87,7 +92,7 @@ void	token_init(t_list_token *l);
 void	token_push(t_list_token *l, char *str);
 void	token_clear(t_list_token *l);
 void	prompt(t_env *env, char **envp);
-int		parsing(char *line, t_token *t);
+int		parsing(char *line, t_list_token *t);
 void	add_token(t_token *t);
 int		verification_token(t_token *t);
 //reste les code erreur
