@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 20:06:52 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/11/07 15:44:47 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/11/07 23:06:25 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,11 @@
 # define FAIL 1
 
 # define NAME_SHELL "doudou"
-# define ERROR_0 " : syntax error near unexepted token %s"
-# define ERROR_1 " : %s: Is a directory"
-# define ERROR_2 " : %s: command not found"
+# define NAME_SHELL_ERROR "\e[1;91mDoudou\e[0m"
+# define ERROR_0 "\e[1;90m%s: syntax error near unexepted token %s\n\e[0m"
+# define ERROR_0_1 "\e[1;90m%s: syntax error near unexpected token `newline'\n\e[0m"
+# define ERROR_1 "\e[1;90m%s : %s: Is a directory\n\e[0m"
+# define ERROR_2 "\e[1;90m%s : %s: command not found\n\e[0m"
 
 typedef enum s_type
 {
@@ -40,7 +42,8 @@ typedef enum s_type
 	APPEND,
 	WRITE,
 	HEREDOC,
-	READ
+	READ,
+	DIRECTORY
 }			e_type;
 
 typedef struct s_env
@@ -96,7 +99,8 @@ int		parsing(char *line, t_list_token *t);
 void	add_token(t_token *t);
 int		verification_token(t_token *t);
 //reste les code erreur
-
+void	ft_quite_error(char s, int len);
+void	ft_code_error(e_type type, char *str, int len);
 /* *************************************************************************** */
 /*------------------------------env------------------------------*/
 /* *************************************************************************** */

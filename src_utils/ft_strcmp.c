@@ -6,9 +6,20 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 10:07:23 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/10/10 15:39:10 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/11/07 19:44:36 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+int ft_chrdir(char *s)
+{
+	while (*s)
+	{
+		if (*s == '/')
+			return (0);
+		s++;
+	}
+	return (1);
+}
 
 int	ft_strcmp(char *s1, char *s2)
 {

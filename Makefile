@@ -12,7 +12,7 @@ SRC_MINISHEL	= src/
 FT_MINISHELL = minishell
 
 SRC_PARSING = src/parsing/
-FT_PARSING = prompteur list_token parsing add_token
+FT_PARSING = prompteur list_token parsing add_token erreur
 
 SRC_ENV = src/env/
 FT_ENV = list_env

@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 11:41:28 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/11/07 14:39:57 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/11/07 20:59:08 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ int	test(char *line, char start)
 		line++, i++;
 	return (i);
 }
-//le decoupage est bon a voir il faut attribuer les token avec est return les cas error
-//voir comment ameliorer cette fonction pour que'elle sois beaucoupe mieux pour la suite
-//du parsing avec exec
+
 void	pars_cmd(t_list_token *l, char *line)
 {
 	int	end;
@@ -63,56 +61,7 @@ void	pars_cmd(t_list_token *l, char *line)
 		token_push(l, ft_substr(line-end, 0, end));
 	}
 }
-//foncction jusste la pour voir a la fin elle degage
-void View(t_list_token l)
-{
-	t_token *pelem = l.first;
-	while(pelem)
-	{
-		printf("%s\n",pelem->str);
-		pelem = pelem->next;
-	}
-}
 
-void view_commande(t_list_token l)
-{
-	int i;
-	t_token *t = l.first;
-	while (t)
-	{
-		i = 0;
-		printf("\ncommande : %s", t->str);
-		while (t->next  && t->next->type == WORD)
-		{
-			t = t->next;
-			printf(" arguments %d : %s ", i, t->str);
-			i++;
-		}
-		if (t->next && t->next->type != WORD)
-		{
-		    t = t->next;
-		    printf ("token : %s", t->str);
-		}
-		 if (t)
-		    t = t->next;
-	}
-	printf ("\n");
-}
-
-void ft_view_groups(t_exec *p)
-{
-
-   while(p)
-   {
-     printf("Command: %s\n Options: %s\n Args: %s\n Type: %d\n File1: %s\n File2: %s\n File3: %s\n File4: %s\n",p->cmd[0], p->cmd[1], p->cmd[2], p->type, p->filename[0], p->filename[1], p->filename[2], p->filename[3]);
-    //  printf("Command: %s\n Options: %s\n Args: %s\n Type: %d\n",p->command[0], p->command[1], p->command[2], p->type);
-    //  printf("Command: %s\nType: %d\n",p->command[0], p->type);
-     p = p->next;
-   }
-
-}
-
-//la fonction parsing qui fait tout
 int	parsing(char *line, t_list_token *t)
 {
 	t_list_token l;
@@ -123,9 +72,5 @@ int	parsing(char *line, t_list_token *t)
 	if (verification_token(l.first) == FAIL)
 		return (FAIL);
 	t->first = l.first;
-
-	//rassenbler les commande apres le parsing quand il est fini
-	//View(l);
-	// return (FAIL);
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:50:52 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/11/07 14:39:45 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/11/07 19:02:50 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,18 @@ static int	verification_quote(char *line)
 			start++;
 			line++;
 		}
-		// if (start == 0 && (*line == 59 || line == 40 || *line == 41 ||))//ajouter les \ ;
-		// 	return (FAIL);
+		if (start == 0 && (*line == 59 || *line == 40 || *line == 41 || *line == 92))
+		{
+			if (start == 0 && (*(line + 1) == 59 || *(line + 1) == 40 || *(line + 1) == 41 || *(line + 1) == 92))
+				return (ft_quite_error(*line, 2), FAIL);
+			return (ft_quite_error(*line, 1), FAIL);
+		}
 		if (*line && start == 1 && *line == c)
 			start = 0;
 		line++;
 	}
 	if (start == 1)
-		return (printf("bash: systax error %c\n", c), FAIL);
+		return (ft_quite_error(c, 1), FAIL);
 	return (SUCCESS);
 }
 
