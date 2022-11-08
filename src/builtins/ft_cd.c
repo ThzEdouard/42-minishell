@@ -28,7 +28,6 @@ static void	set_env(t_env **env, char *tmp_pwd)
 	free(tmp->str);
 
 	tmp->str = ft_strjoin("PWD=", getcwd(pwd, sizeof(pwd)));
-	printf("aaaa%s",tmp->str);
 	while (tmp_two && ft_strncmp(tmp_two->str, "OLDPWD=", 7))
 		tmp_two = tmp_two->next;
 	if (!tmp_two)

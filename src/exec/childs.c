@@ -82,7 +82,6 @@ void	ft_exec_init(t_exec *data, t_env **env)
 	if (ft_exec_builtins(data, env))
 		exit (0);
 
-
 	if (data->path_cmd == NULL)
 	{
 		// ft_free_all(new->cmd);
@@ -120,17 +119,17 @@ int	ft_check_builtins(t_exec *data)
 {
 	if (!ft_strncmp(data->cmd[0], "cd", 2))
 		return (1);
-	if (ft_strncmp(data->cmd[0], "echo", 4))
+	if (!ft_strncmp(data->cmd[0], "echo", 4))
 		return (1);
 	if (!ft_strncmp(data->cmd[0], "env", 3))
 		return (1);
-	if (ft_strncmp(data->cmd[0], "exit", 4))
+	if (!ft_strncmp(data->cmd[0], "exit", 4))
 		return (1);
-	if (ft_strncmp(data->cmd[0], "export", 6))
+	if (!ft_strncmp(data->cmd[0], "export", 6))
 		return (1);
 	if (!ft_strncmp(data->cmd[0], "pwd", 3))
 		return (1);
-	if (ft_strncmp(data->cmd[0], "unset", 5))
+	if (!ft_strncmp(data->cmd[0], "unset", 5))
 		return (1);
 	return (0);
 }

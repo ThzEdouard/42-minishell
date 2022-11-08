@@ -1,0 +1,10 @@
+total 100
+drwxr-xr-x 2 eflaquet 2022_paris  4096 Nov  8 15:28 include
+-rw-r--r-- 1 eflaquet 2022_paris  1771 Nov  8 15:30 Makefile
+-rwxr-xr-x 1 eflaquet 2022_paris 71088 Nov  8 21:56 minishell
+drwxr-xr-x 4 eflaquet 2022_paris  4096 Nov  8 19:31 obj
+-rw-r--r-- 1 eflaquet 2022_paris    92 Nov  8 15:28 readline_link
+drwxr-xr-x 6 eflaquet 2022_paris  4096 Nov  8 15:28 src
+drwxr-xr-x 2 eflaquet 2022_paris  4096 Nov  8 15:28 src_utils
+-rw-r--r-- 1 eflaquet 2022_paris     0 Nov  8 21:56 test
+-rw-r--r-- 1 eflaquet 2022_paris    65 Nov  8 21:15 testd

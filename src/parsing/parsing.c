@@ -25,7 +25,7 @@ int	ft_space(char c)
 //le test fonction voir pour ameliorer tout ca !!
 int	test(char *line, char start)
 {
-	int	i = 0;
+	int	i = 2;
 	line++;
 	while (*line && *line != start)
 		line++, i++;

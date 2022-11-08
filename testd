@@ -1,0 +1,8 @@
+include
+Makefile
+minishell
+obj
+readline_link
+src
+src_utils
+testd

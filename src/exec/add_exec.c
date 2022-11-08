@@ -17,7 +17,10 @@ t_exec	*add_exec(t_token *t, t_env *env)
 	int		i;
 	int		y;
 	int	j;
+	int nb_filename = 0;
+	int nb_cmd = 0;
 	t_list_exec exec;
+	t_token *tmp;
 
 	char	**command;
 	char	**filename;
@@ -25,7 +28,26 @@ t_exec	*add_exec(t_token *t, t_env *env)
 	i = 0;
 	y = 0;
 	j = 0;
+	tmp = t;
 	exec_init(&exec);
+
+	while(tmp)
+	{
+		if (tmp->type != WORD && tmp->type != PIPE)
+		{
+			nb_filename++;
+		}
+		else if (t->type == WORD)
+		{
+			nb_cmd++;
+		}
+		tmp = tmp->next;
+	}
+	nb_cmd -= nb_filename;
+	printf("nb_filename: %d | nb_cmd: %d\n", nb_filename, nb_cmd);
+
+	// filename = malloc(sizeof(char *) * nb_filename + 1);
+	// command = malloc(sizeof(char *) * nb_cmd +1 );
 	filename = malloc(10000);
 	command = malloc(10000);
 
@@ -37,6 +59,7 @@ t_exec	*add_exec(t_token *t, t_env *env)
 			y++;
 			if (!(t->next) || t->next->type == PIPE || t->type == PIPE)
 			{
+				command[y] = 0;
 				exec_push(&exec, command, filename, WORD, env);
 				i = 0;
 				while(command[i])
@@ -152,5 +175,7 @@ t_exec	*add_exec(t_token *t, t_env *env)
 		t = t->next;
 
 	}
+	// free(command);
+	// free(filename);
 	return (exec.first);
 }

@@ -19,13 +19,13 @@ void	exec_init(t_list_exec *l)
 	l->last = NULL;
 }
 
-
-
 void	ft_free_all(char **tab)
 {
 	int	i;
 
 	i = 0;
+	if (!tab)
+		return ;
 	while (tab[i])
 	{
 		free (tab[i]);
@@ -41,9 +41,7 @@ void	ft_free_paths(t_exec *data)
 	exit(1);
 }
 
-
-
-char *ft_access(t_exec *exec)
+static char *ft_access(t_exec *exec)
 {
 	int		i;
 	char	*tmp;
@@ -68,7 +66,7 @@ char *ft_access(t_exec *exec)
 	return (NULL);
 }
 
-char	*ft_path(t_exec *exec, t_env *env)
+static char	*ft_path(t_exec *exec, t_env *env)
 {
 	char	*paths;
 
@@ -97,18 +95,17 @@ char	*ft_path(t_exec *exec, t_env *env)
 void	exec_push(t_list_exec *l, char **cmd, char **filename, e_type type, t_env *env)
 {
 	t_exec	*new;
-
+	(void)env;
 	new = malloc(sizeof(t_exec));
 	if (!new)
 		return ;
 	new->cmd = ft_double_raloc(cmd);
-
-	//printf("%s", new->path_cmd);
 	new->filename = ft_double_raloc(filename);
 	if (env)
 	{
 		new->path_cmd = ft_path(new, env);
 	}
+	new->file = NULL;
 	new->type = type;
 	new->prev = l->last;
 	new->next = NULL;
@@ -117,9 +114,28 @@ void	exec_push(t_list_exec *l, char **cmd, char **filename, e_type type, t_env *
 	else
 		l->first = new;
 	l->last = new;
+
 }
 
-void	exec_clear()
+void	exec_clear(t_list_exec *l)
 {
 
+	t_exec	*tmp;
+	t_exec	*elem;
+
+	elem = l->first;
+	while (elem)
+	{
+		tmp = elem;
+		ft_free_all(tmp->cmd);
+		if (tmp->path_cmd)
+			free(tmp->path_cmd);
+		ft_free_all(tmp->filename);
+		if (tmp->file)
+			free(tmp->file);
+		elem = elem->next;
+		free(tmp);
+	}
+	l->first = NULL;
+	l->last = NULL;
 }

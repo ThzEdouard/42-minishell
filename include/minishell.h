@@ -113,19 +113,17 @@ void	generator_env(t_env **env, char **envp);
 //exec fonction sur l'autre ;)
 void	exec_init(t_list_exec *l);
 void	exec_push(t_list_exec *l, char **cmd, char **filename, e_type type, t_env *env);
-void	exec_clear();//clear a faire ;)
+void	exec_clear(t_list_exec *l);//clear a faire ;)
 t_exec	*add_exec(t_token *t, t_env *env);
 void	ft_free_paths(t_exec *exec);//les free a farie
 
 void	ft_error(char *error);
 void	ft_free_all(char **tab);
-void	ft_open_files(t_exec *data);
+void	ft_open_files(t_exec *data, int i);
 void	ft_childs(t_exec *data, char **envp, t_env **env);
 void	ft_exec(t_exec *pipe, char **envp, t_env **env);
-char	*ft_access(t_exec *data);
-char	*ft_path(t_exec *exec, t_env *env);
 void	ft_mode(t_exec *data);
-void	ft_here_doc(t_exec *data);
+void	ft_here_doc(t_exec *data, int i);
 void	ft_free_paths(t_exec *data);
 void	ft_exec_init(t_exec *data, t_env **env);
 void	ft_message(char *error);
