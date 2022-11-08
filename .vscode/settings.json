@@ -1,7 +1,0 @@
-{
-	"files.associations": {
-		"minishell.h": "c",
-		"numbers": "c",
-		"*.tcc": "c"
-	}
-}

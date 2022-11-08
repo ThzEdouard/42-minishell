@@ -94,7 +94,7 @@ typedef struct s_list_token
 void	token_init(t_list_token *l);
 void	token_push(t_list_token *l, char *str);
 void	token_clear(t_list_token *l);
-void	prompt(t_env *env, char **envp);
+void	prompt(t_env **env, char **envp);
 int		parsing(char *line, t_list_token *t);
 void	add_token(t_token *t);
 int		verification_token(t_token *t);
@@ -120,15 +120,18 @@ void	ft_free_paths(t_exec *exec);//les free a farie
 void	ft_error(char *error);
 void	ft_free_all(char **tab);
 void	ft_open_files(t_exec *data);
-void	ft_childs(t_exec *data, char **envp, t_env *env);
-void	ft_exec(t_exec *pipe, char **envp, t_env *env);
+void	ft_childs(t_exec *data, char **envp, t_env **env);
+void	ft_exec(t_exec *pipe, char **envp, t_env **env);
 char	*ft_access(t_exec *data);
 char	*ft_path(t_exec *exec, t_env *env);
 void	ft_mode(t_exec *data);
 void	ft_here_doc(t_exec *data);
 void	ft_free_paths(t_exec *data);
-void	ft_exec_init(t_exec *data, t_env *env);
+void	ft_exec_init(t_exec *data, t_env **env);
 void	ft_message(char *error);
+
+int	ft_exec_builtins(t_exec *data, t_env **env);
+int	ft_check_builtins(t_exec *data);
 
 /* *************************************************************************** */
 /*------------------------------bulting------------------------------*/

@@ -25,7 +25,7 @@ int main(int argc, char **argv, char **envp)
 	t_env	*env;
 	generator_env(&env, envp);
 	
-	prompt(env, envp);
+	prompt(&env, envp);
 
 	//cler ce qu'il y a a clear
 	return (SUCCESS);

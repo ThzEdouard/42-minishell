@@ -22,6 +22,7 @@ void	ft_open_files(t_exec *data)
 	while (tmp)
 	{
 		i = 0;
+		tmp->file = malloc(10000);
 		while(tmp->filename[i])
 		{
 			if (tmp->type == READ)
@@ -94,15 +95,33 @@ void	ft_mode(t_exec *data)
 		ft_open_files(data);
 }
 
-void	ft_exec(t_exec *p, char **envp, t_env *env)
+void	ft_exec(t_exec *p, char **envp, t_env **env)
 {
 	t_exec	*tmp;
+	t_exec	*tmp2;
+	t_exec	*tmp3;
+	int i = 0;;
+
 
 	tmp = p;
-	ft_mode(p);
+	tmp2 = p;
+	tmp3 = p;
+	ft_mode(tmp2);
 	// dup2((&data)->infile, STDIN_FILENO);
 
 	// ft_exec_init(tmp, envp);
+	while (tmp3)
+	{
+		i++;
+		tmp3 = tmp3->next;
+	}
+	tmp3 = p;
+	if (ft_check_builtins(tmp3) && i == 1)
+	{
+		ft_exec_builtins(tmp3, env);
+		return ;
+	}
+
 	while (tmp)
 	{
 		ft_childs(tmp, envp, env);

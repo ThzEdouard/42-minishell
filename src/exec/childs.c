@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
 
-void	ft_childs(t_exec *data, char **envp, t_env *env)
+void	ft_childs(t_exec *data, char **envp, t_env **env)
 {
 	if (pipe(data->pipefd) == -1)
 		ft_error("Pipe Error");
@@ -39,7 +39,7 @@ void	ft_childs(t_exec *data, char **envp, t_env *env)
 	// dup2(data->pipefd[0], STDIN_FILENO);
 }
 
-void	ft_exec_init(t_exec *data, t_env *env)
+void	ft_exec_init(t_exec *data, t_env **env)
 {
 	// if (data->heredoc == 1)
 	// 	data->command = ft_split(argv[3 + data->index_child], ' ');
@@ -78,26 +78,10 @@ void	ft_exec_init(t_exec *data, t_env *env)
 			i++;
 		}
 	}
-	// (void)env;
-	if (!ft_strncmp(data->cmd[0], "cd", 2))
-	{
-		ft_cd(&env, data->cmd[1]);
-		exit(0);
-	}
-	// if (ft_strncmp(data->command[0], "echo", 4))
-	if (!ft_strncmp(data->cmd[0], "env", 3))
-	{
-		ft_env(env);
-		exit(0);
-	}
-	// if (ft_strncmp(data->command[0], "exit", 4))
-	// if (ft_strncmp(data->command[0], "export", 6))
-	if (!ft_strncmp(data->cmd[0], "pwd", 3))
-	{
-		ft_pwd();
-		exit(0);
-	}
-	// if (ft_strncmp(data->command[0], "unset", 5))
+
+	if (ft_exec_builtins(data, env))
+		exit (0);
+
 
 	if (data->path_cmd == NULL)
 	{
@@ -105,6 +89,50 @@ void	ft_exec_init(t_exec *data, t_env *env)
 		// free(new->path_cmd);
 		ft_message("Error: Command not found\n");
 	}
+}
+
+int	ft_exec_builtins(t_exec *data, t_env **env)
+{
+	if (!ft_strncmp(data->cmd[0], "cd", 2))
+	{
+		// printf("aa%s", (*env)->str);
+		ft_cd(env, data->cmd[1]);
+		return (1);
+	}
+	// if (ft_strncmp(data->command[0], "echo", 4))
+	if (!ft_strncmp(data->cmd[0], "env", 3))
+	{
+		ft_env(*env);
+		return (1);
+	}
+	// if (ft_strncmp(data->command[0], "exit", 4))
+	// if (ft_strncmp(data->command[0], "export", 6))
+	if (!ft_strncmp(data->cmd[0], "pwd", 3))
+	{
+		ft_pwd();
+		return (1);
+	}
+	// if (ft_strncmp(data->command[0], "unset", 5))
+	return (0);
+}
+
+int	ft_check_builtins(t_exec *data)
+{
+	if (!ft_strncmp(data->cmd[0], "cd", 2))
+		return (1);
+	if (ft_strncmp(data->cmd[0], "echo", 4))
+		return (1);
+	if (!ft_strncmp(data->cmd[0], "env", 3))
+		return (1);
+	if (ft_strncmp(data->cmd[0], "exit", 4))
+		return (1);
+	if (ft_strncmp(data->cmd[0], "export", 6))
+		return (1);
+	if (!ft_strncmp(data->cmd[0], "pwd", 3))
+		return (1);
+	if (ft_strncmp(data->cmd[0], "unset", 5))
+		return (1);
+	return (0);
 }
 
 void	ft_error(char *error)

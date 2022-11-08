@@ -44,7 +44,7 @@ static int	verification_quote(char *line)
 }
 
 
-void	prompt(t_env *env, char **envp)
+void	prompt(t_env **env, char **envp)
 {
 	char	*line;
 	t_exec *exec;
@@ -55,7 +55,7 @@ void	prompt(t_env *env, char **envp)
 	{
 		if (verification_quote(line) == SUCCESS && (parsing(line, &t) == SUCCESS))
 		{
-			exec = add_exec(t.first, env);
+			exec = add_exec(t.first, *env);
 			//ft_view_groups(exec);
 			ft_exec(exec, envp, env);
 		}
