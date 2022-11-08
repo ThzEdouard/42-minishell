@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 09:38:52 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/11/07 20:39:48 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/11/08 15:30:53 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ void	ft_putstr_fd(char *s, int fd);
 char	*ft_free_substr(char *s, unsigned int start, size_t len);
 char	*ft_strccat(char c, char t);
 int		ft_chrdir(char *s);
+char	**ft_double_raloc(char **src);
 
 #endif

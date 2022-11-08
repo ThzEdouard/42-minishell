@@ -1,12 +1,13 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   list_exec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aradice <aradice@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 20:01:26 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/11/04 22:42:50 by aradice          ###   ########.fr       */
+/*   Updated: 2022/11/08 15:00:24 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +48,7 @@ char *ft_access(t_exec *exec)
 	int		i;
 	char	*tmp;
 	char	*cmd;
-	
+
 	i = 0;
 	cmd = exec->cmd[0];
 	if (access(cmd, F_OK | X_OK) == 0)
@@ -76,7 +77,7 @@ char	*ft_path(t_exec *exec, t_env *env)
 		if ((paths = ft_strnstr(env->str, "PATH=", 5)))
 		{
 			exec->path  = ft_substr(paths, 5, ft_strlen(paths));
-			
+
 			if (!exec->path)
 			{
 				ft_free_all(exec->cmd);
@@ -96,25 +97,14 @@ char	*ft_path(t_exec *exec, t_env *env)
 void	exec_push(t_list_exec *l, char **cmd, char **filename, e_type type, t_env *env)
 {
 	t_exec	*new;
-	(void)env;
-	int i = 0, y = 0;
+
 	new = malloc(sizeof(t_exec));
 	if (!new)
 		return ;
-	new->cmd = malloc(10000);
-	
+	new->cmd = ft_double_raloc(cmd);
+
 	//printf("%s", new->path_cmd);
-	new->filename = malloc(10000);
-	while(filename[y])
-	{
-		new->filename[y] = filename[y];
-		y++;
-	}
-	while(cmd[i])
-	{
-		new->cmd[i] = cmd[i];
-		i++;
-	}
+	new->filename = ft_double_raloc(filename);
 	if (env)
 	{
 		new->path_cmd = ft_path(new, env);

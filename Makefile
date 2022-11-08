@@ -1,5 +1,4 @@
 
-
 #				//NAME AND COMPILATION\\ #
 NAME		= minishell
 SRC_DIR		= ./
@@ -24,7 +23,8 @@ SRC_BUILTINS = src/builtins/
 FT_BUILTINS = ft_cd ft_echo ft_env ft_exit ft_export ft_pwd ft_unset
 
 SRC_UTILS = src_utils/
-FT_UTILS = ft_strjoin ft_strlen ft_strdup ft_strcpy ft_strcmp ft_strcat ft_substr ft_split ft_strnstr ft_putstr_fd
+FT_UTILS = ft_realoc ft_strjoin ft_strlen ft_strdup ft_strcpy ft_strcmp \
+		 ft_strcat ft_substr ft_split ft_strnstr ft_putstr_fd
 
 #				//ADD TO SRC_DIR\\#
 SRC_FILES+=$(addprefix $(SRC_MINISHEL),$(FT_MINISHELL))

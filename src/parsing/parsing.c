@@ -1,3 +1,4 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -6,7 +7,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 11:41:28 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/11/07 20:59:08 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/11/08 14:32:06 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +25,7 @@ int	ft_space(char c)
 //le test fonction voir pour ameliorer tout ca !!
 int	test(char *line, char start)
 {
-	int	i = 2;
+	int	i = 0;
 	line++;
 	while (*line && *line != start)
 		line++, i++;
