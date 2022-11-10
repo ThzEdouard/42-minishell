@@ -44,7 +44,7 @@ t_exec	*add_exec(t_token *t, t_env *env)
 		tmp = tmp->next;
 	}
 	nb_cmd -= nb_filename;
-	printf("nb_filename: %d | nb_cmd: %d\n", nb_filename, nb_cmd);
+	// printf("nb_filename: %d | nb_cmd: %d\n", nb_filename, nb_cmd);
 
 	// filename = malloc(sizeof(char *) * nb_filename + 1);
 	// command = malloc(sizeof(char *) * nb_cmd +1 );

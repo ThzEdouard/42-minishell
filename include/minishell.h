@@ -135,12 +135,12 @@ int	ft_check_builtins(t_exec *data);
 /*------------------------------bulting------------------------------*/
 /* *************************************************************************** */
 
-int		ft_pwd(void); // faite a tester !!
-void	ft_exit(void); //a faire;
-int		ft_env(t_env *env); //a faire
-void	ft_export(void); //a faire
-void	ft_unset(void); //a faire
+int		ft_pwd(void);
+void	ft_exit(void);
+int		ft_env(t_env *env);
+void	ft_export(t_env **env, char *cmd);
+void	ft_unset(t_env **env, char *cmd);
 int		ft_cd(t_env **env, char *cmd);
-void	ft_echo(void); //a faire
+void	ft_echo(char **cmd);
 
 #endif

@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aradice <aradice@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/10 15:47:52 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/10/10 15:50:21 by eflaquet         ###   ########.fr       */
+/*   Created: 2022/11/10 05:36:45 by aradice           #+#    #+#             */
+/*   Updated: 2022/11/10 05:36:45 by aradice          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// void	ft_exit(void)
-// {
+#include "../../include/minishell.h"
 
-// 	//ne pas oublier de free tout ce qui est malloc ou autre !!
-// 	//link posible
-// 	exit(0);
-// }
+void	ft_exit(void)
+{
+	exit(0);
+}

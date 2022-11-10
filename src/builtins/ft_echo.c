@@ -3,15 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aradice <aradice@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/10 15:59:12 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/10/12 09:43:13 by eflaquet         ###   ########.fr       */
+/*   Created: 2022/11/10 05:43:01 by aradice           #+#    #+#             */
+/*   Updated: 2022/11/10 05:43:01 by aradice          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_echo(void)
-{
+#include "../../include/minishell.h"
 
-	return (0);
+void	ft_echo(char **cmd)
+{
+	int i;
+
+	i = 1;
+	while(cmd[i])
+	{
+		printf("%s ",cmd[i]);
+		i++;
+	}
+	printf("\n");
 }

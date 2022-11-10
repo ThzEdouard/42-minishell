@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aradice <aradice@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/10 15:53:54 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/10/10 15:54:15 by eflaquet         ###   ########.fr       */
+/*   Created: 2022/11/10 05:37:20 by aradice           #+#    #+#             */
+/*   Updated: 2022/11/10 05:37:20 by aradice          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_export(void)
+#include "../../include/minishell.h"
+
+void	ft_export(t_env **env, char *cmd)
 {
-	
+	t_env *tmp;
+
+	tmp = *env;
+	while(tmp->next)
+		tmp = tmp->next;
+
+	tmp->next = new_elem(cmd);
 }

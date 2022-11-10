@@ -98,20 +98,36 @@ int	ft_exec_builtins(t_exec *data, t_env **env)
 		ft_cd(env, data->cmd[1]);
 		return (1);
 	}
-	// if (ft_strncmp(data->command[0], "echo", 4))
+	if (!ft_strncmp(data->cmd[0], "echo", 4))
+	{
+		ft_echo(data->cmd);
+		return (1);
+	}
 	if (!ft_strncmp(data->cmd[0], "env", 3))
 	{
 		ft_env(*env);
 		return (1);
 	}
-	// if (ft_strncmp(data->command[0], "exit", 4))
-	// if (ft_strncmp(data->command[0], "export", 6))
+	if (!ft_strncmp(data->cmd[0], "exit", 4))
+	{
+		ft_exit();
+		return (1);
+	}
+	if (!ft_strncmp(data->cmd[0], "export", 6))
+	{
+		ft_export(env, data->cmd[1]);
+		return (1);
+	}
 	if (!ft_strncmp(data->cmd[0], "pwd", 3))
 	{
 		ft_pwd();
 		return (1);
 	}
-	// if (ft_strncmp(data->command[0], "unset", 5))
+	if (!ft_strncmp(data->cmd[0], "unset", 5))
+	{
+		ft_unset(env, data->cmd[1]);
+		return (1);
+	}
 	return (0);
 }
 
