@@ -55,3 +55,8 @@ void	generator_env(t_env **env, char **envp)
 		i++;
 	}
 }
+
+// void	clear_env(t_env *env)
+// {
+
+// }

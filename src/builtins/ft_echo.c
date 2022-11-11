@@ -12,6 +12,11 @@
 
 #include "../../include/minishell.h"
 
+// static int checking_args(char **cmd)
+// {
+// 	return (SUCCESS);
+// }
+
 void	ft_echo(char **cmd)
 {
 	int i;

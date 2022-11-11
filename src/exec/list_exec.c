@@ -114,7 +114,6 @@ void	exec_push(t_list_exec *l, char **cmd, char **filename, e_type type, t_env *
 	else
 		l->first = new;
 	l->last = new;
-
 }
 
 void	exec_clear(t_list_exec *l)

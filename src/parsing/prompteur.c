@@ -49,8 +49,8 @@ void	prompt(t_env **env, char **envp)
 	char	*line;
 	t_exec *exec;
 	t_list_token t;
-	// t_list_exec e;
-	// exec_init(&e);
+	t_list_exec e;
+	exec_init(&e);
 	token_init(&t);
 	line = readline("doudou > ");
 	while (line != NULL)
@@ -59,9 +59,10 @@ void	prompt(t_env **env, char **envp)
 		{
 			exec = add_exec(t.first, *env);
 			ft_exec(exec, envp, env);
-			//token_clear(&t);
-			// e.first = exec;
-			// exec_clear(&e);
+			token_clear(&t);
+			e.first = exec;
+			token_clear(&t);
+			exec_clear(&e);
 		}
 		//ici on envoie la ligne vair le parsing est l'execution du programme
 		add_history(line);
