@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
 
-int		ft_pwd(void)
+int	ft_pwd(void)
 {
 	char	run[256];
 
@@ -22,8 +22,6 @@ int		ft_pwd(void)
 		return (1);
 	}
 	else
-	{
 		printf("%s\n", run);
-	}
 	return (0);
 }

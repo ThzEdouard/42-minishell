@@ -20,7 +20,7 @@ void	token_init(t_list_token *l)
 
 void	token_push(t_list_token *l, char *str)
 {
-	t_token *new;
+	t_token	*new;
 
 	new = malloc(sizeof(t_token));
 	if (!new)

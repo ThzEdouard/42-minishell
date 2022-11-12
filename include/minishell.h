@@ -28,6 +28,8 @@
 # define SUCCESS 0
 # define FAIL 1
 
+# define echo_code "$?"
+
 # define NAME_SHELL "doudou"
 # define NAME_SHELL_ERROR "\e[1;91mDoudou\e[0m"
 # define ERROR_0 "\e[1;90m%s: syntax error near unexepted token %s\n\e[0m"
@@ -112,10 +114,11 @@ void	generator_env(t_env **env, char **envp);
 /* *************************************************************************** */
 //exec fonction sur l'autre ;)
 void	exec_init(t_list_exec *l);
-void	exec_push(t_list_exec *l, char **cmd, char **filename, e_type type, t_env *env);
+void	exec_push(t_list_exec *l, char **cmd, char **filename, e_type type);
 void	exec_clear(t_list_exec *l);//clear a faire ;)
 t_exec	*add_exec(t_token *t, t_env *env);
 void	ft_free_paths(t_exec *exec);//les free a farie
+t_exec *set_path(t_exec *e,t_env *env);
 
 void	ft_error(char *error);
 void	ft_free_all(char **tab);
@@ -128,8 +131,9 @@ void	ft_free_paths(t_exec *data);
 void	ft_exec_init(t_exec *data, t_env **env);
 void	ft_message(char *error);
 
-int	ft_exec_builtins(t_exec *data, t_env **env);
-int	ft_check_builtins(t_exec *data);
+int		ft_exec_builtins(t_exec *data, t_env **env);
+int		ft_check_builtins(t_exec *data);
+int		ft_check_heredoc(t_exec *data);
 
 /* *************************************************************************** */
 /*------------------------------bulting------------------------------*/
@@ -141,6 +145,6 @@ int		ft_env(t_env *env);
 void	ft_export(t_env **env, char *cmd);
 void	ft_unset(t_env **env, char *cmd);
 int		ft_cd(t_env **env, char *cmd);
-void	ft_echo(char **cmd);
+int		ft_echo(char **cmd);
 
 #endif

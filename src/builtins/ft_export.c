@@ -14,11 +14,10 @@
 
 void	ft_export(t_env **env, char *cmd)
 {
-	t_env *tmp;
+	t_env	*tmp;
 
 	tmp = *env;
-	while(tmp->next)
+	while (tmp->next)
 		tmp = tmp->next;
-
 	tmp->next = new_elem(cmd);
 }

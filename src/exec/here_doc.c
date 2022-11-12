@@ -17,7 +17,6 @@ void	ft_here_doc(t_exec *data, int i)
 	char	*line;
 	int		temp;
 
-	data->file = malloc(10000);
 	temp = open("temp.tmp", O_WRONLY | O_APPEND | O_CREAT, 0644);
 	if (temp == -1)
 		ft_error("File Error");
@@ -40,4 +39,18 @@ void	ft_here_doc(t_exec *data, int i)
 		free(line);
 		line = readline(STDIN_FILENO);
 	}
+}
+
+int	ft_check_heredoc(t_exec *data)
+{
+	t_exec	*tmp;
+
+	tmp = data;
+	while (tmp)
+	{
+		if (tmp->type == HEREDOC)
+			return (1);
+		tmp = tmp->next;
+	}
+	return (0);
 }

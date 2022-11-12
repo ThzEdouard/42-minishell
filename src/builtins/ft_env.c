@@ -16,8 +16,7 @@ int	ft_env(t_env *env)
 {
 	t_env	*tmp;
 
-	tmp = env; 
-
+	tmp = env;
 	while (tmp)
 	{
 		printf("%s\n", tmp->str);

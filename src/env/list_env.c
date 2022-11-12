@@ -24,7 +24,6 @@ t_env	*new_elem(char *str)
 	return (new);
 }
 
-
 static void	get_env(t_env **env)
 {
 	char	pwd[255];
@@ -36,7 +35,7 @@ static void	get_env(t_env **env)
 
 void	generator_env(t_env **env, char **envp)
 {
-	int	i;
+	int		i;
 	t_env	*tmp;
 
 	i = 0;

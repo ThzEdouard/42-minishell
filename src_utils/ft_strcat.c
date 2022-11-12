@@ -34,7 +34,7 @@ char	*ft_strccat(char c, char t)
 	{
 		return (NULL);
 	}
-	str[0] =  c;
+	str[0] = c;
 	str[1] = t;
 	str[2] = 0;
 	return (str);

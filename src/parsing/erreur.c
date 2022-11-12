@@ -23,7 +23,6 @@ void	ft_quite_error(char s, int len)
 			return ;
 		printf(ERROR_0, NAME_SHELL_ERROR, str);
 		free (str);
-
 	}
 	else
 		printf(ERROR_0, NAME_SHELL_ERROR, &s);
@@ -35,9 +34,22 @@ void	ft_code_error(e_type type, char *str, int len)
 		printf(ERROR_0_1, NAME_SHELL_ERROR);
 	else
 	{
-		if (type == PIPE || type == APPEND || type == WRITE || type == HEREDOC || type == READ)
+		if (type == PIPE || type == APPEND || type == WRITE
+			|| type == HEREDOC || type == READ)
 			printf(ERROR_0, NAME_SHELL_ERROR, str);
 		if (type == DIRECTORY)
 			printf(ERROR_1, NAME_SHELL_ERROR, str);
 	}
+}
+
+void	ft_error(char *error)
+{
+	perror(error);
+	exit (1);
+}
+
+void	ft_message(char *error)
+{
+	ft_putstr_fd(error, 2);
+	exit(1);
 }

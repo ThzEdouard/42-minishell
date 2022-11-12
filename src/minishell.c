@@ -12,21 +12,13 @@
 
 #include "../include/minishell.h"
 
-
-//ATTENTION A FAIRE RAPIDEMENT
-//LE MAKEFILE en bien mieux que ce qu'il y a
-//actulement pour qu'il sois plus simple d'utilistion
-//||||||||!!!!!!!!\\\/
-//cree un code erreur pour avoir le erreur bien ecrie est styler
-
-int main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
-	(void) argc, (void)argv;
 	t_env	*env;
-	generator_env(&env, envp);
 
+	(void) argc;
+	(void) argv;
+	generator_env(&env, envp);
 	prompt(&env, envp);
-	
-	//cler ce qu'il y a a clear
 	return (SUCCESS);
 }

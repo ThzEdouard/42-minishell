@@ -14,7 +14,7 @@
 
 static void	ft_delete_node(t_env *env)
 {
-	t_env *tmp;
+	t_env	*tmp;
 
 	tmp = env->next;
 	env->str = tmp->str;
@@ -25,23 +25,19 @@ static void	ft_delete_node(t_env *env)
 
 void	ft_unset(t_env **env, char *cmd)
 {
-	t_env *tmp;
+	t_env	*tmp;
 
 	tmp = *env;
 	cmd = ft_strjoin(cmd, "=");
-	while(tmp)
+	while (tmp)
 	{
 		if (!ft_strncmp(tmp->str, cmd, ft_strlen(cmd)))
 		{
 			if (tmp->next)
-			{
-				// printf("str: %s cmd: %s length: %d\n", tmp->str, cmd, ft_strlen(cmd));
 				ft_delete_node(tmp);
-			}
 			else
 				free(tmp);
 		}
 		tmp = tmp->next;
 	}
 }
-

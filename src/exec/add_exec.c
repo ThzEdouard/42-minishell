@@ -14,16 +14,15 @@
 
 t_exec	*add_exec(t_token *t, t_env *env)
 {
-	int		i;
-	int		y;
-	int	j;
-	int nb_filename = 0;
-	int nb_cmd = 0;
+	int			i;
+	int			y;
+	int			j;
+	int			nb_filename = 0;
+	int			nb_cmd = 0;
 	t_list_exec exec;
-	t_token *tmp;
-
-	char	**command;
-	char	**filename;
+	t_token 	*tmp;
+	char		**command;
+	char		**filename;
 
 	i = 0;
 	y = 0;
@@ -37,17 +36,18 @@ t_exec	*add_exec(t_token *t, t_env *env)
 		{
 			nb_filename++;
 		}
-		else if (t->type == WORD)
+		if (tmp->type == WORD)
 		{
 			nb_cmd++;
 		}
+		// printf("%d     ", tmp->type);
 		tmp = tmp->next;
 	}
 	nb_cmd -= nb_filename;
-	// printf("nb_filename: %d | nb_cmd: %d\n", nb_filename, nb_cmd);
+	printf("nb_filename: %d | nb_cmd: %d\n", nb_filename, nb_cmd);
 
 	// filename = malloc(sizeof(char *) * nb_filename + 1);
-	// command = malloc(sizeof(char *) * nb_cmd +1 );
+	// command = malloc(sizeof(char *) * nb_cmd  + 1 );
 	filename = malloc(10000);
 	command = malloc(10000);
 
@@ -60,7 +60,8 @@ t_exec	*add_exec(t_token *t, t_env *env)
 			if (!(t->next) || t->next->type == PIPE || t->type == PIPE)
 			{
 				command[y] = 0;
-				exec_push(&exec, command, filename, WORD, env);
+				exec_push(&exec, command, filename, WORD);
+				exec.first = set_path(exec.first, env);
 				i = 0;
 				while(command[i])
 				{
@@ -82,7 +83,8 @@ t_exec	*add_exec(t_token *t, t_env *env)
 				filename[j] = t->next->str;
 				j++;
 			}
-			exec_push(&exec, command, filename, WRITE, env);
+			exec_push(&exec, command, filename, WRITE);
+			exec.first = set_path(exec.first, env);
 			j = 0;
 			while(filename[j])
 			{
@@ -104,7 +106,8 @@ t_exec	*add_exec(t_token *t, t_env *env)
 				filename[j] = t->next->str;
 				j++;
 			}
-			exec_push(&exec, command, filename, APPEND, env);
+			exec_push(&exec, command, filename, APPEND);
+			exec.first = set_path(exec.first, env);
 			j = 0;
 			while(filename[j])
 			{
@@ -132,7 +135,8 @@ t_exec	*add_exec(t_token *t, t_env *env)
 				y++;
 				t = t->next;
 			}
-			exec_push(&exec, command, filename, READ, env);
+			exec_push(&exec, command, filename, READ);
+			exec.first = set_path(exec.first, env);
 			j = 0;
 			while(filename[j])
 			{
@@ -161,7 +165,8 @@ t_exec	*add_exec(t_token *t, t_env *env)
 				y++;
 				t = t->next;
 			}
-			exec_push(&exec, command, filename, HEREDOC, env);
+			exec_push(&exec, command, filename, HEREDOC);
+			exec.first = set_path(exec.first, env);
 			j = 0;
 			while(filename[j])
 			{
