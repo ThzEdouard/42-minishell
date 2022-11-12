@@ -79,8 +79,8 @@ t_exec	*set_path(t_exec *t, t_env *env)
 	{
 		if (!tmp->path_cmd)
 			tmp->path_cmd = ft_path(tmp, env);
-		if (tmp->path_cmd)
-			puts(tmp->path_cmd);
+		// if (tmp->path_cmd)
+		// 	printf("%s\n", tmp->path_cmd);
 		tmp = tmp->next;
 	}
 	return (t);

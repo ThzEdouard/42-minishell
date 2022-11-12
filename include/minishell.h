@@ -90,6 +90,15 @@ typedef struct s_list_token
 	t_token *last;
 }				t_list_token;
 
+typedef struct s_add
+{
+	int		i;
+	int		y;
+	int		j;
+	char	**command;
+	char	**filename;
+}				t_add;
+
 /* *************************************************************************** */
 /*------------------------------prompt in parsing------------------------------*/
 /* *************************************************************************** */
@@ -134,6 +143,15 @@ void	ft_message(char *error);
 int		ft_exec_builtins(t_exec *data, t_env **env);
 int		ft_check_builtins(t_exec *data);
 int		ft_check_heredoc(t_exec *data);
+
+void 	malloc_cmd_filename(t_token *t, t_add *values);
+void	calcul_len_malloc(t_token *tmp, int *len_cmd, int *len_file);
+void	cmd_word(t_list_exec *exec, t_token *t, t_add *values, t_env *env);
+t_token	*cmd_write(t_list_exec *exec, t_token *t, t_add *values, t_env *env);
+t_token	*cmd_append(t_list_exec *exec, t_token *t, t_add *values, t_env *env);
+t_token	*cmd_read(t_list_exec *exec, t_token *t, t_add *values, t_env *env);
+t_token	*cmd_here(t_list_exec *exec, t_token *t, t_add *values, t_env *env);
+
 
 /* *************************************************************************** */
 /*------------------------------bulting------------------------------*/
