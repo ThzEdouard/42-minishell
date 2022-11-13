@@ -112,9 +112,9 @@ void	ft_exec(t_exec *p, char **envp, t_env **env)
 		tmp = tmp->next;
 	}
 	tmp = p;
-	if (i == 1 && ft_check_builtins(tmp))
+	if (i == 1 && tmp->cmd && ft_check_builtins(tmp))
 		ft_exec_builtins(tmp, env);
-	if (i == 1 && ft_check_builtins(tmp))
+	if (i == 1 && tmp->cmd && ft_check_builtins(tmp))
 		return ;
 	tmp = p;
 	while (tmp)
