@@ -14,7 +14,7 @@
 
 int	verification_arg(t_token *t)
 {
-	if (t && t->type != WORD)
+	if (!t->next && t->type != WORD)
 		return (ft_code_error(t->type, t->str, 0), FAIL);
 	while (t->next)
 	{

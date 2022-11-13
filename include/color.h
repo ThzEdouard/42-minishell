@@ -39,8 +39,8 @@
 # define UYEL "\e[4;33m"
 # define UBLU "\e[4;34m"
 # define UMAG "\e[4;35m"
-#  define UCYN "\e[4;36m"
-#  define UWHT "\e[4;37m"
+# define UCYN "\e[4;36m"
+# define UWHT "\e[4;37m"
 
 //Regular background
 # define BLKB "\e[40m"
@@ -83,7 +83,7 @@
 # define BHWHT "\e[1;97m"
 
 //Reset
-# define reset "\e[0m"
+# define RESET "\e[0m"
 # define CRESET "\e[0m"
 # define COLOR_RESET "\e[0m"
 

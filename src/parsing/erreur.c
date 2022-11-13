@@ -28,7 +28,7 @@ void	ft_quite_error(char s, int len)
 		printf(ERROR_0, NAME_SHELL_ERROR, &s);
 }
 
-void	ft_code_error(e_type type, char *str, int len)
+void	ft_code_error(t_type type, char *str, int len)
 {
 	if (len == 2)
 		printf(ERROR_0_1, NAME_SHELL_ERROR);

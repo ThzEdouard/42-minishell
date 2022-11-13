@@ -40,10 +40,8 @@ void	prstwo(char *line, int *en)
 	end = *en;
 	if (*line == 39 || *line == 34)
 	{
-		// line++;
 		end = test(line, *line);
 		line += end;
-		// line++;
 	}
 	else
 	{
@@ -93,7 +91,6 @@ int	parsing(char *line, t_list_token *t)
 	add_token(l.first);
 	if (verification_token(l.first) == FAIL)
 		return (FAIL);
-	// printf("\n");
 	t->first = l.first;
 	return (SUCCESS);
 }

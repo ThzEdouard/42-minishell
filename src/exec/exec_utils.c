@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aradice <aradice@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 03:11:35 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/11/12 21:23:00 by aradice          ###   ########.fr       */
+/*   Updated: 2022/11/13 19:46:19 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_free_all(char **tab)
 	free(tab);
 }
 
-void	exec_push(t_list_exec *l, char **cmd, char **filename, e_type type)
+void	exec_push(t_list_exec *l, char **cmd, char **filename, t_type type)
 {
 	t_exec	*new;
 

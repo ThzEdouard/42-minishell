@@ -74,8 +74,8 @@ void	malloc_cmd_filename(t_token *t, t_add *values)
 	nb_cmd = 0;
 	calcul_len_malloc(t, &nb_cmd, &nb_filename);
 	printf("nb_filename: %d | nb_cmd: %d\n", nb_filename, nb_cmd);
-	// values->filename = malloc(sizeof(char *) * nb_filename + 1);
-	// values->command = malloc(sizeof(char *) * nb_cmd +1 );
-	values->filename = malloc(10000);
-	values->command = malloc(10000);
+	values->filename = malloc(sizeof(char *) * nb_filename + 1);
+	values->command = malloc(sizeof(char *) * nb_cmd + 1);
+	values->filename[0] = 0;
+	values->command[0] = 0;
 }

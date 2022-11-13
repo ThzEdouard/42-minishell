@@ -12,13 +12,16 @@
 
 #include "../../include/minishell.h"
 
-void	ft_open_files_2(t_exec *tmp, int i)
+int	ft_open_files_2(t_exec *tmp, int i)
 {
 	if (tmp->type == READ)
 	{
 		tmp->file[i] = open(tmp->filename[i], O_RDONLY);
 		if (tmp->file[i] == -1)
+		{
 			perror("Infile Error");
+			return (FAIL);
+		}
 	}
 	else if (tmp->type == WRITE)
 	{
@@ -34,9 +37,10 @@ void	ft_open_files_2(t_exec *tmp, int i)
 		if (tmp->file[i] == -1)
 			perror("Outfile Error");
 	}
+	return (SUCCESS);
 }
 
-void	ft_open_files(t_exec *data, int i)
+int	ft_open_files(t_exec *data, int i)
 {
 	t_exec	*tmp;
 
@@ -47,15 +51,17 @@ void	ft_open_files(t_exec *data, int i)
 		while (!tmp->filename && tmp->next)
 			tmp = tmp->next;
 		if (!tmp->filename)
-			return ;
+			return (SUCCESS);
 		tmp->file = ft_realoc_int(tmp->filename);
 		while (tmp->filename[i])
 		{
-			ft_open_files_2(tmp, i);
+			if (ft_open_files_2(tmp, i) == FAIL)
+				return (FAIL);
 			i++;
 		}
 		tmp = tmp->next;
 	}
+	return (SUCCESS);
 }
 
 void	ft_close_files(t_exec *data)
@@ -82,20 +88,23 @@ void	ft_close_files(t_exec *data)
 	}
 }
 
-void	ft_mode(t_exec *data)
+int	ft_mode(t_exec *data)
 {
 	int	i;
 
 	i = 0;
 	if (ft_check_heredoc(data))
 	{
-		ft_open_files(data, i);
+		if (ft_open_files(data, i) == FAIL)
+			return (FAIL);
 		ft_here_doc(data, i);
 		if (unlink("temp.tmp") == -1)
 			ft_error("Temp File Error");
 	}
 	else
-		ft_open_files(data, i);
+		if (ft_open_files(data, i) == FAIL)
+			return (FAIL);
+	return (SUCCESS);
 }
 
 void	ft_exec(t_exec *p, char **envp, t_env **env)
@@ -105,7 +114,8 @@ void	ft_exec(t_exec *p, char **envp, t_env **env)
 
 	i = 0;
 	tmp = p;
-	ft_mode(tmp);
+	if (ft_mode(tmp) == FAIL)
+		return ;
 	while (tmp)
 	{
 		i++;
@@ -116,7 +126,6 @@ void	ft_exec(t_exec *p, char **envp, t_env **env)
 		ft_exec_builtins(tmp, env);
 	if (i == 1 && tmp->cmd && ft_check_builtins(tmp))
 		return ;
-	tmp = p;
 	while (tmp)
 	{
 		ft_childs(tmp, envp, env);
