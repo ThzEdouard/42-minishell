@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
+//a finir
 // static int checking_code(char **cmd)
 // {
 //

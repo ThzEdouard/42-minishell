@@ -50,13 +50,24 @@ static int	verification_quote(char *line)
 	return (SUCCESS);
 }
 
+void View(t_list_token l)
+{
+   t_token *pelem = l.first;
+   while(pelem)
+   {
+     printf("%s\n",pelem->str);
+     pelem = pelem->next;
+   }
+}
+
 void	prompt(t_env **env, char **envp)
 {
 	char			*line;
-	t_exec			*exec;
+	// t_exec			*exec;
 	t_list_token	t;
 	t_list_exec		e;
-
+	(void)envp;
+	(void) env;
 	exec_init(&e);
 	token_init(&t);
 	line = readline("doudou > ");
@@ -65,9 +76,10 @@ void	prompt(t_env **env, char **envp)
 		if (ft_strlen(line) && verification_quote(line) == SUCCESS
 			&& (parsing(line, &t) == SUCCESS))
 		{
-			exec = add_exec(t.first, *env);
-			ft_exec(exec, envp, env);
-			e.first = exec;
+			View(t);
+			// exec = add_exec(t.first, *env);
+			// ft_exec(exec, envp, env);
+			// e.first = exec;
 		}
 		add_history(line);
 		free(line);

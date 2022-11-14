@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
+//a refaire
 void	ft_export(t_env **env, char *cmd)
 {
 	t_env	*tmp;

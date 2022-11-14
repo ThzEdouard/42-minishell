@@ -24,13 +24,15 @@ t_env	*new_elem(char *str)
 	return (new);
 }
 
-static void	get_env(t_env **env)
+char	*get_name(t_env *env, char *s, int len)
 {
-	char	pwd[255];
-
-	(*env) = new_elem(ft_strjoin("PWD=", getcwd(pwd, sizeof(pwd))));
-	(*env)->next = new_elem(ft_strdup("SHLVL=1"));
-	(*env)->next->next = new_elem(ft_strdup("_=./minishell"));
+	while (env)
+	{
+		if (!ft_strncmp(env->str, s, len))
+			return (env->str);
+		env =env->next;
+	}
+	return(NULL);
 }
 
 void	generator_env(t_env **env, char **envp)
@@ -39,11 +41,6 @@ void	generator_env(t_env **env, char **envp)
 	t_env	*tmp;
 
 	i = 0;
-	if (!envp[i])
-	{
-		get_env(env);
-		return ;
-	}
 	*env = new_elem(envp[i]);
 	tmp = *env;
 	i++;

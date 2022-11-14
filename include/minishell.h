@@ -115,6 +115,7 @@ void	ft_code_error(t_type type, char *str, int len);
 /* ************************************************************ */
 t_env	*new_elem(char *str);
 void	generator_env(t_env **env, char **envp);
+char	*get_name(t_env *env, char *s, int len);
 //faire aussi tous les chngement qui'il y a avec les bulting
 /* *************************************************************** */
 /*------------------------------exec------------------------------*/
