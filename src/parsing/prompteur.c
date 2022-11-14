@@ -76,6 +76,7 @@ void	prompt(t_env **env, char **envp)
 		if (ft_strlen(line) && verification_quote(line) == SUCCESS
 			&& (parsing(line, &t) == SUCCESS))
 		{
+			ta_mere(&t, *env);
 			View(t);
 			// exec = add_exec(t.first, *env);
 			// ft_exec(exec, envp, env);

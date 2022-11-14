@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:32:45 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/11/14 20:45:56 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/11/14 21:49:09 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ char	*ft_ralou(char *s, int i, int y, int len, char *s2)
 		r[x] = s[x];
 		x++;
 	}
-	char *e = ft_strnstr(s2, s + y, i - y);
-	int o = 0;
+	char *e = ft_strdup(s2 + (i - y));
+	int o = 1;
 	while (e[o])
 	{
 		r[x] = e[o];

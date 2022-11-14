@@ -163,4 +163,6 @@ void	ft_unset(t_env **env, char *cmd);
 int		ft_cd(t_env **env, char *cmd);
 int		ft_echo(char **cmd);
 
+void	ta_mere(t_list_token *l, t_env *env);
+
 #endif
