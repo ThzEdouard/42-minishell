@@ -36,6 +36,7 @@
 # define ERROR_3 "\e[1;90m%s: syntax error near unexpected token `newline'\n\e[0m"
 # define ERROR_1 "\e[1;90m%s : %s: Is a directory\n\e[0m"
 # define ERROR_2 "\e[1;90m%s : %s: command not found\n\e[0m"
+# define ERROR_5 "\e[1;90m%s : %s: %s: Not a directory\n\e[0m"
 
 typedef enum s_type
 {
@@ -110,12 +111,16 @@ void	add_token(t_token *t);
 int		verification_token(t_token *t);
 void	ft_quite_error(char s, int len);
 void	ft_code_error(t_type type, char *str, int len);
+int		expand_utils(t_list_token *l, t_env *env);
+void	expand_process(t_token *tmp, int *tmp1, int *i);
+int		update_str(char **str, t_env *env, int i, int len);
 /* ************************************************************** */
 /*------------------------------env------------------------------*/
 /* ************************************************************ */
 t_env	*new_elem(char *str);
 void	generator_env(t_env **env, char **envp);
 char	*get_name(t_env *env, char *s, int len);
+void	clear_env(t_env **env);
 //faire aussi tous les chngement qui'il y a avec les bulting
 /* *************************************************************** */
 /*------------------------------exec------------------------------*/
@@ -163,6 +168,7 @@ void	ft_unset(t_env **env, char *cmd);
 int		ft_cd(t_env **env, char *cmd);
 int		ft_echo(char **cmd);
 
-void	ta_mere(t_list_token *l, t_env *env);
+void	expand(t_list_token *l, t_env *env);
+int		add_list(t_list_token *l, char *line, int end);
 
 #endif

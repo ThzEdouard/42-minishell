@@ -63,11 +63,10 @@ void View(t_list_token l)
 void	prompt(t_env **env, char **envp)
 {
 	char			*line;
-	// t_exec			*exec;
+	t_exec			*exec;
 	t_list_token	t;
 	t_list_exec		e;
-	(void)envp;
-	(void) env;
+
 	exec_init(&e);
 	token_init(&t);
 	line = readline("doudou > ");
@@ -76,11 +75,12 @@ void	prompt(t_env **env, char **envp)
 		if (ft_strlen(line) && verification_quote(line) == SUCCESS
 			&& (parsing(line, &t) == SUCCESS))
 		{
-			ta_mere(&t, *env);
-			View(t);
-			// exec = add_exec(t.first, *env);
-			// ft_exec(exec, envp, env);
-			// e.first = exec;
+			expand(&t, *env);
+			exec = add_exec(t.first, *env);
+			token_clear(&t);
+			ft_exec(exec, envp, env);
+			e.first = exec;
+			exec_clear(&e);
 		}
 		add_history(line);
 		free(line);

@@ -19,7 +19,7 @@ static int	ft_double_len(char **src)
 	if (!src)
 		return (0);
 	i = 0;
-	while (src[i])
+	while (src[i] != 0)
 		i++;
 	return (i);
 }
@@ -50,7 +50,7 @@ char	**ft_double_raloc(char **src)
 		return (NULL);
 	while (src[y])
 	{
-		malloc_src[y] = src[y];
+		malloc_src[y] = ft_strdup(src[y]);
 		y++;
 	}
 	malloc_src[y] = 0;

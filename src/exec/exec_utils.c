@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 03:11:35 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/11/13 19:46:19 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/11/15 23:52:23 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	exec_push(t_list_exec *l, char **cmd, char **filename, t_type type)
 	new = malloc(sizeof(t_exec));
 	if (!new)
 		return ;
-	printf("cmd: %s | filename: %s | type: %d\n", cmd[0], filename[0], type);
+	// printf("cmd: %s | filename: %s | type: %d\n", cmd[0], filename[0], type);
 	new->cmd = ft_double_raloc(cmd);
 	new->filename = ft_double_raloc(filename);
 	new->path_cmd = NULL;

@@ -6,85 +6,74 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:32:45 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/11/14 23:42:21 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/11/15 22:41:05 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-char	*ft_ralou(char *s, int i, int y, int len, char *s2)
+char	*ft_joinralo(char *s, int i, int len, char *s2)
 {
-	char *r = malloc(sizeof(char *) *(i - y + len));
-	if (!r)
-		return (s);
-	int	x = 0;
-	while (x != y - 1)
+	char	*value;
+	char	*name;
+
+	value = malloc(sizeof(char *) * (i + ft_strlen(s2) - (i - len + 1) + 1));
+	if (!value)
+		return (NULL);
+	ft_strncpy(value, s, len - 2);
+	value[len - 2] = 0;
+	s += len + i;
+	name = ft_strdup(s2 + i + 2);
+	if (name)
 	{
-		r[x] = s[x];
-		x++;
+		value = ft_free_strjoin(value, name);
+		free(name);
 	}
-	if (s2)
-	{
-		char *e = ft_strdup(s2 + (i - y + 1));
-		int o = 1;
-		while (e[o])
-		{
-			r[x] = e[o];
-			x++;
-			o++;
-		}
-	}
-	int p = 0;
-	while (p != y - 1)
-		p++;
-	int t = i - y;
-	while (t)
-		p++, t--;
-	while (s[p])
-	{
-		r[x] = s[p];
-		x++, p++;
-	}
-	r[x] = 0;
-	return (r);
+	value = ft_free_strjoin(value, s);
+	return (value);
 }
 
-void	ta_mere(t_list_token *l, t_env *env)
+int	update_str(char **str, t_env *env, int i, int len)
 {
-	int	i;
-	int y;
-	int x = 0;
-	t_token *tmp;
-	tmp = l->first;
-	while (tmp)
-	{
-		i = 0;
-		y = 0;
-		x = 0;
-		while (tmp->str[i])
-		{
-			if (tmp->str[i] && i == 0 && tmp->str[i] == 39)
-				break ;
-			if (tmp->str[i] && tmp->str[i] == 36)
-			{
-				i++;
-				y = i;
-				while (tmp->str[i] && tmp->str[i] != 34 && tmp->str[i] != 39 && tmp->str[i] != 32)
-					i++, x++;
-			}
-			if (x != 0)
-				break ;
-			i++;
-		}
-		if (x != 0)
-		{
-			char *t = get_name(env, tmp->str + y, x);
-			if (!t)
-				continue ;
-			char * zozo = ft_ralou(tmp->str, i, y, ft_strlen(t), t);
-			free (tmp->str);
-			tmp->str = zozo;
-		}
-		tmp = tmp->next;
-	}
+	char	*name;
+	char	*change;
+
+	name = get_name(env, *str + len - 1, i - len + 1);
+	if (!name)
+		return (FAIL);
+	change = ft_joinralo(*str, (i - len), len, name);
+	if (!change)
+		return (FAIL);
+	free(*str);
+	printf("change = %s\n", change);
+	*str = change;
+	return (SUCCESS);
+}
+
+// int	check_expand(t_token t, int i)
+// {
+// 	t_token	*tmp;
+
+// 	tmp = &t;
+// 	while (tmp)
+// 	{
+// 		while (*tmp->str)
+// 		{
+// 			if (*tmp->str == 39 && i == 0)
+// 				break ;
+// 			if (*tmp->str == 36)
+// 				return (SUCCESS);
+// 			tmp->str++;
+// 		}
+// 		i = 0;
+// 		tmp = tmp->next;
+// 	}
+// 	return (FAIL);
+// }
+
+void	expand(t_list_token *l, t_env *env)
+{
+	// if (check_expand(*l->first, 0))
+	// 	return ;
+	expand_utils(l, env);
 }

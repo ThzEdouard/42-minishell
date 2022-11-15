@@ -41,7 +41,7 @@ t_token	*cmd_write(t_list_exec *exec, t_token *t, t_add *values, t_env *env)
 		t = t->next->next;
 		values->filename[values->j++] = t->next->str;
 	}
-	values->filename[values->j] = 0;
+	// values->filename[values->j] = 0;
 	exec_push(exec, values->command, values->filename, WRITE);
 	exec->first = set_path(exec->first, env);
 	values->j = 0;

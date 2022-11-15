@@ -20,5 +20,6 @@ int	main(int argc, char **argv, char **envp)
 	(void) argv;
 	generator_env(&env, envp);
 	prompt(&env, envp);
+	clear_env(&env);
 	return (SUCCESS);
 }

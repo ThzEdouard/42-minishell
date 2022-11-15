@@ -54,10 +54,8 @@ void	prstwo(char *line, int *en)
 	*en = end;
 }
 
-void	pars_cmd(t_list_token *l, char *line)
+int	pars_cmd(t_list_token *l, char *line, int end)
 {
-	int	end;
-
 	while (*line)
 	{
 		end = 0;
@@ -78,8 +76,10 @@ void	pars_cmd(t_list_token *l, char *line)
 			prstwo(line, &end);
 			line += end;
 		}
-		token_push(l, ft_substr(line - end, 0, end));
+		if (add_list(l, line, end))
+			return (FAIL);
 	}
+	return (SUCCESS);
 }
 
 int	parsing(char *line, t_list_token *t)
@@ -87,10 +87,11 @@ int	parsing(char *line, t_list_token *t)
 	t_list_token	l;
 
 	token_init(&l);
-	pars_cmd(&l, line);
+	if (pars_cmd(&l, line, 0) == FAIL)
+		return (token_clear(&l), FAIL);
 	add_token(l.first);
 	if (verification_token(l.first) == FAIL)
-		return (FAIL);
+		return (token_clear(&l), FAIL);
 	t->first = l.first;
 	return (SUCCESS);
 }

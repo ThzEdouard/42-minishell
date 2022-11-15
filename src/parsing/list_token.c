@@ -18,6 +18,18 @@ void	token_init(t_list_token *l)
 	l->last = NULL;
 }
 
+int	add_list(t_list_token *l, char *line, int end)
+{
+	char	*str;
+
+	str = ft_substr(line - end, 0, end);
+	printf("str =  %s\n", str);
+	if (!str)
+		return (FAIL);
+	token_push(l, str);
+	return (SUCCESS);
+}
+
 void	token_push(t_list_token *l, char *str)
 {
 	t_token	*new;
@@ -33,6 +45,7 @@ void	token_push(t_list_token *l, char *str)
 	else
 		l->first = new;
 	l->last = new;
+	printf("new str = %s\n", new->str);
 }
 
 void	token_clear(t_list_token *l)
@@ -40,10 +53,15 @@ void	token_clear(t_list_token *l)
 	t_token	*tmp;
 	t_token	*elem;
 
+	if (!l->first)
+		return ;
 	elem = l->first;
 	while (elem)
 	{
 		tmp = elem;
+		if (tmp->str)
+			free(tmp->str);
+		tmp->str = NULL;
 		elem = elem->next;
 		free(tmp);
 	}
