@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../include/utils.h"
+#include <stdio.h>
 
 static int	ft_double_len(char **src)
 {
@@ -19,7 +20,7 @@ static int	ft_double_len(char **src)
 	if (!src)
 		return (0);
 	i = 0;
-	while (src[i] != 0)
+	while (src[i])
 		i++;
 	return (i);
 }
@@ -43,7 +44,7 @@ char	**ft_double_raloc(char **src)
 	char	**malloc_src;
 
 	y = 0;
-	if (ft_double_len(src) == 0)
+	if (!src || ft_double_len(src) == 0)
 		return (NULL);
 	malloc_src = malloc(sizeof(char *) * (ft_double_len(src) + 1));
 	if (!malloc_src)

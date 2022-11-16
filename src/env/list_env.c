@@ -28,6 +28,8 @@ t_env	*new_elem(char *str)
 
 char	*get_name(t_env *env, char *s, int len)
 {
+	if (!ft_strncmp(ECHO_CODE, s, len))
+		return(NULL);
 	while (env)
 	{
 		if (!ft_strncmp(env->str, s, len))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aradice <aradice@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 03:11:35 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/11/16 02:25:21 by aradice          ###   ########.fr       */
+/*   Updated: 2022/11/16 12:52:24 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,14 @@ void	exec_push(t_list_exec *l, char **cmd, char **filename, t_type type)
 	if (!new)
 		return ;
 	// printf("cmd: %s | filename: %s | type: %d\n", cmd[0], filename[0], type);
-	new->cmd = ft_double_raloc(cmd);
-	new->filename = ft_double_raloc(filename);
+	if (cmd)
+		new->cmd = ft_double_raloc(cmd);
+	else
+		new->cmd = NULL;
+	if (filename)
+		new->filename = ft_double_raloc(filename);
+	else
+		new->filename = NULL;
 	new->path_cmd = NULL;
 	new->file = NULL;
 	new->type = type;
