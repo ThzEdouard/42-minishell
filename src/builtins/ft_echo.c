@@ -60,15 +60,11 @@ int	ft_echo(char **cmd)
 	if (checking_args(cmd, &i) == SUCCESS)
 	{
 		while (cmd[i])
-		{
-			printf("%s", cmd[i]);
-		}
+			printf("%s", cmd[i++]);
 		return (1);
 	}
 	while (cmd[i])
-	{
-		printf("%s", cmd[i]);
-	}
+		printf("%s", cmd[i++]);
 	printf("\n");
 	return (1);
 }

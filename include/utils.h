@@ -35,5 +35,6 @@ int		ft_chrdir(char *s);
 char	**ft_double_raloc(char **src);
 int		*ft_realoc_int(char **src);
 char	**ft_sd_ralloc(char *src, char **tab);
+int		ft_atoi(const char *str);
 
 #endif

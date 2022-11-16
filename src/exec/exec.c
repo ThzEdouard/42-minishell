@@ -55,7 +55,6 @@ int	ft_open_files(t_exec *data, int i)
 		tmp->file = ft_realoc_int(tmp->filename);
 		while (tmp->filename[i])
 		{
-			printf("dd\n");
 			if (ft_open_files_2(tmp, i) == FAIL)
 				return (FAIL);
 			i++;

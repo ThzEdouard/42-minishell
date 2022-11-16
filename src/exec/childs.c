@@ -91,7 +91,7 @@ int	ft_exec_builtins(t_exec *data, t_env **env)
 	if (!ft_strncmp(data->cmd[0], "env", 3))
 		return (ft_env(*env), 1);
 	if (!ft_strncmp(data->cmd[0], "exit", 4))
-		return (ft_exit(), 1);
+		return (ft_exit(data->cmd), 1);
 	if (!ft_strncmp(data->cmd[0], "export", 6))
 		return (ft_export(env, data->cmd[1]), 1);
 	if (!ft_strncmp(data->cmd[0], "pwd", 3))

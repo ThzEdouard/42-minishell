@@ -161,7 +161,7 @@ t_token	*cmd_here(t_list_exec *exec, t_token *t, t_add *values, t_env *env);
 /* ***************************************************************** */
 
 int		ft_pwd(void);
-void	ft_exit(void);
+void	ft_exit(char **cmd);
 int		ft_env(t_env *env);
 void	ft_export(t_env **env, char *cmd);
 void	ft_unset(t_env **env, char *cmd);

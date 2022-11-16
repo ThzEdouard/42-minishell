@@ -38,8 +38,13 @@ t_exec	*add_exec(t_token *t, t_env *env)
 			tmp = cmd_here(&exec, tmp, &values, env);
 		tmp = tmp->next;
 	}
-	ft_free_all(values.filename);
-	ft_free_all(values.command);
+
+	// printf("FILE=%s\n",values.filename[0]);
+	// printf("CMD=%s\n",values.command[0]);
+
+	// ft_free_all(values.filename);
+	// ft_free_all(values.command);
+
 	return (exec.first);
 }
 
@@ -82,7 +87,7 @@ void	malloc_cmd_filename(t_token *t, t_add *values)
 		values->filename = malloc(sizeof(char *) * nb_filename + 1);
 	if (nb_cmd)
 		values->command = malloc(sizeof(char *) * nb_cmd + 1);
-	// printf("%d | %d",nb_filename, nb_cmd);
+	// printf("%d | %d\n",nb_filename, nb_cmd);
 	i = -1;
 	while (++i < nb_filename)
 		values->filename[i] = 0;
