@@ -11,46 +11,46 @@
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-//a finir
-// static int checking_code(char **cmd)
-// {
-//
-// }
-//je vais la fini aujourd'hui
 
-static int	checking_args(char **cmd, int *t)
+static int	checking_args(char **cmd, int *t, int i)
+{
+	int	y;
+	int r;
+
+	r = 0;
+	while (cmd[i])
+	{
+		if (cmd[i][0] == '-' && ft_strlen(cmd[i]) > 1)
+		{
+			y = 1;
+			while (cmd[i][y] == 'n')
+				y++;
+			printf ("y = %d len = %d\n", y, ft_strlen(cmd[i]));
+			if (y == ft_strlen(cmd[i]))
+				r = i;
+		}
+		else
+			return (*t = r + 1, SUCCESS);
+		i++;
+	}
+	if (r > 0)
+		return (*t = r, SUCCESS);
+	return (FAIL);
+}
+
+static void	check_quite(char **cmd)
 {
 	int	i;
-	int	y;
-	int	x;
 
 	i = 0;
-	x = 0;
-	while (cmd[i] && x == 0)
+	while (cmd[i])
 	{
-		if (!strcmp(cmd[i], "echo"))
-			i++;
-		y = 0;
-		while (cmd[i][y])
+		if (cmd[i][0] == 34 || cmd[i][0] == 36)
 		{
-			if (y == 0 && cmd[i][0] != '-')
-			{
-				x = 0;
-				break ;
-			}
-			if (y != 0 && cmd[i][y] != 'n')
-			{
-				x = 0;
-				break ;
-			}
-			x++;
-			y++;
+			cmd[i] = ft_free_substr(cmd[i], 1, ft_strlen(cmd[i]) - 2);
 		}
 		i++;
 	}
-	if (x > 0)
-		return (*t = i, SUCCESS);
-	return (FAIL);
 }
 
 int	ft_echo(char **cmd)
@@ -58,14 +58,23 @@ int	ft_echo(char **cmd)
 	int	i;
 
 	i = 1;
-	if (checking_args(cmd, &i) == SUCCESS)
+	check_quite(cmd);
+	if (checking_args(cmd, &i, 1) == SUCCESS)
 	{
 		while (cmd[i])
+		{
 			printf("%s", cmd[i++]);
+			if (cmd[i])
+				printf(" ");
+		}
 		return (1);
 	}
 	while (cmd[i])
+	{
 		printf("%s", cmd[i++]);
+		if (cmd[i])
+			printf(" ");
+	}
 	printf("\n");
 	return (1);
 }
