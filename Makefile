@@ -66,5 +66,11 @@ fclean:		clean
 
 re:		fclean all
 
+val:
+			valgrind --suppressions=readline_link ./minishell
+git:	fclean
+		git add ./
+		git commit -m "commit de <<$(SRC_FILES)>>"
+		git push
 
 .PHONY:		all clean fclean re

@@ -16,6 +16,7 @@
 // {
 //
 // }
+//je vais la fini aujourd'hui
 
 static int	checking_args(char **cmd, int *t)
 {
