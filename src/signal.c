@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 12:33:02 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/11/17 14:08:23 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/11/17 17:53:08 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static void	handel(int sig)
 	if (sig == SIGKILL)
 	{
 		printf("\n");
-		prompt(NULL, NULL);
+		g_statesssss = 1;
 	}
+	if (sig == SIGQUIT)
+		g_statesssss = 1;
 }
