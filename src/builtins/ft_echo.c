@@ -76,5 +76,6 @@ int	ft_echo(char **cmd)
 			printf(" ");
 	}
 	printf("\n");
+	g_statesssss = 0;
 	return (1);
 }

@@ -72,6 +72,7 @@ void	prompt(t_env **env, char **envp)
 			e.first = exec;
 			exec_clear(&e);
 		}
+		printf("code error = %d\n", g_statesssss);
 		add_history(line);
 		free(line);
 		line = readline("doudou > ");

@@ -12,53 +12,82 @@
 
 #include "../../include/minishell.h"
 
+void	exec_clears(t_exec *l)
+{
+	t_exec	*tmp;
+	t_exec	*elem;
+
+	elem = l;
+	while (elem)
+	{
+		tmp = elem;
+		ft_free_all(tmp->cmd);
+		if (tmp->path_cmd)
+			free(tmp->path_cmd);
+		ft_free_all(tmp->filename);
+		if (tmp->file)
+			free(tmp->file);
+		if (tmp->paths)
+			ft_free_all(tmp->paths);
+		tmp->paths = NULL;
+		elem = elem->next;
+		free(tmp);
+	}
+
+}
+
+void	ft_free_exit(t_exec *data, t_env **env, int code)
+{
+	printf("exit\n");
+	clear_env(env);
+	exec_clears(data);
+	exit(code);
+}
+
+void	ft_exit_util(t_exec *data, t_env **env, char **cmd)
+{
+	int	y;
+
+	y = 0;
+	while(cmd[1][y])
+	{
+		if (cmd[1][y] < '0' || cmd[1][y] > '9')
+		{
+			if(y == 0 && cmd[1][y] == '-')
+			{
+				y++;
+				continue ;
+			}
+			else
+			{
+				printf("bash: exit: %s: numeric argument required\n", cmd[1]);
+				exit(2);
+			}
+		}
+		y++;
+	}
+}
+
 void	ft_exit(t_exec *data, t_env **env, char **cmd)
 {
-	int val;
-	int i;
-	int y;
+	int	i;
 
-	val = 0;
 	i = 0;
-	y = 0;
-	(void)data;
-	printf("exit\n");
 	while(cmd[i])
 		i++;
 	if (i == 1)
-		exit(0);
-	while(cmd[1][y])
-		{
-			if (cmd[1][y] < '0' || cmd[1][y] > '9')
-			{
-				if(y == 0 && cmd[1][y] == '-')
-				{
-					y++;
-					continue ;
-				}
-				else
-				{
-					printf("bash: exit: %s: numeric argument required\n", cmd[1]);
-					exit(2);
-				}
-			}
-			y++;
-		}
+		ft_free_exit(data, env, 0);
+	ft_exit_util(data, env, cmd);
 	if (i > 2)
 	{
 		printf("bash: exit: too many arguments\n");
 		return ;
 	}
 	else if (i == 2)
-		val = ft_atoi(cmd[1]);
-
-	if (val < 0)
-		val = 256 - (-val % 256);
+		g_statesssss = ft_atoi(cmd[1]);
+	if (g_statesssss < 0)
+		g_statesssss = 256 - (-g_statesssss % 256);
 	else
-		val = val % 256;
-	// printf("VAL= %d",val);
-
-	clear_env(env);
-	// exec_clear(data);
-	exit(val);
+		g_statesssss = g_statesssss % 256;
+	ft_free_exit(data, env, g_statesssss);
 }
