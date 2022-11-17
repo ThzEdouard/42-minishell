@@ -19,7 +19,8 @@ int	ft_env(t_env *env)
 	tmp = env;
 	while (tmp)
 	{
-		printf("%s\n", tmp->str);
+		if (tmp->str)
+			printf("%s\n", tmp->str);
 		tmp = tmp->next;
 	}
 	return (0);

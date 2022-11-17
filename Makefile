@@ -66,8 +66,9 @@ fclean:		clean
 
 re:		fclean all
 
-val:
-			valgrind --suppressions=readline_link ./minishell
+val:	all
+			valgrind --leak-check=full --suppressions=readline_link ./minishell
+
 git:	fclean
 		git add ./
 		git commit -m "commit de <<$(SRC_FILES)>>"

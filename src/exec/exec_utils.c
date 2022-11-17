@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 03:11:35 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/11/16 12:52:24 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/11/16 23:07:57 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	ft_free_all(char **tab)
 		i++;
 	}
 	free(tab);
+
 }
 
 void	exec_push(t_list_exec *l, char **cmd, char **filename, t_type type)
@@ -76,6 +77,9 @@ void	exec_clear(t_list_exec *l)
 		ft_free_all(tmp->filename);
 		if (tmp->file)
 			free(tmp->file);
+		// if (tmp->paths)
+		// 	ft_free_all(tmp->paths);
+		// tmp->paths = NULL;
 		elem = elem->next;
 		free(tmp);
 	}

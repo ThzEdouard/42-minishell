@@ -26,18 +26,29 @@ static void	ft_delete_node(t_env *env)
 void	ft_unset(t_env **env, char *cmd)
 {
 	t_env	*tmp;
-
+	char	*tmp_str;
 	tmp = *env;
-	cmd = ft_strjoin(cmd, "=");
+	tmp_str = ft_strjoin(cmd, "=");
 	while (tmp)
 	{
-		if (!ft_strncmp(tmp->str, cmd, ft_strlen(cmd)))
+		if (!ft_strncmp(tmp->str, tmp_str, ft_strlen(tmp_str)))
 		{
+
 			if (tmp->next)
-				ft_delete_node(tmp);
+			{
+				ft_delete_node(tmp);printf("coucou\n");
+			}
+
 			else
-				free(tmp);
+			{
+				free(tmp->str);
+				tmp->str = NULL;
+				//free(tmp);
+
+			}
+			break ;
 		}
 		tmp = tmp->next;
 	}
+	free(tmp_str);
 }

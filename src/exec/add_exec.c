@@ -85,13 +85,16 @@ int	malloc_cmd_filename(t_token *t, t_add *values)
 		values->command = malloc(sizeof(char *) * (nb_cmd + 1));
 		if (!values->command)
 			return (FAIL);
+		while (nb_cmd)
+			values->command[nb_cmd--] = 0;
 	}
 	if (!values->filename && nb_filename)
 	{
 		values->filename = malloc(sizeof(char *) * (nb_filename + 1));
 		if (!values->filename)
 			return (FAIL);
+		while (nb_filename)
+			values->filename[nb_filename--] = 0;
 	}
-	printf("%d | %d\n",nb_filename, nb_cmd);
 	return (SUCCESS);
 }

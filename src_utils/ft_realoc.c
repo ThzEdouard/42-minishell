@@ -13,7 +13,7 @@
 #include "../include/utils.h"
 #include <stdio.h>
 
-static int	ft_double_len(char **src)
+int	ft_double_len(char **src)
 {
 	int	i;
 
@@ -28,13 +28,16 @@ static int	ft_double_len(char **src)
 int	*ft_realoc_int(char **src)
 {
 	int	*malloc_src;
+	int	 i;
 
-	if (ft_double_len(src) == 0)
+	if (!src || ft_double_len(src) == 0)
 		return (NULL);
 	malloc_src = malloc(sizeof(int) * (ft_double_len(src) + 1));
 	if (!malloc_src)
 		return (NULL);
-	malloc_src[ft_double_len(src) + 1] = 0;
+	i = ft_double_len(src);
+	while(i)
+		malloc_src[i--] = 0;
 	return (malloc_src);
 }
 

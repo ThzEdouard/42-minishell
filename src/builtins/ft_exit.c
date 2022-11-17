@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
 
-void	ft_exit(char **cmd)
+void	ft_exit(t_exec *data, t_env **env, char **cmd)
 {
 	int val;
 	int i;
@@ -21,6 +21,8 @@ void	ft_exit(char **cmd)
 	val = 0;
 	i = 0;
 	y = 0;
+	(void)data;
+	printf("exit\n");
 	while(cmd[i])
 		i++;
 	if (i == 1)
@@ -55,5 +57,8 @@ void	ft_exit(char **cmd)
 	else
 		val = val % 256;
 	// printf("VAL= %d",val);
+
+	clear_env(env);
+	// exec_clear(data);
 	exit(val);
 }

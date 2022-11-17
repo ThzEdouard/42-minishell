@@ -37,16 +37,13 @@ void	ft_childs(t_exec *data, char **envp, t_env **env)
 
 void	ft_exec_init2(t_exec *data, t_env **env)
 {
-	int	i;
-
-	i = 0;
 	if (data->type == READ || data->type == HEREDOC)
 	{
-		while (data->file[i])
+		while (*data->file != 0)
 		{
-			data->pipefd[0] = data->file[i];
+			data->pipefd[0] = *data->file;
 			dup2(data->pipefd[0], STDIN_FILENO);
-			i++;
+			data->file++;
 		}
 	}
 	if (ft_exec_builtins(data, env))
@@ -57,26 +54,22 @@ void	ft_exec_init2(t_exec *data, t_env **env)
 
 void	ft_exec_init(t_exec *data, t_env **env)
 {
-	int	i;
-
-	i = 0;
 	if (data->type == WRITE)
 	{
-		while (data->file[i])
+		while (*data->file != 0)
 		{
-			data->pipefd[1] = data->file[i];
+			data->pipefd[1] = *data->file;
 			dup2(data->pipefd[1], STDOUT_FILENO);
-			i++;
+			data->file++;
 		}
 	}
-	i = 0;
 	if (data->type == APPEND)
 	{
-		while (data->file[i])
+		while (*data->file != 0)
 		{
-			data->pipefd[1] = data->file[i];
+			data->pipefd[1] = *data->file;
 			dup2(data->pipefd[1], STDOUT_FILENO);
-			i++;
+			data->file++;
 		}
 	}
 	ft_exec_init2(data, env);
@@ -91,9 +84,9 @@ int	ft_exec_builtins(t_exec *data, t_env **env)
 	if (!ft_strncmp(data->cmd[0], "env", 3))
 		return (ft_env(*env), 1);
 	if (!ft_strncmp(data->cmd[0], "exit", 4))
-		return (ft_exit(data->cmd), 1);
+		return (ft_exit(data, env, data->cmd), 1);
 	if (!ft_strncmp(data->cmd[0], "export", 6))
-		return (ft_export(env, data->cmd[1]), 1);
+		return (ft_export(env, data->cmd), 1);
 	if (!ft_strncmp(data->cmd[0], "pwd", 3))
 		return (ft_pwd(), 1);
 	if (!ft_strncmp(data->cmd[0], "unset", 5))

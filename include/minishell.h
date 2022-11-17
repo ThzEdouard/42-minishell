@@ -161,14 +161,15 @@ t_token	*cmd_here(t_list_exec *exec, t_token *t, t_add *values, t_env *env);
 /* ***************************************************************** */
 
 int		ft_pwd(void);
-void	ft_exit(char **cmd);
+void	ft_exit(t_exec *data, t_env **env, char **cmd);
 int		ft_env(t_env *env);
-void	ft_export(t_env **env, char *cmd);
+void	ft_export(t_env **env, char **cmd);
 void	ft_unset(t_env **env, char *cmd);
 int		ft_cd(t_env **env, char *cmd);
 int		ft_echo(char **cmd);
 
 void	expand(t_list_token *l, t_env *env);
 int		add_list(t_list_token *l, char *line, int end);
+void	get_name_change(t_env *env, char *s, int len, char *str);
 
 #endif

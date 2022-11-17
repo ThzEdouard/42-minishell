@@ -15,7 +15,7 @@
 int	ft_cd(t_env **env, char *cmd)
 {
 	(void)env;
-	if (access(cmd, F_OK | X_OK) == -1)
+	if (!cmd || access(cmd, F_OK | X_OK) == -1)
 	{
 		printf(ERROR_5, NAME_SHELL_ERROR, "cd", cmd);
 		return (1);
