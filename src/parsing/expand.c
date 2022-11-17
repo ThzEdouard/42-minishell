@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:32:45 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/11/15 22:41:05 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/11/17 12:31:51 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	update_str(char **str, t_env *env, int i, int len)
 	if (!change)
 		return (FAIL);
 	free(*str);
-	printf("change = %s\n", change);
 	*str = change;
 	return (SUCCESS);
 }

@@ -62,7 +62,7 @@ int	pars_cmd(t_list_token *l, char *line, int end)
 		while (*line && *line == 32)
 			line++;
 		if (!*line)
-			break ;
+			return (FAIL);
 		if (!ft_space(*line))
 		{
 			while (*line && *line != 32 && !ft_space(*line))

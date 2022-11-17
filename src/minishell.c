@@ -12,10 +12,13 @@
 
 #include "../include/minishell.h"
 
+int		g_statesssss;
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_env	*env;
 
+	g_statesssss = 0;
 	(void) argc;
 	(void) argv;
 	generator_env(&env, envp);

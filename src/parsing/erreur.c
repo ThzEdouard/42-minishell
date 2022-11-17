@@ -26,18 +26,18 @@ void	ft_quite_error(char s, int len)
 	}
 	else
 		printf(ERROR_0, NAME_SHELL_ERROR, &s);
+	g_statesssss = 2;
 }
 
 void	ft_code_error(t_type type, char *str, int len)
 {
-	if (len == 2)
+	if (len == 0 && type != PIPE)
 		printf(ERROR_3, NAME_SHELL_ERROR);
 	else
-	{
-		if (type == PIPE || type == APPEND || type == WRITE
-			|| type == HEREDOC || type == READ)
-			printf(ERROR_0, NAME_SHELL_ERROR, str);
-	}
+		printf(ERROR_0, NAME_SHELL_ERROR, str);
+	if (len == 1 && type != WORD)
+		printf(ERROR_0, NAME_SHELL_ERROR, str);
+	g_statesssss = 2;
 }
 
 void	ft_error(char *error)

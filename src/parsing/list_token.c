@@ -23,7 +23,6 @@ int	add_list(t_list_token *l, char *line, int end)
 	char	*str;
 
 	str = ft_substr(line - end, 0, end);
-	// printf("str =  %s\n", str);
 	if (!str)
 		return (FAIL);
 	token_push(l, str);
@@ -45,7 +44,6 @@ void	token_push(t_list_token *l, char *str)
 	else
 		l->first = new;
 	l->last = new;
-	// printf("new str = %s\n", new->str);
 }
 
 void	token_clear(t_list_token *l)

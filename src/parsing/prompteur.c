@@ -50,16 +50,6 @@ static int	verification_quote(char *line)
 	return (SUCCESS);
 }
 
-void View(t_list_token l)
-{
-   t_token *pelem = l.first;
-   while(pelem)
-   {
-     printf("%s\n",pelem->str);
-     pelem = pelem->next;
-   }
-}
-
 void	prompt(t_env **env, char **envp)
 {
 	char			*line;

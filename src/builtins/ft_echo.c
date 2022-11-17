@@ -15,7 +15,7 @@
 static int	checking_args(char **cmd, int *t, int i)
 {
 	int	y;
-	int r;
+	int	r;
 
 	r = 0;
 	while (cmd[i])
@@ -30,12 +30,12 @@ static int	checking_args(char **cmd, int *t, int i)
 				r = i;
 		}
 		else
-			return (*t = r + 1, SUCCESS);
+			break ;
 		i++;
 	}
 	if (r > 0)
-		return (*t = r, SUCCESS);
-	return (FAIL);
+		return (*t = r + 1, SUCCESS);
+	return (*t = r + 1, FAIL);
 }
 
 static void	check_quite(char **cmd)

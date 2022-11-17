@@ -28,7 +28,7 @@
 # define SUCCESS 0
 # define FAIL 1
 
-# define ECHO_CODE "$?"
+# define ECHO_CODE "?"
 
 # define NAME_SHELL "doudou"
 # define NAME_SHELL_ERROR "\e[1;91mDoudou\e[0m"
@@ -37,6 +37,8 @@
 # define ERROR_1 "\e[1;90m%s : %s: Is a directory\n\e[0m"
 # define ERROR_2 "\e[1;90m%s : %s: command not found\n\e[0m"
 # define ERROR_5 "\e[1;90m%s : %s: %s: Not a directory\n\e[0m"
+
+extern int g_statesssss;
 
 typedef enum s_type
 {
@@ -98,6 +100,8 @@ typedef struct s_add
 	char	**command;
 	char	**filename;
 }				t_add;
+
+
 
 /* **************************************************************** */
 /*------------------------------prompt in parsing-------------------*/
