@@ -62,7 +62,7 @@ int	pars_cmd(t_list_token *l, char *line, int end)
 		while (*line && *line == 32)
 			line++;
 		if (!*line)
-			return (FAIL);
+			return (SUCCESS);
 		if (!ft_space(*line))
 		{
 			while (*line && *line != 32 && !ft_space(*line))
@@ -77,7 +77,7 @@ int	pars_cmd(t_list_token *l, char *line, int end)
 			line += end;
 		}
 		if (add_list(l, line, end))
-			return (FAIL);
+			return (token_clear(l), FAIL);
 	}
 	return (SUCCESS);
 }
@@ -87,8 +87,8 @@ int	parsing(char *line, t_list_token *t)
 	t_list_token	l;
 
 	token_init(&l);
-	if (pars_cmd(&l, line, 0) == FAIL)
-		return (token_clear(&l), FAIL);
+	if (pars_cmd(&l, line, 0) == FAIL && !l.first)
+		return (FAIL);
 	add_token(l.first);
 	if (verification_token(l.first) == FAIL)
 		return (token_clear(&l), FAIL);
