@@ -61,7 +61,7 @@ void	ft_exit_util(t_exec *data, t_env **env, char **cmd)
 			else
 			{
 				printf("bash: exit: %s: numeric argument required\n", cmd[1]);
-				exit(2);
+				ft_free_exit(data, env, 2);
 			}
 		}
 		y++;
