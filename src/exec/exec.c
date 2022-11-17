@@ -61,6 +61,7 @@ int	ft_open_files(t_exec *data, int i)
 		}
 		tmp = tmp->next;
 	}
+	printf("i = %d\n", i);
 	return (SUCCESS);
 }
 
@@ -122,10 +123,22 @@ void	ft_exec(t_exec *p, char **envp, t_env **env)
 		tmp = tmp->next;
 	}
 	tmp = p;
-	if (i == 1 && tmp->cmd && ft_check_builtins(tmp))
-		ft_exec_builtins(tmp, env);
-	if (i == 1 && tmp->cmd && ft_check_builtins(tmp))
+	if (i == 1 && tmp->cmd && ft_check_builtins(tmp) && !ft_check_redirs(tmp))//
+	{
+		ft_exec_builtins_init(tmp, env);
+		ft_close_files(p);
+		//	close(1);
+		dup2(tmp->savein, STDIN_FILENO);
+		dup2(tmp->saveout, STDOUT_FILENO);
+		close(tmp->savein);
+		close(tmp->saveout);
 		return ;
+	}
+	if (i == 1 && tmp->cmd && ft_check_builtins(tmp))
+	{
+			ft_exec_builtins(tmp, env);
+			return ;
+	}
 	while (tmp)
 	{
 		ft_childs(tmp, envp, env);
@@ -133,5 +146,6 @@ void	ft_exec(t_exec *p, char **envp, t_env **env)
 	}
 	while (wait(&p->pid) > 0)
 		continue ;
+
 	ft_close_files(p);
 }

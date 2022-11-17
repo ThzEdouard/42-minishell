@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 03:11:35 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/11/16 23:07:57 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/11/17 21:59:39 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	exec_push(t_list_exec *l, char **cmd, char **filename, t_type type)
 	new->type = type;
 	new->prev = l->last;
 	new->next = NULL;
+	new->saveout = dup(STDOUT_FILENO);
+	new->savein = dup(STDIN_FILENO);
 	if (l->last)
 		l->last->next = new;
 	else
@@ -75,8 +77,8 @@ void	exec_clear(t_list_exec *l)
 		if (tmp->path_cmd)
 			free(tmp->path_cmd);
 		ft_free_all(tmp->filename);
-		if (tmp->file)
-			free(tmp->file);
+		// if (tmp->file)
+		// 	free(tmp->file);
 		// if (tmp->paths)
 		// 	ft_free_all(tmp->paths);
 		// tmp->paths = NULL;

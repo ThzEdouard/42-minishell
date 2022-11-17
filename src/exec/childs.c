@@ -112,3 +112,48 @@ int	ft_check_builtins(t_exec *data)
 		return (1);
 	return (0);
 }
+
+void	ft_exec_builtins_init2(t_exec *data, t_env **env)
+{
+	if (data->type == READ || data->type == HEREDOC)
+	{
+		while (*data->file != 0)
+		{
+			data->pipefd[0] = *data->file;
+			dup2(data->pipefd[0], STDIN_FILENO);
+			data->file++;
+		}
+	}
+	if (ft_exec_builtins(data, env))
+		return ;
+}
+
+void	ft_exec_builtins_init(t_exec *data, t_env **env)
+{
+	if (data->type == WRITE)
+	{
+		while (*data->file != 0)
+		{
+			data->pipefd[1] = *data->file;
+			dup2(data->pipefd[1], STDOUT_FILENO);
+			data->file++;
+		}
+	}
+	if (data->type == APPEND)
+	{
+		while (*data->file != 0)
+		{
+			data->pipefd[1] = *data->file;
+			dup2(data->pipefd[1], STDOUT_FILENO);
+			data->file++;
+		}
+	}
+	ft_exec_builtins_init2(data, env);
+}
+
+int	ft_check_redirs(t_exec *data)
+{
+	if (data->type != WORD)
+		return (SUCCESS);
+	return (FAIL);
+}

@@ -66,6 +66,8 @@ typedef struct s_token
 
 typedef struct s_exec
 {
+	int				saveout;
+	int				savein;
 	char			**cmd;
 	char			*path_cmd;
 	int				pipefd[2];
@@ -145,6 +147,9 @@ void	ft_here_doc(t_exec *data, int i);
 void	ft_free_paths(t_exec *data);
 void	ft_exec_init(t_exec *data, t_env **env);
 void	ft_message(char *error);
+int		ft_check_redirs(t_exec *data);
+void	ft_exec_builtins_init(t_exec *data, t_env **env);
+void	ft_exec_builtins_init2(t_exec *data, t_env **env);
 
 int		ft_exec_builtins(t_exec *data, t_env **env);
 int		ft_check_builtins(t_exec *data);
