@@ -42,6 +42,7 @@ extern int g_statesssss;
 
 typedef enum s_type
 {
+	NOTHING,
 	WORD,
 	PIPE,
 	APPEND,
@@ -64,6 +65,14 @@ typedef struct s_token
 	struct s_token	*next;
 }					t_token;
 
+typedef struct s_files 
+{
+	int				file;
+	t_type			type;
+	struct s_files	*prev;
+	struct s_files	*next;
+}					t_files;
+
 typedef struct s_exec
 {
 	int				saveout;
@@ -77,7 +86,8 @@ typedef struct s_exec
 	char			*command_path;
 	char			**filename;
 	int				*file;
-	t_type			type;
+	t_type			*type;
+	//t_files			*files;
 	struct s_exec	*prev;
 	struct s_exec	*next;
 }			t_exec;
@@ -101,6 +111,7 @@ typedef struct s_add
 	int		j;
 	char	**command;
 	char	**filename;
+	t_type	*type;
 }				t_add;
 
 /* **************************************************************** */
@@ -132,6 +143,7 @@ void	clear_env(t_env **env);
 //exec fonction sur l'autre ;)
 void	exec_init(t_list_exec *l);
 void	exec_push(t_list_exec *l, char **cmd, char **filename, t_type type);
+void	exec_push_v2(t_list_exec *l, char **cmd, char **filename, t_type *type);
 void	exec_clear(t_list_exec *l);
 t_exec	*add_exec(t_token *t, t_env *env);
 void	ft_free_paths(t_exec *exec);
@@ -162,6 +174,9 @@ t_token	*cmd_write(t_list_exec *exec, t_token *t, t_add *values, t_env *env);
 t_token	*cmd_append(t_list_exec *exec, t_token *t, t_add *values, t_env *env);
 t_token	*cmd_read(t_list_exec *exec, t_token *t, t_add *values, t_env *env);
 t_token	*cmd_here(t_list_exec *exec, t_token *t, t_add *values, t_env *env);
+
+t_token	*cmd_write_append(t_list_exec *exec, t_token *t, t_add *values, t_env *env);
+t_type	*ft_double_realoc_enum(t_type *src);
 
 /* **************************************************************** */
 /*------------------------------bulting------------------------------*/

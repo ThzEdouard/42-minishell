@@ -35,44 +35,62 @@ void	ft_childs(t_exec *data, char **envp, t_env **env)
 		close(data->prev->pipefd[0]);
 }
 
-void	ft_exec_init2(t_exec *data, t_env **env)
+// void	ft_exec_init2(t_exec *data, t_env **env)
+// {
+// 	if (data->type == READ || data->type == HEREDOC)
+// 	{
+// 		while (*data->file != 0)
+// 		{
+// 			data->pipefd[0] = *data->file;
+// 			dup2(data->pipefd[0], STDIN_FILENO);
+// 			data->file++;
+// 		}
+// 	}
+// 	if (ft_exec_builtins(data, env))
+// 		exit (0);
+// 	if (data->path_cmd == NULL)
+// 		ft_message("Error: Command not found\n");
+// }
+
+void	ft_exec_init(t_exec *data, t_env **env)
 {
-	if (data->type == READ || data->type == HEREDOC)
+	int i = 0;
+	while(data->type[i])
 	{
-		while (*data->file != 0)
+		if (data->type[i] == WRITE)
 		{
-			data->pipefd[0] = *data->file;
-			dup2(data->pipefd[0], STDIN_FILENO);
-			data->file++;
+			while (*data->file != 0)
+			{
+				data->pipefd[1] = *data->file;
+				dup2(data->pipefd[1], STDOUT_FILENO);
+				data->file++;
+			}
 		}
+		if (data->type[i] == APPEND)
+		{
+			while (*data->file != 0)
+			{
+				data->pipefd[1] = *data->file;
+				dup2(data->pipefd[1], STDOUT_FILENO);
+				data->file++;
+			}
+		}
+		if (data->type[i] == READ || data->type[i] == HEREDOC)
+		{
+			while (*data->file != 0)
+			{
+				data->pipefd[0] = *data->file;
+				dup2(data->pipefd[0], STDIN_FILENO);
+				data->file++;
+			}
+		}
+		i++;
 	}
 	if (ft_exec_builtins(data, env))
 		exit (0);
 	if (data->path_cmd == NULL)
 		ft_message("Error: Command not found\n");
-}
-
-void	ft_exec_init(t_exec *data, t_env **env)
-{
-	if (data->type == WRITE)
-	{
-		while (*data->file != 0)
-		{
-			data->pipefd[1] = *data->file;
-			dup2(data->pipefd[1], STDOUT_FILENO);
-			data->file++;
-		}
-	}
-	if (data->type == APPEND)
-	{
-		while (*data->file != 0)
-		{
-			data->pipefd[1] = *data->file;
-			dup2(data->pipefd[1], STDOUT_FILENO);
-			data->file++;
-		}
-	}
-	ft_exec_init2(data, env);
+	// ft_exec_init2(data, env);
 }
 
 int	ft_exec_builtins(t_exec *data, t_env **env)
@@ -113,47 +131,90 @@ int	ft_check_builtins(t_exec *data)
 	return (0);
 }
 
-void	ft_exec_builtins_init2(t_exec *data, t_env **env)
-{
-	if (data->type == READ || data->type == HEREDOC)
-	{
-		while (*data->file != 0)
-		{
-			data->pipefd[0] = *data->file;
-			dup2(data->pipefd[0], STDIN_FILENO);
-			data->file++;
-		}
-	}
-	if (ft_exec_builtins(data, env))
-		return ;
-}
+// void	ft_exec_builtins_init2(t_exec *data, t_env **env)
+// {
+// 	if (data->type == READ || data->type == HEREDOC)
+// 	{
+// 		while (*data->file != 0)
+// 		{
+// 			data->pipefd[0] = *data->file;
+// 			dup2(data->pipefd[0], STDIN_FILENO);
+// 			data->file++;
+// 		}
+// 	}
+// 	if (ft_exec_builtins(data, env))
+// 		return ;
+// }
+
+// void	ft_exec_builtins_init(t_exec *data, t_env **env)
+// {
+// 	if (data->type == WRITE)
+// 	{
+// 		while (*data->file != 0)
+// 		{
+// 			data->pipefd[1] = *data->file;
+// 			dup2(data->pipefd[1], STDOUT_FILENO);
+// 			data->file++;
+// 		}
+// 	}
+// 	if (data->type == APPEND)
+// 	{
+// 		while (*data->file != 0)
+// 		{
+// 			data->pipefd[1] = *data->file;
+// 			dup2(data->pipefd[1], STDOUT_FILENO);
+// 			data->file++;
+// 		}
+// 	}
+// 	ft_exec_builtins_init2(data, env);
+// }
 
 void	ft_exec_builtins_init(t_exec *data, t_env **env)
 {
-	if (data->type == WRITE)
+	int i = 0;
+	while(data->type[i])
 	{
-		while (*data->file != 0)
+		if (data->type[i] == WRITE)
 		{
-			data->pipefd[1] = *data->file;
-			dup2(data->pipefd[1], STDOUT_FILENO);
-			data->file++;
+			while (*data->file != 0)
+			{
+				data->pipefd[1] = *data->file;
+				dup2(data->pipefd[1], STDOUT_FILENO);
+				data->file++;
+			}
 		}
-	}
-	if (data->type == APPEND)
-	{
-		while (*data->file != 0)
+		if (data->type[i] == APPEND)
 		{
-			data->pipefd[1] = *data->file;
-			dup2(data->pipefd[1], STDOUT_FILENO);
-			data->file++;
+			while (*data->file != 0)
+			{
+				data->pipefd[1] = *data->file;
+				dup2(data->pipefd[1], STDOUT_FILENO);
+				data->file++;
+			}
 		}
+		if (data->type[i] == READ || data->type[i] == HEREDOC)
+		{
+			while (*data->file != 0)
+			{
+				data->pipefd[0] = *data->file;
+				dup2(data->pipefd[0], STDIN_FILENO);
+				data->file++;
+			}
+		}
+		i++;
 	}
-	ft_exec_builtins_init2(data, env);
+	if (ft_exec_builtins(data, env))
+		return ;
+	// ft_exec_builtins_init2(data, env);
 }
 
 int	ft_check_redirs(t_exec *data)
 {
-	if (data->type != WORD)
-		return (SUCCESS);
+	int i = 0;
+	while(data->type[i])
+	{
+		if (data->type[i] != WORD)
+			return (SUCCESS);
+	}
 	return (FAIL);
 }

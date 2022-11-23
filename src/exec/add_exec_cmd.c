@@ -14,12 +14,13 @@
 
 void	cmd_word(t_list_exec *exec, t_token *t, t_add *values, t_env *env)
 {
-	values->command[values->y] = t->str;
-	values->y++;
+	values->command[values->y++] = t->str;
 	if (!(t->next) || t->next->type == PIPE || t->type == PIPE)
 	{
 		values->command[values->y] = 0;
-		exec_push(exec, values->command, values->filename, WORD);
+		values->type[0] = WORD;
+		values->type[1] = 0;
+		exec_push_v2(exec, values->command, values->filename, values->type);
 		exec->first = set_path(exec->first, env);
 		values->i = 0;
 		while (values->command[values->i])
@@ -32,17 +33,20 @@ void	cmd_word(t_list_exec *exec, t_token *t, t_add *values, t_env *env)
 	}
 }
 
-t_token	*cmd_write(t_list_exec *exec, t_token *t, t_add *values, t_env *env)
+t_token	*cmd_write_append(t_list_exec *exec, t_token *t, t_add *values, t_env *env)
 {
-	values->j = 0;
-	values->filename[values->j++] = t->next->str;
-	while (t->next->next && t->next->next->type == WRITE)
+	
+	values->filename[values->j] = t->next->str;
+	values->type[values->j++] = t->type;
+	while (t->next->next && (t->next->next->type == WRITE || t->next->next->type == APPEND))
 	{
 		t = t->next->next;
-		values->filename[values->j++] = t->next->str;
+		values->filename[values->j] = t->next->str;
+		values->type[values->j++] = t->type;
 	}
 	values->filename[values->j] = 0;
-	exec_push(exec, values->command, values->filename, WRITE);
+	values->type[values->j] = 0;
+	exec_push_v2(exec, values->command, values->filename, values->type);
 	exec->first = set_path(exec->first, env);
 	values->j = 0;
 	while (values->filename[values->j])
@@ -50,38 +54,65 @@ t_token	*cmd_write(t_list_exec *exec, t_token *t, t_add *values, t_env *env)
 	while (values->command[values->i])
 		values->command[values->i++] = 0;
 	values->i = 0;
+	while (values->type[values->i])
+		values->type[values->i++] = 0;
+	values->i = 0;
 	values->y = 0;
+	values->j = 0;
 	return (t->next);
 }
 
-t_token	*cmd_append(t_list_exec *exec, t_token *t, t_add *values, t_env *env)
-{
-	values->j = 0;
-	values->filename[values->j++] = t->next->str;
-	while (t->next->next && t->next->next->type == WRITE)
-	{
-		t = t->next->next;
-		values->filename[values->j++] = t->next->str;
-	}
-	values->filename[values->j] = 0;
-	exec_push(exec, values->command, values->filename, APPEND);
-	exec->first = set_path(exec->first, env);
-	values->j = 0;
-	while (values->filename[values->j])
-		values->filename[values->j++] = 0;
-	values->i = 0;
-	values->y = 0;
-	return (t->next);
-}
+// t_token	*cmd_write(t_list_exec *exec, t_token *t, t_add *values, t_env *env)
+// {
+// 	values->j = 0;
+// 	values->filename[values->j++] = t->next->str;
+// 	while (t->next->next && t->next->next->type == WRITE)
+// 	{
+// 		t = t->next->next;
+// 		values->filename[values->j++] = t->next->str;
+// 	}
+// 	values->filename[values->j] = 0;
+// 	exec_push(exec, values->command, values->filename, WRITE);
+// 	exec->first = set_path(exec->first, env);
+// 	values->j = 0;
+// 	while (values->filename[values->j])
+// 		values->filename[values->j++] = 0;
+// 	while (values->command[values->i])
+// 		values->command[values->i++] = 0;
+// 	values->i = 0;
+// 	values->y = 0;
+// 	return (t->next);
+// }
+
+// t_token	*cmd_append(t_list_exec *exec, t_token *t, t_add *values, t_env *env)
+// {
+// 	values->j = 0;
+// 	values->filename[values->j++] = t->next->str;
+// 	while (t->next->next && t->next->next->type == APPEND)
+// 	{
+// 		t = t->next->next;
+// 		values->filename[values->j++] = t->next->str;
+// 	}
+// 	values->filename[values->j] = 0;
+// 	exec_push(exec, values->command, values->filename, APPEND);
+// 	exec->first = set_path(exec->first, env);
+// 	values->j = 0;
+// 	while (values->filename[values->j])
+// 		values->filename[values->j++] = 0;
+// 	values->i = 0;
+// 	values->y = 0;
+// 	return (t->next);
+// }
 
 t_token	*cmd_read(t_list_exec *exec, t_token *t, t_add *values, t_env *env)
 {
-	values->j = 0;
-	values->filename[values->j++] = t->next->str;
-	while (t->next->next && t->next->next->type == WRITE)
+	values->filename[values->j] = t->next->str;
+	values->type[values->j++] = t->type;
+	while (t->next->next && t->next->next->type == READ)
 	{
 		t = t->next->next;
-		values->filename[values->j++] = t->next->str;
+		values->filename[values->j] = t->next->str;
+		values->type[values->j++] = READ;
 	}
 	while (t->next->next && t->next->next->type == WORD)
 	{
@@ -89,25 +120,28 @@ t_token	*cmd_read(t_list_exec *exec, t_token *t, t_add *values, t_env *env)
 		t = t->next;
 	}
 	values->filename[values->j] = 0;
+	values->type[values->j] = 0;
 	values->command[values->y] = 0;
-	exec_push(exec, values->command, values->filename, READ);
+	exec_push_v2(exec, values->command, values->filename, values->type);
 	exec->first = set_path(exec->first, env);
 	values->j = 0;
 	while (values->filename[values->j])
 		values->filename[values->j++] = 0;
 	values->i = 0;
 	values->y = 0;
+	values->j = 0;
 	return (t->next);
 }
 
 t_token	*cmd_here(t_list_exec *exec, t_token *t, t_add *values, t_env *env)
 {
-	values->j = 0;
-	values->filename[values->j++] = t->next->str;
+	values->filename[values->j] = t->next->str;
+	values->type[values->j++] = t->type;
 	while (t->next->next && t->next->next->type == HEREDOC)
 	{
 		t = t->next->next;
-		values->filename[values->j++] = t->next->str;
+		values->filename[values->j] = t->next->str;
+		values->type[values->j++] = HEREDOC;
 	}
 	while (t->next->next && t->next->next->type == WORD)
 	{
@@ -116,12 +150,14 @@ t_token	*cmd_here(t_list_exec *exec, t_token *t, t_add *values, t_env *env)
 	}
 	values->command[values->y] = 0;
 	values->filename[values->j] = 0;
-	exec_push(exec, values->command, values->filename, HEREDOC);
+	values->type[values->j] = 0;
+	exec_push_v2(exec, values->command, values->filename, values->type);
 	exec->first = set_path(exec->first, env);
 	values->j = 0;
 	while (values->filename[values->j])
 		values->filename[values->j++] = 0;
 	values->i = 0;
 	values->y = 0;
+	values->j = 0;
 	return (t->next);
 }

@@ -44,12 +44,16 @@ void	ft_here_doc(t_exec *data, int i)
 int	ft_check_heredoc(t_exec *data)
 {
 	t_exec	*tmp;
-
+	int i = 0;
 	tmp = data;
-	while (tmp)
+	while (tmp && tmp->type)
 	{
-		if (tmp->type == HEREDOC)
-			return (1);
+		while(tmp->type[i])
+		{
+			if (tmp->type[i] == HEREDOC)
+				return (1);
+			i++;
+		}
 		tmp = tmp->next;
 	}
 	return (0);

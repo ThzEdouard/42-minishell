@@ -34,7 +34,37 @@ void	ft_free_all(char **tab)
 
 }
 
-void	exec_push(t_list_exec *l, char **cmd, char **filename, t_type type)
+// void	exec_push(t_list_exec *l, char **cmd, char **filename, t_type type)
+// {
+// 	t_exec	*new;
+
+// 	new = malloc(sizeof(t_exec));
+// 	if (!new)
+// 		return ;
+// 	// printf("cmd: %s | filename: %s | type: %d\n", cmd[0], filename[0], type);
+// 	if (cmd)
+// 		new->cmd = ft_double_raloc(cmd);
+// 	else
+// 		new->cmd = NULL;
+// 	if (filename)
+// 		new->filename = ft_double_raloc(filename);
+// 	else
+// 		new->filename = NULL;
+// 	new->path_cmd = NULL;
+// 	new->file = NULL;
+// 	new->type = type;
+// 	new->prev = l->last;
+// 	new->next = NULL;
+// 	new->saveout = dup(STDOUT_FILENO);
+// 	new->savein = dup(STDIN_FILENO);
+// 	if (l->last)
+// 		l->last->next = new;
+// 	else
+// 		l->first = new;
+// 	l->last = new;
+// }
+
+void	exec_push_v2(t_list_exec *l, char **cmd, char **filename, t_type *type)
 {
 	t_exec	*new;
 
@@ -52,7 +82,10 @@ void	exec_push(t_list_exec *l, char **cmd, char **filename, t_type type)
 		new->filename = NULL;
 	new->path_cmd = NULL;
 	new->file = NULL;
-	new->type = type;
+	// if (type)
+		new->type = ft_double_realoc_enum(type);
+	// else
+	// 	new->type = NULL;
 	new->prev = l->last;
 	new->next = NULL;
 	new->saveout = dup(STDOUT_FILENO);

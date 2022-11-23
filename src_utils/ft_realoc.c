@@ -11,9 +11,21 @@
 /* ************************************************************************** */
 
 #include "../include/utils.h"
-#include <stdio.h>
+#include "../include/minishell.h"
 
 int	ft_double_len(char **src)
+{
+	int	i;
+
+	if (!src)
+		return (0);
+	i = 0;
+	while (src[i])
+		i++;
+	return (i);
+}
+
+int	ft_double_len_int(t_type *src)
 {
 	int	i;
 
@@ -58,5 +70,28 @@ char	**ft_double_raloc(char **src)
 		y++;
 	}
 	malloc_src[y] = 0;
+	return (malloc_src);
+}
+
+t_type	*ft_double_realoc_enum(t_type *src)
+{
+	int		y;
+	t_type	*malloc_src;
+
+	y = 0;
+	if (!src || ft_double_len_int(src) == 0)
+		return (NULL);
+	printf("dddd");
+	malloc_src = malloc(sizeof(t_type) * (ft_double_len_int(src) + 1));
+	if (!malloc_src)
+		return (NULL);
+	printf("dddd");
+	while (src[y])
+	{
+		malloc_src[y] = src[y];
+		y++;
+	}
+	malloc_src[y] = 0;
+	printf("dddd");
 	return (malloc_src);
 }

@@ -14,7 +14,7 @@
 
 int	ft_open_files_2(t_exec *tmp, int i)
 {
-	if (tmp->type == READ)
+	if (tmp->type[i] == READ)
 	{
 		tmp->file[i] = open(tmp->filename[i], O_RDONLY);
 		if (tmp->file[i] == -1)
@@ -23,20 +23,22 @@ int	ft_open_files_2(t_exec *tmp, int i)
 			return (FAIL);
 		}
 	}
-	else if (tmp->type == WRITE)
+	else if (tmp->type[i] == WRITE)
 	{
 		tmp->file[i] = open(tmp->filename[i], O_RDWR
 				| O_CREAT | O_TRUNC, 0644);
 		if (tmp->file[i] == -1)
 			perror("Outfile Error");
+		// puts(tmp->filename[i]);
 	}
-	else if (tmp->type == APPEND)
+	else if (tmp->type[i] == APPEND)
 	{
 		tmp->file[i] = open(tmp->filename[i], O_WRONLY
 				| O_CREAT | O_APPEND, 0644);
 		if (tmp->file[i] == -1)
-			perror("Outfile Error");
+			perror("Outfile Error");		
 	}
+	// puts(tmp->filename[i]);
 	return (SUCCESS);
 }
 
@@ -55,6 +57,8 @@ int	ft_open_files(t_exec *data, int i)
 		tmp->file = ft_realoc_int(tmp->filename);
 		while (tmp->filename[i])
 		{
+			puts(tmp->filename[i]);
+			printf("sss%d\n%d::\n", tmp->type[i], i);
 			if (ft_open_files_2(tmp, i) == FAIL)
 				return (FAIL);
 			i++;
@@ -81,7 +85,7 @@ void	ft_close_files(t_exec *data)
 			return ;
 		while (tmp->filename[i])
 		{
-			if (tmp->type != HEREDOC)
+			if (tmp->type[i] != HEREDOC)
 				close(tmp->file[i]);
 			i++;
 		}
@@ -119,6 +123,7 @@ void	ft_exec(t_exec *p, char **envp, t_env **env)
 		return ;
 	while (tmp)
 	{
+		// printf("TYPE= %d", tmp->type[0]);
 		i++;
 		tmp = tmp->next;
 	}
@@ -127,7 +132,6 @@ void	ft_exec(t_exec *p, char **envp, t_env **env)
 	{
 		ft_exec_builtins_init(tmp, env);
 		ft_close_files(p);
-		//	close(1);
 		dup2(tmp->savein, STDIN_FILENO);
 		dup2(tmp->saveout, STDOUT_FILENO);
 		close(tmp->savein);
