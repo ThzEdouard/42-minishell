@@ -20,6 +20,7 @@ void	ft_here_doc(t_exec *data, int i)
 	temp = open("temp.tmp", O_WRONLY | O_APPEND | O_CREAT, 0644);
 	if (temp == -1)
 		ft_error("File Error");
+	write(STDIN_FILENO, "> ", 2);
 	line = readline(STDIN_FILENO);
 	while (1)
 	{
@@ -29,14 +30,18 @@ void	ft_here_doc(t_exec *data, int i)
 			{
 				close(temp);
 				free(line);
+				// printf("TEST: %d\n", data->file[i]);
 				data->file[i] = open("temp.tmp", O_RDONLY);
+				// printf("TEST2: %d i: %d\n", data->file[i], i);
 				if (data->file[i] == -1)
 					ft_error("File Error");
 				break ;
 			}
 		}
 		write(temp, line, ft_strlen(line));
+		write(temp, "\n", 1);
 		free(line);
+		write(STDIN_FILENO, "> ", 2);
 		line = readline(STDIN_FILENO);
 	}
 }

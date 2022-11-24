@@ -23,10 +23,10 @@ void	cmd_word(t_list_exec *exec, t_token *t, t_add *values, t_env *env)
 		exec_push_v2(exec, values->command, values->filename, values->type);
 		exec->first = set_path(exec->first, env);
 		values->i = 0;
-		while (values->command[values->i])
+		if(values->command)
 		{
-			values->command[values->i] = 0;
-			values->i++;
+			while (values->command[values->i])
+				values->command[values->i++] = 0;
 		}
 		values->i = 0;
 		values->y = 0;
@@ -51,8 +51,11 @@ t_token	*cmd_write_append(t_list_exec *exec, t_token *t, t_add *values, t_env *e
 	values->j = 0;
 	while (values->filename[values->j])
 		values->filename[values->j++] = 0;
-	while (values->command[values->i])
-		values->command[values->i++] = 0;
+	if(values->command)
+	{
+		while (values->command[values->i])
+			values->command[values->i++] = 0;
+	}
 	values->i = 0;
 	while (values->type[values->i])
 		values->type[values->i++] = 0;
@@ -121,7 +124,8 @@ t_token	*cmd_read(t_list_exec *exec, t_token *t, t_add *values, t_env *env)
 	}
 	values->filename[values->j] = 0;
 	values->type[values->j] = 0;
-	values->command[values->y] = 0;
+	if(values->command)
+		values->command[values->y] = 0;
 	exec_push_v2(exec, values->command, values->filename, values->type);
 	exec->first = set_path(exec->first, env);
 	values->j = 0;
@@ -148,7 +152,8 @@ t_token	*cmd_here(t_list_exec *exec, t_token *t, t_add *values, t_env *env)
 		values->command[values->y++] = t->next->next->str;
 		t = t->next;
 	}
-	values->command[values->y] = 0;
+	if(values->command)
+		values->command[values->y] = 0;
 	values->filename[values->j] = 0;
 	values->type[values->j] = 0;
 	exec_push_v2(exec, values->command, values->filename, values->type);

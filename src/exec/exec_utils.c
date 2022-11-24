@@ -82,10 +82,10 @@ void	exec_push_v2(t_list_exec *l, char **cmd, char **filename, t_type *type)
 		new->filename = NULL;
 	new->path_cmd = NULL;
 	new->file = NULL;
-	// if (type)
+	if (type)
 		new->type = ft_double_realoc_enum(type);
-	// else
-	// 	new->type = NULL;
+	else
+		new->type = NULL;
 	new->prev = l->last;
 	new->next = NULL;
 	new->saveout = dup(STDOUT_FILENO);

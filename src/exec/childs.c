@@ -26,6 +26,8 @@ void	ft_childs(t_exec *data, char **envp, t_env **env)
 		if (data->next != NULL)
 			dup2(data->pipefd[1], STDOUT_FILENO);
 		ft_exec_init(data, env);
+		// puts(data->path_cmd);
+		// puts(data->cmd[1]);
 		close(data->pipefd[0]);
 		close(data->pipefd[1]);
 		execve(data->path_cmd, data->cmd, envp);
@@ -79,6 +81,7 @@ void	ft_exec_init(t_exec *data, t_env **env)
 		{
 			while (*data->file != 0)
 			{
+				// printf("TEsST: %d\n", data->file[i]);
 				data->pipefd[0] = *data->file;
 				dup2(data->pipefd[0], STDIN_FILENO);
 				data->file++;
@@ -215,6 +218,7 @@ int	ft_check_redirs(t_exec *data)
 	{
 		if (data->type[i] != WORD)
 			return (SUCCESS);
+		i++;
 	}
 	return (FAIL);
 }

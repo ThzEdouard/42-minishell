@@ -57,15 +57,15 @@ int	ft_open_files(t_exec *data, int i)
 		tmp->file = ft_realoc_int(tmp->filename);
 		while (tmp->filename[i])
 		{
-			puts(tmp->filename[i]);
-			printf("sss%d\n%d::\n", tmp->type[i], i);
+			// puts(tmp->filename[i]);
+			// printf("sss%d\n%d::\n", tmp->type[i], i);
 			if (ft_open_files_2(tmp, i) == FAIL)
 				return (FAIL);
 			i++;
 		}
 		tmp = tmp->next;
 	}
-	printf("i = %d\n", i);
+	// printf("i = %d\n", i);
 	return (SUCCESS);
 }
 
@@ -102,9 +102,20 @@ int	ft_mode(t_exec *data)
 	{
 		if (ft_open_files(data, i) == FAIL)
 			return (FAIL);
-		ft_here_doc(data, i);
-		if (unlink("temp.tmp") == -1)
-			ft_error("Temp File Error");
+		while(data->filename[i])
+		{
+			if(data->type[i] == HEREDOC)
+				ft_here_doc(data, i);
+			i++;
+			// printf("type: %d\n i: %d\n file: %d\n filename: %s\n", data->type[i], i, data->file[i], data->filename[i]);
+			if(data->type[i] == HEREDOC)
+			{
+				if (unlink("temp.tmp") == -1)
+					ft_error("Temp File Error");
+			}
+		}
+		// if (unlink("temp.tmp") == -1)
+		// 	ft_error("Temp File Error");
 	}
 	else
 		if (ft_open_files(data, i) == FAIL)
@@ -151,5 +162,11 @@ void	ft_exec(t_exec *p, char **envp, t_env **env)
 	while (wait(&p->pid) > 0)
 		continue ;
 
+	tmp = p;
+	if (ft_check_heredoc(tmp))
+	{
+		if (unlink("temp.tmp") == -1)
+			ft_error("Temp File Error");
+	}
 	ft_close_files(p);
 }
