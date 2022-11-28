@@ -56,12 +56,24 @@ void	prompt(t_env **env, char **envp)
 	t_exec			*exec;
 	t_list_token	t;
 	t_list_exec		e;
-
+	struct sigaction	sa;
+	sa.sa_sigaction = sig_int;
+	sa.sa_flags = SA_SIGINFO;
+	struct sigaction	se;
+	
+	if (g_statesssss == 130)
+		return;
+	se.sa_sigaction = sig_quit;
+	se.sa_flags = SA_SIGINFO;
 	exec_init(&e);
 	token_init(&t);
+	
+	sigaction(SIGINT, &sa, NULL);
+	sigaction(SIGQUIT, &se, NULL);
 	line = readline("doudou > ");
 	while (line != NULL)
 	{
+		
 		if (ft_strlen(line) && verification_quote(line) == SUCCESS
 			&& (parsing(line, &t) == SUCCESS))
 		{

@@ -18,6 +18,18 @@
 // }
 
 
+static void	print_solo(t_env *env)
+{
+	t_env *tmp;
+
+	tmp = env;
+	while (tmp)
+	{
+		printf("declare -x %s\n", tmp->str);
+		tmp = tmp->next;
+	}
+}
+
 void	ft_export(t_env **env, char **cmd)
 {
 	t_env	*tmp;
@@ -32,7 +44,11 @@ void	ft_export(t_env **env, char **cmd)
 	while(cmd[i])
 		i++;
 	if (i == 1)
+	{
+		print_solo(*env);
 		return ;
+	}
+		
 	while (cmd[y])
 	{
 		i = 0;

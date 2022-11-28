@@ -194,4 +194,7 @@ void	expand(t_list_token *l, t_env *env);
 int		add_list(t_list_token *l, char *line, int end);
 void	get_name_change(t_env *env, char *s, int len, char *str);
 
+void	sig_quit(int sig, siginfo_t *info, void *tmp);
+void	sig_int(int sig, siginfo_t *info, void *tmp);
+
 #endif

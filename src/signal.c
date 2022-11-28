@@ -12,13 +12,33 @@
 
 #include "../include/minishell.h"
 
-static void	handel(int sig)
+void	sig_int(int sig, siginfo_t *info, void *tmp)
 {
-	if (sig == SIGKILL)
+	(void)sig;
+	(void)tmp;
+	if (info->si_pid == 0)
 	{
-		printf("\n");
+		printf("\b\b \n🤬");
 		g_statesssss = 1;
 	}
-	if (sig == SIGQUIT)
-		g_statesssss = 1;
+	else
+	{
+		printf("\n");
+		g_statesssss = 130;
+		prompt(NULL,NULL);
+		printf("doudou > ");
+	}
+}
+
+void	sig_quit(int sig, siginfo_t *info, void *tmp)
+{
+	(void)tmp;
+	(void)sig;
+	if (info->si_pid == 0)
+	{
+		printf("Quit (core dumped)\n");
+		g_statesssss = 131;
+	}
+	else
+		printf("\b\b  \b\b");
 }

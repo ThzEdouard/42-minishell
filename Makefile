@@ -8,7 +8,7 @@ CFLAGS		= -Wall -Werror -Wextra -g
 RM			= rm -f
 #					//SOUCES\\  #
 SRC_MINISHEL	= src/
-FT_MINISHELL = minishell
+FT_MINISHELL = minishell signal
 
 SRC_PARSING = src/parsing/
 FT_PARSING = prompteur expand expand_utils list_token parsing add_token erreur
