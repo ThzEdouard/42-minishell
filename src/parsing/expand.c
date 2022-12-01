@@ -72,7 +72,5 @@ int	update_str(char **str, t_env *env, int i, int len)
 
 void	expand(t_list_token *l, t_env *env)
 {
-	// if (check_expand(*l->first, 0))
-	// 	return ;
 	expand_utils(l, env);
 }

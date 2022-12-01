@@ -50,30 +50,14 @@ static int	verification_quote(char *line)
 	return (SUCCESS);
 }
 
-void	prompt(t_env **env, char **envp)
+char	*line_prompt(t_env **env, char **envp, t_list_token t, t_list_exec e)
 {
-	char			*line;
-	t_exec			*exec;
-	t_list_token	t;
-	t_list_exec		e;
-	struct sigaction	sa;
-	sa.sa_sigaction = sig_int;
-	sa.sa_flags = SA_SIGINFO;
-	struct sigaction	se;
-	
-	if (g_statesssss == 130)
-		return;
-	se.sa_sigaction = sig_quit;
-	se.sa_flags = SA_SIGINFO;
-	exec_init(&e);
-	token_init(&t);
-	
-	sigaction(SIGINT, &sa, NULL);
-	sigaction(SIGQUIT, &se, NULL);
+	char	*line;
+	t_exec	*exec;
+
 	line = readline("doudou > ");
 	while (line != NULL)
 	{
-		
 		if (ft_strlen(line) && verification_quote(line) == SUCCESS
 			&& (parsing(line, &t) == SUCCESS))
 		{
@@ -84,9 +68,24 @@ void	prompt(t_env **env, char **envp)
 			e.first = exec;
 			exec_clear(&e);
 		}
-		// printf("code error = %d\n", g_statesssss);
 		add_history(line);
 		free(line);
 		line = readline("doudou > ");
 	}
+	return (line);
+}
+
+void	prompt(t_env **env, char **envp)
+{
+	t_list_token	t;
+	t_list_exec		e;
+	char			*line;
+
+	if (g_statesssss == 130)
+		return ;
+	exec_init(&e);
+	token_init(&t);
+	line = line_prompt(env, envp, t, e);
+	if (!line)
+		printf("exit");
 }

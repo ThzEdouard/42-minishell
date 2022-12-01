@@ -65,7 +65,7 @@ typedef struct s_token
 	struct s_token	*next;
 }					t_token;
 
-typedef struct s_files 
+typedef struct s_files
 {
 	int				file;
 	t_type			type;
@@ -185,7 +185,7 @@ t_type	*ft_double_realoc_enum(t_type *src);
 int		ft_pwd(void);
 void	ft_exit(t_exec *data, t_env **env, char **cmd);
 int		ft_env(t_env *env);
-void	ft_export(t_env **env, char **cmd);
+int		ft_export(t_env **env, char **cmd);
 void	ft_unset(t_env **env, char *cmd);
 int		ft_cd(t_env **env, char *cmd);
 int		ft_echo(char **cmd);
@@ -196,5 +196,6 @@ void	get_name_change(t_env *env, char *s, int len, char *str);
 
 void	sig_quit(int sig, siginfo_t *info, void *tmp);
 void	sig_int(int sig, siginfo_t *info, void *tmp);
+void	add_export(t_env **env, char *cmd, int ok);
 
 #endif

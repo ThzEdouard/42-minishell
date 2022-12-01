@@ -26,10 +26,36 @@ t_env	*new_elem(char *str)
 	return (new);
 }
 
+char	*creat_code()
+{
+	char	*code;
+	char	*nbr;
+
+	nbr = ft_itoa(g_statesssss);
+	if(!nbr)
+		return (NULL);
+	code = malloc(sizeof(char) * (3 + ft_strlen(nbr)));
+	if (!code)
+		return (free(nbr), NULL);
+	code = ft_strjoin("?=", nbr);
+	return (free(nbr), code);
+}
+
 char	*get_name(t_env *env, char *s, int len)
 {
+	// char	*tmp;
+	// t_env	**tmp_env;
+
 	if (!ft_strncmp(ECHO_CODE, s, 1))
-		return(NULL);
+	{
+		// tmp = creat_code();
+		// if (!tmp)
+		// 	return (NULL);
+		// tmp_env = &env;
+		// add_export(tmp_env, tmp, 2);
+		// free(tmp);
+		return (NULL);
+	}
 	while (env)
 	{
 		if (!ft_strncmp(env->str, s, len))

@@ -12,15 +12,9 @@
 
 #include "../../include/minishell.h"
 
-// void	ft_check_export(t_env **env, char **cmd)
-// {
-
-// }
-
-
 static void	print_solo(t_env *env)
 {
-	t_env *tmp;
+	t_env	*tmp;
 
 	tmp = env;
 	while (tmp)
@@ -30,69 +24,83 @@ static void	print_solo(t_env *env)
 	}
 }
 
-void	ft_export(t_env **env, char **cmd)
+void	add_export(t_env **env, char *cmd, int ok)
 {
+	char	*test;
 	t_env	*tmp;
-	int 	i;
-	int 	y;
-	int 	ok;
-	char 	*test;
+
+	tmp = *env;
+	test = get_name(*env, cmd, ok);
+	if (!test)
+	{
+		while (tmp->next)
+			tmp = tmp->next;
+		if (!tmp->next)
+			tmp->next = new_elem(cmd);
+	}
+	else
+	{
+		while (tmp)
+		{
+			if (!ft_strncmp(tmp->str, cmd, ok))
+			{
+				free(tmp->str);
+				tmp->str = ft_strdup(cmd);
+				break ;
+			}
+			tmp = tmp->next;
+		}
+	}
+}
+
+void	check_export(t_env **env, char *cmd)
+{
+	int	i;
+	int	ok;
+
+	i = 0;
+	ok = 0;
+	if ((cmd[0] < 'a' || cmd[0] > 'z')
+		&& (cmd[0] < 'A' || cmd[0] > 'Z') && cmd[0] != '_')
+	{
+		printf("bash: export: `%s': not a valid identifier\n", cmd);
+		g_statesssss = 1;
+	}
+	else
+	{
+		while (cmd[i])
+		{
+			if (cmd[i] == '=')
+				ok = i;
+			i++;
+		}
+		if (!ok)
+			return ;
+		i = 0;
+		add_export(env, cmd, ok);
+		g_statesssss = 0;
+	}
+}
+
+int	ft_export(t_env **env, char **cmd)
+{
+	int	y;
+	int	i;
 
 	i = 0;
 	y = 1;
-	ok = 0;
-	while(cmd[i])
+	while (cmd[i])
 		i++;
 	if (i == 1)
 	{
 		print_solo(*env);
-		return ;
+		g_statesssss = 0;
+		return (SUCCESS);
 	}
-		
 	while (cmd[y])
 	{
-		i = 0;
-		tmp = *env;
-		if ((cmd[y][0] < 'a' || cmd[y][0] > 'z') && (cmd[y][0] < 'A' || cmd[y][0] > 'Z') && cmd[y][0] != '_')
-		{
-			printf("bash: export: `%s': not a valid identifier\n", cmd[1]);
-		}
-		else
-		{
-			while(cmd[y][i])
-			{
-				if(cmd[y][i] == '=')
-					ok = i;
-				i++;
-			}
-			if (!ok)
-				return ;
-			i = 0;
-			test = get_name(*env, cmd[y], ok);
-			if (!test)
-			{
-				while (tmp->next)
-					tmp = tmp->next;
-				if (!tmp->next)
-					tmp->next = new_elem(cmd[y]);
-			}
-			else
-			{
-				while (tmp)
-				{
-					if (!ft_strncmp(tmp->str, cmd[y], ok))
-					{
-						free(tmp->str);
-						tmp->str = ft_strdup(cmd[y]);
-						//free(cmd[y]);
-						break ;
-					}
-					tmp = tmp->next;
-				}
-			}
-
-		}
+		check_export(env, cmd[y]);
 		y++;
-		ok = 0;
 	}
+	return (SUCCESS);
 }

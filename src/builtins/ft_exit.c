@@ -33,7 +33,6 @@ void	exec_clears(t_exec *l)
 		elem = elem->next;
 		free(tmp);
 	}
-
 }
 
 void	ft_free_exit(t_exec *data, t_env **env, int code)
@@ -49,11 +48,11 @@ void	ft_exit_util(t_exec *data, t_env **env, char **cmd)
 	int	y;
 
 	y = 0;
-	while(cmd[1][y])
+	while (cmd[1][y])
 	{
 		if (cmd[1][y] < '0' || cmd[1][y] > '9')
 		{
-			if(y == 0 && cmd[1][y] == '-')
+			if (y == 0 && cmd[1][y] == '-')
 			{
 				y++;
 				continue ;
@@ -73,7 +72,7 @@ void	ft_exit(t_exec *data, t_env **env, char **cmd)
 	int	i;
 
 	i = 0;
-	while(cmd[i])
+	while (cmd[i])
 		i++;
 	if (i == 1)
 		ft_free_exit(data, env, 0);

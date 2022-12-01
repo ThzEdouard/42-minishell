@@ -18,14 +18,14 @@ void	sig_int(int sig, siginfo_t *info, void *tmp)
 	(void)tmp;
 	if (info->si_pid == 0)
 	{
-		printf("\b\b \n🤬");
+		printf("\b\b\n🤬");
 		g_statesssss = 1;
 	}
 	else
 	{
 		printf("\n");
 		g_statesssss = 130;
-		prompt(NULL,NULL);
+		prompt(NULL, NULL);
 		printf("doudou > ");
 	}
 }
@@ -40,5 +40,5 @@ void	sig_quit(int sig, siginfo_t *info, void *tmp)
 		g_statesssss = 131;
 	}
 	else
-		printf("\b\b  \b\b");
+		printf("doudou >   \b\b  \b\b");
 }
