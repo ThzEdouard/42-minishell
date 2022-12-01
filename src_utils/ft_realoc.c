@@ -40,7 +40,7 @@ int	ft_double_len_int(t_type *src)
 int	*ft_realoc_int(char **src)
 {
 	int	*malloc_src;
-	int	 i;
+	int	i;
 
 	if (!src || ft_double_len(src) == 0)
 		return (NULL);
@@ -48,7 +48,7 @@ int	*ft_realoc_int(char **src)
 	if (!malloc_src)
 		return (NULL);
 	i = ft_double_len(src);
-	while(i)
+	while (i)
 		malloc_src[i--] = 0;
 	return (malloc_src);
 }
@@ -81,17 +81,14 @@ t_type	*ft_double_realoc_enum(t_type *src)
 	y = 0;
 	if (!src || ft_double_len_int(src) == 0)
 		return (NULL);
-	// printf("dddd");
 	malloc_src = malloc(sizeof(t_type) * (ft_double_len_int(src) + 1));
 	if (!malloc_src)
 		return (NULL);
-	// printf("dddd");
 	while (src[y])
 	{
 		malloc_src[y] = src[y];
 		y++;
 	}
 	malloc_src[y] = 0;
-	// printf("dddd");
 	return (malloc_src);
 }

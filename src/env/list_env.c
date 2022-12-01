@@ -26,13 +26,13 @@ t_env	*new_elem(char *str)
 	return (new);
 }
 
-char	*creat_code()
+static char	*creat_code(void)
 {
 	char	*code;
 	char	*nbr;
 
 	nbr = ft_itoa(g_statesssss);
-	if(!nbr)
+	if (!nbr)
 		return (NULL);
 	code = malloc(sizeof(char) * (3 + ft_strlen(nbr)));
 	if (!code)
@@ -43,18 +43,14 @@ char	*creat_code()
 
 char	*get_name(t_env *env, char *s, int len)
 {
-	// char	*tmp;
-	// t_env	**tmp_env;
+	char	*tmp;
 
 	if (!ft_strncmp(ECHO_CODE, s, 1))
 	{
-		// tmp = creat_code();
-		// if (!tmp)
-		// 	return (NULL);
-		// tmp_env = &env;
-		// add_export(tmp_env, tmp, 2);
-		// free(tmp);
-		return (NULL);
+		tmp = creat_code();
+		if (!tmp)
+			return (NULL);
+		return (tmp);
 	}
 	while (env)
 	{

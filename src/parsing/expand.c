@@ -46,6 +46,8 @@ int	update_str(char **str, t_env *env, int i, int len)
 		return (FAIL);
 	free(*str);
 	*str = change;
+	if (!ft_strncmp(name, "?=", 2))
+		free(name);
 	return (SUCCESS);
 }
 
