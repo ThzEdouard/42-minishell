@@ -83,7 +83,10 @@ void	exec_push_v2(t_list_exec *l, char **cmd, char **filename, t_type *type)
 	new->path_cmd = NULL;
 	new->file = NULL;
 	if (type)
+	{
 		new->type = ft_double_realoc_enum(type);
+		free(type);
+	}
 	else
 		new->type = NULL;
 	new->prev = l->last;
@@ -110,6 +113,8 @@ void	exec_clear(t_list_exec *l)
 		if (tmp->path_cmd)
 			free(tmp->path_cmd);
 		ft_free_all(tmp->filename);
+		if (elem->type)
+			free(elem->type);
 		// if (tmp->file)
 		// 	free(tmp->file);
 		// if (tmp->paths)

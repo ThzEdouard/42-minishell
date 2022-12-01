@@ -103,7 +103,6 @@ int	malloc_cmd_filename(t_token *t, t_add *values)
 	{
 		values->type = malloc(sizeof(t_type) * 2);
 		values->type[0] = 0;
-		values->type[1] = 0;
 	}
 	return (SUCCESS);
 }
