@@ -28,8 +28,9 @@ static char	*ft_access(t_exec *exec)
 
 	i = 0;
 	cmd = exec->cmd[0];
+	//cmd = ft_strdup(exec->cmd[0]);
 	if (access(cmd, F_OK | X_OK) == 0)
-		return (cmd);
+		return (ft_free_all(exec->paths), cmd);
 	while (exec->paths[i])
 	{
 		tmp = ft_strjoin(exec->paths[i], "/");
@@ -65,7 +66,8 @@ static char	*ft_path(t_exec *exec, t_env *env)
 		}
 		env = env->next;
 	}
-	exec->paths = ft_split(exec->path, ':');
+	if (env)
+		exec->paths = ft_split(exec->path, ':');
 	if (!exec->paths)
 		ft_free_paths(exec);
 	free(exec->path);

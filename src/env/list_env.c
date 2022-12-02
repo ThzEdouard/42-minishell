@@ -69,6 +69,8 @@ void	generator_env(t_env **env, char **envp)
 	i = 0;
 	*env = new_elem(envp[i]);
 	tmp = *env;
+	if (!tmp)
+		return ;
 	i++;
 	while (envp[i])
 	{
