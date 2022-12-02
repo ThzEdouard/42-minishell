@@ -30,30 +30,35 @@ void	ft_here_doc(t_exec *data, int i)
 			{
 				close(temp);
 				free(line);
-				// printf("TEST: %d\n", data->file[i]);
 				data->file[i] = open("temp.tmp", O_RDONLY);
-				// printf("TEST2: %d i: %d\n", data->file[i], i);
 				if (data->file[i] == -1)
 					ft_error("File Error");
 				break ;
 			}
 		}
-		write(temp, line, ft_strlen(line));
-		write(temp, "\n", 1);
-		free(line);
-		write(STDIN_FILENO, "> ", 2);
+		ft_here_doc_2(line, temp);
 		line = readline(STDIN_FILENO);
 	}
+}
+
+void	ft_here_doc_2(char *line, int temp)
+{
+	write(temp, line, ft_strlen(line));
+	write(temp, "\n", 1);
+	free(line);
+	write(STDIN_FILENO, "> ", 2);
 }
 
 int	ft_check_heredoc(t_exec *data)
 {
 	t_exec	*tmp;
-	int i = 0;
+	int		i;
+
+	i = 0;
 	tmp = data;
 	while (tmp && tmp->type)
 	{
-		while(tmp->type[i])
+		while (tmp->type[i])
 		{
 			if (tmp->type[i] == HEREDOC)
 				return (1);

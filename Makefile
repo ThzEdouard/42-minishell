@@ -17,7 +17,8 @@ SRC_ENV = src/env/
 FT_ENV = list_env
 
 SRC_EXEC = src/exec/
-FT_EXEC = list_exec add_exec childs exec here_doc exec_utils add_exec_cmd
+FT_EXEC = list_exec add_exec childs exec here_doc exec_utils add_exec_cmd \
+		exec_init files
 
 SRC_BUILTINS = src/builtins/
 FT_BUILTINS = ft_cd ft_echo ft_env ft_exit ft_export ft_pwd ft_unset

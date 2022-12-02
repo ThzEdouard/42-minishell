@@ -31,47 +31,29 @@ void	ft_free_all(char **tab)
 		i++;
 	}
 	free(tab);
-
 }
-
-// void	exec_push(t_list_exec *l, char **cmd, char **filename, t_type type)
-// {
-// 	t_exec	*new;
-
-// 	new = malloc(sizeof(t_exec));
-// 	if (!new)
-// 		return ;
-// 	// printf("cmd: %s | filename: %s | type: %d\n", cmd[0], filename[0], type);
-// 	if (cmd)
-// 		new->cmd = ft_double_raloc(cmd);
-// 	else
-// 		new->cmd = NULL;
-// 	if (filename)
-// 		new->filename = ft_double_raloc(filename);
-// 	else
-// 		new->filename = NULL;
-// 	new->path_cmd = NULL;
-// 	new->file = NULL;
-// 	new->type = type;
-// 	new->prev = l->last;
-// 	new->next = NULL;
-// 	new->saveout = dup(STDOUT_FILENO);
-// 	new->savein = dup(STDIN_FILENO);
-// 	if (l->last)
-// 		l->last->next = new;
-// 	else
-// 		l->first = new;
-// 	l->last = new;
-// }
 
 void	exec_push_v2(t_list_exec *l, char **cmd, char **filename, t_type *type)
 {
 	t_exec	*new;
 
 	new = malloc(sizeof(t_exec));
-	if (!new)
-		return ;
-	// printf("cmd: %s | filename: %s | type: %d\n", cmd[0], filename[0], type);
+	exec_push_v2_2(new, cmd, filename, type);
+	new->path_cmd = NULL;
+	new->file = NULL;
+	new->saveout = dup(STDOUT_FILENO);
+	new->savein = dup(STDIN_FILENO);
+	new->prev = l->last;
+	new->next = NULL;
+	if (l->last)
+		l->last->next = new;
+	else
+		l->first = new;
+	l->last = new;
+}
+
+void	exec_push_v2_2(t_exec *new, char **cmd, char **filename, t_type *type)
+{
 	if (cmd)
 		new->cmd = ft_double_raloc(cmd);
 	else
@@ -80,24 +62,10 @@ void	exec_push_v2(t_list_exec *l, char **cmd, char **filename, t_type *type)
 		new->filename = ft_double_raloc(filename);
 	else
 		new->filename = NULL;
-	new->path_cmd = NULL;
-	new->file = NULL;
 	if (type)
-	{
 		new->type = ft_double_realoc_enum(type);
-		free(type);
-	}
 	else
 		new->type = NULL;
-	new->prev = l->last;
-	new->next = NULL;
-	new->saveout = dup(STDOUT_FILENO);
-	new->savein = dup(STDIN_FILENO);
-	if (l->last)
-		l->last->next = new;
-	else
-		l->first = new;
-	l->last = new;
 }
 
 void	exec_clear(t_list_exec *l)
@@ -115,11 +83,6 @@ void	exec_clear(t_list_exec *l)
 		ft_free_all(tmp->filename);
 		if (elem->type)
 			free(elem->type);
-		// if (tmp->file)
-		// 	free(tmp->file);
-		// if (tmp->paths)
-		// 	ft_free_all(tmp->paths);
-		// tmp->paths = NULL;
 		elem = elem->next;
 		free(tmp);
 	}

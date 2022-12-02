@@ -38,7 +38,7 @@
 # define ERROR_2 "\e[1;90m%s : %s: command not found\n\e[0m"
 # define ERROR_5 "\e[1;90m%s : %s: %s: Not a directory\n\e[0m"
 
-extern int g_statesssss;
+extern int	g_statesssss;
 
 typedef enum s_type
 {
@@ -87,7 +87,6 @@ typedef struct s_exec
 	char			**filename;
 	int				*file;
 	t_type			*type;
-	//t_files			*files;
 	struct s_exec	*prev;
 	struct s_exec	*next;
 }			t_exec;
@@ -142,8 +141,10 @@ void	clear_env(t_env **env);
 /* ************************************************************* */
 //exec fonction sur l'autre ;)
 void	exec_init(t_list_exec *l);
+void	add_exec_init(t_list_exec *l, t_add *values);
 void	exec_push(t_list_exec *l, char **cmd, char **filename, t_type type);
 void	exec_push_v2(t_list_exec *l, char **cmd, char **filename, t_type *type);
+void	exec_push_v2_2(t_exec *new, char **cmd, char **filename, t_type *type);
 void	exec_clear(t_list_exec *l);
 t_exec	*add_exec(t_token *t, t_env *env);
 void	ft_free_paths(t_exec *exec);
@@ -152,22 +153,30 @@ t_exec	*set_path(t_exec *e, t_env *env);
 void	ft_error(char *error);
 void	ft_free_all(char **tab);
 int		ft_open_files(t_exec *data, int i);
+int	ft_open_files_2(t_exec *tmp, int i);
+void	ft_close_files(t_exec *data);
 void	ft_childs(t_exec *data, char **envp, t_env **env);
 void	ft_exec(t_exec *pipe, char **envp, t_env **env);
 int		ft_mode(t_exec *data);
 void	ft_here_doc(t_exec *data, int i);
 void	ft_free_paths(t_exec *data);
 void	ft_exec_init(t_exec *data, t_env **env);
+void	ft_exec_init_2(t_exec *data, int i);
 void	ft_message(char *error);
 int		ft_check_redirs(t_exec *data);
 void	ft_exec_builtins_init(t_exec *data, t_env **env);
-void	ft_exec_builtins_init2(t_exec *data, t_env **env);
+void	ft_exec_builtins_init_2(t_exec *data, int i);
+void	ft_exec_process(t_exec *tmp, t_exec *p, char **envp, t_env **env);
+void	ft_exec_process_builtins(t_exec *tmp, t_exec *p, t_env **env);
 
 int		ft_exec_builtins(t_exec *data, t_env **env);
 int		ft_check_builtins(t_exec *data);
 int		ft_check_heredoc(t_exec *data);
+void	ft_here_doc_2(char *line, int temp);
 
 int		malloc_cmd_filename(t_token *t, t_add *values);
+int		malloc_command(t_add *values, int nb_cmd);
+void	malloc_type(t_add *values);
 void	calcul_len_malloc(t_token *tmp, int *len_cmd, int *len_file);
 void	cmd_word(t_list_exec *exec, t_token *t, t_add *values, t_env *env);
 t_token	*cmd_write(t_list_exec *exec, t_token *t, t_add *values, t_env *env);
@@ -175,7 +184,8 @@ t_token	*cmd_append(t_list_exec *exec, t_token *t, t_add *values, t_env *env);
 t_token	*cmd_read(t_list_exec *exec, t_token *t, t_add *values, t_env *env);
 t_token	*cmd_here(t_list_exec *exec, t_token *t, t_add *values, t_env *env);
 
-t_token	*cmd_write_append(t_list_exec *exec, t_token *t, t_add *values, t_env *env);
+t_token	*write_append(t_list_exec *exec,
+			t_token *t, t_add *values, t_env *env);
 t_type	*ft_double_realoc_enum(t_type *src);
 
 /* **************************************************************** */

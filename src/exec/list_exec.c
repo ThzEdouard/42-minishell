@@ -16,8 +16,6 @@ void	ft_free_paths(t_exec *data)
 {
 	free(data->path);
 	data->path = NULL;
-	//ft_free_all(data->cmd);
-	//data->cmd = NULL;
 	data->paths = NULL;
 	exit(1);
 }
