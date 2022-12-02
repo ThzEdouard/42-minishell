@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 01:23:42 by aradice           #+#    #+#             */
-/*   Updated: 2022/12/02 11:39:01 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/12/02 15:04:05 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ void	ft_exec_init(t_exec *data, t_env **env)
 	if (ft_exec_builtins(data, env))
 		exit (0);
 	if (data->path_cmd == NULL)
+	{
 		ft_message("Error: Command not found\n");
+	}
+
 }
 
 void	ft_exec_init_2(t_exec *data, int i)

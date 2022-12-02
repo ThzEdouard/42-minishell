@@ -49,5 +49,5 @@ void	ft_error(char *error)
 void	ft_message(char *error)
 {
 	ft_putstr_fd(error, 2);
-	exit(1);
+	exit(0);
 }

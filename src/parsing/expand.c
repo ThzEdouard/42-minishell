@@ -51,27 +51,6 @@ int	update_str(char **str, t_env *env, int i, int len)
 	return (SUCCESS);
 }
 
-// int	check_expand(t_token t, int i)
-// {
-// 	t_token	*tmp;
-
-// 	tmp = &t;
-// 	while (tmp)
-// 	{
-// 		while (*tmp->str)
-// 		{
-// 			if (*tmp->str == 39 && i == 0)
-// 				break ;
-// 			if (*tmp->str == 36)
-// 				return (SUCCESS);
-// 			tmp->str++;
-// 		}
-// 		i = 0;
-// 		tmp = tmp->next;
-// 	}
-// 	return (FAIL);
-// }
-
 void	expand(t_list_token *l, t_env *env)
 {
 	expand_utils(l, env);
