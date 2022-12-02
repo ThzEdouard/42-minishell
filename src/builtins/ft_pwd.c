@@ -19,9 +19,11 @@ int	ft_pwd(void)
 	if (getcwd(run, sizeof(run)) == NULL)
 	{
 		perror("error getcwd()");
+		g_statesssss = 1;
 		return (1);
 	}
 	else
 		printf("%s\n", run);
+	g_statesssss = 0;
 	return (0);
 }

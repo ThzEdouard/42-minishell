@@ -23,5 +23,6 @@ int	ft_env(t_env *env)
 			printf("%s\n", tmp->str);
 		tmp = tmp->next;
 	}
+	g_statesssss = 0;
 	return (0);
 }

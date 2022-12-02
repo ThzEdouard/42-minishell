@@ -68,7 +68,7 @@ fclean:		clean
 re:		fclean all
 
 val:	all
-			valgrind --leak-check=full --suppressions=readline_link ./minishell
+			valgrind --leak-check=full --show-leak-kinds=all --suppressions=readline_leaks ./minishell
 
 git:	fclean
 		git add ./

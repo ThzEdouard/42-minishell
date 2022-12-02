@@ -38,6 +38,8 @@ t_exec	*add_exec(t_token *t, t_env *env)
 		free(values.filename);
 	if (values.command)
 		free(values.command);
+	if (values.type)
+		free(values.type);
 	return (exec.first);
 }
 
@@ -108,7 +110,7 @@ void	malloc_type(t_add *values)
 {
 	if (!values->type)
 	{
-		values->type = malloc(sizeof(t_type) * 1);
+		values->type = malloc(sizeof(t_type) * 2);
 		values->type[0] = 0;
 	}
 }
