@@ -21,15 +21,18 @@ void	exec_clears(t_exec *l)
 	while (elem)
 	{
 		tmp = elem;
-		ft_free_all(tmp->cmd);
-		if (tmp->path_cmd)
-			free(tmp->path_cmd);
+		if (tmp->cmd[0] == tmp->path_cmd)
+			ft_free_all(tmp->cmd);
+		else
+		{
+			ft_free_all(tmp->cmd);
+			if (tmp->path_cmd)
+				free(tmp->path_cmd);
+		}
+		tmp->path_cmd = NULL;
 		ft_free_all(tmp->filename);
-		if (tmp->file)
-			free(tmp->file);
-		if (tmp->paths)
-			ft_free_all(tmp->paths);
-		tmp->paths = NULL;
+		if (elem->type)
+			free(elem->type);
 		elem = elem->next;
 		free(tmp);
 	}

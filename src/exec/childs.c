@@ -14,7 +14,7 @@
 
 void	ft_childs(t_exec *data, char **envp, t_env **env)
 {
-	if (!ft_check_builtins(data) && !data->path_cmd && !data->file)
+	if (!data->cmd || (!ft_check_builtins(data) && !data->path_cmd && !data->file))
 		return ;
 	if (pipe(data->pipefd) == -1)
 		ft_error("Pipe Error");

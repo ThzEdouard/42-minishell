@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 01:23:42 by aradice           #+#    #+#             */
-/*   Updated: 2022/12/02 15:04:05 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/12/03 20:20:06 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_exec_init_2(t_exec *data, int i)
 {
 	if (data->type[i] == APPEND || data->type[i] == WRITE)
 	{
-		while (*data->file != 0)
+		while (*data->file)
 		{
 			data->pipefd[1] = *data->file;
 			dup2(data->pipefd[1], STDOUT_FILENO);
@@ -44,7 +44,7 @@ void	ft_exec_init_2(t_exec *data, int i)
 	}
 	if (data->type[i] == READ || data->type[i] == HEREDOC)
 	{
-		while (*data->file != 0)
+		while (*data->file)
 		{
 			data->pipefd[0] = *data->file;
 			dup2(data->pipefd[0], STDIN_FILENO);

@@ -39,7 +39,7 @@ void	exec_push_v2(t_list_exec *l, char **cmd, char **filename, t_type *type)
 	t_exec	*new;
 
 	new = malloc(sizeof(t_exec));
-	exec_push_v2_2(&new, cmd, filename, type);
+	exec_push_v2_2(new, cmd, filename, type);
 	new->path_cmd = NULL;
 	new->file = NULL;
 	new->saveout = dup(STDOUT_FILENO);
@@ -53,20 +53,20 @@ void	exec_push_v2(t_list_exec *l, char **cmd, char **filename, t_type *type)
 	l->last = new;
 }
 
-void	exec_push_v2_2(t_exec **new, char **cmd, char **filename, t_type *type)
+void	exec_push_v2_2(t_exec *new, char **cmd, char **filename, t_type *type)
 {
 	if (cmd)
-		(*new)->cmd = ft_double_raloc(cmd);
+		new->cmd = ft_double_raloc(cmd);
 	else
-		(*new)->cmd = NULL;
+		new->cmd = NULL;
 	if (filename)
-		(*new)->filename = ft_double_raloc(filename);
+		new->filename = ft_double_raloc(filename);
 	else
-		(*new)->filename = NULL;
+		new->filename = NULL;
 	if (type)
-		(*new)->type = ft_double_realoc_enum(type);
+		new->type = ft_double_realoc_enum(type);
 	else
-		(*new)->type = NULL;
+		new->type = NULL;
 }
 
 void	exec_clear(t_list_exec *l)
@@ -79,7 +79,7 @@ void	exec_clear(t_list_exec *l)
 	{
 
 		tmp = elem;
-		if (tmp->cmd[0] == tmp->path_cmd)
+		if (tmp->cmd && tmp->cmd[0] == tmp->path_cmd)
 			ft_free_all(tmp->cmd);
 		else
 		{
@@ -89,6 +89,8 @@ void	exec_clear(t_list_exec *l)
 		}
 		tmp->path_cmd = NULL;
 		ft_free_all(tmp->filename);
+		if (tmp->file)
+			free(tmp->file);
 		if (elem->type)
 			free(elem->type);
 		elem = elem->next;

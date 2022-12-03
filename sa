@@ -1,9 +1,0 @@
-include
-Makefile
-minishell
-obj
-readline_leaks
-s
-sa
-src
-src_utils

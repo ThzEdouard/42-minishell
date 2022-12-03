@@ -72,6 +72,7 @@ char	*line_prompt(t_env **env, char **envp, t_list_token t, t_list_exec e)
 		free(line);
 		line = readline("doudou > ");
 	}
+
 	return (line);
 }
 
@@ -87,5 +88,5 @@ void	prompt(t_env **env, char **envp)
 	token_init(&t);
 	line = line_prompt(env, envp, t, e);
 	if (!line)
-		printf("exit");
+		printf("exit\n");
 }

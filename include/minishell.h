@@ -24,6 +24,7 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 # include "utils.h"
+# include "get_next_line.h"
 
 # define SUCCESS 0
 # define FAIL 1
@@ -144,7 +145,7 @@ void	exec_init(t_list_exec *l);
 void	add_exec_init(t_list_exec *l, t_add *values);
 void	exec_push(t_list_exec *l, char **cmd, char **filename, t_type type);
 void	exec_push_v2(t_list_exec *l, char **cmd, char **filename, t_type *type);
-void	exec_push_v2_2(t_exec **new, char **cmd, char **filename, t_type *type);
+void	exec_push_v2_2(t_exec *new, char **cmd, char **filename, t_type *type);
 void	exec_clear(t_list_exec *l);
 t_exec	*add_exec(t_token *t, t_env *env);
 void	ft_free_paths(t_exec *exec);
