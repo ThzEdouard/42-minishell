@@ -15,11 +15,12 @@
 void	ft_here_doc(t_exec *data, int i)
 {
 	char	*line;
-	int		temp;
+	char	*tmpfilename;
+	// int		temp;
 
-	temp = open("temp.tmp", O_WRONLY | O_APPEND | O_CREAT, 0644);
-	if (temp == -1)
-		ft_error("File Error");
+	// temp = open("temp.tmp", O_WRONLY | O_APPEND | O_CREAT, 0644);
+	// if (temp == -1)
+		// ft_error("File Error");
 	write(STDIN_FILENO, "> ", 2);
 	line = get_next_line(STDIN_FILENO);
 	while (1)
@@ -28,18 +29,23 @@ void	ft_here_doc(t_exec *data, int i)
 		{
 			if (!line || ft_strlen(data->filename[i]) == (ft_strlen(line) - 1))
 			{
-				close(temp);
+
+				tmpfilename = ft_strjoin("tmp", ft_itoa(i));
+				printf("f[i]: |%s| - le: |%s| - filename: %s\n", data->filename[i], line, tmpfilename);
+				close(data->file[i]);
 				if (line)
 					free(line);
-				data->file[i] = open("temp.tmp", O_RDONLY);
+				data->file[i] = open(tmpfilename, O_RDONLY);
 				if (data->file[i] == -1)
 					ft_error("File Error");
 				break ;
 			}
 		}
-		ft_here_doc_2(line, temp);
+		ft_here_doc_2(line, data->file[i]);
 		line = get_next_line(STDIN_FILENO);
 	}
+	free(data->filename[i]);
+	data->filename[i] = tmpfilename;
 }
 
 void	ft_here_doc_2(char *line, int temp)

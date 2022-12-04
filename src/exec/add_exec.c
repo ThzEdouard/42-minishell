@@ -28,10 +28,10 @@ t_exec	*add_exec(t_token *t, t_env *env)
 			cmd_word(&exec, tmp, &values, env);
 		else if (tmp->type == WRITE || tmp->type == APPEND)
 			tmp = write_append(&exec, tmp, &values, env);
-		else if (tmp->type == READ)
+		else if (tmp->type == READ || tmp->type == HEREDOC)
 			tmp = cmd_read(&exec, tmp, &values, env);
-		else if (tmp->type == HEREDOC)
-			tmp = cmd_here(&exec, tmp, &values, env);
+		// else if (tmp->type == HEREDOC)
+		// 	tmp = cmd_here(&exec, tmp, &values, env);
 		tmp = tmp->next;
 	}
 	if (values.filename)
@@ -79,8 +79,10 @@ int	malloc_cmd_filename(t_token *t, t_add *values)
 		return (FAIL);
 	if (!values->filename && nb_filename)
 	{
-		values->filename = malloc(sizeof(char *) * (nb_filename + 1));
-		values->type = malloc(sizeof(t_type) * (nb_filename + 1));
+		// values->filename = malloc(sizeof(char *) * (nb_filename + 1));
+		values->filename = malloc(10000);
+		// values->type = malloc(sizeof(t_type) * (nb_filename + 1));
+		values->type = malloc(10000);
 		if (!values->filename)
 			return (FAIL);
 		while (nb_filename)
@@ -97,7 +99,8 @@ int	malloc_command(t_add *values, int nb_cmd)
 {
 	if (!values->command && nb_cmd)
 	{
-		values->command = malloc(sizeof(char *) * (nb_cmd + 1));
+		// values->command = malloc(sizeof(char *) * (nb_cmd + 1));
+		values->command = malloc(10000);
 		if (!values->command)
 			return (FAIL);
 		while (nb_cmd)

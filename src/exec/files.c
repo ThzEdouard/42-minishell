@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   files.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aradice <aradice@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 01:28:13 by aradice           #+#    #+#             */
-/*   Updated: 2022/12/02 01:29:46 by aradice          ###   ########.fr       */
+/*   Updated: 2022/12/04 20:19:15 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ int	ft_open_files(t_exec *data, int i)
 		tmp->file = ft_realoc_int(tmp->filename);
 		while (tmp->filename[i])
 		{
+			puts("qqqqqqqqqqqqqqqq");
+			puts(ft_itoa(i));
+			puts(tmp->filename[i]);
 			if (ft_open_files_2(tmp, i) == FAIL)
 				return (FAIL);
 			i++;
@@ -60,6 +63,16 @@ int	ft_open_files_2(t_exec *tmp, int i)
 				| O_CREAT | O_APPEND, 0644);
 		if (tmp->file[i] == -1)
 			perror("Outfile Error");
+	}
+	else if (tmp->type[i] == HEREDOC)
+	{
+		printf("tmp%s", ft_itoa(i));
+		tmp->file[i] = open(ft_strjoin("tmp", ft_itoa(i)), O_WRONLY | O_APPEND | O_CREAT, 0644);
+		if (tmp->file[i] == -1)
+		{
+			perror("Infile Error");
+			return (FAIL);
+		}
 	}
 	return (SUCCESS);
 }

@@ -25,12 +25,12 @@ int	ft_mode(t_exec *data)
 		{
 			if (data->type[i] == HEREDOC)
 				ft_here_doc(data, i);
+			// if (data->type[i] == HEREDOC)
+			// {
+			// 	if (unlink(ft_strjoin("tmp", ft_itoa(i))) == -1)
+			// 		ft_error("Temp File Error");
+			// }
 			i++;
-			if (data->type[i] == HEREDOC)
-			{
-				if (unlink("temp.tmp") == -1)
-					ft_error("Temp File Error");
-			}
 		}
 	}
 	else
@@ -50,6 +50,10 @@ void	ft_exec(t_exec *p, char **envp, t_env **env)
 		return ;
 	while (tmp)
 	{
+		printf("cmd[0]: %s - filename[0]: %s\n", tmp->cmd[0], tmp->filename[0]);
+		// printf("cmd[0]: %s - filename[0]: %s\n", tmp->cmd[0], tmp->filename[1]);
+		// printf("cmd[0]: %s type[0]: %d\n", tmp->cmd[0], tmp->type[0]);
+		// printf("cmd[0]: %s type[0]: %d\n", tmp->cmd[1], tmp->type[1]);
 		i++;
 		tmp = tmp->next;
 	}
@@ -69,6 +73,9 @@ void	ft_exec(t_exec *p, char **envp, t_env **env)
 
 void	ft_exec_process(t_exec *tmp, t_exec *p, char **envp, t_env **env)
 {
+	int	i;
+
+	i = 0;
 	while (tmp)
 	{
 		ft_childs(tmp, envp, env);
@@ -79,8 +86,13 @@ void	ft_exec_process(t_exec *tmp, t_exec *p, char **envp, t_env **env)
 	tmp = p;
 	if (ft_check_heredoc(tmp))
 	{
-		if (unlink("temp.tmp") == -1)
-			ft_error("Temp File Error");
+		while(tmp->type[i] == HEREDOC)
+		{
+			printf("filename%s - type%d\n", tmp->filename[i], tmp->type[i]);
+			if (unlink(tmp->filename[i]) == -1)
+				ft_error("Temp File Error");
+			i++;
+		}
 	}
 	ft_close_files(p);
 }
