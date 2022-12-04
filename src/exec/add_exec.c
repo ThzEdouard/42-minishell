@@ -32,7 +32,9 @@ t_exec	*add_exec(t_token *t, t_env *env)
 			tmp = cmd_read(&exec, tmp, &values, env);
 		// else if (tmp->type == HEREDOC)
 		// 	tmp = cmd_here(&exec, tmp, &values, env);
-		tmp = tmp->next;
+		if ((tmp && tmp->next) || tmp)
+			tmp = tmp->next;
+		printf("e");
 	}
 	if (values.filename)
 		free(values.filename);

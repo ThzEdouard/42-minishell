@@ -50,7 +50,7 @@ void	ft_exec(t_exec *p, char **envp, t_env **env)
 		return ;
 	while (tmp)
 	{
-		printf("cmd[0]: %s - filename[0]: %s\n", tmp->cmd[0], tmp->filename[0]);
+		// printf("cmd[0]: %s - filename[0]: %s\n", tmp->cmd[0], tmp->filename[0]);
 		// printf("cmd[0]: %s - filename[0]: %s\n", tmp->cmd[0], tmp->filename[1]);
 		// printf("cmd[0]: %s type[0]: %d\n", tmp->cmd[0], tmp->type[0]);
 		// printf("cmd[0]: %s type[0]: %d\n", tmp->cmd[1], tmp->type[1]);

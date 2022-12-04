@@ -65,7 +65,8 @@ t_token	*write_append(t_list_exec *exec, t_token *t, t_add *values, t_env *env)
 t_token	*cmd_read(t_list_exec *exec, t_token *t, t_add *values, t_env *env)
 {
 	t_token *tmp;
-
+	static int i = 0;
+	int y = 0;
 	tmp = t;
 	// values->filename[values->j] = t->next->str;
 	// values->type[values->j++] = t->type;
@@ -97,16 +98,23 @@ t_token	*cmd_read(t_list_exec *exec, t_token *t, t_add *values, t_env *env)
 		if (t->next && t->next->type != PIPE && t->next->type != WRITE && t->next->type != APPEND)
 			t = t->next;
 	}
-	if (t->prev->prev)
-		t = t->prev->prev;
-	else
-		t = t->prev;
+	// if (t->prev->prev)
+	// 	t = t->prev->prev;
+	// else
+		// t = t->prev;
+
 	puts(t->str);
 	puts(ft_itoa(t->type));
 	values->filename[values->j] = 0;
 	values->type[values->j] = 0;
 	if (values->command)
 		values->command[values->y] = 0;
+	while (values->command[y])
+	{
+		printf("pass = %d cmd = %s\n", i, values->command[y]);
+		y++;
+	}
+	i++;
 	exec_push_v2(exec, values->command, values->filename, values->type);
 	exec->first = set_path(exec->first, env);
 	values->j = 0;
@@ -114,7 +122,8 @@ t_token	*cmd_read(t_list_exec *exec, t_token *t, t_add *values, t_env *env)
 		values->filename[values->j++] = 0;
 	values->y = 0;
 	values->j = 0;
-	return (t->next);
+	printf("%s", t->str);
+	return (t);
 }
 
 // t_token	*cmd_here(t_list_exec *exec, t_token *t, t_add *values, t_env *env)
