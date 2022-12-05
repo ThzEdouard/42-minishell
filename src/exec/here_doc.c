@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
 
-void	ft_here_doc(t_exec *data, int i)
+void	ft_here_doc(t_exec *data, int i, int *filenumber)
 {
 	char	*line;
 	char	*tmpfilename;
@@ -25,13 +25,13 @@ void	ft_here_doc(t_exec *data, int i)
 	line = get_next_line(STDIN_FILENO);
 	while (1)
 	{
+		printf("line: %s - filenam[i]: %s - len: %d - fnum: %d - i: %d\n", line, data->filename[i], ft_strlen(data->filename[i]), *filenumber, i);
 		if (!line || !ft_strncmp(line, data->filename[i], ft_strlen(data->filename[i])))
 		{
 			if (!line || ft_strlen(data->filename[i]) == (ft_strlen(line) - 1))
 			{
-
-				tmpfilename = ft_strjoin("tmp", ft_itoa(i));
-				printf("f[i]: |%s| - le: |%s| - filename: %s\n", data->filename[i], line, tmpfilename);
+				tmpfilename = ft_strjoin("tmp", ft_itoa(*filenumber));
+				printf("filename: %s\n", tmpfilename);
 				close(data->file[i]);
 				if (line)
 					free(line);
@@ -45,7 +45,7 @@ void	ft_here_doc(t_exec *data, int i)
 		line = get_next_line(STDIN_FILENO);
 	}
 	free(data->filename[i]);
-	data->filename[i] = tmpfilename;
+	// data->filename[i] = tmpfilename;
 }
 
 void	ft_here_doc_2(char *line, int temp)

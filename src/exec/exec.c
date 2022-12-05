@@ -15,26 +15,41 @@
 int	ft_mode(t_exec *data)
 {
 	int	i;
+	int test;
+	int	*filenumber;
+	int	*iv2;
+	t_exec	*tmp;
 
+	tmp = data;
+	test = 0;
+	filenumber = &test; 
 	i = 0;
+	iv2 = &i;
 	if (ft_check_heredoc(data))
 	{
-		if (ft_open_files(data, i) == FAIL)
+		if (ft_open_files(data, i, filenumber) == FAIL)
 			return (FAIL);
-		while (data->filename[i])
+		while(tmp)
 		{
-			if (data->type[i] == HEREDOC)
-				ft_here_doc(data, i);
-			// if (data->type[i] == HEREDOC)
-			// {
-			// 	if (unlink(ft_strjoin("tmp", ft_itoa(i))) == -1)
-			// 		ft_error("Temp File Error");
-			// }
-			i++;
+			*iv2 = 0;
+			while (data->filename[*iv2])
+			{
+				printf("PPPPPPPPPPPPPPPPPP%d\n", *filenumber);
+				if (data->type[*iv2] == HEREDOC)
+					ft_here_doc(data, *iv2, filenumber);
+				// if (data->type[i] == HEREDOC)
+				// {
+				// 	if (unlink(ft_strjoin("tmp", ft_itoa(i))) == -1)
+				// 		ft_error("Temp File Error");
+				// }
+				*filenumber = *filenumber + 1;
+				*iv2 = *iv2 + 1;
+			}
+			tmp = tmp->next;
 		}
 	}
 	else
-		if (ft_open_files(data, i) == FAIL)
+		if (ft_open_files(data, i, filenumber) == FAIL)
 			return (FAIL);
 	return (SUCCESS);
 }

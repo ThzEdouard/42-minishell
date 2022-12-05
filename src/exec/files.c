@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
 
-int	ft_open_files(t_exec *data, int i)
+int	ft_open_files(t_exec *data, int i, int *filenumber)
 {
 	t_exec	*tmp;
 
@@ -29,17 +29,18 @@ int	ft_open_files(t_exec *data, int i)
 		{
 			puts("qqqqqqqqqqqqqqqq");
 			puts(ft_itoa(i));
-			puts(tmp->filename[i]);
-			if (ft_open_files_2(tmp, i) == FAIL)
+			// puts(tmp->filename[i]);
+			if (ft_open_files_2(tmp, i, filenumber) == FAIL)
 				return (FAIL);
 			i++;
 		}
 		tmp = tmp->next;
 	}
+	*filenumber = 0;
 	return (SUCCESS);
 }
 
-int	ft_open_files_2(t_exec *tmp, int i)
+int	ft_open_files_2(t_exec *tmp, int i, int *filenumber)
 {
 	if (tmp->type[i] == READ)
 	{
@@ -66,13 +67,14 @@ int	ft_open_files_2(t_exec *tmp, int i)
 	}
 	else if (tmp->type[i] == HEREDOC)
 	{
-		printf("tmp%s", ft_itoa(i));
-		tmp->file[i] = open(ft_strjoin("tmp", ft_itoa(i)), O_WRONLY | O_APPEND | O_CREAT, 0644);
+		printf("tmp%s\n", ft_itoa(*filenumber));
+		tmp->file[i] = open(ft_strjoin("tmp", ft_itoa(*filenumber)), O_WRONLY | O_APPEND | O_CREAT, 0644);
 		if (tmp->file[i] == -1)
 		{
 			perror("Infile Error");
 			return (FAIL);
 		}
+		*filenumber = *filenumber + 1;
 	}
 	return (SUCCESS);
 }

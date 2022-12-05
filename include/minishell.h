@@ -153,13 +153,13 @@ t_exec	*set_path(t_exec *e, t_env *env);
 
 void	ft_error(char *error);
 void	ft_free_all(char **tab);
-int		ft_open_files(t_exec *data, int i);
-int	ft_open_files_2(t_exec *tmp, int i);
+int		ft_open_files(t_exec *data, int i, int *filenumber);
+int		ft_open_files_2(t_exec *tmp, int i, int *filenumber);
 void	ft_close_files(t_exec *data);
 void	ft_childs(t_exec *data, char **envp, t_env **env);
 void	ft_exec(t_exec *pipe, char **envp, t_env **env);
 int		ft_mode(t_exec *data);
-void	ft_here_doc(t_exec *data, int i);
+void	ft_here_doc(t_exec *data, int i, int *filenumber);
 void	ft_free_paths(t_exec *data);
 void	ft_exec_init(t_exec *data, t_env **env);
 void	ft_exec_init_2(t_exec *data, int i);
