@@ -12,10 +12,27 @@
 
 #include "../../include/minishell.h"
 
+void	ft_code_errur_ex(t_exec	*data)
+{
+	if (!data->cmd || !data->cmd[0])
+		return ;
+	if (ft_strncmp(data->cmd[0], "./", 2))
+	{
+		printf(ERROR_1, NAME_SHELL_ERROR, data->cmd[0]);
+		g_statesssss = 126;
+		return ;
+	}
+	g_statesssss = 127;
+	printf(ERROR_2, NAME_SHELL_ERROR, data->cmd[0]);
+}
+
 void	ft_childs(t_exec *data, char **envp, t_env **env)
 {
 	if (!data->cmd || (!ft_check_builtins(data) && !data->path_cmd && !data->file))
+	{
+		ft_code_errur_ex(data);
 		return ;
+	}
 	if (pipe(data->pipefd) == -1)
 		ft_error("Pipe Error");
 	data->pid = fork();
