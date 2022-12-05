@@ -22,7 +22,7 @@ int	ft_mode(t_exec *data)
 
 	tmp = data;
 	test = 0;
-	filenumber = &test; 
+	filenumber = &test;
 	i = 0;
 	iv2 = &i;
 	if (ft_check_heredoc(data))
@@ -34,7 +34,6 @@ int	ft_mode(t_exec *data)
 			*iv2 = 0;
 			while (data->filename[*iv2])
 			{
-				printf("PPPPPPPPPPPPPPPPPP%d\n", *filenumber);
 				if (data->type[*iv2] == HEREDOC)
 					ft_here_doc(data, *iv2, filenumber);
 				// if (data->type[i] == HEREDOC)
