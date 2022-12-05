@@ -32,17 +32,19 @@ int	ft_mode(t_exec *data)
 		while(tmp)
 		{
 			*iv2 = 0;
-			while (data->filename[*iv2])
+			while (tmp->filename[*iv2])
 			{
-				printf("PPPPPPPPPPPPPPPPPP%d\n", *filenumber);
-				if (data->type[*iv2] == HEREDOC)
-					ft_here_doc(data, *iv2, filenumber);
+				// printf("PPPPPPPPPPPPPPPPPP%d\n", *filenumber);
+				if (tmp->type[*iv2] == HEREDOC)
+				{
+					ft_here_doc(tmp, *iv2, filenumber);
+					*filenumber = *filenumber + 1;
+				}
 				// if (data->type[i] == HEREDOC)
 				// {
 				// 	if (unlink(ft_strjoin("tmp", ft_itoa(i))) == -1)
 				// 		ft_error("Temp File Error");
 				// }
-				*filenumber = *filenumber + 1;
 				*iv2 = *iv2 + 1;
 			}
 			tmp = tmp->next;
@@ -101,12 +103,17 @@ void	ft_exec_process(t_exec *tmp, t_exec *p, char **envp, t_env **env)
 	tmp = p;
 	if (ft_check_heredoc(tmp))
 	{
-		while(tmp->type[i] == HEREDOC)
+		while(tmp)
 		{
-			printf("filename%s - type%d\n", tmp->filename[i], tmp->type[i]);
-			if (unlink(tmp->filename[i]) == -1)
-				ft_error("Temp File Error");
-			i++;
+			i = 0;
+			while(tmp->type[i] == HEREDOC)
+			{
+				printf("filename->%s - type->%d\n", tmp->filename[i], tmp->type[i]);
+				if (unlink(tmp->filename[i]) == -1)
+					ft_error("Temp File Error");
+				i++;
+			}
+			tmp = tmp->next;
 		}
 	}
 	ft_close_files(p);

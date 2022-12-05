@@ -45,7 +45,7 @@ void	ft_here_doc(t_exec *data, int i, int *filenumber)
 		line = get_next_line(STDIN_FILENO);
 	}
 	free(data->filename[i]);
-	// data->filename[i] = tmpfilename;
+	data->filename[i] = tmpfilename;
 }
 
 void	ft_here_doc_2(char *line, int temp)
