@@ -22,7 +22,7 @@ int	ft_mode(t_exec *data)
 
 	tmp = data;
 	test = 0;
-	filenumber = &test; 
+	filenumber = &test;
 	i = 0;
 	iv2 = &i;
 	if (ft_check_heredoc(data))

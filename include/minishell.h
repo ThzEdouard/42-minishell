@@ -33,7 +33,7 @@
 
 # define NAME_SHELL "doudou"
 # define NAME_SHELL_ERROR "\e[1;91mDoudou\e[0m"
-# define ERROR_0 "\e[1;90m%s: syntax error near unexepted token %s\n\e[0m"
+# define ERROR_0 "\e[1;90m%s: syntax error near unexpected token %s\n\e[0m"
 # define ERROR_3 "\e[1;90m%s: syntax error near unexpected token `newline'\n\e[0m"
 # define ERROR_1 "\e[1;90m%s : %s: Is a directory\n\e[0m"
 # define ERROR_2 "\e[1;90m%s : %s: command not found\n\e[0m"

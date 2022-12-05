@@ -44,10 +44,10 @@ int	update_str(char **str, t_env *env, int i, int len)
 	change = ft_joinralo(*str, (i - len), len, name);
 	if (!change)
 		return (FAIL);
-	free(*str);
-	*str = change;
 	if (!ft_strncmp(name, "?=", 2))
 		free(name);
+	free(*str);
+	*str = change;
 	return (SUCCESS);
 }
 

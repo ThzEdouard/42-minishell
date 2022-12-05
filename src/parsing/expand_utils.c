@@ -36,19 +36,24 @@ int	expand_utils(t_list_token *l, t_env *env)
 	while (tmp)
 	{
 		i = 0;
-		while (tmp->str[i])
+		printf("1\n");
+		while (tmp && tmp->str[i])
 		{
 			if (i == 0 && tmp->str[i] == 39)
 				break ;
 			if (tmp->str[i] && tmp->str[i] == 36)
 			{
 				expand_process(tmp, &tmp1, &i);
+				if (!tmp->str[tmp1 - 1])
+				{tmp = tmp->next; i = 0; continue ;}
 				update_str(&tmp->str, env, i, tmp1);
-				i = tmp1;
+				i = tmp1 - 1;
 			}
-			i++;
+			if (tmp->str[i])
+				i++;;
 		}
-		tmp = tmp->next;
+		if (tmp)
+			tmp = tmp->next;
 	}
 	return (SUCCESS);
 }
