@@ -15,10 +15,10 @@
 static int	verifcation_qot(int *start, char *line)
 {
 	if (*start == 0 && (*line == 59 || *line == 40
-			|| *line == 41 || *line == 92))
+			|| *line == 41))
 	{
 		if (start == 0 && (*(line + 1) == 59 || *(line + 1) == 40
-				|| *(line + 1) == 41 || *(line + 1) == 92))
+				|| *(line + 1) == 41))
 			return (ft_quite_error(*line, 2), FAIL);
 		return (ft_quite_error(*line, 1), FAIL);
 	}
@@ -31,6 +31,8 @@ static int	verification_quote(char *line)
 	char	c;
 
 	start = 0;
+	if (ft_strlen(line) == 1 && (*line == ':' || *line == '!'))
+		return (FAIL);
 	while (*line)
 	{
 		if (start == 0 && (*line == 34 || *line == 39))
@@ -68,6 +70,7 @@ char	*line_prompt(t_env **env, char **envp, t_list_token t, t_list_exec e)
 			e.first = exec;
 			exec_clear(&e);
 		}
+		//CODE ERREUR A METRE A JOUR
 		add_history(line);
 		free(line);
 		line = readline("doudou > ");

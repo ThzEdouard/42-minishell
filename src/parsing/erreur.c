@@ -16,7 +16,13 @@ void	ft_quite_error(char s, int len)
 {
 	char	*str;
 
-	if (len == 2)
+	if (s == 92)
+	{
+		printf(ERROR_2, NAME_SHELL_ERROR, &s);
+		g_statesssss = 127;
+		return ;
+	}
+	else if (len == 2)
 	{
 		str = ft_strccat(s, s);
 		if (!str)

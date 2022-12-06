@@ -25,7 +25,6 @@ void	ft_here_doc(t_exec *data, int i, int *filenumber)
 	line = get_next_line(STDIN_FILENO);
 	while (1)
 	{
-		
 		if (!line || !ft_strncmp(line, data->filename[i], ft_strlen(data->filename[i])))
 		{
 			if (!line || ft_strlen(data->filename[i]) == (ft_strlen(line) - 1))
