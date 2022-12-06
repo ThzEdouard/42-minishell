@@ -28,7 +28,6 @@ void	ft_exec_init(t_exec *data, t_env **env)
 	{
 		ft_message("Error: Command not found\n");
 	}
-
 }
 
 void	ft_exec_init_2(t_exec *data, int i)

@@ -36,7 +36,6 @@ int	expand_utils(t_list_token *l, t_env *env)
 	while (tmp)
 	{
 		i = 0;
-		printf("1\n");
 		while (tmp && tmp->str[i])
 		{
 			if (i == 0 && tmp->str[i] == 39)

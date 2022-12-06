@@ -67,7 +67,6 @@ char	*line_prompt(t_env **env, char **envp, t_list_token t, t_list_exec e)
 			ft_exec(exec, envp, env);
 			e.first = exec;
 			exec_clear(&e);
-			//unsetcode(env);
 		}
 		add_history(line);
 		free(line);

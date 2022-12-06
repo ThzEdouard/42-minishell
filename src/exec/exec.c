@@ -67,10 +67,6 @@ void	ft_exec(t_exec *p, char **envp, t_env **env)
 		return ;
 	while (tmp)
 	{
-		// printf("cmd[0]: %s - filename[0]: %s\n", tmp->cmd[0], tmp->filename[0]);
-		// printf("cmd[0]: %s - filename[0]: %s\n", tmp->cmd[0], tmp->filename[1]);
-		// printf("cmd[0]: %s type[0]: %d\n", tmp->cmd[0], tmp->type[0]);
-		// printf("cmd[0]: %s type[0]: %d\n", tmp->cmd[1], tmp->type[1]);
 		i++;
 		tmp = tmp->next;
 	}
@@ -99,7 +95,10 @@ void	ft_exec_process(t_exec *tmp, t_exec *p, char **envp, t_env **env)
 		tmp = tmp->next;
 	}
 	while (wait(&p->pid) > 0)
+	{
+		g_statesssss = p->pid / 256;
 		continue ;
+	}
 	tmp = p;
 	if (ft_check_heredoc(tmp))
 	{
@@ -108,7 +107,6 @@ void	ft_exec_process(t_exec *tmp, t_exec *p, char **envp, t_env **env)
 			i = 0;
 			while(tmp->type[i] == HEREDOC)
 			{
-				printf("filename->%s - type->%d\n", tmp->filename[i], tmp->type[i]);
 				if (unlink(tmp->filename[i]) == -1)
 					ft_error("Temp File Error");
 				i++;

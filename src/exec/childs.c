@@ -16,7 +16,7 @@ void	ft_code_errur_ex(t_exec	*data)
 {
 	if (!data->cmd || !data->cmd[0])
 		return ;
-	if (ft_strncmp(data->cmd[0], "./", 2))
+	if (!ft_strncmp(data->cmd[0], "./", 2))
 	{
 		printf(ERROR_1, NAME_SHELL_ERROR, data->cmd[0]);
 		g_statesssss = 126;
