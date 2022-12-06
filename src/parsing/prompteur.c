@@ -52,6 +52,15 @@ static int	verification_quote(char *line)
 	return (SUCCESS);
 }
 
+static int	up_code(char *line)
+{
+	if (!ft_strlen(line))
+		return (0);
+	if (*line == '!')
+		return (1);
+	return (0);
+}
+
 char	*line_prompt(t_env **env, char **envp, t_list_token t, t_list_exec e)
 {
 	char	*line;
@@ -69,8 +78,8 @@ char	*line_prompt(t_env **env, char **envp, t_list_token t, t_list_exec e)
 			ft_exec(exec, envp, env);
 			e.first = exec;
 			exec_clear(&e);
-		}
-		//CODE ERREUR A METRE A JOUR
+		}else
+			g_statesssss = up_code(line);
 		add_history(line);
 		free(line);
 		line = readline("doudou > ");
