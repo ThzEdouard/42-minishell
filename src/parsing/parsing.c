@@ -81,7 +81,17 @@ int	pars_cmd(t_list_token *l, char *line, int end)
 	}
 	return (SUCCESS);
 }
-
+void View(t_list_token l)
+{
+   t_token *pelem = l.first;
+   printf("===================\n");
+   while(pelem)
+   {
+     printf("%s  type %d\n",pelem->str, pelem->type);
+     pelem = pelem->next;
+   }
+   printf("=====================\n");
+}
 int	parsing(char *line, t_list_token *t)
 {
 	t_list_token	l;
@@ -92,6 +102,7 @@ int	parsing(char *line, t_list_token *t)
 	add_token(l.first);
 	if (verification_token(l.first) == FAIL)
 		return (token_clear(&l), FAIL);
+	View(l);
 	t->first = l.first;
 	return (SUCCESS);
 }

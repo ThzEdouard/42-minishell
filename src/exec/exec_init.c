@@ -23,12 +23,17 @@ void	ft_exec_init(t_exec *data, t_env **env)
 		i++;
 	}
 	if (ft_exec_builtins(data, env))
-		exit (0);
-	if (data->path_cmd == NULL && ft_strcmp(data->cmd[0], "~"))
-		ft_message("Error: Command not found\n", data, env);
-	if ((stat(data->path_cmd, &stats) == 0 && S_ISDIR(stats.st_mode)) || !ft_strcmp(data->cmd[0], "~"))
 	{
-		ft_message(".iow\n", data, env);
+		clear_env(env);
+	exec_clears(data);
+		exit (0);
+	}
+
+	if (data->path_cmd == NULL && (data->cmd &&  ft_strcmp(data->cmd[0], "~")))
+		ft_message("Error: Command not found\n", data, env,127);
+	if ((stat(data->path_cmd, &stats) == 0 && S_ISDIR(stats.st_mode)) || (data->cmd &&  !ft_strcmp(data->cmd[0], "~")))
+	{
+		ft_message(ERROR_1, data, env, 126);
 	}
 }
 

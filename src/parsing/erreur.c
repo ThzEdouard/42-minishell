@@ -18,7 +18,7 @@ void	ft_quite_error(char s, int len)
 
 	if (s == 92)
 	{
-		printf(ERROR_2, NAME_SHELL_ERROR, &s);
+		printf(ERROR_2);
 		g_statesssss = 127;
 		return ;
 	}
@@ -52,10 +52,10 @@ void	ft_error(char *error)
 	exit (1);
 }
 
-void	ft_message(char *error, t_exec * data,t_env **env)
+void	ft_message(char *error, t_exec * data,t_env **env, int code)
 {
 	ft_putstr_fd(error, 2);
 	clear_env(env);
 	exec_clears(data);
-	exit(127);
+	exit(code);
 }

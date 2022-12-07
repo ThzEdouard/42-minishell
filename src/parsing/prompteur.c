@@ -33,7 +33,7 @@ static int	verification_quote(char *line)
 	start = 0;
 	if (ft_strlen(line) == 1 && (*line == ':' || *line == '!'))
 		return (FAIL);
-	while (*line == '\f' || *line == '\n' || *line == '\r' || *line == '\t' || *line == '\v' || *line == ' ')
+	while (*line == '#' ||*line == '\f' || *line == '\n' || *line == '\r' || *line == '\t' || *line == '\v' || *line == ' ')
 		line++;
 	if (!ft_strlen(line))
 		return (FAIL);
@@ -73,15 +73,17 @@ char	*line_prompt(t_env **env, char **envp, t_list_token t, t_list_exec e)
 	line = readline("doudou > ");
 	while (line != NULL)
 	{
-		if (ft_strlen(line) && verification_quote(line) == SUCCESS
-			&& (parsing(line, &t) == SUCCESS))
+		if (ft_strlen(line) && verification_quote(line) == SUCCESS)
 		{
-			expand(&t, *env);
-			exec = add_exec(t.first, *env);
-			token_clear(&t);
-			ft_exec(exec, envp, env);
-			e.first = exec;
-			exec_clear(&e);
+			if ((parsing(line, &t) == SUCCESS))
+			{
+				expand(&t, *env);
+				exec = add_exec(t.first, *env);
+				token_clear(&t);
+				ft_exec(exec, envp, env);
+				e.first = exec;
+				exec_clear(&e);
+			}
 		}else
 			g_statesssss = up_code(line);
 		add_history(line);

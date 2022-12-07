@@ -54,4 +54,5 @@ int	update_str(char **str, t_env *env, int i, int len)
 void	expand(t_list_token *l, t_env *env)
 {
 	expand_utils(l, env);
+
 }

@@ -21,7 +21,7 @@ void	exec_clears(t_exec *l)
 	while (elem)
 	{
 		tmp = elem;
-		if (tmp->cmd[0] == tmp->path_cmd)
+		if (tmp->cmd && tmp->cmd[0] == tmp->path_cmd)
 			ft_free_all(tmp->cmd);
 		else
 		{

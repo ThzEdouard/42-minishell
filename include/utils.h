@@ -23,6 +23,7 @@ char	*ft_strcpy(char *s1, char *s2);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strdup(char *str);
 char	*ft_free_strjoin(char *s1, char *s2);
+char	*ft_free2_strjoin(char *s1, char *s2);
 char	**ft_split(char const *s, char c);
 char	*ft_strncpy(char *s1, char *s2, unsigned int n);
 char	*ft_strcat(char *s1, char *s2);

@@ -28,8 +28,8 @@ void	ft_childs(t_exec *data, char **envp, t_env **env)
 		ft_exec_init(data, env);
 		close(data->pipefd[0]);
 		close(data->pipefd[1]);
-		execve(data->path_cmd, data->cmd, envp);
-
+		if (data->cmd)
+			execve(data->path_cmd, data->cmd, envp);
 	}
 	close(data->pipefd[1]);
 	if (data->prev != NULL)
@@ -38,38 +38,38 @@ void	ft_childs(t_exec *data, char **envp, t_env **env)
 
 int	ft_exec_builtins(t_exec *data, t_env **env)
 {
-	if (!ft_strncmp(data->cmd[0], "cd", 2))
+	if (data->cmd && !ft_strcmp(data->cmd[0], "cd"))
 		return (ft_cd(env, data->cmd[1]), 1);
-	if (!ft_strncmp(data->cmd[0], "echo", 4))
+	if (data->cmd && !ft_strcmp(data->cmd[0], "echo"))
 		return (ft_echo(data->cmd), 1);
-	if (!ft_strncmp(data->cmd[0], "env", 3))
+	if (data->cmd && !ft_strcmp(data->cmd[0], "env"))
 		return (ft_env(*env), 1);
-	if (!ft_strncmp(data->cmd[0], "exit", 4))
+	if (data->cmd && !ft_strcmp(data->cmd[0], "exit"))
 		return (ft_exit(data, env, data->cmd), 1);
-	if (!ft_strncmp(data->cmd[0], "export", 6))
+	if (data->cmd && !ft_strcmp(data->cmd[0], "export"))
 		return (ft_export(env, data->cmd), 1);
-	if (!ft_strncmp(data->cmd[0], "pwd", 3))
+	if (data->cmd && !ft_strcmp(data->cmd[0], "pwd"))
 		return (ft_pwd(), 1);
-	if (!ft_strncmp(data->cmd[0], "unset", 5))
+	if (data->cmd && !ft_strcmp(data->cmd[0], "unset"))
 		return (ft_unset(env, data->cmd[1]), 1);
 	return (0);
 }
 
 int	ft_check_builtins(t_exec *data)
 {
-	if (!ft_strncmp(data->cmd[0], "cd", 2))
+	if (data->cmd &&  !ft_strcmp(data->cmd[0], "cd"))
 		return (1);
-	if (!ft_strncmp(data->cmd[0], "echo", 4))
+	if (data->cmd && !ft_strcmp(data->cmd[0], "echo"))
 		return (1);
-	if (!ft_strncmp(data->cmd[0], "env", 3))
+	if (data->cmd && !ft_strcmp(data->cmd[0], "env"))
 		return (1);
-	if (!ft_strncmp(data->cmd[0], "exit", 4))
+	if (data->cmd && !ft_strcmp(data->cmd[0], "exit"))
 		return (1);
-	if (!ft_strncmp(data->cmd[0], "export", 6))
+	if (data->cmd && !ft_strcmp(data->cmd[0], "export"))
 		return (1);
-	if (!ft_strncmp(data->cmd[0], "pwd", 3))
+	if (data->cmd && !ft_strcmp(data->cmd[0], "pwd"))
 		return (1);
-	if (!ft_strncmp(data->cmd[0], "unset", 5))
+	if (data->cmd && !ft_strcmp(data->cmd[0], "unset"))
 		return (1);
 	return (0);
 }

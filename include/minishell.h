@@ -37,8 +37,8 @@
 # define NAME_SHELL_ERROR "\e[1;91mDoudou\e[0m"
 # define ERROR_0 "\e[1;90m%s: syntax error near unexpected token %s\n\e[0m"
 # define ERROR_3 "\e[1;90m%s: syntax error near unexpected token `newline'\n\e[0m"
-# define ERROR_1 "\e[1;90m%s : %s: Is a directory\n\e[0m"
-# define ERROR_2 "\e[1;90m%s : %s: command not found\n\e[0m"
+# define ERROR_1 "\e[1;90m\e[1;91mDoudou\e[0m : Is a directory\n\e[0m"
+# define ERROR_2 "\e[1;90m[1;91mDoudou\e[0m : command not found\n\e[0m"
 # define ERROR_5 "\e[1;90m%s : %s: %s: Not a directory\n\e[0m"
 
 extern int	g_statesssss;
@@ -51,7 +51,8 @@ typedef enum s_type
 	APPEND,
 	WRITE,
 	HEREDOC,
-	READ
+	READ,
+	COUNT
 }			t_type;
 
 typedef struct s_env
@@ -165,7 +166,7 @@ void	ft_here_doc(t_exec *data, int i, int *filenumber);
 void	ft_free_paths(t_exec *data);
 void	ft_exec_init(t_exec *data, t_env **env);
 void	ft_exec_init_2(t_exec *data, int i);
-void	ft_message(char *error, t_exec * data,t_env **env);
+void	ft_message(char *error, t_exec * data,t_env **env, int code);
 int		ft_check_redirs(t_exec *data);
 void	ft_exec_builtins_init(t_exec *data, t_env **env);
 void	ft_exec_builtins_init_2(t_exec *data, int i);

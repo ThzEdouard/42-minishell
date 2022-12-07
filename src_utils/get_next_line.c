@@ -3,86 +3,102 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aradice <aradice@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/27 16:09:47 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/12/03 19:29:53 by eflaquet         ###   ########.fr       */
+/*   Created: 2022/05/24 23:28:12 by aradice           #+#    #+#             */
+/*   Updated: 2022/05/24 23:28:12 by aradice          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/get_next_line.h"
 
-char	*get_next_line(int fd)
+char	*ft_new_staticstr(char *staticstr)
 {
-	static char	*trash;
-	char		*line;
-	int			byte;
+	int		i;
+	int		y;
+	char	*newstr;
 
-	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, &line, 0) < 0)
-		return (NULL);
-	byte = 1;
-	line = NULL;
-	get_read_file(fd, &trash, &byte);
-	if (trash == NULL)
-		return (NULL);
-	line = ft_substrr(trash, 0, ft_lenline(trash));
-	trash = get_save_trash(trash, 0);
-	if (line[0] == 0 && trash == NULL)
+	i = 0;
+	y = 0;
+	while (staticstr[i] && staticstr[i] != '\n')
+		i++;
+	if (!staticstr[i])
 	{
-		free(line);
+		free(staticstr);
 		return (NULL);
 	}
+	newstr = malloc(sizeof(char) * (ft_strlen_gnl(staticstr) - i + 1));
+	if (!newstr)
+		return (NULL);
+	i++;
+	while (staticstr[i])
+		newstr[y++] = staticstr[i++];
+	newstr[y] = '\0';
+	free(staticstr);
+	return (newstr);
+}
+
+char	*ft_get_line(char *staticstr)
+{
+	int		i;
+	char	*line;
+
+	i = 0;
+	if (!staticstr[i])
+		return (NULL);
+	while (staticstr[i] && staticstr[i] != '\n')
+		i++;
+	line = malloc(sizeof(char) * (i + 2));
+	if (!line)
+		return (NULL);
+	i = 0;
+	while (staticstr[i] && staticstr[i] != '\n')
+	{
+		line[i] = staticstr[i];
+		i++;
+	}
+	if (staticstr[i] == '\n')
+	{
+		line[i] = staticstr[i];
+		i++;
+	}
+	line[i] = '\0';
 	return (line);
 }
 
-char	*get_save_trash(char *trash, int x)
+char	*ft_read(int fd, char *staticstr)
 {
-	char	*save_trash;
-	int		i;
+	int		readval;
+	char	*buffer;
 
-	i = 0;
-	while (trash[i] && trash[i] != '\n')
-		i++;
-	if (!trash[i])
-		return (free (trash), NULL);
-	save_trash = malloc(sizeof(char) * (ft_strlenr(trash) - i + 1));
-	if (!save_trash)
-		return (free (trash), NULL);
-	i++;
-	while (trash[i + x])
+	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buffer)
+		return (NULL);
+	readval = 1;
+	while (!ft_strchr_gnl(staticstr, '\n') && readval != 0)
 	{
-		save_trash[x] = trash[i + x];
-		x++;
+		readval = read(fd, buffer, BUFFER_SIZE);
+		if (readval == -1)
+		{
+			free(buffer);
+			return (NULL);
+		}
+		buffer[readval] = '\0';
+		staticstr = ft_strjoin_gnl(staticstr, buffer);
 	}
-	save_trash[x] = 0;
-	free(trash);
-	return (save_trash);
+	free(buffer);
+	return (staticstr);
 }
 
-void	get_read_file(int fd, char **trash, int *byte_ptr)
+char	*get_next_line(int fd)
 {
-	char	*buf;
+	char	*staticstr;
 
-	if (!*trash)
-	{
-		*trash = malloc(sizeof(char) * 1);
-		if (!*trash)
-			return ;
-		*trash[0] = 0;
-	}
-	while (!(ft_newline(*trash)) && *byte_ptr)
-	{
-		buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-		if (!buf)
-			return ;
-		*byte_ptr = read(fd, buf, BUFFER_SIZE);
-		if (*byte_ptr <= 0)
-		{
-			free(buf);
-			return ;
-		}
-		buf[*byte_ptr] = 0;
-		*trash = ft_strjoinr(*trash, buf);
-		free(buf);
-	}
+	staticstr = NULL;
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (0);
+	staticstr = ft_read(fd, staticstr);
+	if (!staticstr)
+		return (NULL);
+	return (staticstr);
 }

@@ -3,27 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aradice <aradice@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/27 16:07:47 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/12/03 19:29:27 by eflaquet         ###   ########.fr       */
+/*   Created: 2022/06/02 02:28:22 by aradice           #+#    #+#             */
+/*   Updated: 2022/06/02 02:28:22 by aradice          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
+# include <stdlib.h>
 # include <unistd.h>
-#include <stdlib.h>
-# define BUFFER_SIZE 1
+# include <stdint.h>
+# include <fcntl.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
 
 char	*get_next_line(int fd);
-void	get_read_file(int fd, char **trash, int *byte_ptr);
-char	*get_save_trash(char *trash, int len_line);
-char	*ft_substrr(char *s, unsigned int start, size_t len);
-char	*ft_strjoinr(char *s1, char *s2);
-int		ft_strlenr(char *str);
-int		ft_newline(char *str);
-int		ft_lenline(char *str);
+char	*ft_new_staticstr(char *staticstr);
+char	*ft_read(int fd, char *staticstr);
+char	*ft_get_line(char *staticstr);
+char	*ft_strchr_gnl(char *str, int c);
+size_t	ft_strlen_gnl(char *str);
+char	*ft_strjoin_gnl(char *s1, char *s2);
 
 #endif

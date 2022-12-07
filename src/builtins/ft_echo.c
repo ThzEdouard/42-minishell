@@ -25,7 +25,7 @@ static int	checking_args(char **cmd, int *t, int i)
 			y = 1;
 			while (cmd[i][y] == 'n')
 				y++;
-			printf ("y = %d len = %d\n", y, ft_strlen(cmd[i]));
+			// printf ("y = %d len = %d\n", y, ft_strlen(cmd[i]));
 			if (y == ft_strlen(cmd[i]))
 				r = i;
 		}
@@ -45,7 +45,7 @@ static void	check_quite(char **cmd)
 	i = 0;
 	while (cmd[i])
 	{
-		if (cmd[i][0] == 34 || cmd[i][0] == 36)
+		if (cmd[i][0] == 34 || cmd[i][0] == 39)
 		{
 			cmd[i] = ft_free_substr(cmd[i], 1, ft_strlen(cmd[i]) - 2);
 		}

@@ -1,0 +1,16 @@
+d
+e
+include
+l
+Makefile
+minishell
+obj
+p
+q
+qc
+readline_leaks
+s
+src
+src_utils
+w
+www
