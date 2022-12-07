@@ -15,7 +15,7 @@
 void	ft_exec_init(t_exec *data, t_env **env)
 {
 	int	i;
-
+	struct stat stats;
 	i = 0;
 	while (data->type[i])
 	{
@@ -24,9 +24,11 @@ void	ft_exec_init(t_exec *data, t_env **env)
 	}
 	if (ft_exec_builtins(data, env))
 		exit (0);
-	if (data->path_cmd == NULL)
+	if (data->path_cmd == NULL && ft_strcmp(data->cmd[0], "~"))
+		ft_message("Error: Command not found\n", data, env);
+	if ((stat(data->path_cmd, &stats) == 0 && S_ISDIR(stats.st_mode)) || !ft_strcmp(data->cmd[0], "~"))
 	{
-		ft_message("Error: Command not found\n");
+		ft_message(".iow\n", data, env);
 	}
 }
 

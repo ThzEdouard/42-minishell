@@ -23,6 +23,8 @@
 # include <limits.h>
 # include <fcntl.h>
 # include <sys/wait.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 # include "utils.h"
 # include "get_next_line.h"
 
@@ -163,7 +165,7 @@ void	ft_here_doc(t_exec *data, int i, int *filenumber);
 void	ft_free_paths(t_exec *data);
 void	ft_exec_init(t_exec *data, t_env **env);
 void	ft_exec_init_2(t_exec *data, int i);
-void	ft_message(char *error);
+void	ft_message(char *error, t_exec * data,t_env **env);
 int		ft_check_redirs(t_exec *data);
 void	ft_exec_builtins_init(t_exec *data, t_env **env);
 void	ft_exec_builtins_init_2(t_exec *data, int i);
@@ -208,5 +210,7 @@ void	get_name_change(t_env *env, char *s, int len, char *str);
 void	sig_quit(int sig, siginfo_t *info, void *tmp);
 void	sig_int(int sig, siginfo_t *info, void *tmp);
 void	add_export(t_env **env, char *cmd, int ok);
+
+void	exec_clears(t_exec *l);
 
 #endif

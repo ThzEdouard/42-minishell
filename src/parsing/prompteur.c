@@ -33,6 +33,10 @@ static int	verification_quote(char *line)
 	start = 0;
 	if (ft_strlen(line) == 1 && (*line == ':' || *line == '!'))
 		return (FAIL);
+	while (*line == '\f' || *line == '\n' || *line == '\r' || *line == '\t' || *line == '\v' || *line == ' ')
+		line++;
+	if (!ft_strlen(line))
+		return (FAIL);
 	while (*line)
 	{
 		if (start == 0 && (*line == 34 || *line == 39))
