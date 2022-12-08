@@ -81,7 +81,8 @@ void	ft_exec(t_exec *p, char **envp, t_env **env)
 		ft_exec_builtins(tmp, env);
 		return ;
 	}
-	ft_exec_process(tmp, p, envp, env);
+	// if (tmp->cmd)
+		ft_exec_process(tmp, p, envp, env);
 }
 
 void	ft_exec_process(t_exec *tmp, t_exec *p, char **envp, t_env **env)
@@ -89,6 +90,7 @@ void	ft_exec_process(t_exec *tmp, t_exec *p, char **envp, t_env **env)
 	int	i;
 
 	i = 0;
+
 	while (tmp)
 	{
 		ft_childs(tmp, envp, env);

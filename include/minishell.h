@@ -43,6 +43,12 @@
 
 extern int	g_statesssss;
 
+typedef enum s_tras
+{
+	NO,
+	YES
+}			t_tras;
+
 typedef enum s_type
 {
 	NOTHING,
@@ -66,6 +72,7 @@ typedef struct s_token
 {
 	char			*str;
 	t_type			type;
+	t_tras			tras;
 	struct s_token	*prev;
 	struct s_token	*next;
 }					t_token;
@@ -122,7 +129,7 @@ typedef struct s_add
 /*------------------------------prompt in parsing-------------------*/
 /* ***************************************************************** */
 void	token_init(t_list_token *l);
-void	token_push(t_list_token *l, char *str);
+void	token_push(t_list_token *l, char *str, t_tras tras);
 void	token_clear(t_list_token *l);
 void	prompt(t_env **env, char **envp);
 int		parsing(char *line, t_list_token *t);
@@ -206,7 +213,7 @@ int		ft_cd(t_env **env, char *cmd);
 int		ft_echo(char **cmd);
 
 void	expand(t_list_token *l, t_env *env);
-int		add_list(t_list_token *l, char *line, int end);
+int		add_list(t_list_token *l, char *line, int end, t_tras tras);
 void	get_name_change(t_env *env, char *s, int len, char *str);
 
 void	sig_quit(int sig, siginfo_t *info, void *tmp);

@@ -64,7 +64,17 @@ static int	up_code(char *line)
 		return (1);
 	return (0);
 }
-
+void View_ex(t_list_token l)
+{
+   t_token *pelem = l.first;
+   printf("===========Ext========\n");
+   while(pelem)
+   {
+     printf("%s  type %d tras  = %d\n",pelem->str, pelem->type, pelem->tras);
+     pelem = pelem->next;
+   }
+   printf("=====================\n");
+}
 char	*line_prompt(t_env **env, char **envp, t_list_token t, t_list_exec e)
 {
 	char	*line;
@@ -78,6 +88,7 @@ char	*line_prompt(t_env **env, char **envp, t_list_token t, t_list_exec e)
 			if ((parsing(line, &t) == SUCCESS))
 			{
 				expand(&t, *env);
+				View_ex(t);
 				exec = add_exec(t.first, *env);
 				token_clear(&t);
 				ft_exec(exec, envp, env);

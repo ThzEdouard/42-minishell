@@ -23,11 +23,14 @@ int	test(char *line, char start)
 {
 	int	i;
 
-	i = 0;
+	i = 2;
 	line++;
 	while (*line && *line != start)
 	{
 		line++;
+		printf("ici 2%c\n", *line);
+		if (*line == start && *line + 1 && *line + 1 != 32)
+			line++;
 		i++;
 	}
 	if (*line == start)
@@ -35,23 +38,31 @@ int	test(char *line, char start)
 	return (i);
 }
 
-int	prstwo(char *line, int *en)
+int	prstwo(char *line, int *en, t_tras *t)
 {
 	int	end;
 	int	i;
 	end = *en;
-	if (*line == 39 || *line == 34)
+	if ((*line == 39 && *line + 1 != 39 )|| (*line == 34 && *line + 1 != 34))
 	{
 		end = test(line, *line);
+		if (*line == 39)
+			*t = NO;
+		else
+			*t = YES;
 		line += end;
-		i = 1;
+
+		i = 0;
 	}
+	else if(*line + 1 == 39 && *line + 1 != 34)
+		return (2);
 	else
 	{
 		while (*line && *line != 32 && ft_space(*line))
 		{
 			end++;
 			line++;
+			*t = YES;
 		}
 		i = 0;
 	}
@@ -62,6 +73,7 @@ int	prstwo(char *line, int *en)
 int	pars_cmd(t_list_token *l, char *line, int end)
 {
 	int	i;
+	t_tras t;
 	while (*line != 0)
 	{
 		end = 0;
@@ -76,27 +88,33 @@ int	pars_cmd(t_list_token *l, char *line, int end)
 			{
 				end++;
 				line++;
+				if (*line && (*line == 34 ||*line == 39) && *line + 1 && (*line != 34 ||*line != 39))
+				{
+					end++;
+					line++;
+				}
+				t = YES;
 			}
 		}
 		else
 		{
-			i = prstwo(line, &end);
+			i = prstwo(line, &end, &t);
 			line += i;
 			line += end;
 		}
-		if (add_list(l, line, end))
+		if (add_list(l, line, end, t))
 			return (token_clear(l), FAIL);
 		line += i;
 	}
 	return (SUCCESS);
 }
-void View(t_list_token l)
+void View_parsing(t_list_token l)
 {
    t_token *pelem = l.first;
-   printf("===================\n");
+   printf("===========Parsing========\n");
    while(pelem)
    {
-     printf("%s  type %d\n",pelem->str, pelem->type);
+     printf("%s  type %d tras  = %d\n",pelem->str, pelem->type, pelem->tras);
      pelem = pelem->next;
    }
    printf("=====================\n");
@@ -111,7 +129,7 @@ int	parsing(char *line, t_list_token *t)
 	add_token(l.first);
 	if (verification_token(l.first) == FAIL)
 		return (token_clear(&l), FAIL);
-	View(l);
+	View_parsing(l);
 	t->first = l.first;
 	return (SUCCESS);
 }

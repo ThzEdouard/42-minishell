@@ -44,12 +44,13 @@ int	*ft_realoc_int(char **src)
 
 	if (!src || ft_double_len(src) == 0)
 		return (NULL);
-	malloc_src = malloc(sizeof(int) * (ft_double_len(src) + 1));
+	malloc_src = (int *)malloc(sizeof(int) * (ft_double_len(src) + 1));
 	if (!malloc_src)
 		return (NULL);
 	i = ft_double_len(src);
 	while (i)
 		malloc_src[i--] = 0;
+	malloc_src[i] = 0;
 	return (malloc_src);
 }
 

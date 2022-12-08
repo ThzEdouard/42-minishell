@@ -25,6 +25,8 @@ int	ft_open_files(t_exec *data, int i, int *filenumber)
 		if (!tmp->filename)
 			return (SUCCESS);
 		tmp->file = ft_realoc_int(tmp->filename);
+		if (!tmp->file)
+			printf("je suis NULL\n");
 		while (tmp->filename[i])
 		{
 			if (ft_open_files_2(tmp, i, filenumber) == FAIL)

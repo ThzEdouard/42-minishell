@@ -30,7 +30,7 @@ void	ft_here_doc(t_exec *data, int i, int *filenumber)
 			if (!line || ft_strlen(data->filename[i]) == (ft_strlen(line) - 1))
 			{
 				tmpfilename = ft_free2_strjoin("tmp", ft_itoa(*filenumber));
-				printf("\n");
+				// printf("\n");
 				close(data->file[i]);
 				if (line)
 					free(line);

@@ -17,6 +17,7 @@ void	ft_exec_init(t_exec *data, t_env **env)
 	int	i;
 	struct stat stats;
 	i = 0;
+	t_list_exec p;
 	while (data->type[i])
 	{
 		ft_exec_init_2(data, i);
@@ -25,7 +26,11 @@ void	ft_exec_init(t_exec *data, t_env **env)
 	if (ft_exec_builtins(data, env))
 	{
 		clear_env(env);
-	exec_clears(data);
+		while (data->prev)
+			data = data->prev;
+		p.first = data;
+		exec_clear(&p);
+		printf("ici je pass ?\n");
 		exit (0);
 	}
 
@@ -39,22 +44,27 @@ void	ft_exec_init(t_exec *data, t_env **env)
 
 void	ft_exec_init_2(t_exec *data, int i)
 {
+	int	y;
+
+	y = 0;
 	if (data->type[i] == APPEND || data->type[i] == WRITE)
 	{
-		while (*data->file)
+		while (data->file[y])
 		{
-			data->pipefd[1] = *data->file;
+			data->pipefd[1] = data->file[y];
 			dup2(data->pipefd[1], STDOUT_FILENO);
-			data->file++;
+			y++;
+			// data->file++;
 		}
 	}
 	if (data->type[i] == READ || data->type[i] == HEREDOC)
 	{
-		while (*data->file)
+		while (data->file[y])
 		{
-			data->pipefd[0] = *data->file;
+			data->pipefd[0] = data->file[y];
 			dup2(data->pipefd[0], STDIN_FILENO);
-			data->file++;
+			y++;
+			// data->file++;
 		}
 	}
 }
@@ -75,22 +85,27 @@ void	ft_exec_builtins_init(t_exec *data, t_env **env)
 
 void	ft_exec_builtins_init_2(t_exec *data, int i)
 {
+	int	y;
+
+	y = 0;
 	if (data->type[i] == APPEND || data->type[i] == WRITE)
 	{
-		while (*data->file != 0)
+		while (data->file[y] != 0)
 		{
-			data->pipefd[1] = *data->file;
+			data->pipefd[1] = data->file[y];
 			dup2(data->pipefd[1], STDOUT_FILENO);
-			data->file++;
+			y++;
+			// data->file++;
 		}
 	}
 	if (data->type[i] == READ || data->type[i] == HEREDOC)
 	{
-		while (*data->file != 0)
+		while (data->file[y] != 0)
 		{
-			data->pipefd[0] = *data->file;
+			data->pipefd[0] = data->file[y];
 			dup2(data->pipefd[0], STDIN_FILENO);
-			data->file++;
+			y++;
+			// data->file++;
 		}
 	}
 }

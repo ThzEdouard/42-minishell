@@ -18,18 +18,18 @@ void	token_init(t_list_token *l)
 	l->last = NULL;
 }
 
-int	add_list(t_list_token *l, char *line, int end)
+int	add_list(t_list_token *l, char *line, int end, t_tras tras)
 {
 	char	*str;
 
 	str = ft_substr(line - end, 0, end);
 	if (!str)
 		return (FAIL);
-	token_push(l, str);
+	token_push(l, str, tras);
 	return (SUCCESS);
 }
 
-void	token_push(t_list_token *l, char *str)
+void	token_push(t_list_token *l, char *str, t_tras tras)
 {
 	t_token	*new;
 
@@ -37,6 +37,7 @@ void	token_push(t_list_token *l, char *str)
 	if (!new)
 		return ;
 	new->str = str;
+	new->tras = tras;
 	new->prev = l->last;
 	new->next = NULL;
 	if (l->last)
