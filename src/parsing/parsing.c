@@ -23,25 +23,28 @@ int	test(char *line, char start)
 {
 	int	i;
 
-	i = 2;
+	i = 0;
 	line++;
 	while (*line && *line != start)
 	{
 		line++;
 		i++;
 	}
+	if (*line == start)
+		line++;
 	return (i);
 }
 
-void	prstwo(char *line, int *en)
+int	prstwo(char *line, int *en)
 {
 	int	end;
-
+	int	i;
 	end = *en;
 	if (*line == 39 || *line == 34)
 	{
 		end = test(line, *line);
 		line += end;
+		i = 1;
 	}
 	else
 	{
@@ -50,15 +53,19 @@ void	prstwo(char *line, int *en)
 			end++;
 			line++;
 		}
+		i = 0;
 	}
 	*en = end;
+	return (i);
 }
 
 int	pars_cmd(t_list_token *l, char *line, int end)
 {
-	while (*line)
+	int	i;
+	while (*line != 0)
 	{
 		end = 0;
+		i = 0;
 		while (*line && *line == 32)
 			line++;
 		if (!*line)
@@ -73,11 +80,13 @@ int	pars_cmd(t_list_token *l, char *line, int end)
 		}
 		else
 		{
-			prstwo(line, &end);
+			i = prstwo(line, &end);
+			line += i;
 			line += end;
 		}
 		if (add_list(l, line, end))
 			return (token_clear(l), FAIL);
+		line += i;
 	}
 	return (SUCCESS);
 }

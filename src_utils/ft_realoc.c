@@ -57,13 +57,28 @@ char	**ft_double_raloc(char **src)
 {
 	int		y;
 	char	**malloc_src;
+	int		v;
 
+	v = 0;
 	y = 0;
 	if (!src || ft_double_len(src) == 0)
 		return (NULL);
 	malloc_src = malloc(sizeof(char *) * (ft_double_len(src) + 1));
 	if (!malloc_src)
 		return (NULL);
+	while (src[v] && !ft_strncmp(src[v], "", 1))
+		v++;
+	if (src[v])
+	{
+		while (src[v])
+		{
+			malloc_src[y++] = ft_strdup(src[v++]);
+			while (src[v] && !ft_strncmp(src[v], "", 1))
+				v++;
+		}
+		malloc_src[y] = 0;
+		return (malloc_src);
+	}
 	while (src[y])
 	{
 		malloc_src[y] = ft_strdup(src[y]);

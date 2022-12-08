@@ -46,6 +46,7 @@ extern int	g_statesssss;
 typedef enum s_type
 {
 	NOTHING,
+	EMPLE,
 	WORD,
 	PIPE,
 	APPEND,
@@ -213,5 +214,5 @@ void	sig_int(int sig, siginfo_t *info, void *tmp);
 void	add_export(t_env **env, char *cmd, int ok);
 
 void	exec_clears(t_exec *l);
-
+void	update_token(t_token *t);
 #endif
