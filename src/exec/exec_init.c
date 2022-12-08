@@ -35,9 +35,16 @@ void	ft_exec_init(t_exec *data, t_env **env)
 	}
 
 	if (data->path_cmd == NULL && (data->cmd &&  ft_strcmp(data->cmd[0], "~")))
+	{
+		while (data->prev)
+			data = data->prev;
 		ft_message("Error: Command not found\n", data, env,127);
+	}
+
 	if ((stat(data->path_cmd, &stats) == 0 && S_ISDIR(stats.st_mode)) || (data->cmd &&  !ft_strcmp(data->cmd[0], "~")))
 	{
+		while (data->prev)
+			data = data->prev;
 		ft_message(ERROR_1, data, env, 126);
 	}
 }

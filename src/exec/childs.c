@@ -21,7 +21,7 @@ void	ft_childs(t_exec *data, char **envp, t_env **env)
 		ft_error("Fork Error");
 	if (data->pid == 0)
 	{
-		if (data->prev != NULL)
+		if (data->prev != NULL && data->prev->cmd != NULL)
 			dup2(data->prev->pipefd[0], STDIN_FILENO);
 		if (data->next != NULL)
 			dup2(data->pipefd[1], STDOUT_FILENO);
@@ -32,7 +32,7 @@ void	ft_childs(t_exec *data, char **envp, t_env **env)
 			execve(data->path_cmd, data->cmd, envp);
 	}
 	close(data->pipefd[1]);
-	if (data->prev != NULL)
+	if (data->prev != NULL && data->prev->cmd != NULL)
 		close(data->prev->pipefd[0]);
 }
 

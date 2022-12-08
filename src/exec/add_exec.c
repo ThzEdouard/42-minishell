@@ -91,6 +91,8 @@ int	malloc_cmd_filename(t_token *t, t_add *values)
 			values->filename[nb_filename] = 0;
 			values->type[nb_filename--] = 0;
 		}
+		values->filename[nb_filename] = 0;
+			values->type[nb_filename] = 0;
 	}
 	malloc_type(values);
 	return (SUCCESS);
@@ -106,6 +108,7 @@ int	malloc_command(t_add *values, int nb_cmd)
 			return (FAIL);
 		while (nb_cmd)
 			values->command[nb_cmd--] = 0;
+		values->command[nb_cmd] = 0;
 	}
 	return (SUCCESS);
 }
