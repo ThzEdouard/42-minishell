@@ -14,46 +14,46 @@
 
 int	ft_mode(t_exec *data)
 {
-	int	i;
-	int test;
-	int	*filenumber;
-	int	*iv2;
+	int		i;
+	int		test;
+	int		*filenumber;
 	t_exec	*tmp;
 
 	tmp = data;
 	test = 0;
 	filenumber = &test;
 	i = 0;
-	iv2 = &i;
 	if (ft_check_heredoc(data))
 	{
 		if (ft_open_files(data, i, filenumber) == FAIL)
 			return (FAIL);
-		while(tmp)
-		{
-			*iv2 = 0;
-			while (tmp->filename[*iv2])
-			{
-				// printf("PPPPPPPPPPPPPPPPPP%d\n", *filenumber);
-				if (tmp->type[*iv2] == HEREDOC)
-				{
-					ft_here_doc(tmp, *iv2, filenumber);
-					*filenumber = *filenumber + 1;
-				}
-				// if (data->type[i] == HEREDOC)
-				// {
-				// 	if (unlink(ft_strjoin("tmp", ft_itoa(i))) == -1)
-				// 		ft_error("Temp File Error");
-				// }
-				*iv2 = *iv2 + 1;
-			}
-			tmp = tmp->next;
-		}
+		ft_mode_heredoc(tmp, i, filenumber);
 	}
 	else
 		if (ft_open_files(data, i, filenumber) == FAIL)
 			return (FAIL);
 	return (SUCCESS);
+}
+
+void	ft_mode_heredoc(t_exec *tmp, int i, int *filenumber)
+{
+	int		*iv2;
+
+	iv2 = &i;
+	while (tmp)
+	{
+		*iv2 = 0;
+		while (tmp->filename[*iv2])
+		{
+			if (tmp->type[*iv2] == HEREDOC)
+			{
+				ft_here_doc(tmp, *iv2, filenumber);
+				*filenumber = *filenumber + 1;
+			}
+			*iv2 = *iv2 + 1;
+		}
+		tmp = tmp->next;
+	}
 }
 
 void	ft_exec(t_exec *p, char **envp, t_env **env)
@@ -81,15 +81,11 @@ void	ft_exec(t_exec *p, char **envp, t_env **env)
 		ft_exec_builtins(tmp, env);
 		return ;
 	}
-		ft_exec_process(tmp, p, envp, env);
+	ft_exec_process(tmp, p, envp, env);
 }
 
 void	ft_exec_process(t_exec *tmp, t_exec *p, char **envp, t_env **env)
 {
-	int	i;
-
-	i = 0;
-
 	while (tmp)
 	{
 		if (tmp->cmd)
@@ -102,12 +98,21 @@ void	ft_exec_process(t_exec *tmp, t_exec *p, char **envp, t_env **env)
 		continue ;
 	}
 	tmp = p;
+	ft_unlink_heredoc(tmp);
+	ft_close_files(p);
+}
+
+void	ft_unlink_heredoc(t_exec *tmp)
+{
+	int	i;
+
+	i = 0;
 	if (ft_check_heredoc(tmp))
 	{
-		while(tmp)
+		while (tmp)
 		{
 			i = 0;
-			while(tmp->type[i] == HEREDOC)
+			while (tmp->type[i] == HEREDOC)
 			{
 				if (unlink(tmp->filename[i]) == -1)
 					ft_error("Temp File Error");
@@ -116,7 +121,6 @@ void	ft_exec_process(t_exec *tmp, t_exec *p, char **envp, t_env **env)
 			tmp = tmp->next;
 		}
 	}
-	ft_close_files(p);
 }
 
 void	ft_exec_process_builtins(t_exec *tmp, t_exec *p, t_env **env)

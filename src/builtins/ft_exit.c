@@ -28,7 +28,6 @@ void	exec_clears(t_exec *l)
 		else
 		{
 			ft_free_all(tmp->cmd);
-			printf("%s\n", tmp->path_cmd);
 			if (tmp->path_cmd)
 				free(tmp->path_cmd);
 		}
@@ -38,7 +37,6 @@ void	exec_clears(t_exec *l)
 			free(elem->type);
 		elem = elem->next;
 		free(tmp);
-		printf("j'ai free");
 	}
 }
 

@@ -14,10 +14,10 @@
 
 void	ft_exec_init(t_exec *data, t_env **env)
 {
-	int	i;
-	struct stat stats;
+	int			i;
+	t_list_exec	p;
+
 	i = 0;
-	t_list_exec p;
 	while (data->type[i])
 	{
 		ft_exec_init_2(data, i);
@@ -30,23 +30,9 @@ void	ft_exec_init(t_exec *data, t_env **env)
 			data = data->prev;
 		p.first = data;
 		exec_clear(&p);
-		printf("ici je pass ?\n");
 		exit (0);
 	}
-
-	if (data->path_cmd == NULL && (data->cmd &&  ft_strcmp(data->cmd[0], "~")))
-	{
-		while (data->prev)
-			data = data->prev;
-		ft_message("Error: Command not found\n", data, env,127);
-	}
-
-	if ((stat(data->path_cmd, &stats) == 0 && S_ISDIR(stats.st_mode)) || (data->cmd &&  !ft_strcmp(data->cmd[0], "~")))
-	{
-		while (data->prev)
-			data = data->prev;
-		ft_message(ERROR_1, data, env, 126);
-	}
+	ft_exec_init_3(data, env);
 }
 
 void	ft_exec_init_2(t_exec *data, int i)
@@ -61,7 +47,6 @@ void	ft_exec_init_2(t_exec *data, int i)
 			data->pipefd[1] = data->file[y];
 			dup2(data->pipefd[1], STDOUT_FILENO);
 			y++;
-			// data->file++;
 		}
 	}
 	if (data->type[i] == READ || data->type[i] == HEREDOC)
@@ -71,8 +56,31 @@ void	ft_exec_init_2(t_exec *data, int i)
 			data->pipefd[0] = data->file[y];
 			dup2(data->pipefd[0], STDIN_FILENO);
 			y++;
-			// data->file++;
 		}
+	}
+}
+
+void	ft_exec_init_3(t_exec *data, t_env **env)
+{
+	struct stat	stats;
+	t_list_exec	p;
+
+	if (data->path_cmd == NULL && (data->cmd && ft_strcmp(data->cmd[0], "~")))
+	{
+		while (data->prev)
+			data = data->prev;
+		p.first = data;
+		exec_clear(&p);
+		ft_message("Error: Command not found\n", data, env, 127);
+	}
+	if ((stat(data->path_cmd, &stats) == 0 && S_ISDIR(stats.st_mode))
+		|| (data->cmd && !ft_strcmp(data->cmd[0], "~")))
+	{
+		while (data->prev)
+			data = data->prev;
+		p.first = data;
+		exec_clear(&p);
+		ft_message(ERROR_1, data, env, 126);
 	}
 }
 
@@ -102,7 +110,6 @@ void	ft_exec_builtins_init_2(t_exec *data, int i)
 			data->pipefd[1] = data->file[y];
 			dup2(data->pipefd[1], STDOUT_FILENO);
 			y++;
-			// data->file++;
 		}
 	}
 	if (data->type[i] == READ || data->type[i] == HEREDOC)
@@ -112,7 +119,6 @@ void	ft_exec_builtins_init_2(t_exec *data, int i)
 			data->pipefd[0] = data->file[y];
 			dup2(data->pipefd[0], STDIN_FILENO);
 			y++;
-			// data->file++;
 		}
 	}
 }

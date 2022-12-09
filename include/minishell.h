@@ -23,8 +23,8 @@
 # include <limits.h>
 # include <fcntl.h>
 # include <sys/wait.h>
-#include <sys/types.h>
-#include <sys/stat.h>
+# include <sys/types.h>
+# include <sys/stat.h>
 # include "utils.h"
 # include "get_next_line.h"
 
@@ -174,7 +174,7 @@ void	ft_here_doc(t_exec *data, int i, int *filenumber);
 void	ft_free_paths(t_exec *data);
 void	ft_exec_init(t_exec *data, t_env **env);
 void	ft_exec_init_2(t_exec *data, int i);
-void	ft_message(char *error, t_exec * data,t_env **env, int code);
+void	ft_message(char *error, t_exec *data, t_env **env, int code);
 int		ft_check_redirs(t_exec *data);
 void	ft_exec_builtins_init(t_exec *data, t_env **env);
 void	ft_exec_builtins_init_2(t_exec *data, int i);
@@ -199,6 +199,19 @@ t_token	*cmd_here(t_list_exec *exec, t_token *t, t_add *values, t_env *env);
 t_token	*write_append(t_list_exec *exec,
 			t_token *t, t_add *values, t_env *env);
 t_type	*ft_double_realoc_enum(t_type *src);
+void	free_add_exec(t_add values);
+void	ft_unlink_heredoc(t_exec *tmp);
+void	ft_exec_init_3(t_exec *data, t_env **env);
+void	expand_quote_2(t_token	*tmp, char c);
+char	**ft_double_realloc_2(char **src, char **malloc_src);
+void	exec_clear_reset(t_list_exec *l);
+void	ft_here_doc_3(t_exec *data, char *line, char *tmpfilename, int i);
+void	ft_mode_heredoc(t_exec *tmp, int i, int *filenumber);
+int		ft_open_files_heredoc(t_exec *tmp, int i, int *filenumber);
+void	verification_quote_2(int start, char c, char *line);
+void	parse_3(char *line, int end, t_tras *t, int i);
+void	parse_4(t_tras t, char *line, int end);
+void	read_heredoc_2(t_list_exec *exec, t_add *values, t_env *env);
 
 /* **************************************************************** */
 /*------------------------------bulting------------------------------*/

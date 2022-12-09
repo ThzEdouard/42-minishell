@@ -25,7 +25,6 @@ static int	checking_args(char **cmd, int *t, int i)
 			y = 1;
 			while (cmd[i][y] == 'n')
 				y++;
-			// printf ("y = %d len = %d\n", y, ft_strlen(cmd[i]));
 			if (y == ft_strlen(cmd[i]))
 				r = i;
 		}

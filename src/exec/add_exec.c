@@ -30,18 +30,21 @@ t_exec	*add_exec(t_token *t, t_env *env)
 			tmp = write_append(&exec, tmp, &values, env);
 		else if (tmp->type == READ || tmp->type == HEREDOC)
 			tmp = cmd_read(&exec, tmp, &values, env);
-		// else if (tmp->type == HEREDOC)
-		// 	tmp = cmd_here(&exec, tmp, &values, env);
 		if ((tmp && tmp->next) || tmp)
 			tmp = tmp->next;
 	}
+	free_add_exec(values);
+	return (exec.first);
+}
+
+void	free_add_exec(t_add values)
+{
 	if (values.filename)
 		free(values.filename);
 	if (values.command)
 		free(values.command);
 	if (values.type)
 		free(values.type);
-	return (exec.first);
 }
 
 void	calcul_len_malloc(t_token *tmp, int *len_cmd, int *len_file)
@@ -81,9 +84,7 @@ int	malloc_cmd_filename(t_token *t, t_add *values)
 	if (!values->filename && nb_filename)
 	{
 		values->filename = malloc(sizeof(char *) * (nb_filename + 1));
-		// values->filename = malloc(10000);
 		values->type = malloc(sizeof(t_type) * (nb_filename + 1));
-		// values->type = malloc(10000);
 		if (!values->filename)
 			return (FAIL);
 		while (nb_filename)
@@ -103,7 +104,6 @@ int	malloc_command(t_add *values, int nb_cmd)
 	if (!values->command && nb_cmd)
 	{
 		values->command = malloc(sizeof(char *) * (nb_cmd + 1));
-		// values->command = malloc(10000);
 		if (!values->command)
 			return (FAIL);
 		while (nb_cmd)

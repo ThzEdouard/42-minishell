@@ -42,19 +42,21 @@ int	prstwo(char *line, int *en, t_tras *t)
 {
 	int	end;
 	int	i;
+
 	end = *en;
-	if ((*line == 39 && *line + 1 != 39 )|| (*line == 34 && *line + 1 != 34))
+	i = 0;
+	if ((*line == 39 && *line + 1 != 39) || (*line == 34 && *line + 1 != 34))
 	{
+		// parse_3(line, end, t, i);
 		end = test(line, *line);
 		if (*line == 39)
 			*t = NO;
 		else
 			*t = YES;
 		line += end;
-
 		i = 0;
 	}
-	else if(*line + 1 == 39 && *line + 1 != 34)
+	else if (*line + 1 == 39 && *line + 1 != 34)
 		return (2);
 	else
 	{
@@ -70,10 +72,22 @@ int	prstwo(char *line, int *en, t_tras *t)
 	return (i);
 }
 
+// void	parse_3(char *line, int end, t_tras *t, int i)
+// {
+// 	end = test(line, *line);
+// 	if (*line == 39)
+// 		*t = NO;
+// 	else
+// 		*t = YES;
+// 	line += end;
+// 	i = 0;
+// }
+
 int	pars_cmd(t_list_token *l, char *line, int end)
 {
-	int	i;
-	t_tras t;
+	int		i;
+	t_tras	t;
+
 	while (*line != 0)
 	{
 		end = 0;
@@ -86,9 +100,11 @@ int	pars_cmd(t_list_token *l, char *line, int end)
 		{
 			while (*line && *line != 32 && !ft_space(*line))
 			{
+				// parse_4(t, line, end);
 				end++;
 				line++;
-				if (*line && (*line == 34 ||*line == 39) && *line + 1 && (*line != 34 ||*line != 39))
+				if (*line && (*line == 34 || *line == 39) && *line + 1
+					&& (*line != 34 || *line != 39))
 				{
 					end++;
 					line++;
@@ -108,17 +124,20 @@ int	pars_cmd(t_list_token *l, char *line, int end)
 	}
 	return (SUCCESS);
 }
-void View_parsing(t_list_token l)
-{
-   t_token *pelem = l.first;
-   printf("===========Parsing========\n");
-   while(pelem)
-   {
-     printf("%s  type %d tras  = %d\n",pelem->str, pelem->type, pelem->tras);
-     pelem = pelem->next;
-   }
-   printf("=====================\n");
-}
+
+// void	parse_4(t_tras t, char *line, int end)
+// {
+// 	end++;
+// 	line++;
+// 	if (*line && (*line == 34 || *line == 39) && *line + 1
+// 		&& (*line != 34 || *line != 39))
+// 	{
+// 		end++;
+// 		line++;
+// 	}
+// 	t = YES;
+// }
+
 int	parsing(char *line, t_list_token *t)
 {
 	t_list_token	l;
@@ -129,7 +148,6 @@ int	parsing(char *line, t_list_token *t)
 	add_token(l.first);
 	if (verification_token(l.first) == FAIL)
 		return (token_clear(&l), FAIL);
-	View_parsing(l);
 	t->first = l.first;
 	return (SUCCESS);
 }

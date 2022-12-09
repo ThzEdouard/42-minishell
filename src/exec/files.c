@@ -25,8 +25,6 @@ int	ft_open_files(t_exec *data, int i, int *filenumber)
 		if (!tmp->filename)
 			return (SUCCESS);
 		tmp->file = ft_realoc_int(tmp->filename);
-		if (!tmp->file)
-			printf("je suis NULL\n");
 		while (tmp->filename[i])
 		{
 			if (ft_open_files_2(tmp, i, filenumber) == FAIL)
@@ -41,16 +39,13 @@ int	ft_open_files(t_exec *data, int i, int *filenumber)
 
 int	ft_open_files_2(t_exec *tmp, int i, int *filenumber)
 {
-	char *tmpfilename;
+	char	*tmpfilename;
 
 	if (tmp->type[i] == READ)
 	{
 		tmp->file[i] = open(tmp->filename[i], O_RDONLY);
 		if (tmp->file[i] == -1)
-		{
 			perror("Infile Error");
-			return (FAIL);
-		}
 	}
 	else if (tmp->type[i] == WRITE)
 	{
@@ -81,6 +76,22 @@ int	ft_open_files_2(t_exec *tmp, int i, int *filenumber)
 	return (SUCCESS);
 }
 
+// int	ft_open_files_heredoc(t_exec *tmp, int i, int *filenumber)
+// {
+// 	char	*tmpfilename;
+
+// 	tmpfilename = ft_free2_strjoin("tmp", ft_itoa(*filenumber));
+// 	tmp->file[i] = open(tmpfilename, O_WRONLY | O_APPEND | O_CREAT, 0644);
+// 	if (tmp->file[i] == -1)
+// 	{
+// 		perror("Infile Error");
+// 		return (FAIL);
+// 	}
+// 	free(tmpfilename);
+// 	*filenumber = *filenumber + 1;
+// 	return (SUCCESS);
+// }
+
 void	ft_close_files(t_exec *data)
 {
 	t_exec	*tmp;
@@ -97,7 +108,7 @@ void	ft_close_files(t_exec *data)
 			return ;
 		while (tmp->filename[i])
 		{
-			if (tmp->type[i] != HEREDOC)
+			if (tmp->type[i] != HEREDOC && tmp->file[i] != -1)
 				close(tmp->file[i]);
 			i++;
 		}

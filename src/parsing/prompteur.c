@@ -31,14 +31,17 @@ static int	verification_quote(char *line)
 	char	c;
 
 	start = 0;
+	c = 0;
 	if (ft_strlen(line) == 1 && (*line == ':' || *line == '!'))
 		return (FAIL);
-	while (*line == '#' ||*line == '\f' || *line == '\n' || *line == '\r' || *line == '\t' || *line == '\v' || *line == ' ')
+	while (*line == '#' || *line == '\f' || *line == '\n'
+		|| *line == '\r' || *line == '\t' || *line == '\v' || *line == ' ')
 		line++;
 	if (!ft_strlen(line))
 		return (FAIL);
 	while (*line)
 	{
+		// verification_quote_2(start, c, line);
 		if (start == 0 && (*line == 34 || *line == 39))
 		{
 			c = *line;
@@ -56,6 +59,16 @@ static int	verification_quote(char *line)
 	return (SUCCESS);
 }
 
+// void	verification_quote_2(int start, char c, char *line)
+// {
+// 	if (start == 0 && (*line == 34 || *line == 39))
+// 	{
+// 		c = *line;
+// 		start++;
+// 		line++;
+// 	}
+// }
+
 static int	up_code(char *line)
 {
 	if (!ft_strlen(line))
@@ -64,17 +77,7 @@ static int	up_code(char *line)
 		return (1);
 	return (0);
 }
-void View_ex(t_list_token l)
-{
-   t_token *pelem = l.first;
-   printf("===========Ext========\n");
-   while(pelem)
-   {
-     printf("%s  type %d tras  = %d\n",pelem->str, pelem->type, pelem->tras);
-     pelem = pelem->next;
-   }
-   printf("=====================\n");
-}
+
 char	*line_prompt(t_env **env, char **envp, t_list_token t, t_list_exec e)
 {
 	char	*line;
@@ -88,20 +91,19 @@ char	*line_prompt(t_env **env, char **envp, t_list_token t, t_list_exec e)
 			if ((parsing(line, &t) == SUCCESS))
 			{
 				expand(&t, *env);
-				View_ex(t);
 				exec = add_exec(t.first, *env);
 				token_clear(&t);
 				ft_exec(exec, envp, env);
 				e.first = exec;
 				exec_clear(&e);
 			}
-		}else
+		}
+		else
 			g_statesssss = up_code(line);
 		add_history(line);
 		free(line);
 		line = readline("doudou > ");
 	}
-
 	return (line);
 }
 

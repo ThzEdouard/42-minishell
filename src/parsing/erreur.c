@@ -52,10 +52,10 @@ void	ft_error(char *error)
 	exit (1);
 }
 
-void	ft_message(char *error, t_exec * data,t_env **env, int code)
+void	ft_message(char *error, t_exec *data, t_env **env, int code)
 {
 	ft_putstr_fd(error, 2);
 	clear_env(env);
-	exec_clears(data);
+	(void)data;
 	exit(code);
 }

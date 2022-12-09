@@ -28,7 +28,6 @@ static char	*ft_access(t_exec *exec)
 
 	i = 0;
 	cmd = exec->cmd[0];
-	//cmd = ft_strdup(exec->cmd[0]);
 	if (access(cmd, F_OK | X_OK) == 0)
 		return (ft_free_all(exec->paths), cmd);
 	while (exec->paths[i])

@@ -16,27 +16,18 @@ void	ft_here_doc(t_exec *data, int i, int *filenumber)
 {
 	char	*line;
 	char	*tmpfilename;
-	// int		temp;
 
-	// temp = open("temp.tmp", O_WRONLY | O_APPEND | O_CREAT, 0644);
-	// if (temp == -1)
-		// ft_error("File Error");
 	write(STDIN_FILENO, "> ", 2);
 	line = get_next_line(STDIN_FILENO);
 	while (1)
 	{
-		if (!line || !ft_strncmp(line, data->filename[i], ft_strlen(data->filename[i])))
+		if (!line || !ft_strncmp(line, data->filename[i],
+				ft_strlen(data->filename[i])))
 		{
 			if (!line || ft_strlen(data->filename[i]) == (ft_strlen(line) - 1))
 			{
 				tmpfilename = ft_free2_strjoin("tmp", ft_itoa(*filenumber));
-				// printf("\n");
-				close(data->file[i]);
-				if (line)
-					free(line);
-				data->file[i] = open(tmpfilename, O_RDONLY);
-				if (data->file[i] == -1)
-					ft_error("File Error");
+				ft_here_doc_3(data, line, tmpfilename, i);
 				break ;
 			}
 		}
@@ -52,6 +43,16 @@ void	ft_here_doc_2(char *line, int temp)
 	write(temp, line, ft_strlen(line));
 	free(line);
 	write(STDIN_FILENO, "> ", 2);
+}
+
+void	ft_here_doc_3(t_exec *data, char *line, char *tmpfilename, int i)
+{
+	close(data->file[i]);
+	if (line)
+		free(line);
+	data->file[i] = open(tmpfilename, O_RDONLY);
+	if (data->file[i] == -1)
+		ft_error("File Error");
 }
 
 int	ft_check_heredoc(t_exec *data)

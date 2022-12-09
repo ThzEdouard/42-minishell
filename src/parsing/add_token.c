@@ -20,7 +20,8 @@ int	verification_arg(t_token *t)
 		return (ft_code_error(t->type, t->str, 0), FAIL);
 	while (t->next)
 	{
-		if (t->prev && t->prev->type == WORD && t->type == PIPE && t->next->type != PIPE)
+		if (t->prev && t->prev->type == WORD
+			&& t->type == PIPE && t->next->type != PIPE)
 		{
 			t = t->next;
 			continue ;
@@ -49,7 +50,7 @@ int	verification_token(t_token *t)
 			return (ft_code_error(APPEND, ">>", 0), FAIL);
 		if (t->type == HEREDOC && ft_strlen(t->str) > 2)
 			return (ft_code_error(HEREDOC, "<<", 0), FAIL);
-		if(t->type == COUNT)
+		if (t->type == COUNT)
 			return (ft_code_error(COUNT, "&&", 0), FAIL);
 		t = t->next;
 		i++;

@@ -56,17 +56,23 @@ int	*ft_realoc_int(char **src)
 
 char	**ft_double_raloc(char **src)
 {
-	int		y;
 	char	**malloc_src;
-	int		v;
 
-	v = 0;
-	y = 0;
 	if (!src || ft_double_len(src) == 0)
 		return (NULL);
 	malloc_src = malloc(sizeof(char *) * (ft_double_len(src) + 1));
 	if (!malloc_src)
 		return (NULL);
+	return (ft_double_realloc_2(src, malloc_src));
+}
+
+char	**ft_double_realloc_2(char **src, char **malloc_src)
+{
+	int		y;
+	int		v;
+
+	v = 0;
+	y = 0;
 	while (src[v] && !ft_strncmp(src[v], "", 1))
 		v++;
 	if (src[v])

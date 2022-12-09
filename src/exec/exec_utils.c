@@ -77,7 +77,6 @@ void	exec_clear(t_list_exec *l)
 	elem = l->first;
 	while (elem)
 	{
-
 		tmp = elem;
 		if (tmp->cmd && tmp->cmd[0] == tmp->path_cmd)
 			ft_free_all(tmp->cmd);
@@ -96,6 +95,11 @@ void	exec_clear(t_list_exec *l)
 		elem = elem->next;
 		free(tmp);
 	}
+	exec_clear_reset(l);
+}
+
+void	exec_clear_reset(t_list_exec *l)
+{
 	l->first = NULL;
 	l->last = NULL;
 }
