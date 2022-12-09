@@ -235,4 +235,6 @@ void	add_export(t_env **env, char *cmd, int ok);
 
 void	exec_clears(t_exec *l);
 void	update_token(t_token *t);
+
+int ft_open_file_3(t_exec *tmp, int i);
 #endif

@@ -41,20 +41,16 @@ int	test(char *line, char start)
 int	prstwo(char *line, int *en, t_tras *t)
 {
 	int	end;
-	int	i;
 
 	end = *en;
-	i = 0;
 	if ((*line == 39 && *line + 1 != 39) || (*line == 34 && *line + 1 != 34))
 	{
-		// parse_3(line, end, t, i);
 		end = test(line, *line);
 		if (*line == 39)
 			*t = NO;
 		else
 			*t = YES;
 		line += end;
-		i = 0;
 	}
 	else if (*line + 1 == 39 && *line + 1 != 34)
 		return (2);
@@ -66,22 +62,33 @@ int	prstwo(char *line, int *en, t_tras *t)
 			line++;
 			*t = YES;
 		}
-		i = 0;
 	}
 	*en = end;
-	return (i);
+	return (0);
 }
 
-// void	parse_3(char *line, int end, t_tras *t, int i)
-// {
-// 	end = test(line, *line);
-// 	if (*line == 39)
-// 		*t = NO;
-// 	else
-// 		*t = YES;
-// 	line += end;
-// 	i = 0;
-// }
+static void	test_pars(char **lines, int *en, t_tras *t)
+{
+	char	*line;
+	int		end;
+
+	end = *en;
+	line = *lines;
+	while (*line && *line != 32 && !ft_space(*line))
+	{
+		end++;
+		line++;
+		if (*line && (*line == 34 || *line == 39) && *line + 1
+			&& (*line != 34 || *line != 39))
+		{
+			end++;
+			line++;
+		}
+		*t = YES;
+	}
+	*lines = line;
+	*en = end;
+}
 
 int	pars_cmd(t_list_token *l, char *line, int end)
 {
@@ -97,21 +104,7 @@ int	pars_cmd(t_list_token *l, char *line, int end)
 		if (!*line)
 			return (SUCCESS);
 		if (!ft_space(*line))
-		{
-			while (*line && *line != 32 && !ft_space(*line))
-			{
-				// parse_4(t, line, end);
-				end++;
-				line++;
-				if (*line && (*line == 34 || *line == 39) && *line + 1
-					&& (*line != 34 || *line != 39))
-				{
-					end++;
-					line++;
-				}
-				t = YES;
-			}
-		}
+			test_pars(&line, &end, &t);
 		else
 		{
 			i = prstwo(line, &end, &t);
@@ -124,19 +117,6 @@ int	pars_cmd(t_list_token *l, char *line, int end)
 	}
 	return (SUCCESS);
 }
-
-// void	parse_4(t_tras t, char *line, int end)
-// {
-// 	end++;
-// 	line++;
-// 	if (*line && (*line == 34 || *line == 39) && *line + 1
-// 		&& (*line != 34 || *line != 39))
-// 	{
-// 		end++;
-// 		line++;
-// 	}
-// 	t = YES;
-// }
 
 int	parsing(char *line, t_list_token *t)
 {

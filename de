@@ -1,0 +1,8 @@
+de
+include
+Makefile
+minishell
+obj
+readline_leaks
+src
+src_utils

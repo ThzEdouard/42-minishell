@@ -34,10 +34,9 @@ static char	*creat_code(void)
 	nbr = ft_itoa(g_statesssss);
 	if (!nbr)
 		return (NULL);
-	code = malloc(sizeof(char) * (3 + ft_strlen(nbr)));
+	code = ft_strjoin("?=", nbr);
 	if (!code)
 		return (free(nbr), NULL);
-	code = ft_strjoin("?=", nbr);
 	return (free(nbr), code);
 }
 

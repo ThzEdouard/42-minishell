@@ -14,6 +14,10 @@
 
 static int	verifcation_qot(int *start, char *line)
 {
+	if (!ft_strlen(line))
+		return (g_statesssss = 0, FAIL);
+	if (*line == '!')
+		return (g_statesssss = 1, FAIL);
 	if (*start == 0 && (*line == 59 || *line == 40
 			|| *line == 41))
 	{
@@ -25,13 +29,11 @@ static int	verifcation_qot(int *start, char *line)
 	return (SUCCESS);
 }
 
-static int	verification_quote(char *line)
+static int	verif_up(char **lines)
 {
-	int		start;
-	char	c;
+	char	*line;
 
-	start = 0;
-	c = 0;
+	line = *lines;
 	if (ft_strlen(line) == 1 && (*line == ':' || *line == '!'))
 		return (FAIL);
 	while (*line == '#' || *line == '\f' || *line == '\n'
@@ -39,9 +41,32 @@ static int	verification_quote(char *line)
 		line++;
 	if (!ft_strlen(line))
 		return (FAIL);
+	*lines = line;
+	return (SUCCESS);
+}
+
+static int	up_code(char *line)
+{
+	if (!ft_strlen(line))
+		return (g_statesssss = 0, FAIL);
+	if (*line == '!')
+		return (g_statesssss = 1, FAIL);
+	if (*line == ':')
+		return (g_statesssss = 0, FAIL);
+	return (SUCCESS);
+}
+
+static int	verification_quote(char *line)
+{
+	int		start;
+	char	c;
+
+	start = 0;
+	c = 0;
+	if (verif_up(&line) && up_code(line))
+		return (FAIL);
 	while (*line)
 	{
-		// verification_quote_2(start, c, line);
 		if (start == 0 && (*line == 34 || *line == 39))
 		{
 			c = *line;
@@ -59,33 +84,16 @@ static int	verification_quote(char *line)
 	return (SUCCESS);
 }
 
-// void	verification_quote_2(int start, char c, char *line)
-// {
-// 	if (start == 0 && (*line == 34 || *line == 39))
-// 	{
-// 		c = *line;
-// 		start++;
-// 		line++;
-// 	}
-// }
-
-static int	up_code(char *line)
-{
-	if (!ft_strlen(line))
-		return (0);
-	if (*line == '!')
-		return (1);
-	return (0);
-}
-
 char	*line_prompt(t_env **env, char **envp, t_list_token t, t_list_exec e)
 {
 	char	*line;
 	t_exec	*exec;
 
-	line = readline("doudou > ");
-	while (line != NULL)
+	while (1)
 	{
+		line = readline("doudou > ");
+		if (!line)
+			break ;
 		if (ft_strlen(line) && verification_quote(line) == SUCCESS)
 		{
 			if ((parsing(line, &t) == SUCCESS))
@@ -98,11 +106,8 @@ char	*line_prompt(t_env **env, char **envp, t_list_token t, t_list_exec e)
 				exec_clear(&e);
 			}
 		}
-		else
-			g_statesssss = up_code(line);
 		add_history(line);
 		free(line);
-		line = readline("doudou > ");
 	}
 	return (line);
 }

@@ -13,18 +13,6 @@
 #include "../include/utils.h"
 #include "../include/minishell.h"
 
-int	ft_double_len(char **src)
-{
-	int	i;
-
-	if (!src)
-		return (0);
-	i = 0;
-	while (src[i])
-		i++;
-	return (i);
-}
-
 int	ft_double_len_int(t_type *src)
 {
 	int	i;

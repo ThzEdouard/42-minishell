@@ -25,8 +25,9 @@ void	sig_int(int sig, siginfo_t *info, void *tmp)
 	{
 		printf("\n");
 		g_statesssss = 130;
-		prompt(NULL, NULL);
-		printf("doudou > ");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
 	}
 }
 

@@ -26,7 +26,7 @@ FT_BUILTINS = ft_cd ft_echo ft_env ft_exit ft_export ft_pwd ft_unset
 SRC_UTILS = src_utils/
 FT_UTILS = ft_realoc ft_strjoin ft_strlen ft_strdup ft_strcpy ft_strcmp \
 		 ft_strcat ft_substr ft_split ft_strnstr ft_putstr_fd ft_atoi ft_itoa \
-		 get_next_line_utils get_next_line
+		 get_next_line_utils get_next_line ft_ralloc_u
 
 #				//ADD TO SRC_DIR\\#
 SRC_FILES+=$(addprefix $(SRC_MINISHEL),$(FT_MINISHELL))
