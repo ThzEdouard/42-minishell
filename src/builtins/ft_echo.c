@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
 
-static int	checking_args(char **cmd, int *t, int i)
+int	checking_args(char **cmd, int *t, int i)
 {
 	int	y;
 	int	r;
@@ -37,7 +37,7 @@ static int	checking_args(char **cmd, int *t, int i)
 	return (*t = r + 1, FAIL);
 }
 
-static void	check_quite(char **cmd)
+void	check_quit(char **cmd)
 {
 	int	i;
 
@@ -57,7 +57,7 @@ int	ft_echo(char **cmd)
 	int	i;
 
 	i = 1;
-	check_quite(cmd);
+	check_quit(cmd);
 	if (checking_args(cmd, &i, 1) == SUCCESS)
 	{
 		while (cmd[i])

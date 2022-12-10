@@ -14,7 +14,7 @@
 
 int		g_statesssss;
 
-static void	init_sig(void)
+void	init_sig(void)
 {
 	struct sigaction	sa;
 	struct sigaction	se;
@@ -38,7 +38,7 @@ int	main(int argc, char **argv, char **envp)
 	(void) argv;
 	generator_env(&env, envp);
 	init_sig();
-	prompt(&env, envp);
+	prompter(&env, envp);
 	clear_env(&env);
 	return (SUCCESS);
 }

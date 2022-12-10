@@ -47,7 +47,7 @@ void	ft_mode_heredoc(t_exec *tmp, int i, int *filenumber)
 		{
 			if (tmp->type[*iv2] == HEREDOC)
 			{
-				ft_here_doc(tmp, *iv2, filenumber);
+				ft_heredoc(tmp, *iv2, filenumber);
 				*filenumber = *filenumber + 1;
 			}
 			*iv2 = *iv2 + 1;
@@ -100,27 +100,6 @@ void	ft_exec_process(t_exec *tmp, t_exec *p, char **envp, t_env **env)
 	tmp = p;
 	ft_unlink_heredoc(tmp);
 	ft_close_files(p);
-}
-
-void	ft_unlink_heredoc(t_exec *tmp)
-{
-	int	i;
-
-	i = 0;
-	if (ft_check_heredoc(tmp))
-	{
-		while (tmp)
-		{
-			i = 0;
-			while (tmp->type[i] == HEREDOC)
-			{
-				if (unlink(tmp->filename[i]) == -1)
-					ft_error("Temp File Error");
-				i++;
-			}
-			tmp = tmp->next;
-		}
-	}
 }
 
 void	ft_exec_process_builtins(t_exec *tmp, t_exec *p, t_env **env)

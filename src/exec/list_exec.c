@@ -20,7 +20,7 @@ void	ft_free_paths(t_exec *data)
 	exit(1);
 }
 
-static char	*ft_access(t_exec *exec)
+char	*ft_access(t_exec *exec)
 {
 	int		i;
 	char	*tmp;
@@ -46,7 +46,7 @@ static char	*ft_access(t_exec *exec)
 	return (NULL);
 }
 
-static char	*ft_path(t_exec *exec, t_env *env)
+char	*ft_path(t_exec *exec, t_env *env)
 {
 	char	*paths;
 

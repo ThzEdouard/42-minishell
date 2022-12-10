@@ -1,34 +1,32 @@
 
-#				//NAME AND COMPILATION\\ #
 NAME		= minishell
 SRC_DIR		= ./
 OBJ_DIR		= obj/
 CC			= cc
 CFLAGS		= -Wall -Werror -Wextra -g
 RM			= rm -f
-#					//SOUCES\\  #
 SRC_MINISHEL	= src/
-FT_MINISHELL = minishell signal
+FT_MINISHELL = minishell signals
 
 SRC_PARSING = src/parsing/
-FT_PARSING = prompteur expand expand_utils list_token parsing add_token erreur
+FT_PARSING = prompter expand expand_utils list_token parsing add_token errors \
+			verifications
 
 SRC_ENV = src/env/
 FT_ENV = list_env
 
 SRC_EXEC = src/exec/
-FT_EXEC = list_exec add_exec childs exec here_doc exec_utils add_exec_cmd \
-		exec_init files
+FT_EXEC = list_exec add_exec childs exec heredoc exec_utils add_exec_cmd \
+		exec_init exec_init_builtins files exec_malloc
 
 SRC_BUILTINS = src/builtins/
 FT_BUILTINS = ft_cd ft_echo ft_env ft_exit ft_export ft_pwd ft_unset
 
 SRC_UTILS = src_utils/
-FT_UTILS = ft_realoc ft_strjoin ft_strlen ft_strdup ft_strcpy ft_strcmp \
+FT_UTILS = ft_realloc ft_strjoin ft_strlen ft_strdup ft_strcpy ft_strcmp \
 		 ft_strcat ft_substr ft_split ft_strnstr ft_putstr_fd ft_atoi ft_itoa \
-		 get_next_line_utils get_next_line ft_ralloc_u
+		 get_next_line_utils get_next_line ft_realloc_2
 
-#				//ADD TO SRC_DIR\\#
 SRC_FILES+=$(addprefix $(SRC_MINISHEL),$(FT_MINISHELL))
 SRC_FILES+=$(addprefix $(SRC_PARSING),$(FT_PARSING))
 SRC_FILES+=$(addprefix $(SRC_EXEC),$(FT_EXEC))

@@ -12,13 +12,6 @@
 
 #include "../../include/minishell.h"
 
-int	ft_space(char c)
-{
-	if (c != 34 && c != 39 && c != 60 && c != 62 && c != 124)
-		return (0);
-	return (1);
-}
-
 int	test(char *line, char start)
 {
 	int	i;
@@ -37,7 +30,7 @@ int	test(char *line, char start)
 	return (i);
 }
 
-int	prstwo(char *line, int *en, t_tras *t)
+int	parse_2(char *line, int *en, t_tras *t)
 {
 	int	end;
 
@@ -66,7 +59,7 @@ int	prstwo(char *line, int *en, t_tras *t)
 	return (0);
 }
 
-static void	test_pars(char **lines, int *en, t_tras *t)
+void	test_parse(char **lines, int *en, t_tras *t)
 {
 	char	*line;
 	int		end;
@@ -89,7 +82,7 @@ static void	test_pars(char **lines, int *en, t_tras *t)
 	*en = end;
 }
 
-int	pars_cmd(t_list_token *l, char *line, int end)
+int	parse_cmd(t_list_token *l, char *line, int end)
 {
 	int		i;
 	t_tras	t;
@@ -103,10 +96,10 @@ int	pars_cmd(t_list_token *l, char *line, int end)
 		if (!*line)
 			return (SUCCESS);
 		if (!ft_space(*line))
-			test_pars(&line, &end, &t);
+			test_parse(&line, &end, &t);
 		else
 		{
-			i = prstwo(line, &end, &t);
+			i = parse_2(line, &end, &t);
 			line += i;
 			line += end;
 		}
@@ -122,7 +115,7 @@ int	parsing(char *line, t_list_token *t)
 	t_list_token	l;
 
 	token_init(&l);
-	if (pars_cmd(&l, line, 0) == FAIL && !l.first)
+	if (parse_cmd(&l, line, 0) == FAIL && !l.first)
 		return (FAIL);
 	add_token(l.first);
 	if (verification_token(l.first) == FAIL)

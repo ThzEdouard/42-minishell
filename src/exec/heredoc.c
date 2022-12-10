@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
 
-void	ft_here_doc(t_exec *data, int i, int *filenumber)
+void	ft_heredoc(t_exec *data, int i, int *filenumber)
 {
 	char	*line;
 	char	*tmpfilename;
@@ -27,25 +27,25 @@ void	ft_here_doc(t_exec *data, int i, int *filenumber)
 			if (!line || ft_strlen(data->filename[i]) == (ft_strlen(line) - 1))
 			{
 				tmpfilename = ft_free2_strjoin("tmp", ft_itoa(*filenumber));
-				ft_here_doc_3(data, line, tmpfilename, i);
+				ft_heredoc_3(data, line, tmpfilename, i);
 				break ;
 			}
 		}
-		ft_here_doc_2(line, data->file[i]);
+		ft_heredoc_2(line, data->file[i]);
 		line = get_next_line(STDIN_FILENO);
 	}
 	free(data->filename[i]);
 	data->filename[i] = tmpfilename;
 }
 
-void	ft_here_doc_2(char *line, int temp)
+void	ft_heredoc_2(char *line, int temp)
 {
 	write(temp, line, ft_strlen(line));
 	free(line);
 	write(STDIN_FILENO, "> ", 2);
 }
 
-void	ft_here_doc_3(t_exec *data, char *line, char *tmpfilename, int i)
+void	ft_heredoc_3(t_exec *data, char *line, char *tmpfilename, int i)
 {
 	close(data->file[i]);
 	if (line)
@@ -73,4 +73,25 @@ int	ft_check_heredoc(t_exec *data)
 		tmp = tmp->next;
 	}
 	return (0);
+}
+
+void	ft_unlink_heredoc(t_exec *tmp)
+{
+	int	i;
+
+	i = 0;
+	if (ft_check_heredoc(tmp))
+	{
+		while (tmp)
+		{
+			i = 0;
+			while (tmp->type[i] == HEREDOC)
+			{
+				if (unlink(tmp->filename[i]) == -1)
+					ft_error("Temp File Error");
+				i++;
+			}
+			tmp = tmp->next;
+		}
+	}
 }

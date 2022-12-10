@@ -26,7 +26,7 @@ t_env	*new_elem(char *str)
 	return (new);
 }
 
-static char	*creat_code(void)
+char	*create_code(void)
 {
 	char	*code;
 	char	*nbr;
@@ -46,7 +46,7 @@ char	*get_name(t_env *env, char *s, int len)
 
 	if (!ft_strncmp(ECHO_CODE, s, 1))
 	{
-		tmp = creat_code();
+		tmp = create_code();
 		if (!tmp)
 			return (NULL);
 		return (tmp);

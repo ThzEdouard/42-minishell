@@ -16,6 +16,7 @@ void	ft_exec_init(t_exec *data, t_env **env)
 {
 	int			i;
 	t_list_exec	p;
+	struct stat	stats;
 
 	i = 0;
 	while (data->type[i])
@@ -32,7 +33,7 @@ void	ft_exec_init(t_exec *data, t_env **env)
 		exec_clear(&p);
 		exit (g_statesssss);
 	}
-	ft_exec_init_3(data, env, 0);
+	ft_exec_init_3(data, env, 0, stats);
 }
 
 void	ft_exec_init_2(t_exec *data, int i)
@@ -42,7 +43,7 @@ void	ft_exec_init_2(t_exec *data, int i)
 	y = 0;
 	if (data->type[i] == APPEND || data->type[i] == WRITE)
 	{
-		while (data->file[y])
+		while (data->file[y] && data->file[y] != -1)
 		{
 			data->pipefd[1] = data->file[y];
 			dup2(data->pipefd[1], STDOUT_FILENO);
@@ -51,7 +52,7 @@ void	ft_exec_init_2(t_exec *data, int i)
 	}
 	if (data->type[i] == READ || data->type[i] == HEREDOC)
 	{
-		while (data->file[y])
+		while (data->file[y] && data->file[y] != -1)
 		{
 			data->pipefd[0] = data->file[y];
 			dup2(data->pipefd[0], STDIN_FILENO);
@@ -60,13 +61,13 @@ void	ft_exec_init_2(t_exec *data, int i)
 	}
 }
 
-void	ft_exec_init_3(t_exec *data, t_env **env, int y)
+void	ft_exec_init_3(t_exec *data, t_env **env, int y, struct stat stats)
 {
-	struct stat	stats;
 	t_list_exec	p;
 
 	if (!data->path_cmd || (data->cmd && (ft_strcmp(data->cmd[0], "~")
-		&& (!ft_strcmp(data->cmd[0], ".") || !ft_strcmp(data->cmd[0], "..")))))
+				&& (!ft_strcmp(data->cmd[0], ".")
+					|| !ft_strcmp(data->cmd[0], "..")))))
 	{
 		if (data->cmd && !ft_strcmp(data->cmd[0], "."))
 			y = 1;
@@ -89,45 +90,6 @@ void	ft_exec_init_3(t_exec *data, t_env **env, int y)
 	}
 }
 
-void	ft_exec_builtins_init(t_exec *data, t_env **env)
-{
-	int	i;
-
-	i = 0;
-	while (data->type[i])
-	{
-		ft_exec_builtins_init_2(data, i);
-		i++;
-	}
-	if (ft_exec_builtins(data, env))
-		return ;
-}
-
-void	ft_exec_builtins_init_2(t_exec *data, int i)
-{
-	int	y;
-
-	y = 0;
-	if (data->type[i] == APPEND || data->type[i] == WRITE)
-	{
-		while (data->file[y] != 0)
-		{
-			data->pipefd[1] = data->file[y];
-			dup2(data->pipefd[1], STDOUT_FILENO);
-			y++;
-		}
-	}
-	if (data->type[i] == READ || data->type[i] == HEREDOC)
-	{
-		while (data->file[y] != 0)
-		{
-			data->pipefd[0] = data->file[y];
-			dup2(data->pipefd[0], STDIN_FILENO);
-			y++;
-		}
-	}
-}
-
 void	add_exec_init(t_list_exec *l, t_add *values)
 {
 	l->first = NULL;
@@ -138,4 +100,10 @@ void	add_exec_init(t_list_exec *l, t_add *values)
 	values->filename = NULL;
 	values->command = NULL;
 	values->type = NULL;
+}
+
+void	exec_init(t_list_exec *l)
+{
+	l->first = NULL;
+	l->last = NULL;
 }

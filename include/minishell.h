@@ -33,13 +33,13 @@
 
 # define ECHO_CODE "?"
 
-# define NAME_SHELL "doudou"
-# define NAME_SHELL_ERROR "\e[1;91mDoudou\e[0m"
+# define NAME_SHELL "Minishell"
+# define NAME_SHELL_ERROR "\e[1;91mMinishell\e[0m"
 # define ERROR_0 "\e[1;90m%s: syntax error near unexpected token %s\n\e[0m"
 # define ERROR_01 "\e[1;90m%s: syntax error near unexpected token %c\n\e[0m"
 # define ERROR_3 "\e[1;90m%s: syntax error near unexpected token `newline'\n\e[0m"
-# define ERROR_1 "\e[1;90m\e[1;91mDoudou\e[0m : Is a directory\n\e[0m"
-# define ERROR_2 "\e[1;90m[1;91mDoudou\e[0m : command not found\n\e[0m"
+# define ERROR_1 "\e[1;90m\e[1;91mMinishell\e[0m : Is a directory\n\e[0m"
+# define ERROR_2 "\e[1;90m[1;91mMinishell\e[0m : command not found\n\e[0m"
 # define ERROR_5 "\e[1;90m%s : %s: %s: Not a directory\n\e[0m"
 
 extern int	g_statesssss;
@@ -99,6 +99,7 @@ typedef struct s_exec
 	char			*command_path;
 	char			**filename;
 	int				*file;
+	int				fileproblem;
 	t_type			*type;
 	struct s_exec	*prev;
 	struct s_exec	*next;
@@ -126,116 +127,159 @@ typedef struct s_add
 	t_type	*type;
 }				t_add;
 
-/* **************************************************************** */
-/*------------------------------prompt in parsing-------------------*/
-/* ***************************************************************** */
-void	token_init(t_list_token *l);
-void	token_push(t_list_token *l, char *str, t_tras tras);
-void	token_clear(t_list_token *l);
-void	prompt(t_env **env, char **envp);
-int		parsing(char *line, t_list_token *t);
-void	add_token(t_token *t);
-int		verification_token(t_token *t);
-void	ft_quite_error(char s, int len);
-void	ft_code_error(t_type type, char *str, int len);
-int		expand_utils(t_list_token *l, t_env *env);
-void	expand_process(t_token *tmp, int *tmp1, int *i);
-int		update_str(char **str, t_env *env, int i, int len);
-/* ************************************************************** */
-/*------------------------------env------------------------------*/
-/* ************************************************************ */
+/*list_env*/
 t_env	*new_elem(char *str);
-void	generator_env(t_env **env, char **envp);
+char	*create_code(void);
 char	*get_name(t_env *env, char *s, int len);
+void	generator_env(t_env **env, char **envp);
 void	clear_env(t_env **env);
-//faire aussi tous les chngement qui'il y a avec les bulting
-/* *************************************************************** */
-/*------------------------------exec------------------------------*/
-/* ************************************************************* */
-//exec fonction sur l'autre ;)
-void	exec_init(t_list_exec *l);
-void	add_exec_init(t_list_exec *l, t_add *values);
-void	exec_push(t_list_exec *l, char **cmd, char **filename, t_type type);
-void	exec_push_v2(t_list_exec *l, char **cmd, char **filename, t_type *type);
-void	exec_push_v2_2(t_exec *new, char **cmd, char **filename, t_type *type);
-void	exec_clear(t_list_exec *l);
+
+/*add_exec_cmd*/
+void	cmd_word(t_list_exec *exec, t_token *t, t_add *values, t_env *env);
+t_token	*write_append(t_list_exec *exec, t_token *t, t_add *values, t_env *env);
+t_token	*read_heredoc(t_list_exec *exec, t_token *t, t_add *values, t_env *env);
+void	read_heredoc_2(t_list_exec *exec, t_add *values, t_env *env);
+
+/*add_exec*/
 t_exec	*add_exec(t_token *t, t_env *env);
-void	ft_free_paths(t_exec *exec);
-t_exec	*set_path(t_exec *e, t_env *env);
+void	free_add_exec(t_add values);
 
-void	ft_error(char *error);
-void	ft_free_all(char **tab);
-int		ft_open_files(t_exec *data, int i, int *filenumber);
-int		ft_open_files_2(t_exec *tmp, int i, int *filenumber);
-void	ft_close_files(t_exec *data);
+/*childs*/
 void	ft_childs(t_exec *data, char **envp, t_env **env);
-void	ft_exec(t_exec *pipe, char **envp, t_env **env);
-int		ft_mode(t_exec *data);
-void	ft_here_doc(t_exec *data, int i, int *filenumber);
-void	ft_free_paths(t_exec *data);
-void	ft_exec_init(t_exec *data, t_env **env);
-void	ft_exec_init_2(t_exec *data, int i);
-void	ft_message(char *error, t_exec *data, t_env **env, int code);
-int		ft_check_redirs(t_exec *data);
-void	ft_exec_builtins_init(t_exec *data, t_env **env);
-void	ft_exec_builtins_init_2(t_exec *data, int i);
-void	ft_exec_process(t_exec *tmp, t_exec *p, char **envp, t_env **env);
-void	ft_exec_process_builtins(t_exec *tmp, t_exec *p, t_env **env);
-
 int		ft_exec_builtins(t_exec *data, t_env **env);
 int		ft_check_builtins(t_exec *data);
-int		ft_check_heredoc(t_exec *data);
-void	ft_here_doc_2(char *line, int temp);
+int		ft_check_redirs(t_exec *data);
 
+/*exec_init_builtins*/
+void	ft_exec_builtins_init(t_exec *data, t_env **env);
+void	ft_exec_builtins_init_2(t_exec *data, int i);
+
+/*exec_init*/
+void	ft_exec_init(t_exec *data, t_env **env);
+void	ft_exec_init_2(t_exec *data, int i);
+void	ft_exec_init_3(t_exec *data, t_env **env, int y, struct stat stats);
+void	add_exec_init(t_list_exec *l, t_add *values);
+void	exec_init(t_list_exec *l);
+
+/*exec_malloc*/
+void	calcul_len_malloc(t_token *tmp, int *len_cmd, int *len_file);
 int		malloc_cmd_filename(t_token *t, t_add *values);
 int		malloc_command(t_add *values, int nb_cmd);
 void	malloc_type(t_add *values);
-void	calcul_len_malloc(t_token *tmp, int *len_cmd, int *len_file);
-void	cmd_word(t_list_exec *exec, t_token *t, t_add *values, t_env *env);
-t_token	*cmd_write(t_list_exec *exec, t_token *t, t_add *values, t_env *env);
-t_token	*cmd_append(t_list_exec *exec, t_token *t, t_add *values, t_env *env);
-t_token	*cmd_read(t_list_exec *exec, t_token *t, t_add *values, t_env *env);
-t_token	*cmd_here(t_list_exec *exec, t_token *t, t_add *values, t_env *env);
 
-t_token	*write_append(t_list_exec *exec,
-			t_token *t, t_add *values, t_env *env);
-t_type	*ft_double_realoc_enum(t_type *src);
-void	free_add_exec(t_add values);
-void	ft_unlink_heredoc(t_exec *tmp);
-void	ft_exec_init_3(t_exec *data, t_env **env, int y);
-void	expand_quote_2(t_token	*tmp, char c);
-char	**ft_double_realloc_2(char **src, char **malloc_src);
+/*exec_utils*/
+void	ft_free_all(char **tab);
+void	exec_push_v2(t_list_exec *l, char **cmd, char **filename, t_type *type);
+void	exec_push_v2_2(t_exec *new, char **cmd, char **filename, t_type *type);
+void	exec_clear(t_list_exec *l);
 void	exec_clear_reset(t_list_exec *l);
-void	ft_here_doc_3(t_exec *data, char *line, char *tmpfilename, int i);
+
+/*exec*/
+int		ft_mode(t_exec *data);
 void	ft_mode_heredoc(t_exec *tmp, int i, int *filenumber);
-int		ft_open_files_heredoc(t_exec *tmp, int i, int *filenumber);
-void	verification_quote_2(int start, char c, char *line);
-void	parse_3(char *line, int end, t_tras *t, int i);
-void	parse_4(t_tras t, char *line, int end);
-void	read_heredoc_2(t_list_exec *exec, t_add *values, t_env *env);
+void	ft_exec(t_exec *p, char **envp, t_env **env);
+void	ft_exec_process(t_exec *tmp, t_exec *p, char **envp, t_env **env);
+void	ft_exec_process_builtins(t_exec *tmp, t_exec *p, t_env **env);
 
-/* **************************************************************** */
-/*------------------------------bulting------------------------------*/
-/* ***************************************************************** */
+/*files*/
+int		ft_open_files(t_exec *data, int i, int *filenumber);
+int		ft_open_file_3(t_exec *tmp, int i);
+int		ft_open_files_2(t_exec *tmp, int i, int *filenumber);
+void	ft_close_files(t_exec *data);
 
-int		ft_pwd(void);
-void	ft_exit(t_exec *data, t_env **env, char **cmd);
-int		ft_env(t_env *env);
-int		ft_export(t_env **env, char **cmd);
-void	ft_unset(t_env **env, char *cmd);
-int		ft_cd(t_env **env, char *cmd);
-int		ft_echo(char **cmd);
+/*heredoc*/
+void	ft_heredoc(t_exec *data, int i, int *filenumber);
+void	ft_heredoc_2(char *line, int temp);
+void	ft_heredoc_3(t_exec *data, char *line, char *tmpfilename, int i);
+int		ft_check_heredoc(t_exec *data);
+void	ft_unlink_heredoc(t_exec *tmp);
 
+/*list_exec*/
+void	ft_free_paths(t_exec *data);
+char	*ft_access(t_exec *exec);
+char	*ft_path(t_exec *exec, t_env *env);
+t_exec	*set_path(t_exec *t, t_env *env);
+
+/*add_token*/
+int		verification_arg(t_token *t);
+int		verification_token(t_token *t);
+void	add_token(t_token *t);
+
+/*errors*/
+void	ft_quit_error(char s, int len);
+void	ft_code_error(t_type type, char *str, int len);
+void	ft_error(char *error);
+void	ft_message(char *error, t_exec *data, t_env **env, int code);
+
+/*expand_utils*/
+void	expand_process(t_token *tmp, int *tmp1, int *i);
+void	test_expand(t_token *tmp, t_env *env);
+int		expand_utils(t_list_token *l, t_env *env);
+
+/*expand*/
+char	*ft_join_realloc(char *s, int i, int len, char *s2);
+int		update_str(char **str, t_env *env, int i, int len);
+void	expand_quote(t_list_token *l);
+void	expand_quote_2(t_token	*tmp, char c);
 void	expand(t_list_token *l, t_env *env);
+
+/*list_token*/
+void	token_init(t_list_token *l);
 int		add_list(t_list_token *l, char *line, int end, t_tras tras);
-void	get_name_change(t_env *env, char *s, int len, char *str);
+void	token_push(t_list_token *l, char *str, t_tras tras);
+void	token_clear(t_list_token *l);
 
-void	sig_quit(int sig, siginfo_t *info, void *tmp);
+/*parsing*/
+int		test(char *line, char start);
+int		parse_2(char *line, int *en, t_tras *t);
+void	test_parse(char **lines, int *en, t_tras *t);
+int		parse_cmd(t_list_token *l, char *line, int end);
+int		parsing(char *line, t_list_token *t);
+
+/*prompter*/
+char	*line_prompter(t_env **env, char **envp, t_list_token t, t_list_exec e);
+void	prompter(t_env **env, char **envp);
+
+/*verifications*/
+int		verification_quote_2(int *start, char *line);
+int		verif_up(char **lines);
+int		up_code(char *line);
+int		verification_quote(char *line);
+int		ft_space(char c);
+
+/*minishell*/
+void	init_sig(void);
+int		main(int argc, char **argv, char **envp);
+
+/*signal*/
 void	sig_int(int sig, siginfo_t *info, void *tmp);
-void	add_export(t_env **env, char *cmd, int ok);
+void	sig_quit(int sig, siginfo_t *info, void *tmp);
 
+/*realloc*/
+int		ft_double_len_int(t_type *src);
+int		*ft_realloc_int(char **src);
+char	**ft_double_realloc(char **src);
+char	**ft_double_realloc_2(char **src, char **malloc_src);
+t_type	*ft_double_realloc_enum(t_type *src);
+int		ft_double_len(char **src);
+
+/*builtins*/
+int		ft_cd(t_env **env, char *cmd);
+int		checking_args(char **cmd, int *t, int i);
+void	check_quit(char **cmd);
+int		ft_echo(char **cmd);
+int		ft_env(t_env *env);
 void	exec_clears(t_exec *l);
-void	update_token(t_token *t);
+void	ft_free_exit(t_exec *data, t_env **env, int code);
+void	ft_exit_util(t_exec *data, t_env **env, char **cmd);
+void	ft_exit(t_exec *data, t_env **env, char **cmd);
+void	print_solo(t_env *env);
+void	add_export(t_env **env, char *cmd, int ok);
+void	check_export(t_env **env, char *cmd);
+int		ft_export(t_env **env, char **cmd);
+int		ft_pwd(void);
+void	ft_delete_node(t_env *env);
+int		ft_delete(t_env *tmp, char *tmp_str);
+void	ft_unset(t_env **env, char *cmd);
 
-int ft_open_file_3(t_exec *tmp, int i);
 #endif

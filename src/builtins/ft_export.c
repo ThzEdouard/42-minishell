@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
 
-static void	print_solo(t_env *env)
+void	print_solo(t_env *env)
 {
 	t_env	*tmp;
 

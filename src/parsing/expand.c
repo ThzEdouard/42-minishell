@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
 
-char	*ft_joinralo(char *s, int i, int len, char *s2)
+char	*ft_join_realloc(char *s, int i, int len, char *s2)
 {
 	char	*value;
 	char	*name;
@@ -49,8 +49,7 @@ int	update_str(char **str, t_env *env, int i, int len)
 	name = get_name(env, *str + len - 1, i - len);
 	if (!name)
 		return (FAIL);
-	printf("name = %s est str = %s\n", name, *str);
-	change = ft_joinralo(*str, (i - len), len, name);
+	change = ft_join_realloc(*str, (i - len), len, name);
 	if (!change)
 		return (FAIL);
 	if (!ft_strncmp(name, "?=", 2))

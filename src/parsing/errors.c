@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
 
-void	ft_quite_error(char s, int len)
+void	ft_quit_error(char s, int len)
 {
 	if (s == 92)
 	{
@@ -22,7 +22,6 @@ void	ft_quite_error(char s, int len)
 	}
 	else if (len == 2)
 	{
-
 		printf(ERROR_01, NAME_SHELL_ERROR, s);
 	}
 	else

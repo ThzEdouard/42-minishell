@@ -12,12 +12,6 @@
 
 #include "../../include/minishell.h"
 
-void	exec_init(t_list_exec *l)
-{
-	l->first = NULL;
-	l->last = NULL;
-}
-
 void	ft_free_all(char **tab)
 {
 	int	i;
@@ -42,6 +36,7 @@ void	exec_push_v2(t_list_exec *l, char **cmd, char **filename, t_type *type)
 	exec_push_v2_2(new, cmd, filename, type);
 	new->path_cmd = NULL;
 	new->file = NULL;
+	new->fileproblem = 0;
 	new->saveout = dup(STDOUT_FILENO);
 	new->savein = dup(STDIN_FILENO);
 	new->prev = l->last;
@@ -56,15 +51,15 @@ void	exec_push_v2(t_list_exec *l, char **cmd, char **filename, t_type *type)
 void	exec_push_v2_2(t_exec *new, char **cmd, char **filename, t_type *type)
 {
 	if (cmd)
-		new->cmd = ft_double_raloc(cmd);
+		new->cmd = ft_double_realloc(cmd);
 	else
 		new->cmd = NULL;
 	if (filename)
-		new->filename = ft_double_raloc(filename);
+		new->filename = ft_double_realloc(filename);
 	else
 		new->filename = NULL;
 	if (type)
-		new->type = ft_double_realoc_enum(type);
+		new->type = ft_double_realloc_enum(type);
 	else
 		new->type = NULL;
 }

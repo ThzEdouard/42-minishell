@@ -18,7 +18,7 @@ void	sig_int(int sig, siginfo_t *info, void *tmp)
 	(void)tmp;
 	if (info->si_pid == 0)
 	{
-		printf("\b\b\n🤬");
+		printf("\b\b\n");
 		g_statesssss = 1;
 	}
 	else
@@ -41,5 +41,5 @@ void	sig_quit(int sig, siginfo_t *info, void *tmp)
 		g_statesssss = 131;
 	}
 	else
-		printf("doudou >   \b\b  \b\b");
+		printf("Minishell >   \b\b  \b\b");
 }

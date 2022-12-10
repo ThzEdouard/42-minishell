@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/utils.h"
 #include "../include/minishell.h"
 
 int	ft_double_len_int(t_type *src)
@@ -25,7 +24,7 @@ int	ft_double_len_int(t_type *src)
 	return (i);
 }
 
-int	*ft_realoc_int(char **src)
+int	*ft_realloc_int(char **src)
 {
 	int	*malloc_src;
 	int	i;
@@ -42,7 +41,7 @@ int	*ft_realoc_int(char **src)
 	return (malloc_src);
 }
 
-char	**ft_double_raloc(char **src)
+char	**ft_double_realloc(char **src)
 {
 	char	**malloc_src;
 
@@ -83,7 +82,7 @@ char	**ft_double_realloc_2(char **src, char **malloc_src)
 	return (malloc_src);
 }
 
-t_type	*ft_double_realoc_enum(t_type *src)
+t_type	*ft_double_realloc_enum(t_type *src)
 {
 	int		y;
 	t_type	*malloc_src;

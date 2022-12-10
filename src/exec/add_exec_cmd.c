@@ -14,6 +14,7 @@
 
 void	cmd_word(t_list_exec *exec, t_token *t, t_add *values, t_env *env)
 {
+	values->y = 0;
 	values->command[values->y++] = t->str;
 	if (!(t->next) || t->next->type == PIPE || t->type == PIPE)
 	{
@@ -62,7 +63,7 @@ t_token	*write_append(t_list_exec *exec, t_token *t, t_add *values, t_env *env)
 	return (t->next);
 }
 
-t_token	*cmd_read(t_list_exec *exec, t_token *t, t_add *values, t_env *env)
+t_token	*read_heredoc(t_list_exec *exec, t_token *t, t_add *values, t_env *env)
 {
 	while (t->next && t->next->type != PIPE
 		&& t->next->type != WRITE && t->next->type != APPEND)

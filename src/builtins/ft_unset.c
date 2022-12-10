@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
 
-static void	ft_delete_node(t_env *env)
+void	ft_delete_node(t_env *env)
 {
 	t_env	*tmp;
 

@@ -33,12 +33,7 @@ void	ft_putstr_fd(char *s, int fd);
 char	*ft_free_substr(char *s, unsigned int start, size_t len);
 char	*ft_strccat(char c, char t);
 int		ft_chrdir(char *s);
-char	**ft_double_raloc(char **src);
-int		*ft_realoc_int(char **src);
-char	**ft_sd_ralloc(char *src, char **tab);
 int		ft_atoi(const char *str);
-int		ft_double_len(char **src);
 char	*ft_itoa(int n);
-int		ft_double_len(char **src);
 
 #endif
