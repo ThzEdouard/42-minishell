@@ -14,8 +14,6 @@
 
 void	ft_quite_error(char s, int len)
 {
-	char	*str;
-
 	if (s == 92)
 	{
 		printf(ERROR_2);
@@ -24,14 +22,11 @@ void	ft_quite_error(char s, int len)
 	}
 	else if (len == 2)
 	{
-		str = ft_strccat(s, s);
-		if (!str)
-			return ;
-		printf(ERROR_0, NAME_SHELL_ERROR, str);
-		free (str);
+
+		printf(ERROR_01, NAME_SHELL_ERROR, s);
 	}
 	else
-		printf(ERROR_0, NAME_SHELL_ERROR, &s);
+		printf(ERROR_01, NAME_SHELL_ERROR, s);
 	g_statesssss = 2;
 }
 

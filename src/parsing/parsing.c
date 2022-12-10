@@ -28,7 +28,6 @@ int	test(char *line, char start)
 	while (*line && *line != start)
 	{
 		line++;
-		printf("ici 2%c\n", *line);
 		if (*line == start && *line + 1 && *line + 1 != 32)
 			line++;
 		i++;

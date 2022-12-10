@@ -36,6 +36,7 @@
 # define NAME_SHELL "doudou"
 # define NAME_SHELL_ERROR "\e[1;91mDoudou\e[0m"
 # define ERROR_0 "\e[1;90m%s: syntax error near unexpected token %s\n\e[0m"
+# define ERROR_01 "\e[1;90m%s: syntax error near unexpected token %c\n\e[0m"
 # define ERROR_3 "\e[1;90m%s: syntax error near unexpected token `newline'\n\e[0m"
 # define ERROR_1 "\e[1;90m\e[1;91mDoudou\e[0m : Is a directory\n\e[0m"
 # define ERROR_2 "\e[1;90m[1;91mDoudou\e[0m : command not found\n\e[0m"
@@ -201,7 +202,7 @@ t_token	*write_append(t_list_exec *exec,
 t_type	*ft_double_realoc_enum(t_type *src);
 void	free_add_exec(t_add values);
 void	ft_unlink_heredoc(t_exec *tmp);
-void	ft_exec_init_3(t_exec *data, t_env **env);
+void	ft_exec_init_3(t_exec *data, t_env **env, int y);
 void	expand_quote_2(t_token	*tmp, char c);
 char	**ft_double_realloc_2(char **src, char **malloc_src);
 void	exec_clear_reset(t_list_exec *l);

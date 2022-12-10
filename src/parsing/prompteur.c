@@ -73,11 +73,12 @@ static int	verification_quote(char *line)
 			start++;
 			line++;
 		}
-		if (verifcation_qot(&start, line) == FAIL)
+		if (*line && verifcation_qot(&start, line) == FAIL)
 			return (FAIL);
 		if (*line && start == 1 && *line == c)
 			start = 0;
-		line++;
+		if (*line)
+			line++;
 	}
 	if (start == 1)
 		return (ft_quite_error(c, 1), FAIL);
