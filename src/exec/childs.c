@@ -28,7 +28,7 @@ void	ft_childs(t_exec *data, char **envp, t_env **env)
 		ft_exec_init(data, env);
 		close(data->pipefd[0]);
 		close(data->pipefd[1]);
-		if (data->cmd && !data->fileproblem)
+		if (data->cmd)
 			execve(data->path_cmd, data->cmd, envp);
 	}
 	close(data->pipefd[1]);
