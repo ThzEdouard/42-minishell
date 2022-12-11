@@ -14,7 +14,6 @@
 
 void	cmd_word(t_list_exec *exec, t_token *t, t_add *values, t_env *env)
 {
-	values->y = 0;
 	values->command[values->y++] = t->str;
 	if (!(t->next) || t->next->type == PIPE || t->type == PIPE)
 	{
@@ -60,6 +59,7 @@ t_token	*write_append(t_list_exec *exec, t_token *t, t_add *values, t_env *env)
 		values->type[values->i++] = 0;
 	values->i = 0;
 	values->j = 0;
+	values->y = 0;
 	return (t->next);
 }
 
@@ -102,4 +102,5 @@ void	read_heredoc_2(t_list_exec *exec, t_add *values, t_env *env)
 		values->filename[values->j++] = 0;
 	values->y = 0;
 	values->j = 0;
+	values->y = 0;
 }
