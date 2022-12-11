@@ -35,11 +35,10 @@
 
 # define NAME_SHELL "Minishell"
 # define NAME_SHELL_ERROR "\e[1;91mMinishell\e[0m"
-# define ERROR_0 "\e[1;90m%s: syntax error near unexpected token %s\n\e[0m"
-# define ERROR_01 "\e[1;90m%s: syntax error near unexpected token %c\n\e[0m"
+# define ERROR_0 "\e[1;90m%s: syntax error near unexpected token \n\e[0m"
 # define ERROR_3 "\e[1;90m%s: syntax error near unexpected token `newline'\n\e[0m"
-# define ERROR_1 "\e[1;90m\e[1;91mMinishell\e[0m : Is a directory\n\e[0m"
-# define ERROR_2 "\e[1;90m[1;91mMinishell\e[0m : command not found\n\e[0m"
+# define ERROR_1 "\e[1;90mMinishell\e : Is a directory\n\e[0m"
+# define ERROR_2 "\e[1;90mMinishell\e : command not found\n\e[0m"
 # define ERROR_5 "\e[1;90m%s : %s: %s: Not a directory\n\e[0m"
 
 extern int	g_statesssss;
@@ -157,7 +156,7 @@ void	ft_exec_builtins_init_2(t_exec *data, int i);
 /*exec_init*/
 void	ft_exec_init(t_exec *data, t_env **env);
 void	ft_exec_init_2(t_exec *data, int i);
-void	ft_exec_init_3(t_exec *data, t_env **env, int y, struct stat stats);
+void	ft_exec_init_3(t_exec *data, t_env **env, int y, struct stat *stats);
 void	add_exec_init(t_list_exec *l, t_add *values);
 void	exec_init(t_list_exec *l);
 

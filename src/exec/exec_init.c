@@ -33,7 +33,7 @@ void	ft_exec_init(t_exec *data, t_env **env)
 		exec_clear(&p);
 		exit (g_statesssss);
 	}
-	ft_exec_init_3(data, env, 0, stats);
+	ft_exec_init_3(data, env, 0, &stats);
 }
 
 void	ft_exec_init_2(t_exec *data, int i)
@@ -61,13 +61,13 @@ void	ft_exec_init_2(t_exec *data, int i)
 	}
 }
 
-void	ft_exec_init_3(t_exec *data, t_env **env, int y, struct stat stats)
+void	ft_exec_init_3(t_exec *data, t_env **env, int y, struct stat *stats)
 {
 	t_list_exec	p;
 
 	if (!data->path_cmd || (data->cmd && (ft_strcmp(data->cmd[0], "~")
 				&& (!ft_strcmp(data->cmd[0], ".")
-					|| !ft_strcmp(data->cmd[0], "..")))))
+					|| !ft_strcmp(data->cmd[0], "..") || !ft_strcmp(data->cmd[0], "")))))
 	{
 		if (data->cmd && !ft_strcmp(data->cmd[0], "."))
 			y = 1;
@@ -79,7 +79,7 @@ void	ft_exec_init_3(t_exec *data, t_env **env, int y, struct stat stats)
 			ft_message(".: usage: . filename\n", data, env, 2);
 		ft_message("Error: Command not found\n", data, env, 127);
 	}
-	if ((stat(data->path_cmd, &stats) == 0 && S_ISDIR(stats.st_mode))
+	if ((stat(data->path_cmd, stats) == 0 && S_ISDIR(stats->st_mode))
 		|| (data->cmd && !ft_strcmp(data->cmd[0], "~")))
 	{
 		while (data->prev)

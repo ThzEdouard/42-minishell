@@ -14,6 +14,7 @@
 
 void	ft_quit_error(char s, int len)
 {
+	(void)s;
 	if (s == 92)
 	{
 		printf(ERROR_2);
@@ -22,21 +23,26 @@ void	ft_quit_error(char s, int len)
 	}
 	else if (len == 2)
 	{
-		printf(ERROR_01, NAME_SHELL_ERROR, s);
+		printf(ERROR_0, NAME_SHELL_ERROR);
 	}
 	else
-		printf(ERROR_01, NAME_SHELL_ERROR, s);
+		printf(ERROR_0, NAME_SHELL_ERROR);
 	g_statesssss = 2;
 }
 
 void	ft_code_error(t_type type, char *str, int len)
 {
+	(void)str;
 	if (len == 0 && type != PIPE)
 		printf(ERROR_3, NAME_SHELL_ERROR);
 	else
-		printf(ERROR_0, NAME_SHELL_ERROR, str);
-	if (len == 1 && type != WORD)
-		printf(ERROR_0, NAME_SHELL_ERROR, str);
+	{
+		printf(ERROR_0, NAME_SHELL_ERROR);
+		g_statesssss = 2;
+		return ;
+	}
+	 if (len == 1 && type != WORD)
+		printf(ERROR_0, NAME_SHELL_ERROR);
 	g_statesssss = 2;
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   verifications.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aradice <aradice@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 17:36:59 by aradice           #+#    #+#             */
-/*   Updated: 2022/12/10 18:46:29 by aradice          ###   ########.fr       */
+/*   Updated: 2022/12/11 14:49:46 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	verification_quote_2(int *start, char *line)
 	if (*line == '!')
 		return (g_statesssss = 1, FAIL);
 	if (*start == 0 && (*line == 59 || *line == 40
-			|| *line == 41))
+			|| *line == 41 || *line == 92))
 	{
 		if (start == 0 && (*(line + 1) == 59 || *(line + 1) == 40
 				|| *(line + 1) == 41))
@@ -40,7 +40,7 @@ int	verif_up(char **lines)
 		|| *line == '\r' || *line == '\t' || *line == '\v' || *line == ' ')
 		line++;
 	if (!ft_strlen(line))
-		return (FAIL);
+		return (g_statesssss = 0, FAIL);
 	*lines = line;
 	return (SUCCESS);
 }
@@ -63,7 +63,7 @@ int	verification_quote(char *line)
 
 	start = 0;
 	c = 0;
-	if (verif_up(&line) && up_code(line))
+	if (verif_up(&line) || up_code(line))
 		return (FAIL);
 	while (*line)
 	{
