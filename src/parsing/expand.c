@@ -46,9 +46,14 @@ int	update_str(char **str, t_env *env, int i, int len)
 	char	*name;
 	char	*change;
 
-	name = get_name(env, *str + len - 1, i - len);
-	if (!name)
-		return (FAIL);
+//printf("name = %s len = %d\n", *str + len - 1,  i - len);
+	if (i == len)
+		name = get_name(env, *str + len - 1, 1);
+	else
+		name = get_name(env, *str + len - 1, i - len);
+	// if (!name)
+	// 	return (printf("fb"), FAIL);
+	printf("len = %d", len);
 	change = ft_join_realloc(*str, (i - len), len, name);
 	if (!change)
 		return (FAIL);

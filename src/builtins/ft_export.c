@@ -35,7 +35,9 @@ void	add_export(t_env **env, char *cmd, int ok)
 	{
 		while (tmp && tmp->next)
 			tmp = tmp->next;
-		if (!tmp || !tmp->next)
+		if (!*env)
+			*env = new_elem(cmd);
+		else if (!tmp->next)
 			tmp->next = new_elem(cmd);
 	}
 	else
