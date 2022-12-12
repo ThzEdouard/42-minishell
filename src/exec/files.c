@@ -23,7 +23,10 @@ int	ft_open_files(t_exec *data, int i, int *filenumber)
 		while (!tmp->filename && tmp->next)
 			tmp = tmp->next;
 		if (!tmp->filename)
+		{
+			*filenumber = 0;
 			return (SUCCESS);
+		}
 		tmp->file = ft_realloc_int(tmp->filename);
 		while (tmp->filename[i])
 		{
