@@ -61,18 +61,28 @@ void	ft_exec_init_2(t_exec *data, int i)
 	}
 }
 
+t_exec	*data_prev(t_exec *data)
+{
+	t_exec	*d;
+
+	d = data;
+	while (d->prev)
+		d = d->prev;
+	return (d);
+}
+
 void	ft_exec_init_3(t_exec *data, t_env **env, int y, struct stat *stats)
 {
 	t_list_exec	p;
 
 	if (!data->path_cmd || (data->cmd && (ft_strcmp(data->cmd[0], "~")
 				&& (!ft_strcmp(data->cmd[0], ".")
-					|| !ft_strcmp(data->cmd[0], "..") || !ft_strcmp(data->cmd[0], "")))))
+					|| !ft_strcmp(data->cmd[0], "..")
+					|| !ft_strcmp(data->cmd[0], "")))))
 	{
 		if (data->cmd && !ft_strcmp(data->cmd[0], "."))
 			y = 1;
-		while (data->prev)
-			data = data->prev;
+		data = data_prev(data);
 		p.first = data;
 		exec_clear(&p);
 		if (y)
@@ -82,8 +92,7 @@ void	ft_exec_init_3(t_exec *data, t_env **env, int y, struct stat *stats)
 	if ((stat(data->path_cmd, stats) == 0 && S_ISDIR(stats->st_mode))
 		|| (data->cmd && !ft_strcmp(data->cmd[0], "~")))
 	{
-		while (data->prev)
-			data = data->prev;
+		data = data_prev(data);
 		p.first = data;
 		exec_clear(&p);
 		ft_message(ERROR_1, data, env, 126);

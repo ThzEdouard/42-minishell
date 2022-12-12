@@ -34,7 +34,7 @@ int	parse_3(char **lines, int end, t_tras *t)
 {
 	char	*line;
 
-	line = lines;
+	line = *lines;
 	while (*line && *line != 32 && ft_space(*line))
 	{
 		end++;
@@ -43,7 +43,7 @@ int	parse_3(char **lines, int end, t_tras *t)
 		if (*line && (*line == '|' || *line == '"' || *line == '\''))
 			break ;
 	}
-	lines = line;
+	*lines = line;
 	return (end);
 }
 
