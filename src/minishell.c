@@ -36,9 +36,13 @@ int	main(int argc, char **argv, char **envp)
 	g_statesssss = 0;
 	(void) argc;
 	(void) argv;
-	generator_env(&env, envp);
+	if (envp && envp[0])
+		generator_env(&env, envp);
+	else
+		env = NULL;
 	init_sig();
 	prompter(&env, envp);
-	clear_env(&env);
+	if (env)
+		clear_env(&env);
 	return (SUCCESS);
 }

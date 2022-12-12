@@ -84,6 +84,8 @@ char	*ft_read(int fd, char *staticstr)
 			return (NULL);
 		}
 		buffer[readval] = '\0';
+		if (!ft_strlen_gnl(buffer))
+			return (free(buffer) , NULL);
 		staticstr = ft_strjoin_gnl(staticstr, buffer);
 	}
 	free(buffer);

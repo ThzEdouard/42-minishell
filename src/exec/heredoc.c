@@ -79,7 +79,6 @@ void	ft_unlink_heredoc(t_exec *tmp)
 {
 	int	i;
 
-	i = 0;
 	if (ft_check_heredoc(tmp))
 	{
 		while (tmp)

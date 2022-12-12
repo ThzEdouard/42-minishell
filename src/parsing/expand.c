@@ -115,6 +115,7 @@ void	expand_quote_2(t_token	*tmp, char c)
 
 void	expand(t_list_token *l, t_env *env)
 {
-	expand_utils(l, env);
+	if (env)
+		expand_utils(l, env);
 	expand_quote(l);
 }

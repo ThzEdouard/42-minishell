@@ -80,7 +80,7 @@ t_exec	*set_path(t_exec *t, t_env *env)
 	tmp = t;
 	while (tmp)
 	{
-		if (!tmp->path_cmd && tmp->cmd)
+		if (!tmp->path_cmd && tmp->cmd && env)
 			tmp->path_cmd = ft_path(tmp, env);
 		tmp = tmp->next;
 	}

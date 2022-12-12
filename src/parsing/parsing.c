@@ -53,7 +53,7 @@ int	parse_2(char *line, int *en, t_tras *t)
 			end++;
 			line++;
 			*t = YES;
-			if (*line && ft_space(*line))
+			if (*line && (*line == '|' || *line == '"' || *line == '\''))
 				break ;
 		}
 	}
