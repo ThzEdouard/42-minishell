@@ -99,18 +99,6 @@ void	ft_exec_init_3(t_exec *data, t_env **env, int y, struct stat *stats)
 	}
 }
 
-void	add_exec_init(t_list_exec *l, t_add *values)
-{
-	l->first = NULL;
-	l->last = NULL;
-	values->i = 0;
-	values->y = 0;
-	values->j = 0;
-	values->filename = NULL;
-	values->command = NULL;
-	values->type = NULL;
-}
-
 void	exec_init(t_list_exec *l)
 {
 	l->first = NULL;

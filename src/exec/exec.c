@@ -43,9 +43,9 @@ void	ft_mode_heredoc(t_exec *tmp, int i, int *filenumber)
 	while (tmp)
 	{
 		*iv2 = 0;
-		while (tmp->filename[*iv2])
+		while (tmp->filename && tmp->filename[*iv2])
 		{
-			if (tmp->type[*iv2] == HEREDOC)
+			if (tmp->type && tmp->type[*iv2] == HEREDOC)
 			{
 				ft_heredoc(tmp, *iv2, filenumber);
 				*filenumber = *filenumber + 1;

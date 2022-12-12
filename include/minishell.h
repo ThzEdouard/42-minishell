@@ -43,16 +43,15 @@
 
 extern int	g_statesssss;
 
-typedef enum s_tras
+typedef enum s_trace
 {
 	NO,
 	YES
-}			t_tras;
+}			t_trace;
 
 typedef enum s_type
 {
 	NOTHING,
-	EMPLE,
 	WORD,
 	PIPE,
 	APPEND,
@@ -72,7 +71,7 @@ typedef struct s_token
 {
 	char			*str;
 	t_type			type;
-	t_tras			tras;
+	t_trace			trace;
 	struct s_token	*prev;
 	struct s_token	*next;
 }					t_token;
@@ -224,14 +223,14 @@ void	expand(t_list_token *l, t_env *env);
 
 /*list_token*/
 void	token_init(t_list_token *l);
-int		add_list(t_list_token *l, char *line, int end, t_tras tras);
-void	token_push(t_list_token *l, char *str, t_tras tras);
+int		add_list(t_list_token *l, char *line, int end, t_trace trace);
+void	token_push(t_list_token *l, char *str, t_trace trace);
 void	token_clear(t_list_token *l);
 
 /*parsing*/
 int		test(char *line, char start);
-int		parse_2(char *line, int *en, t_tras *t);
-void	test_parse(char **lines, int *en, t_tras *t);
+int		parse_2(char *line, int *en, t_trace *t);
+void	test_parse(char **lines, int *en, t_trace *t);
 int		parse_cmd(t_list_token *l, char *line, int end);
 int		parsing(char *line, t_list_token *t);
 

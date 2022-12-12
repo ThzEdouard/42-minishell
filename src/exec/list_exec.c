@@ -65,6 +65,8 @@ char	*ft_path(t_exec *exec, t_env *env)
 		}
 		env = env->next;
 	}
+	if (!paths)
+		return (NULL);
 	if (env)
 		exec->paths = ft_split(exec->path, ':');
 	if (!exec->paths)

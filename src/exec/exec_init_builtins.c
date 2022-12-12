@@ -6,7 +6,7 @@
 /*   By: aradice <aradice@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 17:33:11 by aradice           #+#    #+#             */
-/*   Updated: 2022/12/10 17:34:31 by aradice          ###   ########.fr       */
+/*   Updated: 2022/12/12 16:12:51 by aradice          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,16 @@ void	ft_exec_builtins_init_2(t_exec *data, int i)
 			y++;
 		}
 	}
+}
+
+void	add_exec_init(t_list_exec *l, t_add *values)
+{
+	l->first = NULL;
+	l->last = NULL;
+	values->i = 0;
+	values->y = 0;
+	values->j = 0;
+	values->filename = NULL;
+	values->command = NULL;
+	values->type = NULL;
 }

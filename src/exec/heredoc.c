@@ -64,6 +64,7 @@ int	ft_check_heredoc(t_exec *data)
 	tmp = data;
 	while (tmp && tmp->type)
 	{
+		i = 0;
 		while (tmp->type[i])
 		{
 			if (tmp->type[i] == HEREDOC)

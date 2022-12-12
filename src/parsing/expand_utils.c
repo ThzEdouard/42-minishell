@@ -32,7 +32,7 @@ void	test_expand(t_token *tmp, t_env *env)
 	int		tmp1;
 
 	i = 0;
-	while (tmp && tmp->str[i] && tmp->tras == YES)
+	while (tmp && tmp->str[i] && tmp->trace == YES)
 	{
 		if (tmp->str[i] == 39)
 		{

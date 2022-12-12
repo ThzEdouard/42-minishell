@@ -6,7 +6,7 @@
 /*   By: aradice <aradice@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 17:30:59 by aradice           #+#    #+#             */
-/*   Updated: 2022/12/10 17:31:10 by aradice          ###   ########.fr       */
+/*   Updated: 2022/12/12 16:38:07 by aradice          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	malloc_cmd_filename(t_token *t, t_add *values)
 	{
 		values->filename = malloc(sizeof(char *) * (nb_filename + 1));
 		values->type = malloc(sizeof(t_type) * (nb_filename + 1));
-		if (!values->filename)
+		if (!values->filename || !values->type)
 			return (FAIL);
 		while (nb_filename)
 		{
@@ -83,6 +83,8 @@ void	malloc_type(t_add *values)
 	if (!values->type)
 	{
 		values->type = malloc(sizeof(t_type) * 2);
+		if (!values->type)
+			return ;
 		values->type[0] = 0;
 	}
 }

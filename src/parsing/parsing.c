@@ -12,25 +12,7 @@
 
 #include "../../include/minishell.h"
 
-int	test(char *line, char start)
-{
-	int	i;
-
-	i = 2;
-	line++;
-	while (*line && *line != start)
-	{
-		line++;
-		if (*line == start && *line + 1 && *line + 1 != 32)
-			line++;
-		i++;
-	}
-	if (*line == start)
-		line++;
-	return (i);
-}
-
-int	parse_3(char **lines, int end, t_tras *t)
+int	parse_3(char **lines, int end, t_trace *t)
 {
 	char	*line;
 
@@ -47,7 +29,7 @@ int	parse_3(char **lines, int end, t_tras *t)
 	return (end);
 }
 
-int	parse_2(char *line, int *en, t_tras *t)
+int	parse_2(char *line, int *en, t_trace *t)
 {
 	int	end;
 
@@ -71,33 +53,10 @@ int	parse_2(char *line, int *en, t_tras *t)
 	return (0);
 }
 
-void	test_parse(char **lines, int *en, t_tras *t)
-{
-	char	*line;
-	int		end;
-
-	end = *en;
-	line = *lines;
-	while (*line && *line != 32 && !ft_space(*line))
-	{
-		end++;
-		line++;
-		if (*line && (*line == 34 || *line == 39) && *line + 1
-			&& (*line != 34 || *line != 39))
-		{
-			end++;
-			line++;
-		}
-		*t = YES;
-	}
-	*lines = line;
-	*en = end;
-}
-
 int	parse_cmd(t_list_token *l, char *line, int end)
 {
 	int		i;
-	t_tras	t;
+	t_trace	t;
 
 	while (*line != 0)
 	{
@@ -122,20 +81,6 @@ int	parse_cmd(t_list_token *l, char *line, int end)
 	return (SUCCESS);
 }
 
-// void	view(t_list_token t)
-// {
-// 	t_token	*token;
-
-// 	token = t.first;
-// 	printf("================\n");
-// 	while (token)
-// 	{
-// 		printf("str = '%s'  type = '%d'\n", token->str, token->type);
-// 		token = token->next;
-// 	}
-// 	printf("================\n");
-// }
-
 int	parsing(char *line, t_list_token *t)
 {
 	t_list_token	l;
@@ -144,7 +89,6 @@ int	parsing(char *line, t_list_token *t)
 	if (parse_cmd(&l, line, 0) == FAIL && !l.first)
 		return (FAIL);
 	add_token(l.first);
-	//view(l);
 	if (verification_token(l.first) == FAIL)
 		return (token_clear(&l), FAIL);
 	t->first = l.first;

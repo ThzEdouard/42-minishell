@@ -10,7 +10,7 @@ FT_MINISHELL = minishell signals
 
 SRC_PARSING = src/parsing/
 FT_PARSING = prompter expand expand_utils list_token parsing add_token errors \
-			verifications
+			verifications parsing_2
 
 SRC_ENV = src/env/
 FT_ENV = list_env
@@ -65,13 +65,5 @@ fclean:		clean
 			$(RM) -f $(NAME)
 
 re:		fclean all
-
-val:	all
-			valgrind --leak-check=full --show-leak-kinds=all --suppressions=readline_leaks ./minishell
-
-git:	fclean
-		git add ./
-		git commit -m "commit de <<$(SRC_FILES)>>"
-		git push
 
 .PHONY:		all clean fclean re

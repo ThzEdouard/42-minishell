@@ -41,7 +41,7 @@ void	ft_code_error(t_type type, char *str, int len)
 		g_statesssss = 2;
 		return ;
 	}
-	 if (len == 1 && type != WORD)
+	if (len == 1 && type != WORD)
 		printf(ERROR_0, NAME_SHELL_ERROR);
 	g_statesssss = 2;
 }
