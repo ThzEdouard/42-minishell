@@ -33,9 +33,9 @@ void	add_export(t_env **env, char *cmd, int ok)
 	test = get_name(*env, cmd, ok);
 	if (!test)
 	{
-		while (tmp->next)
+		while (tmp && tmp->next)
 			tmp = tmp->next;
-		if (!tmp->next)
+		if (!tmp || !tmp->next)
 			tmp->next = new_elem(cmd);
 	}
 	else

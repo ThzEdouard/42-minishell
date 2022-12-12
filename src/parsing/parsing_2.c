@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aradice <aradice@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:14:41 by aradice           #+#    #+#             */
-/*   Updated: 2022/12/12 16:23:03 by aradice          ###   ########.fr       */
+/*   Updated: 2022/12/12 19:37:22 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	test(char *line, char start)
 	while (*line && *line != start)
 	{
 		line++;
-		if (*line == start && *line + 1 && *line + 1 != 32)
-			line++;
+		// if (*line == start && *line + 1 && *line + 1 != 32)
+		// 	line++;
 		i++;
 	}
 	if (*line == start)
