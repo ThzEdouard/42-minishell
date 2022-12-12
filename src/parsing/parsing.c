@@ -30,6 +30,23 @@ int	test(char *line, char start)
 	return (i);
 }
 
+int	parse_3(char **lines, int end, t_tras *t)
+{
+	char	*line;
+
+	line = lines;
+	while (*line && *line != 32 && ft_space(*line))
+	{
+		end++;
+		line++;
+		*t = YES;
+		if (*line && (*line == '|' || *line == '"' || *line == '\''))
+			break ;
+	}
+	lines = line;
+	return (end);
+}
+
 int	parse_2(char *line, int *en, t_tras *t)
 {
 	int	end;
@@ -48,14 +65,7 @@ int	parse_2(char *line, int *en, t_tras *t)
 		return (2);
 	else
 	{
-		while (*line && *line != 32 && ft_space(*line))
-		{
-			end++;
-			line++;
-			*t = YES;
-			if (*line && (*line == '|' || *line == '"' || *line == '\''))
-				break ;
-		}
+		end = parse_3(&line, end, t);
 	}
 	*en = end;
 	return (0);

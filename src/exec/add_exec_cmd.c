@@ -59,8 +59,7 @@ t_token	*write_append(t_list_exec *exec, t_token *t, t_add *values, t_env *env)
 		values->type[values->i++] = 0;
 	values->i = 0;
 	values->j = 0;
-	values->y = 0;
-	return (t->next);
+	return (values->y = 0, t->next);
 }
 
 t_token	*read_heredoc(t_list_exec *exec, t_token *t, t_add *values, t_env *env)
