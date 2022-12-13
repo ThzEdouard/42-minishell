@@ -59,6 +59,7 @@ void	test_expand(t_token *tmp, t_env *env)
 			else
 				i++;
 		}
+		printf("\ni  = %d\n", i);
 		if (tmp->str[i])
 			i++;
 	}

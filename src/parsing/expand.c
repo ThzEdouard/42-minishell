@@ -44,11 +44,11 @@ char	*ft_join_realloc(char *s, int i, int len, char *s2)
 	else
 	{
 		printf("\ns == %s  len = %d\n", s, len);
-		while (s && len--)
+		while (s && *s && len--)
 			s++;
-		while (s && *s != 36)
+		while (s && *s && *s != 36)
 			s++;
-		if (s)
+		if (s && *s)
 			value = ft_free_strjoin(value, s);
 	}
 	return (value);
