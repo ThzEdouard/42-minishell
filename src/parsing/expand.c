@@ -22,22 +22,35 @@ char	*ft_join_realloc(char *s, int i, int len, char *s2)
 		return (NULL);
 	ft_strncpy(value, s, len - 2);
 	value[len - 2] = 0;
-	while (s && *s != 36)
-		s++;
-	if (*s == 36)
-		s++;
-	while (s2 && *s2 != '=' && *s2 == *s)
+	if (s2)
 	{
-		s2++;
-		s++;
+		while (s && *s != 36)
+			s++;
+		if (*s == 36)
+			s++;
+		while (s2 && *s2 != '=' && *s2 == *s)
+		{
+			s2++;
+			s++;
+		}
+		name = ft_strdup(s2 + 1);
+		if (name)
+		{
+			value = ft_free_strjoin(value, name);
+			free(name);
+		}
+		value = ft_free_strjoin(value, s);
 	}
-	name = ft_strdup(s2 + 1);
-	if (name)
+	else
 	{
-		value = ft_free_strjoin(value, name);
-		free(name);
+		printf("\ns == %s  len = %d\n", s, len);
+		while (s && len--)
+			s++;
+		while (s && *s != 36)
+			s++;
+		if (s)
+			value = ft_free_strjoin(value, s);
 	}
-	value = ft_free_strjoin(value, s);
 	return (value);
 }
 
@@ -117,6 +130,8 @@ void	expand_quote_2(t_token	*tmp, char c)
 		free (tmp_str);
 	}
 }
+
+
 
 void	expand(t_list_token *l, t_env *env)
 {

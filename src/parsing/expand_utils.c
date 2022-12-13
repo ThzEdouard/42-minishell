@@ -51,8 +51,13 @@ void	test_expand(t_token *tmp, t_env *env)
 			//printf("1291540");
 			if (/*tmp->str[i - 1] != 36 ||*/ (tmp->str[i] != 34
 					&& tmp->str[i] != 39))
-				update_str(&tmp->str, env, i, tmp1);
-			i = tmp1 - 1;
+					{
+						update_str(&tmp->str, env, i, tmp1);
+					}
+			if (i != tmp1)
+				i = tmp1 - 1;
+			else
+				i++;
 		}
 		if (tmp->str[i])
 			i++;
