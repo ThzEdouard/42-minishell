@@ -40,7 +40,7 @@ int	main(int argc, char **argv, char **envp)
 		generator_env(&env, envp);
 	else
 		env = NULL;
-	init_sig();
+	//init_sig();
 	prompter(&env, envp);
 	if (env)
 		clear_env(&env);

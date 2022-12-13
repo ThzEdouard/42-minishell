@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:14:41 by aradice           #+#    #+#             */
-/*   Updated: 2022/12/12 19:46:50 by eflaquet         ###   ########.fr       */
+/*   Updated: 2022/12/13 17:12:08 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,13 @@ void	test_parse(char **lines, int *en, t_trace *t)
 	{
 		end++;
 		line++;
-		if (*line && (*line == 34 || *line == 39) && *line + 1
-			&& (*line != 34 || *line != 39))
-		{
-			end++;
-			line++;
-		}
+		// if (*line && (*line == 34 || *line == 39) && *line + 1
+		// 	&& (*line + 1 != 34 || *line + 1 != 39))
+		// {
+		// 	end++;
+		// 	line++;
+		// 	printf("test\n");
+		// }
 		*t = YES;
 	}
 	*lines = line;
