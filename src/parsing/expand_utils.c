@@ -54,13 +54,14 @@ void	test_expand(t_token *tmp, t_env *env)
 					{
 						update_str(&tmp->str, env, i, tmp1);
 					}
-			if (i != tmp1)
-				i = tmp1 - 1;
-			else
+			i = 0;
+			while (tmp->str[i] && tmp->str[i] != 36)
 				i++;
+			// printf("j susi\n ");
+			// printf("\ni  = %c\n", tmp->str[i]);
 		}
-		printf("\ni  = %d\n", i);
-		if (tmp->str[i])
+
+		if (tmp->str[i] && tmp->str[i] != 36)
 			i++;
 	}
 }
