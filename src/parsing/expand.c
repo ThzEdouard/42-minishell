@@ -43,7 +43,7 @@ char	*ft_join_realloc(char *s, int i, int len, char *s2)
 	}
 	else
 	{
-		printf("\ns == %s  len = %d\n", s, len);
+		//printf("\ns == %s  len = %d\n", s, len);
 		while (s && *s && len--)
 			s++;
 		while (s && *s && *s != 36)
@@ -59,14 +59,18 @@ int	update_str(char **str, t_env *env, int i, int len)
 	char	*name;
 	char	*change;
 
-//printf("name = %s len = %d\n", *str + len - 1,  i - len);
-	if (i == len)
-		name = get_name(env, *str + len - 1, 1);
+	//printf("name = %s len = %d\n", *str + len - 1,  i - len);
+	if (*(*str + len - 1) == 36)
+		name = NULL;
 	else
-		name = get_name(env, *str + len - 1, i - len);
+	{
+		name = get_name(env, *str + len - 1, (i - len + 1));
+		//printf("je passe la");
+	}
+
 	// if (!name)
 	// 	return (printf("fb"), FAIL);
-	printf("len = %d", len);
+	//printf("len = %d", len);
 	change = ft_join_realloc(*str, (i - len), len, name);
 	if (!change)
 		return (FAIL);

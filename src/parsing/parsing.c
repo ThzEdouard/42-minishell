@@ -70,7 +70,7 @@ int	parse_cmd(t_list_token *l, char *line, int end)
 			test_parse(&line, &end, &t);
 		else
 		{
-			printf("ets o\n %s", line);
+			//printf("ets o\n %s", line);
 			i = parse_2(line, &end, &t);
 			line += i;
 			line += end;
@@ -104,7 +104,7 @@ int	parsing(char *line, t_list_token *t)
 	if (parse_cmd(&l, line, 0) == FAIL && !l.first)
 		return (FAIL);
 	add_token(l.first);
-	view(l);
+	//view(l);
 	if (verification_token(l.first) == FAIL)
 		return (token_clear(&l), FAIL);
 	t->first = l.first;

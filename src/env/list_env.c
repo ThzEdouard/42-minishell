@@ -54,7 +54,9 @@ char	*get_name(t_env *env, char *s, int len)
 	while (env)
 	{
 		if (!ft_strncmp(env->str, s, len))
-			return (env->str);
+			if (env->str[len] == '=')
+				return (env->str);
+
 		env = env->next;
 	}
 	return (NULL);
