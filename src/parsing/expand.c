@@ -22,35 +22,40 @@ char	*ft_join_realloc(char *s, int i, int len, char *s2)
 		return (NULL);
 	ft_strncpy(value, s, len - 2);
 	value[len - 2] = 0;
-	if (s2)
+	while (s && *s != 36)
+		s++;
+	if (*s == 36)
+		s++;
+	while (s2 && *s2 != '=' && *s2 == *s)
 	{
-		while (s && *s != 36)
+		s2++;
+		s++;
+	}
+	name = ft_strdup(s2 + 1);
+	if (name)
+	{
+		value = ft_free_strjoin(value, name);
+		free(name);
+	}
+	value = ft_free_strjoin(value, s);
+	return (value);
+}
+
+char	*ft_join_null_realloc(char *s, int i, int len)
+{
+	char	*value;
+
+	value = malloc(sizeof(char *) * (i + 0 - (i - len + 1) + 1));
+	if (!value)
+		return (NULL);
+	ft_strncpy(value, s, len - 2);
+	value[len - 2] = 0;
+	while (s && *s && len--)
 			s++;
-		if (*s == 36)
-			s++;
-		while (s2 && *s2 != '=' && *s2 == *s)
-		{
-			s2++;
-			s++;
-		}
-		name = ft_strdup(s2 + 1);
-		if (name)
-		{
-			value = ft_free_strjoin(value, name);
-			free(name);
-		}
+	while (s && *s && *s != 36)
+		s++;
+	if (s && *s)
 		value = ft_free_strjoin(value, s);
-	}
-	else
-	{
-		//printf("\ns == %s  len = %d\n", s, len);
-		while (s && *s && len--)
-			s++;
-		while (s && *s && *s != 36)
-			s++;
-		if (s && *s)
-			value = ft_free_strjoin(value, s);
-	}
 	return (value);
 }
 
@@ -59,19 +64,14 @@ int	update_str(char **str, t_env *env, int i, int len)
 	char	*name;
 	char	*change;
 
-	//printf("name = %s len = %d\n", *str + len - 1,  i - len);
 	if (*(*str + len - 1) == 36)
 		name = NULL;
 	else
-	{
 		name = get_name(env, *str + len - 1, (i - len + 1));
-		//printf("je passe la");
-	}
-
-	// if (!name)
-	// 	return (printf("fb"), FAIL);
-	//printf("len = %d", len);
-	change = ft_join_realloc(*str, (i - len), len, name);
+	if (!name)
+		change = ft_join_null_realloc(*str, (i - len), len);
+	else
+		change = ft_join_realloc(*str, (i - len), len, name);
 	if (!change)
 		return (FAIL);
 	if (!ft_strncmp(name, "?=", 2))
@@ -133,13 +133,4 @@ void	expand_quote_2(t_token	*tmp, char c)
 		tmp->str = ft_strdup(tmp_str);
 		free (tmp_str);
 	}
-}
-
-
-
-void	expand(t_list_token *l, t_env *env)
-{
-	if (env)
-		expand_utils(l, env);
-	expand_quote(l);
 }

@@ -24,13 +24,11 @@ void	print_solo(t_env *env)
 	}
 }
 
-void	add_export(t_env **env, char *cmd, int ok)
+void	add_export(t_env **env, char *cmd, int ok, char *test)
 {
-	char	*test;
 	t_env	*tmp;
 
 	tmp = *env;
-	test = get_name(*env, cmd, ok);
 	if (!test)
 	{
 		while (tmp && tmp->next)
@@ -79,7 +77,7 @@ void	check_export(t_env **env, char *cmd)
 		if (!ok)
 			return ;
 		i = 0;
-		add_export(env, cmd, ok);
+		add_export(env, cmd, ok, get_name(*env, cmd, ok));
 		g_statesssss = 0;
 	}
 }

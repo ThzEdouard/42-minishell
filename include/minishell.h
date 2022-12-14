@@ -211,7 +211,7 @@ void	ft_message(char *error, t_exec *data, t_env **env, int code);
 
 /*expand_utils*/
 void	expand_process(t_token *tmp, int *tmp1, int *i);
-void	test_expand(t_token *tmp, t_env *env);
+void	test_expand(t_token *tmp, t_env *env, int i);
 int		expand_utils(t_list_token *l, t_env *env);
 
 /*expand*/
@@ -272,7 +272,7 @@ void	ft_free_exit(t_exec *data, t_env **env, int code);
 void	ft_exit_util(t_exec *data, t_env **env, char **cmd);
 void	ft_exit(t_exec *data, t_env **env, char **cmd);
 void	print_solo(t_env *env);
-void	add_export(t_env **env, char *cmd, int ok);
+void	add_export(t_env **env, char *cmd, int ok, char *test);
 void	check_export(t_env **env, char *cmd);
 int		ft_export(t_env **env, char **cmd);
 int		ft_pwd(void);

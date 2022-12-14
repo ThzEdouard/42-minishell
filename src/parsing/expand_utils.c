@@ -29,12 +29,10 @@ void	expand_process(t_token *tmp, int *tmp1, int *i)
 	*i = a;
 }
 
-void	test_expand(t_token *tmp, t_env *env)
+void	test_expand(t_token *tmp, t_env *env, int i)
 {
-	int		i;
 	int		tmp1;
 
-	i = 0;
 	while (tmp && tmp->str[i] && tmp->trace == YES)
 	{
 		if (tmp->str[i] == 39)
@@ -48,19 +46,12 @@ void	test_expand(t_token *tmp, t_env *env)
 			expand_process(tmp, &tmp1, &i);
 			if (!tmp->str[tmp1 - 1])
 				break ;
-			//printf("1291540");
-			if (/*tmp->str[i - 1] != 36 ||*/ (tmp->str[i] != 34
-					&& tmp->str[i] != 39))
-					{
-						update_str(&tmp->str, env, i, tmp1);
-					}
+			if ((tmp->str[i] != 34 && tmp->str[i] != 39))
+				update_str(&tmp->str, env, i, tmp1);
 			i = 0;
 			while (tmp->str[i] && tmp->str[i] != 36)
 				i++;
-			// printf("j susi\n ");
-			// printf("\ni  = %c\n", tmp->str[i]);
 		}
-
 		if (tmp->str[i] && tmp->str[i] != 36)
 			i++;
 	}
@@ -73,9 +64,16 @@ int	expand_utils(t_list_token *l, t_env *env)
 	tmp = l->first;
 	while (tmp)
 	{
-		test_expand(tmp, env);
+		test_expand(tmp, env, 0);
 		if (tmp)
 			tmp = tmp->next;
 	}
 	return (SUCCESS);
+}
+
+void	expand(t_list_token *l, t_env *env)
+{
+	if (env)
+		expand_utils(l, env);
+	expand_quote(l);
 }

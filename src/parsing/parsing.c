@@ -70,7 +70,6 @@ int	parse_cmd(t_list_token *l, char *line, int end)
 			test_parse(&line, &end, &t);
 		else
 		{
-			//printf("ets o\n %s", line);
 			i = parse_2(line, &end, &t);
 			line += i;
 			line += end;
@@ -82,19 +81,19 @@ int	parse_cmd(t_list_token *l, char *line, int end)
 	return (SUCCESS);
 }
 
-void	view(t_list_token t)
-{
-	t_token	*token;
+// void	view(t_list_token t)
+// {
+// 	t_token	*token;
 
-	token = t.first;
-	printf("================\n");
-	while (token)
-	{
-		printf("str = '%s'  type = '%d'\n", token->str, token->type);
-		token = token->next;
-	}
-	printf("================\n");
-}
+// 	token = t.first;
+// 	printf("================\n");
+// 	while (token)
+// 	{
+// 		printf("str = '%s'  type = '%d'\n", token->str, token->type);
+// 		token = token->next;
+// 	}
+// 	printf("================\n");
+// }
 
 int	parsing(char *line, t_list_token *t)
 {
@@ -104,7 +103,6 @@ int	parsing(char *line, t_list_token *t)
 	if (parse_cmd(&l, line, 0) == FAIL && !l.first)
 		return (FAIL);
 	add_token(l.first);
-	view(l);
 	if (verification_token(l.first) == FAIL)
 		return (token_clear(&l), FAIL);
 	t->first = l.first;
