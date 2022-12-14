@@ -16,7 +16,6 @@ void	sig_int(int sig, siginfo_t *info, void *tmp)
 {
 	(void)sig;
 	(void)tmp;
-
 	if (info->si_pid == 0)
 	{
 		printf("\b\b\n");
@@ -24,10 +23,6 @@ void	sig_int(int sig, siginfo_t *info, void *tmp)
 	}
 	else
 	{
-		if (!kill(info->si_pid, sig))
-		{
-			
-		}
 		printf("\n");
 		g_statesssss = 130;
 		rl_on_new_line();
