@@ -36,6 +36,7 @@ void	ft_heredoc(t_exec *data, int i, int *filenumber)
 			{
 				tmpfilename = ft_free2_strjoin("tmp", ft_itoa(*filenumber));
 				ft_heredoc_3(data, line, tmpfilename, i);
+				init_sig();
 				break ;
 			}
 		}
