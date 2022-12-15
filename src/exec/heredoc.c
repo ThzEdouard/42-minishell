@@ -12,11 +12,19 @@
 
 #include "../../include/minishell.h"
 
+void	sig_quit_here(int sig)
+{
+	(void)sig;
+	ft_putstr_fd("\b\b  \b\b", 0);
+}
+
 void	ft_heredoc(t_exec *data, int i, int *filenumber)
 {
 	char	*line;
 	char	*tmpfilename;
 
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGQUIT, &sig_quit_here);
 	write(STDIN_FILENO, "> ", 2);
 	line = get_next_line(STDIN_FILENO);
 	while (1)

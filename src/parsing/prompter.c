@@ -19,6 +19,7 @@ char	*line_prompter(t_env **env, char **envp, t_list_token t, t_list_exec e)
 
 	while (1)
 	{
+		init_sig();
 		line = readline("Minishell > ");
 		if (!line)
 			break ;

@@ -37,9 +37,12 @@ void	sig_quit(int sig, siginfo_t *info, void *tmp)
 	(void)sig;
 	if (info->si_pid == 0)
 	{
-		printf("Quit (core dumped)\n");
+		printf("Quit : (core dumped)\n");
 		g_statesssss = 131;
 	}
 	else
+	{
 		printf("Minishell >   \b\b  \b\b");
+		g_statesssss = 1;
+	}
 }
