@@ -211,7 +211,7 @@ void	ft_message(char *error, t_exec *data, t_env **env, int code);
 
 /*expand_utils*/
 void	expand_process(t_token *tmp, int *tmp1, int *i);
-void	test_expand(t_token *tmp, t_env *env, int i);
+void	test_expand(t_token *tmp, t_env *env, int i, int tmp1);
 int		expand_utils(t_list_token *l, t_env *env);
 
 /*expand*/
@@ -249,9 +249,10 @@ int		ft_space(char c);
 void	init_sig(void);
 int		main(int argc, char **argv, char **envp);
 
-/*signal*/
+/*signals*/
 void	sig_int(int sig, siginfo_t *info, void *tmp);
 void	sig_quit(int sig, siginfo_t *info, void *tmp);
+void	sig_quit_here(int sig);
 
 /*realloc*/
 int		ft_double_len_int(t_type *src);

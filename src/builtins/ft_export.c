@@ -12,18 +12,6 @@
 
 #include "../../include/minishell.h"
 
-void	print_solo(t_env *env)
-{
-	t_env	*tmp;
-
-	tmp = env;
-	while (tmp)
-	{
-		printf("declare -x %s\n", tmp->str);
-		tmp = tmp->next;
-	}
-}
-
 void	add_export(t_env **env, char *cmd, int ok, char *test)
 {
 	t_env	*tmp;
@@ -93,7 +81,6 @@ int	ft_export(t_env **env, char **cmd)
 		i++;
 	if (i == 1)
 	{
-		print_solo(*env);
 		g_statesssss = 0;
 		return (SUCCESS);
 	}

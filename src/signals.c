@@ -46,3 +46,9 @@ void	sig_quit(int sig, siginfo_t *info, void *tmp)
 		g_statesssss = 1;
 	}
 }
+
+void	sig_quit_here(int sig)
+{
+	(void)sig;
+	ft_putstr_fd("\b\b  \b\b", 0);
+}

@@ -52,7 +52,7 @@ char	*ft_join_null_realloc(char *s, int i, int len)
 	value[len - 2] = 0;
 	while (s && *s && len--)
 			s++;
-	while (s && *s && *s != 36)
+	while (s && *s && *s != 36 & *s != 61)
 		s++;
 	if (s && *s)
 		value = ft_free_strjoin(value, s);

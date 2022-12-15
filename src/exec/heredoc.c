@@ -12,12 +12,6 @@
 
 #include "../../include/minishell.h"
 
-void	sig_quit_here(int sig)
-{
-	(void)sig;
-	ft_putstr_fd("\b\b  \b\b", 0);
-}
-
 void	ft_heredoc(t_exec *data, int i, int *filenumber)
 {
 	char	*line;
