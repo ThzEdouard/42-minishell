@@ -42,7 +42,7 @@ void	sig_quit(int sig, siginfo_t *info, void *tmp)
 	}
 	else
 	{
-		printf("Minishell > \b\b  \b\b");
+		printf("Minishell >   \b\b  \b\b");
 		g_statesssss = 1;
 	}
 }

@@ -80,7 +80,7 @@ void	ft_exit(t_exec *data, t_env **env, char **cmd)
 	while (cmd[i])
 		i++;
 	if (i == 1)
-		ft_free_exit(data, env, 0);
+		ft_free_exit(data, env, g_statesssss);
 	ft_exit_util(data, env, cmd);
 	if (i > 2)
 	{
