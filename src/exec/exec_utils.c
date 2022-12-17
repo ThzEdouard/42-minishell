@@ -73,6 +73,11 @@ void	exec_clear(t_list_exec *l)
 	while (elem)
 	{
 		tmp = elem;
+		if (!ft_check_builtins(tmp))
+		{
+			close(tmp->pipefd[0]);
+			close(tmp->pipefd[1]);
+		}
 		if (tmp->cmd && tmp->cmd[0] == tmp->path_cmd)
 			ft_free_all(tmp->cmd);
 		else
@@ -87,6 +92,8 @@ void	exec_clear(t_list_exec *l)
 			free(tmp->file);
 		if (elem->type)
 			free(elem->type);
+		close(tmp->savein);
+		close(tmp->saveout);
 		elem = elem->next;
 		free(tmp);
 	}
