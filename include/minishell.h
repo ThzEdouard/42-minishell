@@ -281,4 +281,6 @@ void	ft_delete_node(t_env *env);
 int		ft_delete(t_env *tmp, char *tmp_str);
 void	ft_unset(t_env **env, char *cmd);
 
+
+void	sig_int_here(int sig, siginfo_t *info, void *tmp);
 #endif

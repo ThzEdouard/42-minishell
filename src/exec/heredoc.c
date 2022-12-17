@@ -17,12 +17,19 @@ void	ft_heredoc(t_exec *data, int i, int *filenumber)
 	char	*line;
 	char	*tmpfilename;
 
+	struct sigaction	sa;
+
+	sa.sa_sigaction = sig_int_here;
+	sa.sa_flags = SA_SIGINFO;
+	sigemptyset(&sa.sa_mask);
 	signal(SIGQUIT, SIG_IGN);
+	sigaction(SIGINT, &sa, NULL);
 	signal(SIGQUIT, &sig_quit_here);
 	write(STDIN_FILENO, "> ", 2);
-	line = get_next_line(STDIN_FILENO);
 	while (1)
 	{
+		line = get_next_line(STDIN_FILENO);
+		printf("%d\n", g_statesssss);
 		if (!line || !ft_strncmp(line, data->filename[i],
 				ft_strlen(data->filename[i])))
 		{
@@ -35,7 +42,6 @@ void	ft_heredoc(t_exec *data, int i, int *filenumber)
 			}
 		}
 		ft_heredoc_2(line, data->file[i]);
-		line = get_next_line(STDIN_FILENO);
 	}
 	free(data->filename[i]);
 	data->filename[i] = tmpfilename;
