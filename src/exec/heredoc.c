@@ -24,11 +24,11 @@ void	ft_heredoc(t_exec *data, int i, int *filenumber)
 	sigemptyset(&sa.sa_mask);
 	signal(SIGQUIT, SIG_IGN);
 	sigaction(SIGINT, &sa, NULL);
-	signal(SIGQUIT, &sig_quit_here);
+	// signal(SIGQUIT, &sig_quit_here);
 	write(STDIN_FILENO, "> ", 2);
 	while (1)
 	{
-		line = get_next_line(STDIN_FILENO);
+		line = get_next_line(STDOUT_FILENO);
 		printf("%d\n", g_statesssss);
 		if (!line || !ft_strncmp(line, data->filename[i],
 				ft_strlen(data->filename[i])))

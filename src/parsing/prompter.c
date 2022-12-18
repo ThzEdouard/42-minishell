@@ -20,8 +20,7 @@ char	*line_prompter(t_env **env, char **envp, t_list_token t, t_list_exec e)
 	while (1)
 	{
 		init_sig();
-		ft_putstr_fd("Minishell >", 0);
-		line = readline(STDIN_FILENO);
+		line = readline("Minishell > ");
 		if (!line)
 			break ;
 		if (ft_strlen(line) && verification_quote(line) == SUCCESS)
@@ -35,8 +34,7 @@ char	*line_prompter(t_env **env, char **envp, t_list_token t, t_list_exec e)
 				e.first = exec;
 				exec_clear(&e);
 			}
-		}else
-			ft_putstr_fd("\n", 0);
+		}
 		add_history(line);
 		free(line);
 	}
@@ -55,5 +53,5 @@ void	prompter(t_env **env, char **envp)
 	token_init(&t);
 	line = line_prompter(env, envp, t, e);
 	if (!line)
-		ft_putstr_fd("\nexit\n", 0);
+		ft_putstr_fd("\nexit\n", 1);
 }
