@@ -17,6 +17,7 @@ void	ft_delete_node(t_env *env)
 	t_env	*tmp;
 
 	tmp = env->next;
+	free(env->str);
 	env->str = tmp->str;
 	env->next = tmp->next;
 	tmp->next = NULL;
@@ -36,6 +37,7 @@ int	ft_delete(t_env *tmp, char *tmp_str)
 		{
 			free(tmp->str);
 			tmp->str = NULL;
+			return (SUCCESS);
 		}
 	}
 	return (FAIL);
@@ -53,6 +55,7 @@ void	ft_unset(t_env **env, char *cmd)
 		if (!ft_delete(tmp, tmp_str))
 		{
 			g_statesssss = 0;
+			free(tmp_str);
 			return ;
 		}
 		tmp = tmp->next;

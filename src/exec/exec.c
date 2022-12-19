@@ -95,6 +95,8 @@ void	ft_exec_process(t_exec *tmp, t_exec *p, char **envp, t_env **env)
 	while (wait(&p->pid) > 0)
 	{
 		g_statesssss = p->pid / 256;
+		close(p->pipefd[0]);
+		close(p->pipefd[1]);
 		continue ;
 	}
 	tmp = p;

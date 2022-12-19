@@ -52,7 +52,8 @@ char	*ft_path(t_exec *exec, t_env *env)
 
 	while (env)
 	{
-		paths = ft_strnstr(env->str, "PATH=", 5);
+		if (env->str)
+			paths = ft_strnstr(env->str, "PATH=", 5);
 		if (paths)
 		{
 			exec->path = ft_substr(paths, 5, ft_strlen(paths));
@@ -71,8 +72,7 @@ char	*ft_path(t_exec *exec, t_env *env)
 		exec->paths = ft_split(exec->path, ':');
 	if (!exec->paths)
 		ft_free_paths(exec);
-	free(exec->path);
-	return (ft_access(exec));
+	return (free(exec->path), ft_access(exec));
 }
 
 t_exec	*set_path(t_exec *t, t_env *env)
@@ -87,4 +87,10 @@ t_exec	*set_path(t_exec *t, t_env *env)
 		tmp = tmp->next;
 	}
 	return (t);
+}
+
+void	exec_clear_reset(t_list_exec *l)
+{
+	l->first = NULL;
+	l->last = NULL;
 }

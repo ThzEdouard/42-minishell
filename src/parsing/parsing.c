@@ -81,20 +81,6 @@ int	parse_cmd(t_list_token *l, char *line, int end)
 	return (SUCCESS);
 }
 
-// void	view(t_list_token t)
-// {
-// 	t_token	*token;
-
-// 	token = t.first;
-// 	printf("================\n");
-// 	while (token)
-// 	{
-// 		printf("str = '%s'  type = '%d'\n", token->str, token->type);
-// 		token = token->next;
-// 	}
-// 	printf("================\n");
-// }
-
 int	parsing(char *line, t_list_token *t)
 {
 	t_list_token	l;

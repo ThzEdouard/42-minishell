@@ -17,16 +17,12 @@ int		g_statesssss;
 void	init_sig(void)
 {
 	struct sigaction	sa;
-	struct sigaction	se;
 
 	sa.sa_sigaction = sig_int;
-	sa.sa_flags = SA_SIGINFO;
+	sa.sa_flags = SA_RESTART | SA_SIGINFO;
 	sigemptyset(&sa.sa_mask);
-	se.sa_sigaction = sig_quit;
-	se.sa_flags = SA_SIGINFO;
-	sigemptyset(&se.sa_mask);
+	signal(SIGQUIT, SIG_IGN);
 	sigaction(SIGINT, &sa, NULL);
-	sigaction(SIGQUIT, &se, NULL);
 }
 
 int	main(int argc, char **argv, char **envp)

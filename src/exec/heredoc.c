@@ -11,25 +11,29 @@
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
+void sig_int_here(int sig, siginfo_t *info, void *tmp)
+{
+	(void)sig;
+	ft_putstr_fd("\b\b\n", 0);
+	kill(STDIN_FILENO, EOF);
+}
 void	ft_heredoc(t_exec *data, int i, int *filenumber)
 {
 	char	*line;
 	char	*tmpfilename;
-
 	struct sigaction	sa;
 
-	sa.sa_sigaction = sig_int_here;
+	sa.sa_sigaction = sig_int;
 	sa.sa_flags = SA_SIGINFO;
 	sigemptyset(&sa.sa_mask);
-	signal(SIGQUIT, SIG_IGN);
-	sigaction(SIGINT, &sa, NULL);
-	// signal(SIGQUIT, &sig_quit_here);
+
 	write(STDIN_FILENO, "> ", 2);
 	while (1)
 	{
-		line = get_next_line(STDOUT_FILENO);
-		printf("%d\n", g_statesssss);
+
+		sigaction(SIGINT, &sa, NULL);
+		signal(SIGQUIT, SIG_IGN);
+		line = readline(STDIN_FILENO);
 		if (!line || !ft_strncmp(line, data->filename[i],
 				ft_strlen(data->filename[i])))
 		{

@@ -53,5 +53,5 @@ void	prompter(t_env **env, char **envp)
 	token_init(&t);
 	line = line_prompter(env, envp, t, e);
 	if (!line)
-		ft_putstr_fd("\nexit\n", 1);
+		ft_putstr_fd("exit\n", 1);
 }

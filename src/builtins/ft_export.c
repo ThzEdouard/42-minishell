@@ -51,7 +51,7 @@ void	check_export(t_env **env, char *cmd)
 	if ((cmd[0] < 'a' || cmd[0] > 'z')
 		&& (cmd[0] < 'A' || cmd[0] > 'Z') && cmd[0] != '_')
 	{
-		printf("bash: export: `%s': not a valid identifier\n", cmd);
+		printf("export: `%s': not a valid identifier\n", cmd);
 		g_statesssss = 1;
 	}
 	else

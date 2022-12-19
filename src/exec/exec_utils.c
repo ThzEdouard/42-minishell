@@ -64,6 +64,13 @@ void	exec_push_v2_2(t_exec *new, char **cmd, char **filename, t_type *type)
 		new->type = NULL;
 }
 
+void	tmp_clear(t_exec *tmp)
+{
+	ft_free_all(tmp->cmd);
+	if (tmp->path_cmd)
+		free(tmp->path_cmd);
+}
+
 void	exec_clear(t_list_exec *l)
 {
 	t_exec	*tmp;
@@ -73,19 +80,10 @@ void	exec_clear(t_list_exec *l)
 	while (elem)
 	{
 		tmp = elem;
-		if (!ft_check_builtins(tmp))
-		{
-			close(tmp->pipefd[0]);
-			close(tmp->pipefd[1]);
-		}
 		if (tmp->cmd && tmp->cmd[0] == tmp->path_cmd)
 			ft_free_all(tmp->cmd);
 		else
-		{
-			ft_free_all(tmp->cmd);
-			if (tmp->path_cmd)
-				free(tmp->path_cmd);
-		}
+			tmp_clear(tmp);
 		tmp->path_cmd = NULL;
 		ft_free_all(tmp->filename);
 		if (tmp->file)
@@ -98,10 +96,4 @@ void	exec_clear(t_list_exec *l)
 		free(tmp);
 	}
 	exec_clear_reset(l);
-}
-
-void	exec_clear_reset(t_list_exec *l)
-{
-	l->first = NULL;
-	l->last = NULL;
 }

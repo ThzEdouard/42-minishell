@@ -171,6 +171,7 @@ void	exec_push_v2(t_list_exec *l, char **cmd, char **filename, t_type *type);
 void	exec_push_v2_2(t_exec *new, char **cmd, char **filename, t_type *type);
 void	exec_clear(t_list_exec *l);
 void	exec_clear_reset(t_list_exec *l);
+void	tmp_clear(t_exec *tmp);
 
 /*exec*/
 int		ft_mode(t_exec *data);
@@ -251,8 +252,6 @@ int		main(int argc, char **argv, char **envp);
 
 /*signals*/
 void	sig_int(int sig, siginfo_t *info, void *tmp);
-void	sig_quit(int sig, siginfo_t *info, void *tmp);
-void	sig_quit_here(int sig);
 
 /*realloc*/
 int		ft_double_len_int(t_type *src);
@@ -281,6 +280,4 @@ void	ft_delete_node(t_env *env);
 int		ft_delete(t_env *tmp, char *tmp_str);
 void	ft_unset(t_env **env, char *cmd);
 
-
-void	sig_int_here(int sig, siginfo_t *info, void *tmp);
 #endif

@@ -21,6 +21,8 @@ void	ft_childs(t_exec *data, char **envp, t_env **env)
 		ft_error("Fork Error");
 	if (data->pid == 0)
 	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 		if (data->prev != NULL && data->prev->cmd != NULL)
 			dup2(data->prev->pipefd[0], STDIN_FILENO);
 		if (data->next != NULL)

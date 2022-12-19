@@ -55,13 +55,8 @@ void	test_expand(t_token *tmp, t_env *env, int i, int tmp1)
 			expand_process(tmp, &tmp1, &i);
 			if (!tmp->str[tmp1 - 1])
 				break ;
-			if (tmp->str[i] != 39)
-			{
-				update_str(&tmp->str, env, i, tmp1);
-				i = len(tmp->str);
-			}
-			else if (tmp->str[i])
-				i++;
+			update_str(&tmp->str, env, i, tmp1);
+			i = len(tmp->str);
 		}
 		if (tmp->str[i] && tmp->str[i] != 36)
 			i++;
