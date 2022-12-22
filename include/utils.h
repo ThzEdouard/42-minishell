@@ -35,5 +35,6 @@ char	*ft_strccat(char c, char t);
 int		ft_chrdir(char *s);
 int		ft_atoi(const char *str);
 char	*ft_itoa(int n);
-
+int	ft_isalpha(int c);
+int	ft_isalnum(int c);
 #endif

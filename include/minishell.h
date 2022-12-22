@@ -43,12 +43,6 @@
 
 extern int	g_statesssss;
 
-typedef enum s_trace
-{
-	NO,
-	YES
-}			t_trace;
-
 typedef enum s_type
 {
 	NOTHING,
@@ -71,7 +65,6 @@ typedef struct s_token
 {
 	char			*str;
 	t_type			type;
-	t_trace			trace;
 	struct s_token	*prev;
 	struct s_token	*next;
 }					t_token;
@@ -202,7 +195,7 @@ t_exec	*set_path(t_exec *t, t_env *env);
 /*add_token*/
 int		verification_arg(t_token *t);
 int		verification_token(t_token *t);
-void	add_token(t_token *t);
+
 
 /*errors*/
 void	ft_quit_error(char s, int len);
@@ -210,30 +203,12 @@ void	ft_code_error(t_type type, char *str, int len);
 void	ft_error(char *error);
 void	ft_message(char *error, t_exec *data, t_env **env, int code);
 
-/*expand_utils*/
-void	expand_process(t_token *tmp, int *tmp1, int *i);
-void	test_expand(t_token *tmp, t_env *env, int i, int tmp1);
-int		expand_utils(t_list_token *l, t_env *env);
-
-/*expand*/
-char	*ft_join_realloc(char *s, int i, int len, char *s2);
-int		update_str(char **str, t_env *env, int i, int len);
-void	expand_quote(t_list_token *l);
-void	expand_quote_2(t_token	*tmp, char c);
-void	expand(t_list_token *l, t_env *env);
-
-/*list_token*/
+int	parsing(char *line, t_list_token *t, t_env *env);
 void	token_init(t_list_token *l);
-int		add_list(t_list_token *l, char *line, int end, t_trace trace);
-void	token_push(t_list_token *l, char *str, t_trace trace);
+int		token_push(t_list_token *l, char *str);
+void	View(t_list_token l);
 void	token_clear(t_list_token *l);
-
-/*parsing*/
-int		test(char *line, char start);
-int		parse_2(char *line, int *en, t_trace *t);
-void	test_parse(char **lines, int *en, t_trace *t);
-int		parse_cmd(t_list_token *l, char *line, int end);
-int		parsing(char *line, t_list_token *t);
+int		add_list(t_list_token *l, char *line, int end);
 
 /*prompter*/
 char	*line_prompter(t_env **env, char **envp, t_list_token t, t_list_exec e);

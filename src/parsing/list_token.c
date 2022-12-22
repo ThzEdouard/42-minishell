@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   list_token.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 13:20:02 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/10/15 13:20:29 by eflaquet         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../include/minishell.h"
 
 void	token_init(t_list_token *l)
@@ -18,26 +6,26 @@ void	token_init(t_list_token *l)
 	l->last = NULL;
 }
 
-int	add_list(t_list_token *l, char *line, int end, t_trace trace)
+int	add_list(t_list_token *l, char *line, int end)
 {
 	char	*str;
 
-	str = ft_substr(line - end, 0, end);
+	str = ft_substr(line, 0, end);
 	if (!str)
 		return (FAIL);
-	token_push(l, str, trace);
+	if (token_push(l, str))
+		return (FAIL);
 	return (SUCCESS);
 }
 
-void	token_push(t_list_token *l, char *str, t_trace trace)
+int	token_push(t_list_token *l, char *str)
 {
 	t_token	*new;
 
 	new = malloc(sizeof(t_token));
 	if (!new)
-		return ;
+		return (FAIL);
 	new->str = str;
-	new->trace = trace;
 	new->prev = l->last;
 	new->next = NULL;
 	if (l->last)
@@ -45,6 +33,19 @@ void	token_push(t_list_token *l, char *str, t_trace trace)
 	else
 		l->first = new;
 	l->last = new;
+	return (SUCCESS);
+}
+
+void View(t_list_token l)
+{
+   t_token *pelem = l.first;
+	printf("===========================\n");
+   while(pelem)
+   {
+     printf("str {%s} type {%d}\n", pelem->str, pelem->type);
+     pelem = pelem->next;
+   }
+   printf("==============================\n");
 }
 
 void	token_clear(t_list_token *l)

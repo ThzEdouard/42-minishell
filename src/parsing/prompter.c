@@ -25,9 +25,8 @@ char	*line_prompter(t_env **env, char **envp, t_list_token t, t_list_exec e)
 			break ;
 		if (ft_strlen(line) && verification_quote(line) == SUCCESS)
 		{
-			if ((parsing(line, &t) == SUCCESS))
+			if ((parsing(line, &t, env) == SUCCESS))
 			{
-				expand(&t, *env);
 				exec = add_exec(t.first, *env);
 				token_clear(&t);
 				ft_exec(exec, envp, env);

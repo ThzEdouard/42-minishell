@@ -57,7 +57,7 @@ int	ft_echo(char **cmd)
 	int	i;
 
 	i = 1;
-	check_quit(cmd);
+	//check_quit(cmd);
 	if (checking_args(cmd, &i, 1) == SUCCESS)
 	{
 		while (cmd[i])
