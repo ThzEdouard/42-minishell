@@ -56,6 +56,8 @@ $(OBJF):
 
 clean:
 			$(RM) -rf $(OBJ_DIR)
+			make clean -C libft/
+			rm -rf libft.a
 
 fclean:		clean
 			$(RM) -f $(NAME)

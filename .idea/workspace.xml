@@ -22,73 +22,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4929978b-732e-4995-8d1e-e382013ea945" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/libft/ft_realloc.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libft/ft_realloc_2.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/minishell.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/minishell.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/utils.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libft.a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libft/ft_itoa.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libft/ft_putchar_fd.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libft/ft_putendl_fd.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libft/ft_putnbr_fd.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libft/ft_putstr_fd.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libft/ft_realloc.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libft/ft_realloc_2.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libft/ft_split.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_split.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libft/ft_split.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libft/ft_striteri.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libft/ft_strmapi.o" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/minishell" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src/builtins/ft_cd.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src/builtins/ft_echo.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src/builtins/ft_env.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src/builtins/ft_exit.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src/builtins/ft_export.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src/builtins/ft_pwd.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src/builtins/ft_unset.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src/env/list_env.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src/exec/add_exec.o" beforeDir="false" afterPath="$PROJECT_DIR$/obj/src/exec/add_exec.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src/exec/add_exec_cmd.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src/exec/childs.o" beforeDir="false" afterPath="$PROJECT_DIR$/obj/src/exec/childs.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src/exec/exec.o" beforeDir="false" afterPath="$PROJECT_DIR$/obj/src/exec/exec.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src/exec/exec_init.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src/exec/exec_init_builtins.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src/exec/exec_malloc.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src/exec/exec_utils.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src/exec/files.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src/exec/heredoc.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src/exec/list_exec.o" beforeDir="false" afterPath="$PROJECT_DIR$/obj/src/exec/list_exec.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src/minishell.o" beforeDir="false" afterPath="$PROJECT_DIR$/obj/src/minishell.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src/parsing/add_token.o" beforeDir="false" afterPath="$PROJECT_DIR$/obj/src/parsing/add_token.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src/parsing/errors.o" beforeDir="false" afterPath="$PROJECT_DIR$/obj/src/parsing/errors.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src/parsing/list_token.o" beforeDir="false" afterPath="$PROJECT_DIR$/obj/src/parsing/list_token.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src/parsing/parsing.o" beforeDir="false" afterPath="$PROJECT_DIR$/obj/src/parsing/parsing.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src/parsing/prompter.o" beforeDir="false" afterPath="$PROJECT_DIR$/obj/src/parsing/prompter.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src/parsing/verifications.o" beforeDir="false" afterPath="$PROJECT_DIR$/obj/src/parsing/verifications.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src/signals.o" beforeDir="false" afterPath="$PROJECT_DIR$/obj/src/signals.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src_utils/ft_atoi.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src_utils/ft_itoa.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src_utils/ft_putstr_fd.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src_utils/ft_realloc.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src_utils/ft_realloc_2.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src_utils/ft_split.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src_utils/ft_strcat.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src_utils/ft_strcmp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src_utils/ft_strcpy.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src_utils/ft_strdup.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src_utils/ft_strjoin.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src_utils/ft_strlen.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src_utils/ft_strnstr.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src_utils/ft_substr.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src_utils/get_next_line.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/src_utils/get_next_line_utils.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/parsing/prompter.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/prompter.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/signals.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/signals.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src_utils/ft_atoi.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src_utils/ft_itoa.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src_utils/ft_putstr_fd.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src_utils/ft_realloc.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src_utils/ft_realloc_2.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src_utils/ft_split.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src_utils/ft_strcat.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src_utils/ft_strcmp.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src_utils/ft_strcpy.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src_utils/ft_strdup.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src_utils/ft_strjoin.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src_utils/ft_strlen.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src_utils/ft_strnstr.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src_utils/ft_substr.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src_utils/get_next_line.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src_utils/get_next_line_utils.c" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,7 +127,7 @@
       <updated>1668467463113</updated>
       <workItem from="1668467464998" duration="631000" />
       <workItem from="1671763126076" duration="626000" />
-      <workItem from="1671900953648" duration="1689000" />
+      <workItem from="1671900953648" duration="2222000" />
     </task>
     <servers />
   </component>
