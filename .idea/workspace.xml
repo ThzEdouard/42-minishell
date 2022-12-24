@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="CMakePresetLoader">{
+  &quot;useNewFormat&quot;: true
+}</component>
+  <component name="CMakeRunConfigurationManager">
+    <generated>
+      <config projectName="doudou" targetName="re" />
+      <config projectName="doudou" targetName="all" />
+      <config projectName="doudou" targetName="val" />
+      <config projectName="doudou" targetName="minishell" />
+      <config projectName="doudou" targetName="fclean" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="4929978b-732e-4995-8d1e-e382013ea945" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/libft/ft_realloc.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libft/ft_realloc_2.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/minishell.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/minishell.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/utils.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/minishell" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src/builtins/ft_cd.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src/builtins/ft_echo.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src/builtins/ft_env.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src/builtins/ft_exit.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src/builtins/ft_export.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src/builtins/ft_pwd.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src/builtins/ft_unset.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src/env/list_env.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src/exec/add_exec.o" beforeDir="false" afterPath="$PROJECT_DIR$/obj/src/exec/add_exec.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src/exec/add_exec_cmd.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src/exec/childs.o" beforeDir="false" afterPath="$PROJECT_DIR$/obj/src/exec/childs.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src/exec/exec.o" beforeDir="false" afterPath="$PROJECT_DIR$/obj/src/exec/exec.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src/exec/exec_init.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src/exec/exec_init_builtins.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src/exec/exec_malloc.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src/exec/exec_utils.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src/exec/files.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src/exec/heredoc.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src/exec/list_exec.o" beforeDir="false" afterPath="$PROJECT_DIR$/obj/src/exec/list_exec.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src/minishell.o" beforeDir="false" afterPath="$PROJECT_DIR$/obj/src/minishell.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src/parsing/add_token.o" beforeDir="false" afterPath="$PROJECT_DIR$/obj/src/parsing/add_token.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src/parsing/errors.o" beforeDir="false" afterPath="$PROJECT_DIR$/obj/src/parsing/errors.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src/parsing/list_token.o" beforeDir="false" afterPath="$PROJECT_DIR$/obj/src/parsing/list_token.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src/parsing/parsing.o" beforeDir="false" afterPath="$PROJECT_DIR$/obj/src/parsing/parsing.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src/parsing/prompter.o" beforeDir="false" afterPath="$PROJECT_DIR$/obj/src/parsing/prompter.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src/parsing/verifications.o" beforeDir="false" afterPath="$PROJECT_DIR$/obj/src/parsing/verifications.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src/signals.o" beforeDir="false" afterPath="$PROJECT_DIR$/obj/src/signals.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src_utils/ft_atoi.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src_utils/ft_itoa.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src_utils/ft_putstr_fd.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src_utils/ft_realloc.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src_utils/ft_realloc_2.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src_utils/ft_split.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src_utils/ft_strcat.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src_utils/ft_strcmp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src_utils/ft_strcpy.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src_utils/ft_strdup.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src_utils/ft_strjoin.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src_utils/ft_strlen.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src_utils/ft_strnstr.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src_utils/ft_substr.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src_utils/get_next_line.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/src_utils/get_next_line_utils.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parsing/prompter.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/prompter.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/signals.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/signals.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src_utils/ft_atoi.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src_utils/ft_itoa.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src_utils/ft_putstr_fd.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src_utils/ft_realloc.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src_utils/ft_realloc_2.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src_utils/ft_split.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src_utils/ft_strcat.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src_utils/ft_strcmp.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src_utils/ft_strcpy.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src_utils/ft_strdup.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src_utils/ft_strjoin.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src_utils/ft_strlen.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src_utils/ft_strnstr.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src_utils/ft_substr.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src_utils/get_next_line.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src_utils/get_next_line_utils.c" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectApplicationVersion">
+    <option name="ide" value="CLion" />
+    <option name="majorVersion" value="2022" />
+    <option name="minorVersion" value="2.3" />
+  </component>
+  <component name="ProjectId" id="2HYgWQgBX6nEFTwnEJPqLtrE5xA" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "last_opened_file_path": "/Users/edouardflaquet/Desktop/doudou/libft"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/libft" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Makefile Application.all">
+    <configuration name="all" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="doudou" TARGET_NAME="all" CONFIG_NAME="all" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="fclean" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="doudou" TARGET_NAME="fclean" CONFIG_NAME="fclean" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="minishell" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="doudou" TARGET_NAME="minishell" CONFIG_NAME="minishell" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="re" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="doudou" TARGET_NAME="re" CONFIG_NAME="re" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="val" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="doudou" TARGET_NAME="val" CONFIG_NAME="val" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Makefile Application.all" />
+      <item itemvalue="Makefile Application.fclean" />
+      <item itemvalue="Makefile Application.re" />
+      <item itemvalue="Makefile Application.minishell" />
+      <item itemvalue="Makefile Application.val" />
+    </list>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4929978b-732e-4995-8d1e-e382013ea945" name="Changes" comment="" />
+      <created>1668467463113</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1668467463113</updated>
+      <workItem from="1668467464998" duration="631000" />
+      <workItem from="1671763126076" duration="626000" />
+      <workItem from="1671900953648" duration="1689000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

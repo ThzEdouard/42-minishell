@@ -1,0 +1,10 @@
+{
+    "C_Cpp.errorSquiggles": "Disabled",
+    "files.associations": {
+        "libft.h": "c",
+        "stdio.h": "c",
+        "unistd.h": "c",
+        "functional": "c"
+    },
+    "C_Cpp.dimInactiveRegions": false
+}

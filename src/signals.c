@@ -22,7 +22,7 @@ void	sig_int(int sig, siginfo_t *info, void *tmp)
 		ft_putstr_fd("\n", 1);
 		g_statesssss = 130;
 		rl_on_new_line();
-		rl_replace_line("", 0);
+		//rl_replace_line("", 0);
 		rl_redisplay();
 	}
 	else

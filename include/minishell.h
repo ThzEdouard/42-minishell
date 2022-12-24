@@ -25,7 +25,7 @@
 # include <sys/wait.h>
 # include <sys/types.h>
 # include <sys/stat.h>
-# include "utils.h"
+# include "../libft/libft.h"
 # include "get_next_line.h"
 
 # define SUCCESS 0

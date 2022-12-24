@@ -22,11 +22,6 @@ FT_EXEC = list_exec add_exec childs exec heredoc exec_utils add_exec_cmd \
 SRC_BUILTINS = src/builtins/
 FT_BUILTINS = ft_cd ft_echo ft_env ft_exit ft_export ft_pwd ft_unset
 
-SRC_UTILS = src_utils/
-FT_UTILS = ft_realloc ft_strjoin ft_strlen ft_strdup ft_strcpy ft_strcmp \
-		 ft_strcat ft_substr ft_split ft_strnstr ft_putstr_fd ft_atoi ft_itoa \
-		 get_next_line_utils get_next_line ft_realloc_2
-
 SRC_FILES+=$(addprefix $(SRC_MINISHEL),$(FT_MINISHELL))
 SRC_FILES+=$(addprefix $(SRC_PARSING),$(FT_PARSING))
 SRC_FILES+=$(addprefix $(SRC_EXEC),$(FT_EXEC))
@@ -43,12 +38,13 @@ all:		$(NAME)
 			@echo "\033[0;32m [OK] \033[0m       \033[0;33m Compiling:\033[0m" $<
 
 $(NAME):	$(OBJ)
-			$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -lreadline
+			make -C libft/
+			mv libft/libft.a .
+			$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -lreadline libft.a
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJF)
 			@echo "\033[0;32m [OK] \033" $<
 			$(CC) $(CFLAGS) -c $< -o $@
-
 $(OBJF):
 			mkdir -p $(OBJ_DIR)
 			mkdir -p $(OBJ_DIR)$(SRC_MINISHEL)
