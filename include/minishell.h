@@ -212,6 +212,7 @@ void	token_clear(t_list_token *l);
 int		add_list(t_list_token *l, char *line, int end);
 
 /*prompter*/
+char	*expand_util(char *str, int i, t_env *tmp_e);
 char	*line_prompter(t_env **env, char **envp, t_list_token t, t_list_exec e);
 void	prompter(t_env **env, char **envp);
 
@@ -224,6 +225,7 @@ int		ft_space(char c);
 
 /*minishell*/
 void	init_sig(void);
+void	sig_here_init(void);
 int		main(int argc, char **argv, char **envp);
 
 /*signals*/

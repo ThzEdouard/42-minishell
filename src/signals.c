@@ -12,6 +12,25 @@
 
 #include "../include/minishell.h"
 
+void	sig_int_here(int sig, siginfo_t *info, void *tmp)
+{
+	(void)sig;
+	ft_putstr_fd("\b\b\n", 0);
+	close(0);
+	g_statesssss = 1300;
+}
+
+void	sig_here_init(void)
+{
+	struct sigaction	sa;
+
+	sa.sa_sigaction = sig_int_here;
+	sa.sa_flags = SA_SIGINFO;
+	sigemptyset(&sa.sa_mask);
+	sigaction(SIGINT, &sa, NULL);
+	signal(SIGQUIT, SIG_IGN);
+}
+
 void	sig_int(int sig, siginfo_t *info, void *tmp)
 {
 	(void)sig;

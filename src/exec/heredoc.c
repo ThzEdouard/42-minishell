@@ -11,30 +11,18 @@
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-void sig_int_here(int sig, siginfo_t *info, void *tmp)
-{
-	(void)sig;
-	ft_putstr_fd("\b\b\n", 0);
-	close(0);
-	g_statesssss = 1300;
-}
+
 void	ft_heredoc(t_exec *data, int i, int *filenumber)
 {
 	char	*line;
 	char	*tmpfilename;
-	struct sigaction	sa;
-	int savein;
+	int		savein;
 
 	savein = dup(STDIN_FILENO);
-	sa.sa_sigaction = sig_int_here;
-	sa.sa_flags = SA_SIGINFO;
-	sigemptyset(&sa.sa_mask);
-
+	sig_here_init();
 	write(STDIN_FILENO, "> ", 2);
 	while (1)
 	{
-		sigaction(SIGINT, &sa, NULL);
-		signal(SIGQUIT, SIG_IGN);
 		line = readline(STDIN_FILENO);
 		if (!line || !ft_strncmp(line, data->filename[i],
 				ft_strlen(data->filename[i])))
@@ -42,14 +30,7 @@ void	ft_heredoc(t_exec *data, int i, int *filenumber)
 			if (!line || ft_strlen(data->filename[i]) == (ft_strlen(line) - 1))
 			{
 				tmpfilename = ft_free2_strjoin("tmp", ft_itoa(*filenumber));
-				if (g_statesssss == 1300)
-				{
-					dup2(savein, 0);
-					close(savein);
-				}else
-				{
-					ft_heredoc_3(data, line, tmpfilename, i);
-				}
+				ft_heredoc_3(data, line, tmpfilename, i);
 				init_sig();
 				break ;
 			}

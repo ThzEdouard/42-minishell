@@ -71,33 +71,29 @@ void	ft_exec(t_exec *p, char **envp, t_env **env)
 		tmp = tmp->next;
 	}
 	tmp = p;
-	if (g_statesssss != 1300)
+	if (i == 1 && tmp->cmd && ft_check_builtins(tmp)
+		&& !ft_check_redirs(tmp) && g_statesssss != 1300)
 	{
-		if (i == 1 && tmp->cmd && ft_check_builtins(tmp) && !ft_check_redirs(tmp))
-		{
-			ft_exec_process_builtins(tmp, p, env);
-			return ;
-		}
-		if (i == 1 && tmp->cmd && ft_check_builtins(tmp))
-		{
-			ft_exec_builtins(tmp, env);
-			return ;
-		}
-		ft_exec_process(tmp, p, envp, env);
+		ft_exec_process_builtins(tmp, p, env);
+		return ;
 	}
-	else
-		g_statesssss = 130;
+	if (i == 1 && tmp->cmd && ft_check_builtins(tmp) && g_statesssss != 1300)
+	{
+		ft_exec_builtins(tmp, env);
+		return ;
+	}
+	ft_exec_process(tmp, p, envp, env);
 }
 
 void	ft_exec_process(t_exec *tmp, t_exec *p, char **envp, t_env **env)
 {
-	while (tmp)
+	while (tmp && g_statesssss != 1300)
 	{
 		if (tmp->cmd && !tmp->fileproblem && envp)
 			ft_childs(tmp, envp, env);
 		tmp = tmp->next;
 	}
-	while (wait(&p->pid) > 0)
+	while (wait(&p->pid) > 0 && g_statesssss != 1300)
 	{
 		g_statesssss = p->pid / 256;
 		close(p->pipefd[0]);
@@ -107,6 +103,12 @@ void	ft_exec_process(t_exec *tmp, t_exec *p, char **envp, t_env **env)
 	tmp = p;
 	ft_unlink_heredoc(tmp);
 	ft_close_files(p);
+	if (g_statesssss == 1300)
+	{
+		dup2(tmp->savein, 0);
+		close(tmp->savein);
+		g_statesssss = 130;
+	}
 }
 
 void	ft_exec_process_builtins(t_exec *tmp, t_exec *p, t_env **env)

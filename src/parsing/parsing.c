@@ -12,6 +12,17 @@
 
 #include "../../include/minishell.h"
 
+char	*expand_util(char *str, int i, t_env *tmp_e)
+{
+	if (str[i + 1] && !ft_isalpha(str[i + 1])
+		&& str[i + 1] == '$'
+		&& (str[i + 1] != '_' || str[i + 1] != '?'))
+		str = check_arg_expand(str, &i);
+	else if (str[i + 1])
+		str = change_expand(str, tmp_e, &i);
+	return (str);
+}
+
 int	ft_sep(char line)
 {
 	if (line == '|' || line == '<' || line == '>' )
