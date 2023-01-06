@@ -27,7 +27,4 @@ void	sig_int(int sig, siginfo_t *info, void *tmp)
 	}
 	else
 		ft_putstr_fd("\b\b\n", 1);
-
 }
-
-

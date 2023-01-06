@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 13:09:32 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/05/07 15:32:52 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/01/06 16:09:54 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,46 +14,46 @@
 
 char	*ft_free2_strjoin(char *s1, char *s2)
 {
-    char	*dest;
-    int		size;
-    int		i;
-    int		j;
+	char	*dest;
+	int		size;
+	int		i;
+	int		j;
 
-    size = ft_strlen(s1) + ft_strlen(s2);
-    dest = (char *)malloc(sizeof(char) * (size + 1));
-    if (!dest || !s1 || !s2)
-        return (NULL);
-    i = -1;
-    while (s1[++i])
-        dest[i] = s1[i];
-    j = -1;
-    while (s2[++j])
-        dest[i + j] = s2[j];
-    dest[size] = 0;
-    free(s2);
-    return (dest);
+	size = ft_strlen(s1) + ft_strlen(s2);
+	dest = (char *)malloc(sizeof(char) * (size + 1));
+	if (!dest || !s1 || !s2)
+		return (NULL);
+	i = -1;
+	while (s1[++i])
+		dest[i] = s1[i];
+	j = -1;
+	while (s2[++j])
+		dest[i + j] = s2[j];
+	dest[size] = 0;
+	free(s2);
+	return (dest);
 }
 
 char	*ft_free_strjoin(char *s1, char *s2)
 {
-    char	*dest;
-    int		size;
-    int		i;
-    int		j;
+	char	*dest;
+	int		size;
+	int		i;
+	int		j;
 
-    size = ft_strlen(s1) + ft_strlen(s2);
-    dest = (char *)malloc(sizeof(char) * (size + 1));
-    if (!dest || !s1 || !s2)
-        return (NULL);
-    i = -1;
-    while (s1[++i])
-        dest[i] = s1[i];
-    j = -1;
-    while (s2[++j])
-        dest[i + j] = s2[j];
-    dest[size] = 0;
-    free(s1);
-    return (dest);
+	size = ft_strlen(s1) + ft_strlen(s2);
+	dest = (char *)malloc(sizeof(char) * (size + 1));
+	if (!dest || !s1 || !s2)
+		return (NULL);
+	i = -1;
+	while (s1[++i])
+		dest[i] = s1[i];
+	j = -1;
+	while (s2[++j])
+		dest[i + j] = s2[j];
+	dest[size] = 0;
+	free(s1);
+	return (dest);
 }
 
 char	*ft_ptrinput(char *ptr, char *s1, char *s2)

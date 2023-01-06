@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 11:24:22 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/05/07 15:54:26 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/01/06 16:15:24 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
 int		ft_atoi(const char *c);
+int		ft_sep_ex(char line);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 int		ft_lstsize(t_list *lst);
 size_t	ft_strlen(const char *theString );
@@ -69,8 +70,10 @@ t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 char	*ft_strncpy(char *s1, char *s2, unsigned int n);
 char	*ft_free_strjoin(char *s1, char *s2);
-int	ft_strcmp(char *s1, char *s2);
+int		ft_strcmp(char *s1, char *s2);
 char	*ft_free_substr(char *s, unsigned int start, size_t len);
 char	*ft_free_strjoin(char *s1, char *s2);
 char	*ft_free2_strjoin(char *s1, char *s2);
+char	*ft_join_realloc(char *s, int i, int len, char *s2);
+
 #endif

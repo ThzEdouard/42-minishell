@@ -6,9 +6,16 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 16:55:27 by eflaquet          #+#    #+#             */
-/*   Updated: 2022/05/07 14:11:35 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/01/06 16:17:01 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+int	ft_sep_ex(char line)
+{
+	if (line != 36 && line != 34 && line != 39)
+		return (0);
+	return (1);
+}
 
 int	ft_isalnum(int c)
 {

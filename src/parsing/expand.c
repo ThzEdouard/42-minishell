@@ -6,47 +6,38 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 18:48:47 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/01/06 12:53:28 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/01/06 16:17:24 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-char	*ft_join_realloc(char *s, int i, int len, char *s2)
+int	check_expand(char *str, int i)
 {
-	char	*value;
-	char	*name;
-
-	value = malloc(sizeof(char *) * (i + ft_strlen(s2) - (i - len + 1) + 1));
-	if (!value)
-		return (NULL);
-	ft_strncpy(value, s, len);
-	value[len] = 0;
-	s += len;
-	while (s && *s != 36)
-		s++;
-	if (*s == 36)
-		s++;
-	while (s2 && *s2 != '=' && *s2 == *s)
+	while (str[i] && !ft_sep_ex(str[i]))
+		i++;
+	if (str[i] && str[i] == 39)
 	{
-		s2++;
-		s++;
+		if (str[i] && str[i] == 39)
+			i++;
+		while (str[i] && str[i] != 39)
+			i++;
+		if (str[i] && str[i] == 39)
+			i++;
 	}
-	name = ft_strdup(s2 + 1);
-	if (name)
+	else if (str[i] && str[i] == 34)
 	{
-		value = ft_free_strjoin(value, name);
-		free(name);
+		if (str[i] && str[i] == 34)
+			i++;
+		while (str[i] && str[i] != 36 && str[i] != 34)
+			i++;
+		if (str[i] && str[i + 1] && str[i - 1] && str[i] == 36
+			&& str[i + 1] == '"' && str[i - 1] == '"')
+			i++;
+		if (str[i] && str[i] == 34)
+			i++;
 	}
-	value = ft_free_strjoin(value, s);
-	return (value);
-}
-
-int	ft_sep_ex(char line)
-{
-	if (line != 36 && line != 34 && line != 39)
-		return(SUCCESS);
-	return (FAIL);
+	return (i);
 }
 
 void	expand(t_token *t, t_env *env)
@@ -65,28 +56,7 @@ void	expand(t_token *t, t_env *env)
 	{
 		if (tmp_token->type == WORD)
 		{
-			while (tmp_token->str[i] && !ft_sep_ex(tmp_token->str[i]))
-				i++;
-			if (tmp_token->str[i] && tmp_token->str[i] == 39)
-			{
-				if (tmp_token->str[i] && tmp_token->str[i] == 39)
-					i++;
-				while (tmp_token->str[i] && tmp_token->str[i] != 39)
-					i++;
-				if (tmp_token->str[i] && tmp_token->str[i] == 39)
-					i++;
-			}
-			else if (tmp_token->str[i] && tmp_token->str[i] == 34)
-			{
-				if (tmp_token->str[i] && tmp_token->str[i] == 34)
-					i++;
-				while (tmp_token->str[i] && tmp_token->str[i] != 36 && tmp_token->str[i] != 34)
-					i++;
-				if (tmp_token->str[i] && tmp_token->str[i + 1] && tmp_token->str[i - 1] &&  tmp_token->str[i] == 36 && tmp_token->str[i + 1] == '"' && tmp_token->str[i - 1] == '"')
-					i++;
-				if (tmp_token->str[i] && tmp_token->str[i] == 34)
-					i++;
-			}
+			i = check_expand(tmp_token->str, i);
 			if (tmp_token->str[i] && tmp_token->str[i] == 36)
 			{
 				if (tmp_token->str[i + 1] && !ft_isalpha(tmp_token->str[i + 1]) && tmp_token->str[i + 1] == '$' && (tmp_token->str[i + 1] != '_' || tmp_token->str[i + 1] != '?'))
