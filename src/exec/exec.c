@@ -71,17 +71,22 @@ void	ft_exec(t_exec *p, char **envp, t_env **env)
 		tmp = tmp->next;
 	}
 	tmp = p;
-	if (i == 1 && tmp->cmd && ft_check_builtins(tmp) && !ft_check_redirs(tmp))
+	if (g_statesssss != 1300)
 	{
-		ft_exec_process_builtins(tmp, p, env);
-		return ;
+		if (i == 1 && tmp->cmd && ft_check_builtins(tmp) && !ft_check_redirs(tmp))
+		{
+			ft_exec_process_builtins(tmp, p, env);
+			return ;
+		}
+		if (i == 1 && tmp->cmd && ft_check_builtins(tmp))
+		{
+			ft_exec_builtins(tmp, env);
+			return ;
+		}
+		ft_exec_process(tmp, p, envp, env);
 	}
-	if (i == 1 && tmp->cmd && ft_check_builtins(tmp))
-	{
-		ft_exec_builtins(tmp, env);
-		return ;
-	}
-	ft_exec_process(tmp, p, envp, env);
+	else
+		g_statesssss = 130;
 }
 
 void	ft_exec_process(t_exec *tmp, t_exec *p, char **envp, t_env **env)

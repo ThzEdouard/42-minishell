@@ -10,7 +10,7 @@ FT_MINISHELL = minishell signals
 
 SRC_PARSING = src/parsing/
 FT_PARSING = prompter list_token parsing add_token errors \
-			verifications 
+			verifications expand extand
 
 SRC_ENV = src/env/
 FT_ENV = list_env

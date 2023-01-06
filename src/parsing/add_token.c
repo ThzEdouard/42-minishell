@@ -58,4 +58,24 @@ int	verification_token(t_token *t)
 	return (SUCCESS);
 }
 
+void	add_token(t_token *t)
+{
+	if (!ft_strncmp(t->str, "|", 1))
+		t->type = PIPE;
+	else if (!ft_strcmp(t->str, ">"))
+		t->type = WRITE;
+	else if (!ft_strcmp(t->str, "<"))
+		t->type = READ;
+	else if (!ft_strncmp(t->str, ">>", 2))
+		t->type = APPEND;
+	else if (!ft_strncmp(t->str, "<<", 2))
+		t->type = HEREDOC;
+	else if (!ft_strncmp(t->str, "&", 1))
+		t->type = COUNT;
+	else
+		t->type = WORD;
+	t = t->next;
+	if (t)
+		add_token(t);
+}
 

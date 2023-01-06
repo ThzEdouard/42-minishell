@@ -195,8 +195,9 @@ t_exec	*set_path(t_exec *t, t_env *env);
 /*add_token*/
 int		verification_arg(t_token *t);
 int		verification_token(t_token *t);
-
-
+void	add_token(t_token *t);
+void	extand(t_token *t);
+void	expand(t_token *t, t_env *env);
 /*errors*/
 void	ft_quit_error(char s, int len);
 void	ft_code_error(t_type type, char *str, int len);
