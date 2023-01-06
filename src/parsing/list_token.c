@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_token.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/06 17:06:42 by eflaquet          #+#    #+#             */
+/*   Updated: 2023/01/06 17:11:59 by eflaquet         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 
 void	token_init(t_list_token *l)
@@ -36,16 +48,18 @@ int	token_push(t_list_token *l, char *str)
 	return (SUCCESS);
 }
 
-void View(t_list_token l)
+void	view(t_list_token l)
 {
-   t_token *pelem = l.first;
+	t_token	*pelem;
+
+	pelem = l.first;
 	printf("===========================\n");
-   while(pelem)
-   {
-     printf("str {%s} type {%d}\n", pelem->str, pelem->type);
-     pelem = pelem->next;
-   }
-   printf("==============================\n");
+	while (pelem)
+	{
+		printf("str {%s} type {%d}\n", pelem->str, pelem->type);
+		pelem = pelem->next;
+	}
+	printf("==============================\n");
 }
 
 void	token_clear(t_list_token *l)

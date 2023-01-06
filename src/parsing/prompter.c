@@ -23,10 +23,8 @@ char	*line_prompter(t_env **env, char **envp, t_list_token t, t_list_exec e)
 		line = readline("Minishell > ");
 		if (!line)
 			break ;
-
 		if (ft_strlen(line) && verification_quote(line) == SUCCESS)
 		{
-			printf("pass");
 			if ((parsing(line, &t, *env) == SUCCESS))
 			{
 				exec = add_exec(t.first, *env);

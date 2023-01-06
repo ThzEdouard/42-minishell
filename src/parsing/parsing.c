@@ -65,10 +65,14 @@ int	parsing(char *line, t_list_token *t, t_env *env)
 
 	token_init(&l);
 	l = parsing_line(line);
-	add_token(l.first);
-	expand(l.first, env);
-	extand(l.first);
-	View(l);
-	t->first = l.first;
-	return (SUCCESS);
+	if (l.first)
+	{
+		add_token(l.first);
+		expand(l.first, env, 0);
+		extand(l.first);
+		view(l);
+		t->first = l.first;
+		return (SUCCESS);
+	}
+	return (FAIL);
 }

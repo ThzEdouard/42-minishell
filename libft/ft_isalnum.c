@@ -6,9 +6,11 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 16:55:27 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/01/06 16:17:01 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/01/06 17:40:22 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	ft_sep_ex(char line)
 {

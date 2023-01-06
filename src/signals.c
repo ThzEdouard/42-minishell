@@ -12,7 +12,6 @@
 
 #include "../include/minishell.h"
 
-
 void	sig_int(int sig, siginfo_t *info, void *tmp)
 {
 	(void)sig;

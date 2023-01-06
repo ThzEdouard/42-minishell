@@ -197,17 +197,17 @@ int		verification_arg(t_token *t);
 int		verification_token(t_token *t);
 void	add_token(t_token *t);
 void	extand(t_token *t);
-void	expand(t_token *t, t_env *env);
+void	expand(t_token *t, t_env *env, int i);
 /*errors*/
 void	ft_quit_error(char s, int len);
 void	ft_code_error(t_type type, char *str, int len);
 void	ft_error(char *error);
 void	ft_message(char *error, t_exec *data, t_env **env, int code);
 
-int	parsing(char *line, t_list_token *t, t_env *env);
+int		parsing(char *line, t_list_token *t, t_env *env);
 void	token_init(t_list_token *l);
 int		token_push(t_list_token *l, char *str);
-void	View(t_list_token l);
+void	view(t_list_token l);
 void	token_clear(t_list_token *l);
 int		add_list(t_list_token *l, char *line, int end);
 
