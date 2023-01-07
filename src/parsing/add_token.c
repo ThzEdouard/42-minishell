@@ -16,9 +16,9 @@ int	verification_arg(t_token *t)
 {
 	if (t && t->next && t->type == PIPE)
 		return (ft_code_error(t->type, t->str, 0), FAIL);
-	if (!t->next && t->type != WORD)
+	if (t && !t->next && t->type != WORD)
 		return (ft_code_error(t->type, t->str, 0), FAIL);
-	while (t->next)
+	while (t && t->next)
 	{
 		if (t->prev && t->prev->type == WORD
 			&& t->type == PIPE && t->next->type != PIPE)
