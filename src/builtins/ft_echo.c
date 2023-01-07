@@ -25,7 +25,7 @@ int	checking_args(char **cmd, int *t, int i)
 			y = 1;
 			while (cmd[i][y] == 'n')
 				y++;
-			if (y == ft_strlen(cmd[i]))
+			if (y == (int)ft_strlen(cmd[i]))
 				r = i;
 		}
 		else

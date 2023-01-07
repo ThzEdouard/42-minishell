@@ -16,14 +16,14 @@ void	ft_heredoc(t_exec *data, int i, int *filenumber)
 {
 	char	*line;
 	char	*tmpfilename;
-	int		savein;
 
-	savein = dup(STDIN_FILENO);
 	sig_here_init();
 	write(STDIN_FILENO, "> ", 2);
 	while (1)
 	{
 		line = readline(STDIN_FILENO);
+		if (line)
+			line = ft_free_strjoin(line, "\n");
 		if (!line || !ft_strncmp(line, data->filename[i],
 				ft_strlen(data->filename[i])))
 		{

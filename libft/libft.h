@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 11:24:22 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/01/06 17:40:27 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/01/07 11:32:28 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int		ft_atoi(const char *c);
 int		ft_sep_ex(char line);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 int		ft_lstsize(t_list *lst);
-size_t	ft_strlen(const char *theString );
+size_t	ft_strlen(const char *theString);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 t_list	*ft_lstnew(void *content);
