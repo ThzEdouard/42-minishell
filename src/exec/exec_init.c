@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
 
-void	ft_exec_init(t_exec *data, t_env **env)
+void	ft_exec_init(t_exec *data, t_env **env, int x)
 {
 	int			i;
 	t_list_exec	p;
@@ -24,8 +24,10 @@ void	ft_exec_init(t_exec *data, t_env **env)
 		ft_exec_init_2(data, i);
 		i++;
 	}
-	if (ft_exec_builtins(data, env))
+	if (ft_exec_builtins(data, env) || x)
 	{
+		close(data->pipefd[0]);
+		close(data->pipefd[1]);
 		clear_env(env);
 		while (data->prev)
 			data = data->prev;
@@ -66,6 +68,10 @@ t_exec	*data_prev(t_exec *data)
 	t_exec	*d;
 
 	d = data;
+	if (data->prev != NULL && data->prev->cmd != NULL)
+		close(data->prev->pipefd[0]);
+	close(data->pipefd[0]);
+	close(data->pipefd[1]);
 	while (d->prev)
 		d = d->prev;
 	return (d);

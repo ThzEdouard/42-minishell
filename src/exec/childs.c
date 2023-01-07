@@ -23,11 +23,13 @@ void	ft_childs(t_exec *data, char **envp, t_env **env)
 	{
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
+		if (data->fileproblem)
+			ft_exec_init(data, env, 1);
 		if (data->prev != NULL && data->prev->cmd != NULL)
 			dup2(data->prev->pipefd[0], STDIN_FILENO);
 		if (data->next != NULL)
 			dup2(data->pipefd[1], STDOUT_FILENO);
-		ft_exec_init(data, env);
+		ft_exec_init(data, env, 0);
 		close(data->pipefd[0]);
 		close(data->pipefd[1]);
 		if (data->cmd)

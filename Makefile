@@ -1,4 +1,4 @@
-
+INCLUDE		= include/minishell.h
 NAME		= minishell
 SRC_DIR		= ./
 OBJ_DIR		= obj/
@@ -37,7 +37,7 @@ OBJF		=	.cache_exists
 all:		$(NAME)
 			@echo "\033[0;32m [OK] \033[0m       \033[0;33m Compiling:\033[0m" $<
 
-$(NAME):	$(OBJ)
+$(NAME):	$(OBJ) $(INCLUDE)
 			make -C libft/
 			mv libft/libft.a .
 			$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -lreadline libft.a
