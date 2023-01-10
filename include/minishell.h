@@ -134,7 +134,7 @@ void	read_heredoc_2(t_list_exec *exec, t_add *values, t_env *env);
 /*add_exec*/
 t_exec	*add_exec(t_token *t, t_env *env);
 void	free_add_exec(t_add values);
-
+void	view(t_list_token l);
 /*childs*/
 void	ft_childs(t_exec *data, char **envp, t_env **env);
 int		ft_exec_builtins(t_exec *data, t_env **env);

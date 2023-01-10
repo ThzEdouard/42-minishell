@@ -99,6 +99,10 @@ void	read_heredoc_2(t_list_exec *exec, t_add *values, t_env *env)
 	values->j = 0;
 	while (values->filename[values->j])
 		values->filename[values->j++] = 0;
+	values->i = 0;
+	if (values->command)
+		while (values->command[values->i])
+			values->command[values->i++] = 0;
 	values->j = 0;
 	values->y = 0;
 }

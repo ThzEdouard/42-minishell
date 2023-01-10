@@ -1,0 +1,1 @@
+< Makefile cat | < Makefile cat -e | pwd > qwerty

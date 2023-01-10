@@ -89,7 +89,7 @@ void	ft_exec_process(t_exec *tmp, t_exec *p, char **envp, t_env **env)
 {
 	while (tmp && g_statesssss != 1300)
 	{
-		if (tmp->cmd && envp)
+		if (envp)
 			ft_childs(tmp, envp, env);
 		tmp = tmp->next;
 	}

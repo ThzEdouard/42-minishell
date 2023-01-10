@@ -14,6 +14,8 @@
 
 void	ft_childs(t_exec *data, char **envp, t_env **env)
 {
+	t_list_exec	p;
+
 	if (pipe(data->pipefd) == -1)
 		ft_error("Pipe Error");
 	data->pid = fork();
@@ -23,9 +25,21 @@ void	ft_childs(t_exec *data, char **envp, t_env **env)
 	{
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
+		if (!data->cmd)
+		{
+			close(data->pipefd[0]);
+			close(data->pipefd[1]);
+			clear_env(env);
+			while (data->prev)
+				data = data->prev;
+			ft_close_files(data);
+			p.first = data;
+			exec_clear(&p);
+			exit(g_statesssss);
+		}
 		if (data->fileproblem)
 			ft_exec_init(data, env, 1);
-		if (data->prev != NULL && data->prev->cmd != NULL)
+		if (data->prev != NULL)
 			dup2(data->prev->pipefd[0], STDIN_FILENO);
 		if (data->next != NULL)
 			dup2(data->pipefd[1], STDOUT_FILENO);
