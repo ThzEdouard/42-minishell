@@ -18,10 +18,9 @@ void	ft_heredoc(t_exec *data, int i, int *filenumber)
 	char	*tmpfilename;
 
 	sig_here_init();
-	write(STDIN_FILENO, "> ", 2);
 	while (1)
 	{
-		line = readline(STDIN_FILENO);
+		line = readline("> ");
 		if (line)
 			line = ft_free_strjoin(line, "\n");
 		if (!line || !ft_strncmp(line, data->filename[i],
@@ -45,7 +44,6 @@ void	ft_heredoc_2(char *line, int temp)
 {
 	write(temp, line, ft_strlen(line));
 	free(line);
-	write(STDIN_FILENO, "> ", 2);
 }
 
 void	ft_heredoc_3(t_exec *data, char *line, char *tmpfilename, int i)
@@ -90,6 +88,7 @@ void	ft_unlink_heredoc(t_exec *tmp)
 			i = 0;
 			while (tmp->type[i] == HEREDOC)
 			{
+				close(tmp->file[i]);
 				if (unlink(tmp->filename[i]) == -1)
 					ft_error("Temp File Error");
 				i++;

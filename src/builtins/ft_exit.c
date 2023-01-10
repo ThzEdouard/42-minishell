@@ -22,9 +22,7 @@ void	exec_clears(t_exec *l)
 	{
 		tmp = elem;
 		if (tmp->cmd && tmp->cmd[0] == tmp->path_cmd)
-		{
 			ft_free_all(tmp->cmd);
-		}
 		else
 		{
 			ft_free_all(tmp->cmd);
@@ -32,6 +30,8 @@ void	exec_clears(t_exec *l)
 				free(tmp->path_cmd);
 		}
 		tmp->path_cmd = NULL;
+		close(tmp->savein);
+		close(tmp->saveout);
 		ft_free_all(tmp->filename);
 		if (elem->type)
 			free(elem->type);

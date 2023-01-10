@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:06:42 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/01/06 17:11:59 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/01/10 17:43:59 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,6 @@ int	token_push(t_list_token *l, char *str)
 		l->first = new;
 	l->last = new;
 	return (SUCCESS);
-}
-
-void	view(t_list_token l)
-{
-	t_token	*pelem;
-
-	pelem = l.first;
-	printf("===========================\n");
-	while (pelem)
-	{
-		printf("str {%s} type {%d}\n", pelem->str, pelem->type);
-		pelem = pelem->next;
-	}
-	printf("==============================\n");
 }
 
 void	token_clear(t_list_token *l)

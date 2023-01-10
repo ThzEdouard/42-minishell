@@ -17,7 +17,7 @@ int	ft_cd(t_env **env, char *cmd)
 	(void)env;
 	if (!cmd || access(cmd, F_OK | X_OK) == -1)
 	{
-		chdir(getenv("HOME"));
+		printf(ERROR_5, NAME_SHELL_ERROR, "cd", cmd);
 		g_statesssss = 0;
 		return (0);
 	}

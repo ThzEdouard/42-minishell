@@ -81,7 +81,6 @@ int	parsing(char *line, t_list_token *t, t_env *env)
 		add_token(l.first);
 		expand(l.first, env, 0);
 		extand(l.first);
-		view(l);
 		t->first = l.first;
 		return (SUCCESS);
 	}

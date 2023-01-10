@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 11:59:09 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/01/07 11:36:26 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/01/10 17:23:23 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 size_t	ft_strlen(const char *thestring)
 {
-	const char	*str;
+	int	i;
 
-	str = thestring;
-	while (*thestring)
-		thestring++;
-	return (thestring - str);
+	if (!thestring)
+		return (0);
+	i = 0;
+	while (thestring[i])
+		i++;
+	return (i);
 }

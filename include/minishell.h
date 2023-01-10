@@ -207,7 +207,6 @@ void	ft_message(char *error, t_exec *data, t_env **env, int code);
 int		parsing(char *line, t_list_token *t, t_env *env);
 void	token_init(t_list_token *l);
 int		token_push(t_list_token *l, char *str);
-void	view(t_list_token l);
 void	token_clear(t_list_token *l);
 int		add_list(t_list_token *l, char *line, int end);
 int		check_expand(char *str, int i);

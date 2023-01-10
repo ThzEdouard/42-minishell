@@ -93,7 +93,7 @@ void	ft_exec_process(t_exec *tmp, t_exec *p, char **envp, t_env **env)
 			ft_childs(tmp, envp, env);
 		tmp = tmp->next;
 	}
-	while (wait(&p->pid) > 0 && g_statesssss != 130)
+	while (wait(&p->pid) > 0 && g_statesssss != 1300)
 	{
 		g_statesssss = p->pid / 256;
 		close(p->pipefd[0]);

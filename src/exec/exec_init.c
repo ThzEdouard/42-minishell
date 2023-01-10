@@ -28,6 +28,8 @@ void	ft_exec_init(t_exec *data, t_env **env, int x)
 	{
 		close(data->pipefd[0]);
 		close(data->pipefd[1]);
+		if (data->prev != NULL && data->prev->cmd != NULL)
+			close(data->prev->pipefd[0]);
 		clear_env(env);
 		while (data->prev)
 			data = data->prev;
