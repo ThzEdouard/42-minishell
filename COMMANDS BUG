@@ -1,1 +1,4 @@
 < Makefile cat | < Makefile cat -e | pwd > qwerty
+ofe permission denied 126
+cat | exit
+ls '';

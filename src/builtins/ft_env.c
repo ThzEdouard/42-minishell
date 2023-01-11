@@ -12,6 +12,22 @@
 
 #include "../../include/minishell.h"
 
+int	ft_size_env(t_env *env)
+{
+	t_env	*tmp;
+	int		i;
+
+	i = 0;
+	tmp = env;
+	while (tmp)
+	{
+		if (tmp->str)
+			i++;
+		tmp = tmp->next;
+	}
+	return (i);
+}
+
 int	ft_env(t_env *env)
 {
 	t_env	*tmp;
@@ -20,7 +36,7 @@ int	ft_env(t_env *env)
 	while (tmp)
 	{
 		if (tmp->str)
-			printf("%s\n", tmp->str);
+			write(1, &tmp->str, ft_strlen(tmp->str));
 		tmp = tmp->next;
 	}
 	g_statesssss = 0;

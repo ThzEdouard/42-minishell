@@ -20,6 +20,16 @@ void	ft_free_paths(t_exec *data)
 	exit(1);
 }
 
+char	*ft_access_first(t_exec *exec)
+{
+	char	*cmd;
+
+	cmd = exec->cmd[0];
+	if (access(cmd, F_OK | X_OK) == 0)
+		return (cmd);
+	return (NULL);
+}
+
 char	*ft_access(t_exec *exec)
 {
 	int		i;
@@ -66,8 +76,8 @@ char	*ft_path(t_exec *exec, t_env *env)
 		}
 		env = env->next;
 	}
-	if (!paths)
-		return (NULL);
+	if (!paths || !env)
+		return (ft_access_first(exec));
 	if (env)
 		exec->paths = ft_split(exec->path, ':');
 	if (!exec->paths)
@@ -82,8 +92,12 @@ t_exec	*set_path(t_exec *t, t_env *env)
 	tmp = t;
 	while (tmp)
 	{
-		if (!tmp->path_cmd && tmp->cmd && env)
+		if (!tmp->path_cmd && tmp->cmd)
+		{
 			tmp->path_cmd = ft_path(tmp, env);
+			if (tmp->path_cmd)
+				puts(tmp->path_cmd);
+		}
 		tmp = tmp->next;
 	}
 	return (t);

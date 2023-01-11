@@ -12,14 +12,15 @@
 
 #include "../../include/minishell.h"
 
-char	*line_prompter(t_env **env, char **envp, t_list_token t, t_list_exec e)
+char	*line_prompter(t_env **env, t_list_token t, t_list_exec e)
 {
 	char	*line;
 	t_exec	*exec;
+	char	**envp;
 
+	init_sig();
 	while (1)
 	{
-		init_sig();
 		line = readline("Minishell > ");
 		if (!line)
 			break ;
@@ -29,7 +30,10 @@ char	*line_prompter(t_env **env, char **envp, t_list_token t, t_list_exec e)
 			{
 				exec = add_exec(t.first, *env);
 				token_clear(&t);
+				envp = new_envp(*env);
 				ft_exec(exec, envp, env);
+				if (envp)
+					free(envp);
 				e.first = exec;
 				exec_clear(&e);
 			}
@@ -46,11 +50,12 @@ void	prompter(t_env **env, char **envp)
 	t_list_exec		e;
 	char			*line;
 
+	(void)envp;
 	if (g_statesssss == 130)
 		return ;
 	exec_init(&e);
 	token_init(&t);
-	line = line_prompter(env, envp, t, e);
+	line = line_prompter(env, t, e);
 	if (!line)
 		ft_putstr_fd("exit\n", 1);
 }

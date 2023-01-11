@@ -46,3 +46,25 @@ void	free_add_exec(t_add values)
 	if (values.type)
 		free(values.type);
 }
+
+char	**new_envp(t_env *env)
+{
+	char	**envp;
+	t_env	*tmp;
+	int		i;
+
+	envp = malloc(sizeof(char *) * (ft_size_env(env) + 1));
+	if (!envp)
+		return (NULL);
+	envp[ft_size_env(env)] = NULL;
+	tmp = env;
+	i = 0;
+	while (tmp)
+	{
+		if (tmp->str)
+			envp[i] = tmp->str;
+		i++;
+		tmp = tmp->next;
+	}
+	return (envp);
+}

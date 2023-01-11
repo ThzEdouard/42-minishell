@@ -50,7 +50,7 @@ t_list_token	parsing_line(char *line)
 	token_init(&tmp);
 	while (*line)
 	{
-		while (*line && *line == 32)
+		while (*line && (*line == 32 || (*line >= 7 && *line <= 13)))
 			line ++;
 		i = 0;
 		while (line[i] && line[i] != 32 && ft_sep(line[i]))

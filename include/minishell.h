@@ -140,6 +140,8 @@ void	ft_childs(t_exec *data, char **envp, t_env **env);
 int		ft_exec_builtins(t_exec *data, t_env **env);
 int		ft_check_builtins(t_exec *data);
 int		ft_check_redirs(t_exec *data);
+char	**new_envp(t_env *env);
+int		ft_size_env(t_env *env);
 
 /*exec_init_builtins*/
 void	ft_exec_builtins_init(t_exec *data, t_env **env);
@@ -214,7 +216,7 @@ char	*change_expand(char *str, t_env *tmp_e, int *x);
 char	*check_arg_expand(char *str, int *x);
 /*prompter*/
 char	*expand_util(char *str, int i, t_env *tmp_e);
-char	*line_prompter(t_env **env, char **envp, t_list_token t, t_list_exec e);
+char	*line_prompter(t_env **env, t_list_token t, t_list_exec e);
 void	prompter(t_env **env, char **envp);
 
 /*verifications*/

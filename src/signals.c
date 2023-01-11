@@ -45,6 +45,4 @@ void	sig_int(int sig, siginfo_t *info, void *tmp)
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	else
-		ft_putstr_fd("\b\b\n", 1);
 }
