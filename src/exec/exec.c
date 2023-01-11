@@ -100,6 +100,8 @@ void	ft_exec_process(t_exec *tmp, t_exec *p, char **envp, t_env **env)
 		continue ;
 	}
 	tmp = p;
+	close(tmp->pipefd[0]);
+	close(tmp->pipefd[1]);
 	ft_unlink_heredoc(tmp);
 	ft_close_files(p);
 	if (g_statesssss == 1300)

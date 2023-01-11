@@ -35,6 +35,7 @@ void	ft_exec_init(t_exec *data, t_env **env, int x, char **envp)
 		clear_env(env);
 		while (data->prev)
 			data = data->prev;
+		ft_close_files(data);
 		p.first = data;
 		exec_clear(&p);
 		exit (g_statesssss);
@@ -93,6 +94,7 @@ void	ft_exec_init_3(t_exec *data, t_env **env, int y, struct stat *stats, char *
 		if (data->cmd && !ft_strcmp(data->cmd[0], "."))
 			y = 1;
 		data = data_prev(data);
+		ft_close_files(data);
 		p.first = data;
 		exec_clear(&p);
 		if (envp)
@@ -105,6 +107,7 @@ void	ft_exec_init_3(t_exec *data, t_env **env, int y, struct stat *stats, char *
 		|| (data->cmd && !ft_strcmp(data->cmd[0], "~")))
 	{
 		data = data_prev(data);
+		ft_close_files(data);
 		p.first = data;
 		exec_clear(&p);
 		if (envp)

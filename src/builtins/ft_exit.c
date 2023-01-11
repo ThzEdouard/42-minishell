@@ -77,6 +77,7 @@ void	ft_exit(t_exec *data, t_env **env, char **cmd)
 	int	i;
 
 	i = 0;
+	printf("eeee");
 	while (cmd[i])
 		i++;
 	if (i == 1)
