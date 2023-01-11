@@ -42,6 +42,13 @@ int	pars_quote(char *line, int i)
 	return (i);
 }
 
+int	ft_test(char c)
+{
+	if (c == 32 || (c >= 7 && c <= 13))
+		return (1);
+	return (0);
+}
+
 t_list_token	parsing_line(char *line)
 {
 	t_list_token	tmp;
@@ -50,18 +57,20 @@ t_list_token	parsing_line(char *line)
 	token_init(&tmp);
 	while (*line)
 	{
-		while (*line && (*line == 32 || (*line >= 7 && *line <= 13)))
+		while (*line && ft_test(*line))
 			line ++;
 		i = 0;
-		while (line[i] && line[i] != 32 && ft_sep(line[i]))
+		while (line[i] && !ft_test(line[i]) && ft_sep(line[i]))
 		{
 			if (line[i] == 34 || line[i] == 39)
 				i = pars_quote(line, i);
-			if (line[i] && line[i] != 32)
+			if (line[i] && (line[i] != 32 || (line[i] >= 7 && line[i] <= 13)))
 				i++;
+			else
+				break ;
 		}
 		if (!i)
-			while (line[i] && line[i] != 32 && !ft_sep(line[i]))
+			while (line[i] && !ft_test(line[i]) && !ft_sep(line[i]))
 				i++;
 		if (i && add_list(&tmp, line, i))
 			return (token_clear(&tmp), tmp);

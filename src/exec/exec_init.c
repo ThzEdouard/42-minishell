@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
 
-void	ft_exec_init(t_exec *data, t_env **env, int x)
+void	ft_exec_init(t_exec *data, t_env **env, int x, char **envp)
 {
 	int			i;
 	t_list_exec	p;
@@ -26,6 +26,8 @@ void	ft_exec_init(t_exec *data, t_env **env, int x)
 	}
 	if (ft_exec_builtins(data, env) || x)
 	{
+		if (envp)
+			free(envp);
 		close(data->pipefd[0]);
 		close(data->pipefd[1]);
 		if (data->prev != NULL && data->prev->cmd != NULL)
@@ -37,7 +39,7 @@ void	ft_exec_init(t_exec *data, t_env **env, int x)
 		exec_clear(&p);
 		exit (g_statesssss);
 	}
-	ft_exec_init_3(data, env, 0, &stats);
+	ft_exec_init_3(data, env, 0, &stats, envp);
 }
 
 void	ft_exec_init_2(t_exec *data, int i)
@@ -79,7 +81,7 @@ t_exec	*data_prev(t_exec *data)
 	return (d);
 }
 
-void	ft_exec_init_3(t_exec *data, t_env **env, int y, struct stat *stats)
+void	ft_exec_init_3(t_exec *data, t_env **env, int y, struct stat *stats, char **envp)
 {
 	t_list_exec	p;
 
@@ -93,6 +95,8 @@ void	ft_exec_init_3(t_exec *data, t_env **env, int y, struct stat *stats)
 		data = data_prev(data);
 		p.first = data;
 		exec_clear(&p);
+		if (envp)
+			free(envp);
 		if (y)
 			ft_message(".: usage: . filename\n", data, env, 2);
 		ft_message("Error: Command not found\n", data, env, 127);
@@ -103,6 +107,8 @@ void	ft_exec_init_3(t_exec *data, t_env **env, int y, struct stat *stats)
 		data = data_prev(data);
 		p.first = data;
 		exec_clear(&p);
+		if (envp)
+			free(envp);
 		ft_message(ERROR_1, data, env, 126);
 	}
 }

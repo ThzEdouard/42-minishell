@@ -148,9 +148,9 @@ void	ft_exec_builtins_init(t_exec *data, t_env **env);
 void	ft_exec_builtins_init_2(t_exec *data, int i);
 
 /*exec_init*/
-void	ft_exec_init(t_exec *data, t_env **env, int x);
+void	ft_exec_init(t_exec *data, t_env **env, int x, char **envp);
 void	ft_exec_init_2(t_exec *data, int i);
-void	ft_exec_init_3(t_exec *data, t_env **env, int y, struct stat *stats);
+void	ft_exec_init_3(t_exec *data, t_env **env, int y, struct stat *stats, char **envp);
 void	add_exec_init(t_list_exec *l, t_add *values);
 void	exec_init(t_list_exec *l);
 

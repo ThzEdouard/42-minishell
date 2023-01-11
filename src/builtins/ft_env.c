@@ -36,7 +36,7 @@ int	ft_env(t_env *env)
 	while (tmp)
 	{
 		if (tmp->str)
-			write(1, &tmp->str, ft_strlen(tmp->str));
+			ft_putendl_fd(tmp->str, 0);
 		tmp = tmp->next;
 	}
 	g_statesssss = 0;

@@ -35,15 +35,17 @@ void	ft_childs(t_exec *data, char **envp, t_env **env)
 			ft_close_files(data);
 			p.first = data;
 			exec_clear(&p);
+			if (envp)
+				free(envp);
 			exit(g_statesssss);
 		}
 		if (data->fileproblem)
-			ft_exec_init(data, env, 1);
+			ft_exec_init(data, env, 1, envp);
 		if (data->prev != NULL)
 			dup2(data->prev->pipefd[0], STDIN_FILENO);
 		if (data->next != NULL)
 			dup2(data->pipefd[1], STDOUT_FILENO);
-		ft_exec_init(data, env, 0);
+		ft_exec_init(data, env, 0, envp);
 		close(data->pipefd[0]);
 		close(data->pipefd[1]);
 		if (data->cmd)
