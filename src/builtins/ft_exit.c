@@ -32,6 +32,8 @@ void	exec_clears(t_exec *l)
 		tmp->path_cmd = NULL;
 		close(tmp->savein);
 		close(tmp->saveout);
+		close(tmp->pipefd[0]);
+		close(tmp->pipefd[1]);
 		ft_free_all(tmp->filename);
 		if (elem->type)
 			free(elem->type);
@@ -42,7 +44,6 @@ void	exec_clears(t_exec *l)
 
 void	ft_free_exit(t_exec *data, t_env **env, int code)
 {
-	printf("exit\n");
 	clear_env(env);
 	exec_clears(data);
 	exit(code);
@@ -64,7 +65,7 @@ void	ft_exit_util(t_exec *data, t_env **env, char **cmd)
 			}
 			else
 			{
-				printf("bash: exit: %s: numeric argument required\n", cmd[1]);
+				ft_putstr_fd("bash: exit: numeric argument required\n", 0);
 				ft_free_exit(data, env, 2);
 			}
 		}
@@ -77,15 +78,19 @@ void	ft_exit(t_exec *data, t_env **env, char **cmd)
 	int	i;
 
 	i = 0;
-	printf("eeee");
 	while (cmd[i])
 		i++;
+	while (data->prev)
+		data = data->prev;
 	if (i == 1)
+	{
+		ft_putstr_fd("exit\n", 0);
 		ft_free_exit(data, env, g_statesssss);
+	}
 	ft_exit_util(data, env, cmd);
 	if (i > 2)
 	{
-		printf("bash: exit: too many arguments\n");
+		ft_putstr_fd("bash: exit: too many arguments\n", 0);
 		return ;
 	}
 	else if (i == 2)
@@ -94,5 +99,6 @@ void	ft_exit(t_exec *data, t_env **env, char **cmd)
 		g_statesssss = 256 - (-g_statesssss % 256);
 	else
 		g_statesssss = g_statesssss % 256;
+	ft_putstr_fd("exit\n", 0);
 	ft_free_exit(data, env, g_statesssss);
 }

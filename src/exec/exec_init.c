@@ -24,7 +24,7 @@ void	ft_exec_init(t_exec *data, t_env **env, int x, char **envp)
 		ft_exec_init_2(data, i);
 		i++;
 	}
-	if (ft_exec_builtins(data, env) || x)
+	if (ft_check_builtins(data) || x)
 	{
 		if (envp)
 			free(envp);
@@ -32,6 +32,7 @@ void	ft_exec_init(t_exec *data, t_env **env, int x, char **envp)
 		close(data->pipefd[1]);
 		if (data->prev != NULL && data->prev->cmd != NULL)
 			close(data->prev->pipefd[0]);
+		ft_exec_builtins(data, env);
 		clear_env(env);
 		while (data->prev)
 			data = data->prev;
@@ -99,6 +100,7 @@ void	ft_exec_init_3(t_exec *data, t_env **env, int y, struct stat *stats, char *
 		exec_clear(&p);
 		if (envp)
 			free(envp);
+		//if (access(data->cmd[0]))
 		if (y)
 			ft_message(".: usage: . filename\n", data, env, 2);
 		ft_message("Error: Command not found\n", data, env, 127);

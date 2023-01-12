@@ -61,7 +61,7 @@ int	ft_echo(char **cmd)
 	{
 		while (cmd[i])
 		{
-			printf("%s", cmd[i++]);
+			ft_putstr_fd(cmd[i++], 1);
 			if (cmd[i])
 				printf(" ");
 		}
@@ -69,11 +69,11 @@ int	ft_echo(char **cmd)
 	}
 	while (cmd[i])
 	{
-		printf("%s", cmd[i++]);
+		ft_putstr_fd(cmd[i++], 1);
 		if (cmd[i])
-			printf(" ");
+			ft_putstr_fd(" ", 1);
 	}
-	printf("\n");
+	ft_putstr_fd("\n", 1);
 	g_statesssss = 0;
 	return (1);
 }

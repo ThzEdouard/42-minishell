@@ -6,7 +6,7 @@
 /*   By: eflaquet <eflaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 18:48:47 by eflaquet          #+#    #+#             */
-/*   Updated: 2023/01/07 11:27:37 by eflaquet         ###   ########.fr       */
+/*   Updated: 2023/01/12 18:17:26 by eflaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,11 +119,16 @@ void	expand(t_token *t, t_env *env, int i)
 	tmp_e = env;
 	while (tmp_t)
 	{
-		if (tmp_t->type == WORD)
+		if ((tmp_t->type == WORD) || (tmp_t->prev && tmp_t->prev->type != HEREDOC) || (tmp_t->prev && tmp_t->prev->prev && tmp_t->prev->type != WORD && tmp_t->prev->prev->type != HEREDOC))
 		{
 			i = check_expand(tmp_t->str, i);
 			if (tmp_t->str[i] && tmp_t->str[i] == 36)
 				tmp_t->str = expand_util(tmp_t->str, i, tmp_e);
+		}
+		else
+		{
+			tmp_t = tmp_t->next;
+			continue;
 		}
 		if (!tmp_t->str[i] || !tmp_t->str[i + 1] || tmp_t->type != WORD)
 		{

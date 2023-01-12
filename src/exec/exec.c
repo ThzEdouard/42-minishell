@@ -92,12 +92,24 @@ void	ft_exec_process(t_exec *tmp, t_exec *p, char **envp, t_env **env)
 		ft_childs(tmp, envp, env);
 		tmp = tmp->next;
 	}
-	while (wait(&p->pid) > 0 && g_statesssss != 1300)
+	tmp = p;
+	while (tmp && waitpid(tmp->pid, &g_statesssss, 0) > 0 && g_statesssss != 1300)
 	{
-		g_statesssss = p->pid / 256;
-		close(p->pipefd[0]);
-		close(p->pipefd[1]);
-		continue ;
+		if (WTERMSIG(g_statesssss) == 2)
+		{
+			ft_putstr_fd("\n", 0);
+			g_statesssss = 130;
+		}
+		else if (WTERMSIG(g_statesssss) == 3)
+		{
+			ft_putstr_fd("\n", 0);
+			g_statesssss = 130;
+		}
+		else
+			g_statesssss = WEXITSTATUS(g_statesssss);
+		close(tmp->pipefd[0]);
+		close(tmp->pipefd[1]);
+		tmp = tmp->next;
 	}
 	tmp = p;
 	close(tmp->pipefd[0]);
