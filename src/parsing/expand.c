@@ -40,29 +40,6 @@ int	check_expand(char *str, int i)
 	return (i);
 }
 
-char	*check_arg_expand(char *str, int *x)
-{
-	int	y;
-	int	i;
-
-	i = *x;
-	y = i;
-	i++;
-	if (str[i] && (!ft_isalpha(str[i]) || str[i] != '$'
-			|| str[i] != '"' || str[i] != '\''))
-		i++;
-	while (str[i])
-	{
-		str[y] = str[i];
-		i++;
-		y++;
-	}
-	str[y] = 0;
-	i = 0;
-	*x = i;
-	return (str);
-}
-
 char	*rename_expand(char *str, char *tmp_line_env, int i, int y)
 {
 	char	*tmp_str;
@@ -112,28 +89,35 @@ char	*change_expand(char *str, t_env *tmp_e, int *x)
 
 void	expand(t_token *t, t_env *env, int i)
 {
-	t_env	*tmp_e;
-	t_token	*tmp_t;
+	t_env	*tp_e;
+	t_token	*tp_t;
 
-	tmp_t = t;
-	tmp_e = env;
-	while (tmp_t)
+	tp_t = t;
+	tp_e = env;
+	while (tp_t)
 	{
-		if ((tmp_t->type == WORD) || (tmp_t->prev && tmp_t->prev->type != HEREDOC) || (tmp_t->prev && tmp_t->prev->prev && tmp_t->prev->type != WORD && tmp_t->prev->prev->type != HEREDOC))
+		if ((tp_t->type == WORD) || (tp_t->prev && tp_t->prev->type != HEREDOC)
+			|| (tp_t->prev && tp_t->prev->prev && tp_t->prev->type != WORD
+				&& tp_t->prev->prev->type != HEREDOC))
 		{
-			i = check_expand(tmp_t->str, i);
-			if (tmp_t->str[i] && tmp_t->str[i] == 36)
-				tmp_t->str = expand_util(tmp_t->str, i, tmp_e);
+			i = check_expand(tp_t->str, i);
+			expand_2(tp_e, tp_t, i);
 		}
 		else
 		{
-			tmp_t = tmp_t->next;
-			continue;
+			tp_t = tp_t->next;
+			continue ;
 		}
-		if (!tmp_t->str[i] || !tmp_t->str[i + 1] || tmp_t->type != WORD)
+		if (!tp_t->str[i] || !tp_t->str[i + 1] || tp_t->type != WORD)
 		{
-			tmp_t = tmp_t->next;
+			tp_t = tp_t->next;
 			i = 0;
 		}
 	}
+}
+
+void	expand_2(t_env *tmp_e, t_token *tmp_t, int i)
+{
+	if (tmp_t->str[i] && tmp_t->str[i] == 36)
+		tmp_t->str = expand_util(tmp_t->str, i, tmp_e);
 }

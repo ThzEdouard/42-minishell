@@ -26,10 +26,7 @@ void	ft_exec_init(t_exec *data, t_env **env, int x, char **envp)
 	}
 	if (ft_check_builtins(data) || x)
 	{
-		if (envp)
-			free(envp);
-		close(data->pipefd[0]);
-		close(data->pipefd[1]);
+		ft_close_free(data, envp);
 		if (data->prev != NULL && data->prev->cmd != NULL)
 			close(data->prev->pipefd[0]);
 		ft_exec_builtins(data, env);
@@ -41,7 +38,7 @@ void	ft_exec_init(t_exec *data, t_env **env, int x, char **envp)
 		exec_clear(&p);
 		exit (g_statesssss);
 	}
-	ft_exec_init_3(data, env, 0, &stats, envp);
+	ft_exec_init_3(data, env, &stats, envp);
 }
 
 void	ft_exec_init_2(t_exec *data, int i)
@@ -83,28 +80,12 @@ t_exec	*data_prev(t_exec *data)
 	return (d);
 }
 
-void	ft_exec_init_3(t_exec *data, t_env **env, int y, struct stat *stats, char **envp)
+void	ft_exec_init_3(t_exec *data, t_env **env,
+			struct stat *stats, char **envp)
 {
 	t_list_exec	p;
 
-	if (!data->path_cmd || (data->cmd && (ft_strcmp(data->cmd[0], "~")
-				&& (!ft_strcmp(data->cmd[0], ".")
-					|| !ft_strcmp(data->cmd[0], "..")
-					|| !ft_strcmp(data->cmd[0], "")))))
-	{
-		if (data->cmd && !ft_strcmp(data->cmd[0], "."))
-			y = 1;
-		data = data_prev(data);
-		ft_close_files(data);
-		p.first = data;
-		exec_clear(&p);
-		if (envp)
-			free(envp);
-		//if (access(data->cmd[0]))
-		if (y)
-			ft_message(".: usage: . filename\n", data, env, 2);
-		ft_message("Error: Command not found\n", data, env, 127);
-	}
+	ft_exec_init_4(data, env, envp, p);
 	if ((stat(data->path_cmd, stats) == 0 && S_ISDIR(stats->st_mode))
 		|| (data->cmd && !ft_strcmp(data->cmd[0], "~")))
 	{
@@ -118,8 +99,26 @@ void	ft_exec_init_3(t_exec *data, t_env **env, int y, struct stat *stats, char *
 	}
 }
 
-void	exec_init(t_list_exec *l)
+void	ft_exec_init_4(t_exec *data, t_env **env, char **envp, t_list_exec p)
 {
-	l->first = NULL;
-	l->last = NULL;
+	int	y;
+
+	y = 0;
+	if (!data->path_cmd || (data->cmd && (ft_strcmp(data->cmd[0], "~")
+				&& (!ft_strcmp(data->cmd[0], ".")
+					|| !ft_strcmp(data->cmd[0], "..")
+					|| !ft_strcmp(data->cmd[0], "")))))
+	{
+		if (data->cmd && !ft_strcmp(data->cmd[0], "."))
+			y = 1;
+		data = data_prev(data);
+		ft_close_files(data);
+		p.first = data;
+		exec_clear(&p);
+		if (envp)
+			free(envp);
+		if (y)
+			ft_message(".: usage: . filename\n", data, env, 2);
+		ft_message("Error: Command not found\n", data, env, 127);
+	}
 }

@@ -10,17 +10,17 @@ FT_MINISHELL = minishell signals
 
 SRC_PARSING = src/parsing/
 FT_PARSING = prompter list_token parsing add_token errors \
-			verifications expand extand
+			verifications expand extand parsing_utils
 
 SRC_ENV = src/env/
 FT_ENV = list_env
 
 SRC_EXEC = src/exec/
 FT_EXEC = list_exec add_exec childs exec heredoc exec_utils add_exec_cmd \
-		exec_init exec_init_builtins files exec_malloc
+		exec_init exec_init_builtins files exec_malloc exec_utils_2
 
 SRC_BUILTINS = src/builtins/
-FT_BUILTINS = ft_cd ft_echo ft_env ft_exit ft_export ft_pwd ft_unset
+FT_BUILTINS = ft_cd ft_echo ft_env ft_exit ft_exit_utils ft_export ft_pwd ft_unset
 
 SRC_FILES+=$(addprefix $(SRC_MINISHEL),$(FT_MINISHELL))
 SRC_FILES+=$(addprefix $(SRC_PARSING),$(FT_PARSING))

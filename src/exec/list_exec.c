@@ -102,9 +102,3 @@ t_exec	*set_path(t_exec *t, t_env *env)
 	}
 	return (t);
 }
-
-void	exec_clear_reset(t_list_exec *l)
-{
-	l->first = NULL;
-	l->last = NULL;
-}

@@ -12,6 +12,44 @@
 
 #include "../../include/minishell.h"
 
+int	ft_exec_builtins(t_exec *data, t_env **env)
+{
+	if (data->cmd && !ft_strcmp(data->cmd[0], "cd"))
+		return (ft_cd(env, data->cmd[1]), 1);
+	if (data->cmd && !ft_strcmp(data->cmd[0], "echo"))
+		return (ft_echo(data->cmd), 1);
+	if (data->cmd && !ft_strcmp(data->cmd[0], "env"))
+		return (ft_env(*env), 1);
+	if (data->cmd && !ft_strcmp(data->cmd[0], "exit"))
+		return (ft_exit(data, env, data->cmd), 1);
+	if (data->cmd && !ft_strcmp(data->cmd[0], "export"))
+		return (ft_export(env, data->cmd), 1);
+	if (data->cmd && !ft_strcmp(data->cmd[0], "pwd"))
+		return (ft_pwd(), 1);
+	if (data->cmd && !ft_strcmp(data->cmd[0], "unset"))
+		return (ft_unset(env, data->cmd[1]), 1);
+	return (0);
+}
+
+int	ft_check_builtins(t_exec *data)
+{
+	if (data->cmd && !ft_strcmp(data->cmd[0], "cd"))
+		return (1);
+	if (data->cmd && !ft_strcmp(data->cmd[0], "echo"))
+		return (1);
+	if (data->cmd && !ft_strcmp(data->cmd[0], "env"))
+		return (1);
+	if (data->cmd && !ft_strcmp(data->cmd[0], "exit"))
+		return (1);
+	if (data->cmd && !ft_strcmp(data->cmd[0], "export"))
+		return (1);
+	if (data->cmd && !ft_strcmp(data->cmd[0], "pwd"))
+		return (1);
+	if (data->cmd && !ft_strcmp(data->cmd[0], "unset"))
+		return (1);
+	return (0);
+}
+
 void	ft_exec_builtins_init(t_exec *data, t_env **env)
 {
 	int	i;

@@ -93,7 +93,8 @@ void	ft_exec_process(t_exec *tmp, t_exec *p, char **envp, t_env **env)
 		tmp = tmp->next;
 	}
 	tmp = p;
-	while (tmp && waitpid(tmp->pid, &g_statesssss, 0) > 0 && g_statesssss != 1300)
+	while (tmp && waitpid(tmp->pid, &g_statesssss, 0)
+		> 0 && g_statesssss != 1300)
 	{
 		if (WTERMSIG(g_statesssss) == 2)
 		{
@@ -107,10 +108,14 @@ void	ft_exec_process(t_exec *tmp, t_exec *p, char **envp, t_env **env)
 		}
 		else
 			g_statesssss = WEXITSTATUS(g_statesssss);
-		close(tmp->pipefd[0]);
-		close(tmp->pipefd[1]);
+		ft_little_closes(tmp);
 		tmp = tmp->next;
 	}
+	ft_exec_process_2(tmp, p);
+}
+
+void	ft_exec_process_2(t_exec *tmp, t_exec *p)
+{
 	tmp = p;
 	close(tmp->pipefd[0]);
 	close(tmp->pipefd[1]);
@@ -122,14 +127,4 @@ void	ft_exec_process(t_exec *tmp, t_exec *p, char **envp, t_env **env)
 		close(tmp->savein);
 		g_statesssss = 130;
 	}
-}
-
-void	ft_exec_process_builtins(t_exec *tmp, t_exec *p, t_env **env)
-{
-	ft_exec_builtins_init(tmp, env);
-	ft_close_files(p);
-	dup2(tmp->savein, STDIN_FILENO);
-	dup2(tmp->saveout, STDOUT_FILENO);
-	close(tmp->savein);
-	close(tmp->saveout);
 }

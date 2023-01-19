@@ -12,47 +12,9 @@
 
 #include "../../include/minishell.h"
 
-char	*expand_util(char *str, int i, t_env *tmp_e)
-{
-	if (str[i + 1] && !ft_isalpha(str[i + 1])
-		&& str[i + 1] == '$'
-		&& (str[i + 1] != '_' || str[i + 1] != '?'))
-		str = check_arg_expand(str, &i);
-	else if (str[i + 1])
-		str = change_expand(str, tmp_e, &i);
-	return (str);
-}
-
-int	ft_sep(char line)
-{
-	if (line == '|' || line == '<' || line == '>' )
-		return (SUCCESS);
-	return (FAIL);
-}
-
-int	pars_quote(char *line, int i)
-{
-	char	c;
-
-	c = line[i];
-	i++;
-	while (line[i] && line[i] != c)
-		i++;
-	c = 0;
-	return (i);
-}
-
-int	ft_test(char c)
-{
-	if (c == 32 || (c >= 7 && c <= 13))
-		return (1);
-	return (0);
-}
-
-t_list_token	parsing_line(char *line)
+t_list_token	parsing_line(char *line, int i)
 {
 	t_list_token	tmp;
-	int				i;
 
 	token_init(&tmp);
 	while (*line)
@@ -82,9 +44,11 @@ t_list_token	parsing_line(char *line)
 int	parsing(char *line, t_list_token *t, t_env *env)
 {
 	t_list_token	l;
+	int				i;
 
+	i = 0;
 	token_init(&l);
-	l = parsing_line(line);
+	l = parsing_line(line, i);
 	if (l.first)
 	{
 		add_token(l.first);
@@ -97,4 +61,38 @@ int	parsing(char *line, t_list_token *t, t_env *env)
 		return (SUCCESS);
 	}
 	return (FAIL);
+}
+
+char	*expand_util(char *str, int i, t_env *tmp_e)
+{
+	if (str[i + 1] && !ft_isalpha(str[i + 1])
+		&& str[i + 1] == '$'
+		&& (str[i + 1] != '_' || str[i + 1] != '?'))
+		str = check_arg_expand(str, &i);
+	else if (str[i + 1])
+		str = change_expand(str, tmp_e, &i);
+	return (str);
+}
+
+char	*check_arg_expand(char *str, int *x)
+{
+	int	y;
+	int	i;
+
+	i = *x;
+	y = i;
+	i++;
+	if (str[i] && (!ft_isalpha(str[i]) || str[i] != '$'
+			|| str[i] != '"' || str[i] != '\''))
+		i++;
+	while (str[i])
+	{
+		str[y] = str[i];
+		i++;
+		y++;
+	}
+	str[y] = 0;
+	i = 0;
+	*x = i;
+	return (str);
 }

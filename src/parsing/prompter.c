@@ -31,17 +31,27 @@ char	*line_prompter(t_env **env, t_list_token t, t_list_exec e)
 				exec = add_exec(t.first, *env);
 				token_clear(&t);
 				envp = new_envp(*env);
-				ft_exec(exec, envp, env);
-				if (envp)
-					free(envp);
+				line_prompter_2(exec, env, envp);
 				e.first = exec;
 				exec_clear(&e);
 			}
 		}
-		add_history(line);
-		free(line);
+		ft_history_free(line);
 	}
 	return (line);
+}
+
+void	line_prompter_2(t_exec *exec, t_env **env, char **envp)
+{
+	ft_exec(exec, envp, env);
+	if (envp)
+		free(envp);
+}
+
+void	ft_history_free(char *line)
+{
+	add_history(line);
+	free(line);
 }
 
 void	prompter(t_env **env, char **envp)

@@ -36,21 +36,6 @@ int	checking_args(char **cmd, int *t, int i)
 		return (*t = r + 1, SUCCESS);
 	return (*t = r + 1, FAIL);
 }
-//
-// void	check_quit(char **cmd)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (cmd[i])
-// 	{
-// 		if (cmd[i][0] == 34 || cmd[i][0] == 39)
-// 		{
-// 			cmd[i] = ft_free_substr(cmd[i], 1, ft_strlen(cmd[i]) - 2);
-// 		}
-// 		i++;
-// 	}
-// }
 
 int	ft_echo(char **cmd)
 {

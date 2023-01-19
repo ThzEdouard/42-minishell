@@ -95,5 +95,5 @@ void	exec_clear(t_list_exec *l)
 		elem = elem->next;
 		free(tmp);
 	}
-	exec_clear_reset(l);
+	exec_init(l);
 }

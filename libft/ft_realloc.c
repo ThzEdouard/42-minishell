@@ -62,17 +62,6 @@ char	**ft_double_realloc_2(char **src, char **malloc_src)
 	y = 0;
 	while (src[v] && !ft_strncmp(src[v], "", 1))
 		v++;
-	// if (src[v])
-	// {
-	// 	while (src[v])
-	// 	{
-	// 		malloc_src[y++] = ft_strdup(src[v++]);
-	// 		while (src[v] && !ft_strncmp(src[v], "", 1))
-	// 			v++;
-	// 	}
-	// 	malloc_src[y] = 0;
-	// 	return (malloc_src);
-	// }
 	while (src[y])
 	{
 		malloc_src[y] = ft_strdup(src[y]);

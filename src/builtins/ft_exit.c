@@ -30,23 +30,13 @@ void	exec_clears(t_exec *l)
 				free(tmp->path_cmd);
 		}
 		tmp->path_cmd = NULL;
-		close(tmp->savein);
-		close(tmp->saveout);
-		close(tmp->pipefd[0]);
-		close(tmp->pipefd[1]);
+		ft_closes(tmp);
 		ft_free_all(tmp->filename);
 		if (elem->type)
 			free(elem->type);
 		elem = elem->next;
 		free(tmp);
 	}
-}
-
-void	ft_free_exit(t_exec *data, t_env **env, int code)
-{
-	clear_env(env);
-	exec_clears(data);
-	exit(code);
 }
 
 void	ft_exit_util(t_exec *data, t_env **env, char **cmd)
@@ -83,10 +73,7 @@ void	ft_exit(t_exec *data, t_env **env, char **cmd)
 	while (data->prev)
 		data = data->prev;
 	if (i == 1)
-	{
-		ft_putstr_fd("exit\n", 0);
-		ft_free_exit(data, env, g_statesssss);
-	}
+		ft_print_exit(data, env);
 	ft_exit_util(data, env, cmd);
 	if (i > 2)
 	{
@@ -99,6 +86,5 @@ void	ft_exit(t_exec *data, t_env **env, char **cmd)
 		g_statesssss = 256 - (-g_statesssss % 256);
 	else
 		g_statesssss = g_statesssss % 256;
-	ft_putstr_fd("exit\n", 0);
-	ft_free_exit(data, env, g_statesssss);
+	ft_print_exit(data, env);
 }
