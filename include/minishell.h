@@ -138,8 +138,8 @@ char	**new_envp(t_env *env);
 
 /*childs*/
 void	ft_childs(t_exec *data, char **envp, t_env **env);
-void	ft_execve(t_exec *data, char **envp);
-void	ft_no_commands(t_exec *data, char **envp, t_env **env, t_list_exec p);
+void	ft_execve(t_exec *data, char **envp, t_env **env);
+void	ft_no_commands(t_exec *data, char **envp, t_env **env);
 int		ft_check_redirs(t_exec *data);
 
 /*exec_init_builtins*/

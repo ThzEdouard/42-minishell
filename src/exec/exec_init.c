@@ -16,7 +16,7 @@ void	ft_exec_init(t_exec *data, t_env **env, int x, char **envp)
 {
 	int			i;
 	t_list_exec	p;
-	struct stat	stats;
+	//struct stat	stats;
 
 	i = 0;
 	while (data->type[i])
@@ -38,7 +38,6 @@ void	ft_exec_init(t_exec *data, t_env **env, int x, char **envp)
 		exec_clear(&p);
 		exit (g_statesssss);
 	}
-	ft_exec_init_3(data, env, &stats, envp);
 }
 
 void	ft_exec_init_2(t_exec *data, int i)
@@ -80,45 +79,7 @@ t_exec	*data_prev(t_exec *data)
 	return (d);
 }
 
-void	ft_exec_init_3(t_exec *data, t_env **env,
-			struct stat *stats, char **envp)
+void	error_mgs_fork(t_exec *data)
 {
-	t_list_exec	p;
-
-	ft_exec_init_4(data, env, envp, p);
-	if ((stat(data->path_cmd, stats) == 0 && S_ISDIR(stats->st_mode))
-		|| (data->cmd && !ft_strcmp(data->cmd[0], "~")))
-	{
-		data = data_prev(data);
-		ft_close_files(data);
-		p.first = data;
-		exec_clear(&p);
-		if (envp)
-			free(envp);
-		ft_message(ERROR_1, data, env, 126);
-	}
-}
-
-void	ft_exec_init_4(t_exec *data, t_env **env, char **envp, t_list_exec p)
-{
-	int	y;
-
-	y = 0;
-	if (!data->path_cmd || (data->cmd && (ft_strcmp(data->cmd[0], "~")
-				&& (!ft_strcmp(data->cmd[0], ".")
-					|| !ft_strcmp(data->cmd[0], "..")
-					|| !ft_strcmp(data->cmd[0], "")))))
-	{
-		if (data->cmd && !ft_strcmp(data->cmd[0], "."))
-			y = 1;
-		data = data_prev(data);
-		ft_close_files(data);
-		p.first = data;
-		exec_clear(&p);
-		if (envp)
-			free(envp);
-		if (y)
-			ft_message(".: usage: . filename\n", data, env, 2);
-		ft_message("Error: Command not found\n", data, env, 127);
-	}
+	
 }

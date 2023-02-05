@@ -14,8 +14,6 @@
 
 void	ft_childs(t_exec *data, char **envp, t_env **env)
 {
-	t_list_exec	p;
-
 	if (pipe(data->pipefd) == -1)
 		ft_error("Pipe Error");
 	data->pid = fork();
@@ -26,7 +24,7 @@ void	ft_childs(t_exec *data, char **envp, t_env **env)
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
 		if (!data->cmd)
-			ft_no_commands(data, envp, env, p);
+			ft_no_commands(data, envp, env);
 		if (data->fileproblem)
 			ft_exec_init(data, env, 1, envp);
 		if (data->prev != NULL)
@@ -34,23 +32,26 @@ void	ft_childs(t_exec *data, char **envp, t_env **env)
 		if (data->next != NULL)
 			dup2(data->pipefd[1], STDOUT_FILENO);
 		ft_exec_init(data, env, 0, envp);
-		ft_execve(data, envp);
+		ft_execve(data, envp, env);
 	}
 	close(data->pipefd[1]);
 	if (data->prev != NULL && data->prev->cmd != NULL)
 		close(data->prev->pipefd[0]);
 }
 
-void	ft_execve(t_exec *data, char **envp)
+void	ft_execve(t_exec *data, char **envp, t_env **env)
 {
 	close(data->pipefd[0]);
 	close(data->pipefd[1]);
 	if (data->cmd)
 		execve(data->path_cmd, data->cmd, envp);
+	ft_no_commands(data, envp, env);
 }
 
-void	ft_no_commands(t_exec *data, char **envp, t_env **env, t_list_exec p)
+void	ft_no_commands(t_exec *data, char **envp, t_env **env)
 {
+	t_list_exec	p;
+
 	close(data->pipefd[0]);
 	close(data->pipefd[1]);
 	clear_env(env);
