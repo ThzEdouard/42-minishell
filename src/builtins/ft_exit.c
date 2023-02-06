@@ -90,7 +90,7 @@ void	ft_exit(t_exec *data, t_env **env, char **cmd, char **envp)
 		ft_free_exit(data, env, 2, envp);
 		return ;
 	}
-	else if (i == 2)
+	if (i == 2)
 		g_statesssss = ft_atoi(cmd[1]);
 	if (g_statesssss < 0)
 		g_statesssss = 256 - (-g_statesssss % 256);
