@@ -15,18 +15,11 @@
 int	ft_cd(t_env **env, char *cmd)
 {
 	(void)env;
-	if (!cmd || access(cmd, F_OK | X_OK) == -1)
-	{
-		printf(ERROR_5, NAME_SHELL_ERROR, "cd", cmd);
-		g_statesssss = 0;
-		return (0);
-	}
-	if (chdir(cmd) == 1)
-	{
-		perror("chdir() to failed");
-		g_statesssss = 1;
-		return (1);
-	}
-	g_statesssss = 0;
+
+	g_statesssss = chdir(cmd);
+    if (g_statesssss < 0)
+        g_statesssss *= -1;
+    if (g_statesssss != 0)
+        ft_putstr_fd(strerror(errno),  2);
 	return (0);
 }
