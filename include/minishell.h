@@ -175,7 +175,8 @@ void	exec_clear(t_list_exec *l);
 
 /*exec_utils_2*/
 void	ft_little_closes(t_exec *tmp);
-void	ft_exec_process_builtins(t_exec *tmp, t_exec *p, t_env **env, char **envp);
+void	ft_exec_process_builtins(t_exec *tmp, t_exec *p,
+			t_env **env, char **envp);
 void	exec_init(t_list_exec *l);
 void	ft_close_free(t_exec *data, char **envp);
 

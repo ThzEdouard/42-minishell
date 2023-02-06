@@ -82,7 +82,8 @@ void	ft_exit(t_exec *data, t_env **env, char **cmd, char **envp)
 		ft_putstr_fd("bash: exit: too many arguments\n", 0);
 		return ;
 	}
-	else if (ft_strlen(cmd[1]) > 19 || !ft_strncmp(cmd[1] + 1, "9223372036854775807", 20))
+	else if (ft_strlen(cmd[1]) > 19
+		|| !ft_strncmp(cmd[1] + 1, "9223372036854775807", 20))
 	{
 		ft_putstr_fd("bash: exit: ", 0);
 		ft_putstr_fd(cmd[1], 0);
