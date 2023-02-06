@@ -16,7 +16,6 @@ void	ft_exec_init(t_exec *data, t_env **env, int x, char **envp)
 {
 	int			i;
 	t_list_exec	p;
-	//struct stat	stats;
 
 	i = 0;
 	while (data->type[i])
@@ -79,7 +78,18 @@ t_exec	*data_prev(t_exec *data)
 	return (d);
 }
 
-void	error_mgs_fork(t_exec *data)
+int	error_mgs_fork(t_exec *data)
 {
-	
+	int	fd;
+	DIR	*folder;
+
+	if (!data->path_cmd)
+		return (ft_putendl_fd("Command not found", 2), 127);
+	fd = open(data->path_cmd, O_WRONLY);
+	folder = opendir(data->path_cmd);
+	if (ft_strchr(data->path_cmd, '/') == NULL)
+		return (ft_putendl_fd("Command not found", 2), 127);
+	if (fd == -1 && folder != NULL)
+		return (ft_putendl_fd("Is a directory", 2), 126);
+	return (ft_putendl_fd("Command not found", 2), 127);
 }

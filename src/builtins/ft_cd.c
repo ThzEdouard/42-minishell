@@ -12,14 +12,38 @@
 
 #include "../../include/minishell.h"
 
-int	ft_cd(t_env **env, char *cmd)
+static void	msg_error(char **args)
 {
-	(void)env;
+	if (args[2])
+		return (ft_putendl_fd("too many arguments", 2));
+	return (ft_putendl_fd(strerror(errno), 2));
+}
 
-	g_statesssss = chdir(cmd);
-    if (g_statesssss < 0)
-        g_statesssss *= -1;
-    if (g_statesssss != 0)
-        ft_putstr_fd(strerror(errno),  2);
+static int	get_home(t_env **env)
+{
+	char	*home;
+
+	home = get_name(*env, "HOME", ft_strlen("HOME"));
+	if (!home)
+		return (ft_putendl_fd("HOME not set", 2), 1);
+	g_statesssss = chdir(home + 5);
+	if (g_statesssss < 0)
+		g_statesssss *= -1;
+	if (g_statesssss != 0)
+		return (ft_putendl_fd(strerror(errno), 2), 1);
+	return (0);
+}
+
+int	ft_cd(t_env **env, char **cmd)
+{
+	if (!cmd[1])
+		return (get_home(env));
+	if (cmd[2])
+		return (msg_error(cmd), 1);
+	g_statesssss = chdir(cmd[1]);
+	if (g_statesssss < 0)
+		g_statesssss *= -1;
+	if (g_statesssss != 0)
+		msg_error(cmd);
 	return (0);
 }

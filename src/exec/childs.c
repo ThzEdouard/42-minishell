@@ -45,6 +45,7 @@ void	ft_execve(t_exec *data, char **envp, t_env **env)
 	close(data->pipefd[1]);
 	if (data->cmd)
 		execve(data->path_cmd, data->cmd, envp);
+	g_statesssss = error_mgs_fork(data);
 	ft_no_commands(data, envp, env);
 }
 

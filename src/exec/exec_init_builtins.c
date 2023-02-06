@@ -15,7 +15,7 @@
 int	ft_exec_builtins(t_exec *data, t_env **env)
 {
 	if (data->cmd && !ft_strcmp(data->cmd[0], "cd"))
-		return (ft_cd(env, data->cmd[1]), 1);
+		return (ft_cd(env, data->cmd), 1);
 	if (data->cmd && !ft_strcmp(data->cmd[0], "echo"))
 		return (ft_echo(data->cmd), 1);
 	if (data->cmd && !ft_strcmp(data->cmd[0], "env"))

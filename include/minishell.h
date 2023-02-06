@@ -21,7 +21,8 @@
 # include <readline/history.h>
 # include <signal.h>
 # include <sys/types.h>
-#include <sys/errno.h>
+# include <sys/errno.h>
+# include <dirent.h>
 # include <limits.h>
 # include <fcntl.h>
 # include <sys/wait.h>
@@ -279,7 +280,7 @@ char	*set_value(char *value, char *name);
 char	*ft_join_realloc(char *s, int i, int len, char *s2);
 
 /*builtins*/
-int		ft_cd(t_env **env, char *cmd);
+int		ft_cd(t_env **env, char **cmd);
 int		checking_args(char **cmd, int *t, int i);
 int		ft_echo(char **cmd);
 int		ft_size_env(t_env *env);
@@ -297,5 +298,7 @@ int		ft_pwd(void);
 void	ft_delete_node(t_env *env);
 int		ft_delete(t_env *tmp, char *tmp_str);
 void	ft_unset(t_env **env, char *cmd);
+
+int		error_mgs_fork(t_exec *data);
 
 #endif
