@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
 
-int	ft_exec_builtins(t_exec *data, t_env **env)
+int	ft_exec_builtins(t_exec *data, t_env **env, char **envp)
 {
 	if (data->cmd && !ft_strcmp(data->cmd[0], "cd"))
 		return (ft_cd(env, data->cmd), 1);
@@ -21,7 +21,7 @@ int	ft_exec_builtins(t_exec *data, t_env **env)
 	if (data->cmd && !ft_strcmp(data->cmd[0], "env"))
 		return (ft_env(*env), 1);
 	if (data->cmd && !ft_strcmp(data->cmd[0], "exit"))
-		return (ft_exit(data, env, data->cmd), 1);
+		return (ft_exit(data, env, data->cmd, envp), 1);
 	if (data->cmd && !ft_strcmp(data->cmd[0], "export"))
 		return (ft_export(env, data->cmd), 1);
 	if (data->cmd && !ft_strcmp(data->cmd[0], "pwd"))
@@ -50,7 +50,7 @@ int	ft_check_builtins(t_exec *data)
 	return (0);
 }
 
-void	ft_exec_builtins_init(t_exec *data, t_env **env)
+void	ft_exec_builtins_init(t_exec *data, t_env **env, char **envp)
 {
 	int	i;
 
@@ -60,7 +60,7 @@ void	ft_exec_builtins_init(t_exec *data, t_env **env)
 		ft_exec_builtins_init_2(data, i);
 		i++;
 	}
-	if (ft_exec_builtins(data, env))
+	if (ft_exec_builtins(data, env, envp))
 		return ;
 }
 

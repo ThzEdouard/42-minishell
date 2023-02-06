@@ -27,8 +27,8 @@ void	ft_exec_init(t_exec *data, t_env **env, int x, char **envp)
 	{
 		ft_close_free(data, envp);
 		if (data->prev != NULL && data->prev->cmd != NULL)
-			close(data->prev->pipefd[0]);
-		ft_exec_builtins(data, env);
+			ft_close_check(data->prev->pipefd[0]);
+		ft_exec_builtins(data, env, NULL);
 		clear_env(env);
 		while (data->prev)
 			data = data->prev;
@@ -70,9 +70,9 @@ t_exec	*data_prev(t_exec *data)
 
 	d = data;
 	if (data->prev != NULL && data->prev->cmd != NULL)
-		close(data->prev->pipefd[0]);
-	close(data->pipefd[0]);
-	close(data->pipefd[1]);
+		ft_close_check(data->prev->pipefd[0]);
+	ft_close_check(data->pipefd[0]);
+	ft_close_check(data->pipefd[1]);
 	while (d->prev)
 		d = d->prev;
 	return (d);

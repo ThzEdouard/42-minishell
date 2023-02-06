@@ -36,6 +36,8 @@ void	exec_push_v2(t_list_exec *l, char **cmd, char **filename, t_type *type)
 	exec_push_v2_2(new, cmd, filename, type);
 	new->path_cmd = NULL;
 	new->file = NULL;
+	new->pipefd[0] = -1;
+	new->pipefd[1] = -1;
 	new->fileproblem = 0;
 	new->saveout = dup(STDOUT_FILENO);
 	new->savein = dup(STDIN_FILENO);
@@ -90,8 +92,8 @@ void	exec_clear(t_list_exec *l)
 			free(tmp->file);
 		if (elem->type)
 			free(elem->type);
-		close(tmp->savein);
-		close(tmp->saveout);
+		ft_close_check(tmp->savein);
+		ft_close_check(tmp->saveout);
 		elem = elem->next;
 		free(tmp);
 	}

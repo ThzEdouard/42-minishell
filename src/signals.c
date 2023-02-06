@@ -18,7 +18,7 @@ void	sig_int_here(int sig, siginfo_t *info, void *tmp)
 	(void)info;
 	(void)tmp;
 	ft_putstr_fd("\b\b\n", 0);
-	close(0);
+	ft_close_check(0);
 	g_statesssss = 1300;
 }
 

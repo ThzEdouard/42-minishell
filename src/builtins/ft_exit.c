@@ -39,7 +39,7 @@ void	exec_clears(t_exec *l)
 	}
 }
 
-void	ft_exit_util(t_exec *data, t_env **env, char **cmd)
+void	ft_exit_util(t_exec *data, t_env **env, char **cmd, char **envp)
 {
 	int	y;
 
@@ -55,15 +55,17 @@ void	ft_exit_util(t_exec *data, t_env **env, char **cmd)
 			}
 			else
 			{
-				ft_putstr_fd("bash: exit: numeric argument required\n", 0);
-				ft_free_exit(data, env, 2);
+				ft_putstr_fd("bash: exit: ", 0);
+				ft_putstr_fd(cmd[1], 0);
+				ft_putstr_fd(": numeric argument required\n", 0);
+				ft_free_exit(data, env, 2, envp);
 			}
 		}
 		y++;
 	}
 }
 
-void	ft_exit(t_exec *data, t_env **env, char **cmd)
+void	ft_exit(t_exec *data, t_env **env, char **cmd, char **envp)
 {
 	int	i;
 
@@ -73,11 +75,19 @@ void	ft_exit(t_exec *data, t_env **env, char **cmd)
 	while (data->prev)
 		data = data->prev;
 	if (i == 1)
-		ft_print_exit(data, env);
-	ft_exit_util(data, env, cmd);
+		ft_print_exit(data, env, envp);
+	ft_exit_util(data, env, cmd, envp);
 	if (i > 2)
 	{
 		ft_putstr_fd("bash: exit: too many arguments\n", 0);
+		return ;
+	}
+	else if (ft_strlen(cmd[1]) > 19 || !ft_strncmp(cmd[1] + 1, "9223372036854775807", 20))
+	{
+		ft_putstr_fd("bash: exit: ", 0);
+		ft_putstr_fd(cmd[1], 0);
+		ft_putstr_fd(": numeric argument required\n", 0);
+		ft_free_exit(data, env, 2, envp);
 		return ;
 	}
 	else if (i == 2)
@@ -86,5 +96,5 @@ void	ft_exit(t_exec *data, t_env **env, char **cmd)
 		g_statesssss = 256 - (-g_statesssss % 256);
 	else
 		g_statesssss = g_statesssss % 256;
-	ft_print_exit(data, env);
+	ft_print_exit(data, env, envp);
 }

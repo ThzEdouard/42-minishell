@@ -74,12 +74,12 @@ void	ft_exec(t_exec *p, char **envp, t_env **env)
 	if (i == 1 && tmp->cmd && ft_check_builtins(tmp)
 		&& !ft_check_redirs(tmp) && g_statesssss != 1300)
 	{
-		ft_exec_process_builtins(tmp, p, env);
+		ft_exec_process_builtins(tmp, p, env, envp);
 		return ;
 	}
 	if (i == 1 && tmp->cmd && ft_check_builtins(tmp) && g_statesssss != 1300)
 	{
-		ft_exec_builtins(tmp, env);
+		ft_exec_builtins(tmp, env, envp);
 		return ;
 	}
 	ft_exec_process(tmp, p, envp, env);
@@ -117,14 +117,14 @@ void	ft_exec_process(t_exec *tmp, t_exec *p, char **envp, t_env **env)
 void	ft_exec_process_2(t_exec *tmp, t_exec *p)
 {
 	tmp = p;
-	close(tmp->pipefd[0]);
-	close(tmp->pipefd[1]);
+	ft_close_check(tmp->pipefd[0]);
+	ft_close_check(tmp->pipefd[1]);
 	ft_unlink_heredoc(tmp);
 	ft_close_files(p);
 	if (g_statesssss == 1300)
 	{
 		dup2(tmp->savein, 0);
-		close(tmp->savein);
+		ft_close_check(tmp->savein);
 		g_statesssss = 130;
 	}
 }

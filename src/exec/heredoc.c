@@ -48,7 +48,7 @@ void	ft_heredoc_2(char *line, int temp)
 
 void	ft_heredoc_3(t_exec *data, char *line, char *tmpfilename, int i)
 {
-	close(data->file[i]);
+	ft_close_check(data->file[i]);
 	if (line)
 		free(line);
 	data->file[i] = open(tmpfilename, O_RDONLY);
@@ -88,7 +88,7 @@ void	ft_unlink_heredoc(t_exec *tmp)
 			i = 0;
 			while (tmp->type[i] == HEREDOC)
 			{
-				close(tmp->file[i]);
+				ft_close_check(tmp->file[i]);
 				if (unlink(tmp->filename[i]) == -1)
 					ft_error("Temp File Error");
 				i++;

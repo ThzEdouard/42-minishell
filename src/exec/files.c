@@ -108,7 +108,7 @@ void	ft_close_files(t_exec *data)
 		while (tmp->filename[i])
 		{
 			if (tmp->type[i] != HEREDOC && tmp->file[i] != -1)
-				close(tmp->file[i]);
+				ft_close_check(tmp->file[i]);
 			i++;
 		}
 		tmp = tmp->next;

@@ -146,9 +146,9 @@ void	ft_no_commands(t_exec *data, char **envp, t_env **env);
 int		ft_check_redirs(t_exec *data);
 
 /*exec_init_builtins*/
-int		ft_exec_builtins(t_exec *data, t_env **env);
+int		ft_exec_builtins(t_exec *data, t_env **env, char **envp);
 int		ft_check_builtins(t_exec *data);
-void	ft_exec_builtins_init(t_exec *data, t_env **env);
+void	ft_exec_builtins_init(t_exec *data, t_env **env, char **envp);
 void	ft_exec_builtins_init_2(t_exec *data, int i);
 void	add_exec_init(t_list_exec *l, t_add *values);
 
@@ -175,7 +175,7 @@ void	exec_clear(t_list_exec *l);
 
 /*exec_utils_2*/
 void	ft_little_closes(t_exec *tmp);
-void	ft_exec_process_builtins(t_exec *tmp, t_exec *p, t_env **env);
+void	ft_exec_process_builtins(t_exec *tmp, t_exec *p, t_env **env, char **envp);
 void	exec_init(t_list_exec *l);
 void	ft_close_free(t_exec *data, char **envp);
 
@@ -278,7 +278,7 @@ t_type	*ft_double_realloc_enum(t_type *src);
 int		ft_double_len(char **src);
 char	*set_value(char *value, char *name);
 char	*ft_join_realloc(char *s, int i, int len, char *s2);
-
+void	ft_close_check(int tmp);
 /*builtins*/
 int		ft_cd(t_env **env, char **cmd);
 int		checking_args(char **cmd, int *t, int i);
@@ -286,11 +286,11 @@ int		ft_echo(char **cmd);
 int		ft_size_env(t_env *env);
 int		ft_env(t_env *env);
 void	exec_clears(t_exec *l);
-void	ft_exit_util(t_exec *data, t_env **env, char **cmd);
-void	ft_exit(t_exec *data, t_env **env, char **cmd);
-void	ft_print_exit(t_exec *data, t_env **env);
+void	ft_exit_util(t_exec *data, t_env **env, char **cmd, char **envp);
+void	ft_exit(t_exec *data, t_env **env, char **cmd, char **envp);
+void	ft_print_exit(t_exec *data, t_env **env, char **envp);
 void	ft_closes(t_exec *tmp);
-void	ft_free_exit(t_exec *data, t_env **env, int code);
+void	ft_free_exit(t_exec *data, t_env **env, int code, char **envp);
 void	add_export(t_env **env, char *cmd, int ok, char *test);
 void	check_export(t_env **env, char *cmd);
 int		ft_export(t_env **env, char **cmd);

@@ -34,16 +34,16 @@ void	ft_childs(t_exec *data, char **envp, t_env **env)
 		ft_exec_init(data, env, 0, envp);
 		ft_execve(data, envp, env);
 	}
-	close(data->pipefd[1]);
+	ft_close_check(data->pipefd[1]);
 	if (data->prev != NULL && data->prev->cmd != NULL)
-		close(data->prev->pipefd[0]);
+		ft_close_check(data->prev->pipefd[0]);
 }
 
 void	ft_execve(t_exec *data, char **envp, t_env **env)
 {
-	close(data->pipefd[0]);
-	close(data->pipefd[1]);
-	if (data->cmd)
+	ft_close_check(data->pipefd[0]);
+	ft_close_check(data->pipefd[1]);
+	if (data->cmd && data->path_cmd)
 		execve(data->path_cmd, data->cmd, envp);
 	g_statesssss = error_mgs_fork(data);
 	ft_no_commands(data, envp, env);
@@ -53,8 +53,10 @@ void	ft_no_commands(t_exec *data, char **envp, t_env **env)
 {
 	t_list_exec	p;
 
-	close(data->pipefd[0]);
-	close(data->pipefd[1]);
+	if (data->prev != NULL && data->prev->cmd != NULL)
+		ft_close_check(data->prev->pipefd[0]);
+	ft_close_check(data->pipefd[0]);
+	ft_close_check(data->pipefd[1]);
 	clear_env(env);
 	while (data->prev)
 		data = data->prev;
@@ -63,6 +65,7 @@ void	ft_no_commands(t_exec *data, char **envp, t_env **env)
 	exec_clear(&p);
 	if (envp)
 		free(envp);
+	envp = NULL;
 	exit(g_statesssss);
 }
 
