@@ -93,8 +93,8 @@ void	ft_exec_process(t_exec *tmp, t_exec *p, char **envp, t_env **env)
 		tmp = tmp->next;
 	}
 	tmp = p;
-	while (tmp && waitpid(tmp->pid, &g_statesssss, 0)
-		> 0 && g_statesssss != 1300)
+	while (g_statesssss != 1300 && tmp
+		&& waitpid(tmp->pid, &g_statesssss, 0) > 0)
 	{
 		if (WTERMSIG(g_statesssss) == 2)
 		{

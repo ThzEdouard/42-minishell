@@ -48,6 +48,11 @@ void	ft_unset(t_env **env, char *cmd)
 	t_env	*tmp;
 	char	*tmp_str;
 
+	if (!cmd)
+	{
+		g_statesssss = 0;
+		return ;
+	}
 	tmp = *env;
 	tmp_str = ft_strjoin(cmd, "=");
 	while (tmp)
